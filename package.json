@@ -1,5 +1,5 @@
 {
-  "name": "@consolia-io/ui",
+  "name": "@consolia/ui",
   "description": "Consolia's internal component library, built with React, Next.js, and Stitches.",
   "version": "0.0.1",
   "author": "Jackson Dolman <mail@dolmios.com>",
