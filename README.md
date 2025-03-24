@@ -1,20 +1,14 @@
-# @cosmoau/ui
-> Cosmo UI is a React component library styled with Stitches, primarily designed for Next.js but adaptable to other React applications. We use it extensively in our projects, particularly customized to suit our specific needs (e.g., our Logo component represents our company logo). 
+# @consolia-io/ui
+> Consolia UI is a React component library styled with Stitches, primarily designed for Next.js but adaptable to other React applications. We use it extensively in our projects, particularly customized to suit our specific needs.
 \
 \
-> We've open-sourced it in the hopes that it may be helpful to other startups and developers. Please keep in mind that it's not intended for general-purpose use or production outside of Cosmo projects.
+> We've open-sourced it in the hopes that it may be helpful to other startups and developers. Please keep in mind that it's not intended for general-purpose use or production outside of Consolia projects.
 
 ## Install
 
 ```sh
 pnpm install
 ```
-
-## Examples
-
-- [cosmogroup.io](https://cosmogroup.io)
-- [cosmo.homes](https://cosmo.homes)
-- [ihostme.com.au](https://ihostme.com.au)
 
 ## Usage
 
@@ -40,4 +34,4 @@ pnpm build
 
 ## License
 
-[MIT](https://github.com/cosmoau/ui/blob/main/LICENSE.md)
+[MIT](https://github.com/consolia-io/ui/blob/main/LICENSE.md)

@@ -26,31 +26,26 @@ export const TextSizes = {
     marginBottom: 0,
   },
   h1: {
-    fontFamily: "$serif",
     fontSize: "$h1",
     lineHeight: "$small",
     marginBottom: "$medium",
   },
   h2: {
-    fontFamily: "$serif",
     fontSize: "$h2",
     lineHeight: "$small",
     marginBottom: "$medium",
   },
   h3: {
-    fontFamily: "$serif",
     fontSize: "$h3",
     lineHeight: "$small",
     marginBottom: "$medium",
   },
   h4: {
-    fontFamily: "$serif",
     fontSize: "$h4",
     lineHeight: "$small",
     marginBottom: "$medium",
   },
   h5: {
-    fontFamily: "$serif",
     fontSize: "$h5",
     lineHeight: "$default",
     marginBottom: "$small",
@@ -126,14 +121,6 @@ export const TextStyled = styled("div", {
         ...highlight,
         backgroundColor: "$blueBackground",
       },
-      cosmo: {
-        ...highlight,
-        backgroundColor: "$accentCosmo",
-        color: "$background",
-        darkModeSpec: {
-          color: "$text",
-        },
-      },
       default: {
         ...highlight,
         backgroundColor: "$default",
@@ -189,11 +176,6 @@ export const TextStyled = styled("div", {
       },
     },
     size: TextSizes,
-    subtle: {
-      true: {
-        color: "$subtle",
-      },
-    },
   },
 
   verticalAlign: "baseline",

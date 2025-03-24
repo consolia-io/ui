@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable @next/next/no-img-element */
 import { FacebookLogo, RadioButton } from "@phosphor-icons/react";
 import React, { ReactElement, useState } from "react";
 import toast from "react-hot-toast";
@@ -20,27 +18,6 @@ export function App(): ReactElement {
   return (
     <C.Provider dark={isDarkTheme}>
       <C.ProviderToggle />
-      <C.Stack bottom="largest">
-        <C.Stack>
-          <C.Icon inline="small">
-            <FacebookLogo />
-          </C.Icon>
-          <C.Button inline="small" theme="cosmo">
-            Cosmo Button
-          </C.Button>
-          <C.Text as="span" highlight="cosmo">
-            Label
-          </C.Text>
-        </C.Stack>
-        <C.Stack top="small">
-          <C.Icon inline="small">
-            <FacebookLogo />
-          </C.Icon>
-          <C.Text as="small" inline="auto">
-            Label
-          </C.Text>
-        </C.Stack>
-      </C.Stack>
       <C.Stack flexduo>
         <C.Text>
           Flexduo side 2: Lorem{" "}

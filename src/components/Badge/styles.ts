@@ -4,7 +4,7 @@ export const BadgeStyled = styled("div", {
   alignContent: "center !important",
   alignItems: "center !important",
   border: "0.1rem solid transparent",
-  borderRadius: "$large",
+  borderRadius: "$small",
   display: "inline-flex",
   fontSize: "$default",
   justifyContent: "center",

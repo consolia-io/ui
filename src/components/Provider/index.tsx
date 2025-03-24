@@ -9,7 +9,7 @@ import Portal from "./ProviderPortal";
 import { ProviderStyled, providerReset } from "./styles";
 import { ToastController } from "./ToastController";
 
-const tag = `Cosmo UI v${packageJson.version}`;
+const tag = `Consolia UI v${packageJson.version}`;
 
 export default function Provider({ children, css, dark }: IProvider): JSX.Element {
   providerReset();

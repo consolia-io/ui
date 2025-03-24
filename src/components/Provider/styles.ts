@@ -89,7 +89,7 @@ export const providerReset = globalCss({
   },
 
   "::selection": {
-    backgroundColor: theme.colors.orangeSelection,
+    backgroundColor: theme.colors.orangeBackground,
     color: "#000",
   },
 

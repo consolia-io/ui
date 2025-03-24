@@ -23,7 +23,7 @@ export const ButtonStyled = styled("button", {
   alignItems: "center",
   appearance: "none",
   border: "0.1rem solid $border",
-  borderRadius: "$small",
+  borderRadius: "$large",
   boxShadow: "$small",
   color: "$text",
   cursor: "pointer",
@@ -64,13 +64,6 @@ export const ButtonStyled = styled("button", {
       },
     },
     theme: {
-      cosmo: {
-        backgroundColor: "$accentCosmo",
-        color: "$background",
-        darkModeSpec: {
-          color: "$text",
-        },
-      },
       default: {
         backgroundColor: "transparent",
         borderColor: "$border",
