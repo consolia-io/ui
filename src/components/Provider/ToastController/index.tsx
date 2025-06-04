@@ -1,10 +1,12 @@
 import { useEffect, type JSX } from "react";
-import toast, { Toast, useToaster } from "react-hot-toast";
+import toast, { Toast, useToaster, Toaster } from "react-hot-toast";
 
-import { Icons } from "../../../icons";
-import { Text, useEventListener } from "../../../index";
+import { Badge, useEventListener } from "../../../index";
 import { IToast } from "../../../types";
-import { ToastContainerStyled, ToastStyled } from "../styles";
+import { ToastStyled } from "../styles";
+
+const TOAST_LIMIT = 4;
+const DEFAULT_DURATION = 3000;
 
 function prepareMessage(message: Toast["message"]): string {
   if (!message) return "No information provided.";
@@ -12,52 +14,76 @@ function prepareMessage(message: Toast["message"]): string {
   return message.toString().replace(/\.$/, "");
 }
 
-export function ToastController(props: IToast): JSX.Element {
+export function ToastController({
+  position = "top-left",
+  toastOptions,
+  ...props
+}: IToast): JSX.Element {
   const { handlers, toasts } = useToaster();
   const { endPause, startPause } = handlers;
-  const TOAST_LIMIT = 4;
 
-  useEventListener("keydown", (event: KeyboardEvent) => {
-    if (event.key === "Escape" || event.key === "Enter") {
+  const visibleToasts = toasts.filter((t) => t.visible);
+  const excessToasts = visibleToasts.filter((_, i) => i >= TOAST_LIMIT);
+  const shouldDismissOnEscape = (key: string): boolean => key === "Escape" || key === "Enter";
+
+  const handleKeyboardDismiss = (event: KeyboardEvent): void => {
+    if (shouldDismissOnEscape(event.key)) {
       event.preventDefault();
       toast.dismiss();
     }
-  });
+  };
+
+  const getToastTheme = (type: Toast["type"]): "orange" | "blue" | "purple" => {
+    switch (type) {
+      case "error":
+        return "orange";
+      case "success":
+        return "blue";
+      default:
+        return "purple";
+    }
+  };
+
+  const handleToastClick = (id: string): void => {
+    toast.remove(id);
+  };
+
+  const renderToast = (t: Toast): JSX.Element => {
+    const theme = getToastTheme(t.type);
+    const message = prepareMessage(t.message);
+
+    return (
+      <ToastStyled
+        onClick={() => handleToastClick(t.id)}
+        onMouseEnter={startPause}
+        onMouseLeave={endPause}>
+        <Badge link theme={theme}>
+          {message}
+        </Badge>
+      </ToastStyled>
+    );
+  };
+
+  useEventListener("keydown", handleKeyboardDismiss);
 
   useEffect(() => {
-    toasts
-      .filter((t) => t.visible)
-      .filter((_, i) => i >= TOAST_LIMIT)
-      .forEach((t) => toast.dismiss(t.id));
+    excessToasts.forEach((t) => toast.dismiss(t.id));
   }, [toasts]);
 
   return (
-    <ToastContainerStyled onMouseEnter={startPause} onMouseLeave={endPause} {...props}>
-      {toasts.map((t) => {
-        t.duration = 5000;
-
-        return (
-          <ToastStyled key={t.id} animation={t.visible} onClick={(): void => toast.dismiss(t.id)}>
-            <Text
-              as="span"
-              highlight={t.type === "success" ? "green" : t.type === "error" ? "red" : "default"}
-              inline="small">
-              {t.type === "success" ? (
-                <Icons.CheckCircle />
-              ) : t.type === "error" ? (
-                <Icons.Warning />
-              ) : (
-                <Icons.Info />
-              )}
-              &nbsp;
-              {t.type === "success" ? "Success" : t.type === "error" ? "Error" : "Info"}
-            </Text>
-            <Text as="span" inline="small">
-              {prepareMessage(t.message)}
-            </Text>
-          </ToastStyled>
-        );
-      })}
-    </ToastContainerStyled>
+    <Toaster
+      {...props}
+      position={position}
+      toastOptions={{
+        duration: toastOptions?.duration || DEFAULT_DURATION,
+        style: {
+          background: "transparent",
+          boxShadow: "none",
+          padding: 0,
+        },
+        ...toastOptions,
+      }}>
+      {renderToast}
+    </Toaster>
   );
 }

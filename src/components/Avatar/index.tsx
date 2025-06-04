@@ -1,58 +1,16 @@
 import type { JSX } from "react";
 
-import { Image, Text, theme } from "../../index";
+import { Image, Text } from "../../index";
 import { IAvatar } from "../../types";
 import { AvatarStyled } from "./styles";
 
-const hexToRGB = (hex: string): string => {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5), 16);
-
-  return `${r}, ${g}, ${b}`;
-};
-
-const getLetter = (
-  text: string,
-): {
-  backgroundColor: string;
-  borderColor: string;
-  color: string;
-} => {
+const getBackgroundColor = (text: string): string => {
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const backgroundOptions = [
-    hexToRGB(theme.colors.blueBackground.value),
-    hexToRGB(theme.colors.greenBackground.value),
-    hexToRGB(theme.colors.orangeBackground.value),
-    hexToRGB(theme.colors.redBackground.value),
-    hexToRGB(theme.colors.purpleBackground.value),
-  ];
-  const colorOptions = [
-    theme.colors.blueText.value,
-    theme.colors.greenText.value,
-    theme.colors.orangeText.value,
-    theme.colors.redText.value,
-    theme.colors.purpleText.value,
-  ];
-  const borderColorOptions = [
-    hexToRGB(theme.colors.blueText.value),
-    hexToRGB(theme.colors.greenText.value),
-    hexToRGB(theme.colors.orangeText.value),
-    hexToRGB(theme.colors.redText.value),
-    hexToRGB(theme.colors.purpleText.value),
-  ];
-
+  const colorOptions = ["purple", "orange", "yellow", "blue"];
   const letter = text.charAt(0).toUpperCase();
   const index = letters.indexOf(letter);
-  const color = colorOptions[index % colorOptions.length];
-  const backgroundColor = backgroundOptions[index % backgroundOptions.length];
-  const borderColor = borderColorOptions[index % borderColorOptions.length];
 
-  return {
-    backgroundColor,
-    borderColor,
-    color,
-  };
+  return `$${colorOptions[index % colorOptions.length]}`;
 };
 
 export default function Avatar({
@@ -61,9 +19,9 @@ export default function Avatar({
   css,
   fallback,
   src,
-  width = 24,
+  width = 32,
 }: IAvatar): JSX.Element {
-  const { backgroundColor, borderColor, color } = getLetter(fallback);
+  const backgroundColor = getBackgroundColor(fallback);
 
   return (
     <AvatarStyled
@@ -75,14 +33,7 @@ export default function Avatar({
         minWidth: width,
         width: width,
         ...(colors && {
-          backgroundColor: `rgba(${backgroundColor}, 0.475)`,
-          border: `0.1rem solid ${borderColor}`,
-          darkModeSpec: {
-            backgroundColor: `rgba(${backgroundColor}, 0.95)`,
-          },
-          span: {
-            color,
-          },
+          backgroundColor,
         }),
         ...css,
       }}>

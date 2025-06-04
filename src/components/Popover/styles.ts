@@ -14,28 +14,37 @@ export const PopoverTriggerStyled = styled("div", {
 });
 
 export const PopoverContentStyled = styled("div", {
+  "&::-webkit-scrollbar": {
+    display: "none",
+  },
   backgroundColor: "$background",
-  border: "0.1rem solid $border",
-  borderRadius: "$large",
+  border: "1px solid $border",
+  borderRadius: "$medium",
   boxShadow: "$large",
-  maxHeight: "50rem",
+  color: "$text",
+  fontSize: "$default",
+  maxHeight: "85vh",
   overflowY: "auto",
   pointerEvents: "auto",
+  position: "relative",
   textAlign: "left !important",
+
+  transition: "$default",
+
   variants: {
     animation: {
       false: {
-        animation: `${fadeOut} .15s linear`,
+        animation: `${fadeOut} 200ms ease-out`,
         animationFillMode: "forwards",
       },
       true: {
-        animation: `${fadeIn} .2s linear`,
+        animation: `${fadeIn} 200ms ease-out`,
         animationFillMode: "forwards",
       },
     },
     minimal: {
       false: {
-        padding: "$small",
+        padding: "$small $medium",
       },
       true: {
         padding: 0,
@@ -43,15 +52,15 @@ export const PopoverContentStyled = styled("div", {
     },
     small: {
       false: {
-        maxWidth: "60%",
+        maxWidth: "42rem",
         phone: {
-          maxWidth: "90%",
+          maxWidth: "calc(100vw - $large)",
         },
       },
       true: {
-        maxWidth: "30%",
+        maxWidth: "28rem",
         phone: {
-          maxWidth: "70%",
+          maxWidth: "calc(100vw - $large)",
         },
       },
     },

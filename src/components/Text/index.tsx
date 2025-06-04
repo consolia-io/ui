@@ -1,3 +1,4 @@
+import { CSS } from "@stitches/react";
 import { Fragment, type JSX } from "react";
 import { Balancer } from "react-wrap-balancer";
 
@@ -24,36 +25,43 @@ export default function Text({
   ...rest
 }: IText): JSX.Element {
   const TextBalancer = balanced ? Balancer : Fragment;
+  const elementType = override || as || "p";
+  const isAnchor = as === "a";
+  const isExternalLink = isAnchor && target === "_blank";
+  const shouldShowInline = inline && !["span", "strong"].includes(as);
+
+  function getCustomStyles(): CSS {
+    return {
+      ...(top && {
+        marginTop: 0,
+        paddingTop: `$${top}`,
+      }),
+      ...(bottom && {
+        marginBottom: 0,
+        paddingBottom: `$${bottom}`,
+      }),
+      ...(inline && {
+        marginRight: inline === "auto" ? "auto" : `$${inline}`,
+      }),
+      ...css,
+    };
+  }
 
   return (
     <TextStyled
       accent={accent}
-      as={override || as || "p"}
-      css={{
-        ...(top && {
-          marginTop: 0,
-          paddingTop: `$${top}`,
-        }),
-        ...(bottom && {
-          marginBottom: 0,
-          paddingBottom: `$${bottom}`,
-        }),
-        ...(inline && {
-          marginRight: inline === "auto" ? "auto" : `$${inline}`,
-        }),
-
-        ...css,
-      }}
+      as={elementType}
+      css={getCustomStyles()}
       highlight={highlight}
-      href={as === "a" ? href : undefined}
-      inline={inline && !["span", "strong"].includes(as) ? true : false}
-      link={link || (as === "a" ? "default" : undefined)}
-      rel={as === "a" ? rel : undefined}
+      href={isAnchor ? href : undefined}
+      inline={shouldShowInline ? true : false}
+      link={link || (isAnchor ? "default" : undefined)}
+      rel={isAnchor ? rel : undefined}
       size={as || "p"}
-      target={as === "a" ? target : undefined}
+      target={isAnchor ? target : undefined}
       {...rest}>
       <TextBalancer>{children}</TextBalancer>
-      {as === "a" && target === "_blank" && (
+      {isExternalLink && (
         <Icon
           css={{
             marginLeft: "$smallest",

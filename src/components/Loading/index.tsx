@@ -1,40 +1,14 @@
 import type { JSX } from "react";
 
-import { styled } from "@stitches/react";
-
 import { ILoading } from "../../types";
+import { LoadingStyled } from "./styles";
 
-const SVGStyled = styled("svg");
-
-export default function Loading({ css, width = 20 }: ILoading): JSX.Element {
+export default function Loading({ css, theme = "default" }: ILoading): JSX.Element {
   return (
-    <SVGStyled
-      css={{
-        height: `${width}px !important`,
-        width: `${width}px !important`,
-        ...css,
-      }}
-      height={width}
-      opacity={0.8}
-      stroke="currentColor"
-      viewBox="0 0 41 38"
-      width={width}
-      xmlns="http://www.w3.org/2000/svg">
-      <g fill="none" fillRule="evenodd">
-        <g strokeWidth={2} transform="translate(1 1)">
-          <circle cx={18} cy={18} r={18} strokeOpacity={0.2} />
-          <path d="M36 18c0-9.94-8.06-18-18-18">
-            <animateTransform
-              attributeName="transform"
-              dur="1.25s"
-              from="0 18 18"
-              repeatCount="indefinite"
-              to="360 18 18"
-              type="rotate"
-            />
-          </path>
-        </g>
-      </g>
-    </SVGStyled>
+    <LoadingStyled colored={theme === "colored"} css={css}>
+      <svg viewBox="-20 -20 426.81 467.47" xmlns="http://www.w3.org/2000/svg">
+        <path d="M369.48,4.46h-224.77c-5.11,0-10.02,1.99-13.7,5.54L19.67,117.73c-9.72,9.4-15.17,22.38-15.06,35.9l.95,118.09c.08,9.9,8.13,17.89,18.03,17.89h99.01c.42.04.82.09,1.37.09,10.34,0,12.43,6.59,12.77,10.63v76.93c0,.57.06,1.12.08,1.68v26.49c0,9.49,7.7,17.19,17.19,17.19h67.4c.89,0,1.74-.11,2.59-.26l15.52.13c9.36.08,18.35-3.64,24.92-10.32l108.72-110.61c4.3-4.37,1.2-11.77-4.93-11.77l-221.69-.18s-.03,0-.05,0c-7.85,0-9.41-5.7-9.66-9.16V18.9c0-5.22,6.35-7.78,9.98-4.03l95.11,98.39c12.61,13.05,29.99,20.42,48.14,20.42h78.72c5.3,0,9.61-4.28,9.65-9.58l.7-109.92c.03-5.35-4.29-9.71-9.65-9.71Z" />
+      </svg>
+    </LoadingStyled>
   );
 }

@@ -1,47 +1,39 @@
 import { styled } from "../../stitches.config";
-import { ButtonStyled } from "../Button/styles";
 
 export const FieldStyled = styled("div", {
   position: "relative",
-
   variants: {
     disabled: {
       true: {
         cursor: "not-allowed",
-        opacity: 0.5,
+        opacity: "$light",
       },
     },
   },
   width: "100%",
 });
+
 export const FieldCoreStyled = styled("div", {
   "&:focus-within": {
+    borderColor: "$text",
     boxShadow: "$small",
   },
   "&:hover": {
+    borderColor: "$text",
     boxShadow: "$small",
   },
-  "*": {
-    verticalAlign: "middle",
-  },
-  border: "0.1rem solid $border",
-  borderRadius: "$small",
+  border: "1px solid $border",
+  borderRadius: "$medium",
+  display: "flex",
+  flexDirection: "column",
   transition: "$default",
-  variants: {
-    disabled: {
-      true: {
-        cursor: "not-allowed",
-        opacity: 0.5,
-      },
-    },
-  },
   width: "100%",
 });
 
 export const FieldAreaStyled = styled("textarea", {
   "&::placeholder": {
-    color: "$accent",
-    opacity: 0.7,
+    color: "$text",
+    opacity: "$light",
   },
   "&:after": {
     clear: "both",
@@ -58,43 +50,30 @@ export const FieldAreaStyled = styled("textarea", {
   fontFamily: "$default",
   fontSize: "$default",
   margin: "0 auto",
-  padding: "$smaller $small",
+  minHeight: "$largest",
+  padding: "$small",
   phone: {
     fontSize: "16px !important",
   },
-  resize: "none",
-  whiteSpace: "pre-wrap",
+  resize: "vertical",
   width: "100%",
 });
 
 export const FieldFunctionStyled = styled("div", {
-  [`& ${ButtonStyled}`]: {
-    minHeight: "none !important",
-    padding: "0 $smaller",
-  },
   alignItems: "center",
-  backgroundColor: "$defaultSubtle",
-  borderTop: "0.1rem solid $borderSubtle",
-
-  button: {
-    marginLeft: "$small",
-  },
+  backgroundColor: "$surfaceLight",
+  borderTop: "1px solid $borderLight",
   display: "flex",
-  height: "100%",
+  gap: "$smaller",
   justifyContent: "flex-end",
   padding: "$smaller $small",
   phone: {
-    button: {
-      marginLeft: 0,
-    },
     justifyContent: "flex-start",
   },
-  position: "relative",
-  verticalAlign: "middle",
-  width: "100%",
 });
 
 export const FieldCallbackStyled = styled("div", {
   display: "block",
   paddingTop: "$small",
+  textAlign: "left",
 });

@@ -19,9 +19,16 @@ export default function Form({
 }: IForm): JSX.Element {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const isSubmitDisabled = !submitValid || disabled || isSubmitted;
+
+  function handleSubmit(): void {
+    submitFunction();
+    setIsSubmitted(true);
+  }
+
   useEventListener("keydown", (event: KeyboardEvent) => {
     if (listen && event.key === "Enter" && submit && submitValid) {
-      submitFunction();
+      handleSubmit();
     }
   });
 
@@ -31,20 +38,16 @@ export default function Form({
       disabled={disabled}
       id={id || name}
       name={name}
-      onChange={(): void => setIsSubmitted(false)}
+      onChange={() => setIsSubmitted(false)}
       {...rest}>
       {children}
+
       {submit && (
         <Button
-          css={{
-            marginTop: "$medium",
-          }}
-          disabled={!submitValid || disabled || isSubmitted}
+          css={{ marginTop: "$medium" }}
+          disabled={isSubmitDisabled}
           loading={loading}
-          onClick={(): void => {
-            submitFunction();
-            setIsSubmitted(true);
-          }}>
+          onClick={() => handleSubmit()}>
           {submit}
         </Button>
       )}

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 
-type UseScrollLockOutput = [boolean, (locked: boolean) => void];
-
-export default function useScrollLock(initialLocked = false, rootId = "root"): UseScrollLockOutput {
+export default function useScrollLock(
+  initialLocked = false,
+  rootId = "root",
+): [boolean, (locked: boolean) => void] {
   const [locked, setLocked] = useState(initialLocked);
 
   useEffect(() => {

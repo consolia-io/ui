@@ -1,4 +1,4 @@
-import { createStitches, createTheme } from "@stitches/react";
+import { createStitches, createTheme, defaultThemeMap } from "@stitches/react";
 
 export const breakpoints = {
   desktop: "@media only screen and (max-width: 2200px)",
@@ -20,25 +20,18 @@ export const breakpoints = {
 
 const defaultTheme = {
   colors: {
-    accent: "rgba(20, 5, 25, 0.9)",
-    background: "rgb(255, 255, 255)",
-    blueBackground: "#DCE9F7",
-    blueText: "#2B5585",
-    border: "rgba(50, 10, 70, 0.1)",
-    borderSubtle: "rgba(50, 10, 70, 0.05)",
-    default: "rgba(50, 10, 70, 0.05)",
-    defaultHover: "rgba(50, 10, 70, 0.075)",
-    defaultSubtle: "rgba(50, 10, 70, 0.025)",
-    dialog: "rgba(0, 0, 0, 0.8)",
-    greenBackground: "#D7E9E4",
-    greenText: "#2D4A3E",
-    orangeBackground: "#F6E2D3",
-    orangeText: "#8B4A1B",
-    purpleBackground: "#E8E1EC",
-    purpleText: "#523357",
-    redBackground: "#F2DDE1",
-    redText: "#943D47",
-    text: "rgb(20, 5, 25)",
+    background: "#FFFFFF",
+    blue: "#8fbdd8",
+    border: "rgba(60, 30, 90, 0.2)",
+    borderLight: "rgba(60, 30, 90, 0.1)",
+    orange: "#E4956A",
+    overlay: "rgba(15, 8, 18, 0.2)",
+    purple: "#a79bd0",
+    surface: "rgba(60, 30, 90, 0.06)",
+    surfaceHover: "rgba(60, 30, 90, 0.12)",
+    surfaceLight: "rgba(60, 30, 90, 0.03)",
+    text: "rgb(45, 25, 55)",
+    yellow: "#f1de8e",
   },
   fonts: {
     default: "Untitled Sans, apple-system, sans-serif",
@@ -57,13 +50,29 @@ const defaultTheme = {
     default: "1.5",
     small: "1.25",
   },
+  opacities: {
+    default: 0.75,
+    light: 0.55,
+  },
   radii: {
-    large: "0.75rem",
-    small: "0.25rem",
+    large: "1.5rem",
+    medium: "0.5rem",
+    small: "0.15rem",
   },
   shadows: {
-    large: "0 0.6rem 1.2rem 0 rgba(20, 5, 25, 0.15)",
-    small: "0 0.2rem 0.4rem 0 rgba(20, 5, 25, 0.15)",
+    large: "0 0.4rem 0.8rem 0 rgba(45, 25, 55, 0.08)",
+    small: "0 1px 3px 0 rgba(45, 25, 55, 0.1)",
+  },
+  sizes: {
+    excess: "16rem",
+    large: "4rem",
+    larger: "6rem",
+    largest: "8rem",
+    medium: "2rem",
+    none: "0",
+    small: "1rem",
+    smaller: "0.5rem",
+    smallest: "0.25rem",
   },
   space: {
     excess: "16rem",
@@ -92,34 +101,28 @@ const defaultTheme = {
 
 export const darkTheme = createTheme({
   colors: {
-    accent: "rgba(254, 247, 242, 0.9)",
-    background: "rgb(20, 5, 25)",
-    blueBackground: "#1E3356",
-    blueText: "#B8D4F7",
-    border: "rgba(254, 247, 242, 0.22)",
-    borderSubtle: "rgba(254, 247, 242, 0.12)",
-    default: "rgba(254, 247, 242, 0.05)",
-    defaultHover: "rgba(254, 247, 242, 0.075)",
-    defaultSubtle: "rgba(254, 247, 242, 0.025)",
-    dialog: "rgba(20, 5, 25, 0.8)",
-    greenBackground: "#1E3633",
-    greenText: "#B8E6D4",
-    orangeBackground: "#332013",
-    orangeText: "#FFD4B8",
-    purpleBackground: "#2D1F33",
-    purpleText: "#E6C7ED",
-    redBackground: "#331A1D",
-    redText: "#FFD0D4",
-    text: "rgb(254, 247, 242)",
+    background: "rgb(16, 16, 20)",
+    blue: "#6b7db0",
+    border: "rgba(255, 255, 255, 0.20)",
+    borderLight: "rgba(255, 255, 255, 0.12)",
+    orange: "#c4746b",
+    overlay: "rgba(255, 255, 255, 0.15)",
+    purple: "#8b7ba8",
+    surface: "rgba(245, 243, 255, 0.12)",
+    surfaceHover: "rgba(245, 243, 255, 0.18)",
+    surfaceLight: "rgba(245, 243, 255, 0.08)",
+    text: "#FFFFFF",
+    yellow: "#e8965f",
   },
   shadows: {
-    large: "0 0.6rem 1.2rem 0 rgba(254, 247, 242, 0.06)",
-    small: "0 0.2rem 0.4rem 0 rgba(254, 247, 242, 0.06)",
+    large: "0 0.6rem 1.2rem 0 rgba(0, 0, 0, 0.7)",
+    small: "0 2px 4px 0 rgba(0, 0, 0, 0.5)",
   },
 });
 
 export const { css, getCssText, globalCss, keyframes, styled, theme } = createStitches({
   theme: defaultTheme,
+  themeMap: { ...defaultThemeMap, opacity: "opacities" },
   utils: {
     darkModeSpec: (value: unknown) => ({
       [`.${darkTheme} &`]: value,
@@ -172,7 +175,6 @@ export const { css, getCssText, globalCss, keyframes, styled, theme } = createSt
     laptopX: (value: unknown) => ({
       [breakpoints.laptopX]: value,
     }),
-
     lightThemeSpec: (value: unknown) => ({
       "@media (prefers-color-scheme: light)": value,
     }),
@@ -251,7 +253,6 @@ export const fadeOut = keyframes({
   "0%": {
     opacity: 1,
   },
-
   "100%": {
     opacity: 0,
   },

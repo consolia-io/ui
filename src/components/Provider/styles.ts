@@ -1,13 +1,4 @@
-import {
-  breakpoints,
-  darkTheme,
-  fadeIn,
-  fadeOut,
-  globalCss,
-  styled,
-  theme,
-} from "../../stitches.config";
-import { placesReset } from "../Places/styles";
+import { breakpoints, darkTheme, globalCss, styled, theme } from "../../stitches.config";
 
 export const ProviderStyled = styled("main", {
   minHeight: "100vh",
@@ -15,10 +6,9 @@ export const ProviderStyled = styled("main", {
 });
 
 export const ToastStyled = styled("div", {
-  backgroundColor: "$background",
-  border: "0.1rem solid $border",
-  borderRadius: "$small",
-  boxShadow: "$large",
+  "&:hover": {
+    opacity: "$default",
+  },
   cursor: "pointer",
   marginBottom: "$small",
   maxWidth: "60rem",
@@ -33,50 +23,10 @@ export const ToastStyled = styled("div", {
     maxWidth: "90%",
     textAlign: "center",
   },
+
   pointerEvents: "all",
-  transition: "$default",
 
-  variants: {
-    animation: {
-      false: {
-        animation: `${fadeOut} .15s linear`,
-        animationFillMode: "forwards",
-      },
-      true: {
-        animation: `${fadeIn} .2s linear`,
-        animationFillMode: "forwards",
-      },
-    },
-  },
   width: "fit-content",
-});
-
-export const ToastContainerStyled = styled("div", {
-  background: "linear-gradient(to bottom, rgba(14,22,35,0) 0%,rgba(14,22,35,0.25) 100%)",
-  bottom: "0",
-  darkModeSpec: {
-    background:
-      "linear-gradient(to bottom, rgba(254, 248, 244,0) 0%,rgba(254, 248, 244,0.075) 100%)",
-  },
-  left: "0",
-  paddingLeft: "$small",
-  phone: {
-    background: "linear-gradient(to top, rgba(14,22,35,0) 0%,rgba(14,22,35,0.15) 100%) !important",
-    bottom: "auto",
-    darkModeSpec: {
-      background:
-        "linear-gradient(to top, rgba(254, 248, 244,0) 0%,rgba(254, 248, 244,0.15) 100%) !important",
-    },
-    left: "50%",
-    top: "0",
-    transform: "translateX(-50%)",
-  },
-  pointerEvents: "none",
-  position: "fixed",
-  transition: "$default",
-  userSelect: "none",
-  width: "100%",
-  zIndex: "$toast",
 });
 
 const baseFontURL = "https://cosmogroup.io/fonts";
@@ -84,13 +34,13 @@ const baseFontURL = "https://cosmogroup.io/fonts";
 export const providerReset = globalCss({
   "*": {
     boxSizing: "border-box",
-    marginBlock: 0,
-    paddingBlock: 0,
+    margin: 0,
+    padding: 0,
   },
 
   "::selection": {
-    backgroundColor: theme.colors.orangeBackground,
-    color: "#000",
+    backgroundColor: theme.colors.text,
+    color: theme.colors.background,
   },
 
   "@font-face": [
@@ -98,56 +48,69 @@ export const providerReset = globalCss({
       fontDisplay: "swap",
       fontFamily: "Untitled Sans",
       fontStyle: "normal",
-      fontWeight: "normal",
-      src: `url(${baseFontURL}/untitled-sans-web-regular.woff2)`,
+      fontWeight: "400",
+      src: `url(${baseFontURL}/untitled-sans-web-regular.woff2) format('woff2')`,
     },
-
     {
       fontDisplay: "swap",
       fontFamily: "Untitled Sans",
       fontStyle: "normal",
-      fontWeight: "bold",
-      src: `url(${baseFontURL}/untitled-sans-web-medium.woff2)`,
-    },
-    {
-      fontDisplay: "swap",
-      fontFamily: "Tiempos Headline",
-      fontStyle: "normal",
-      fontWeight: "bold",
-      src: `url(${baseFontURL}/tiempos-headline-regular.woff2)`,
-    },
-    {
-      fontDisplay: "swap",
-      fontFamily: "Tiempos Text",
-      fontStyle: "normal",
-      fontWeight: "normal",
-      src: `url(${baseFontURL}/tiempos-text-regular.woff2)`,
+      fontWeight: "600",
+      src: `url(${baseFontURL}/untitled-sans-web-medium.woff2) format('woff2')`,
     },
   ],
+
+  "@media (prefers-reduced-motion: reduce)": {
+    "*": {
+      animationDuration: "0.01ms !important",
+      animationIterationCount: "1 !important",
+      scrollBehavior: "auto !important",
+      transitionDuration: "0.01ms !important",
+    },
+  },
 
   "a, a:visited, a:active, a:hover": {
     color: "inherit",
     textDecoration: "none",
-    WebkitTapHighlightColor: "rgba(15, 23, 36, 0)",
+    WebkitTapHighlightColor: "transparent",
   },
 
   body: {
-    ...placesReset,
     [`.${darkTheme}`]: {
       backgroundColor: darkTheme.colors.background,
       color: darkTheme.colors.text,
+      colorScheme: "dark",
     },
     backgroundColor: theme.colors.background,
-    boxSizing: "border-box",
     color: theme.colors.text,
-    fontFamily: "Untitled Sans, system-ui, -apple-system, sans-serif",
-    fontSize: "16px",
-    fontWeight: "normal",
-    lineHeight: 1.4,
+    fontFamily: theme.fonts.default,
+    fontSize: theme.fontSizes.default,
+    fontWeight: "400",
+    lineHeight: theme.lineHeights.default,
     margin: 0,
+    minHeight: "100vh",
     MozOsxFontSmoothing: "grayscale",
+    overflowX: "hidden",
     padding: 0,
+    textRendering: "optimizeLegibility",
     WebkitFontSmoothing: "antialiased",
+  },
+
+  button: {
+    "&:disabled": {
+      cursor: "not-allowed",
+      opacity: theme.opacities.light,
+    },
+    cursor: "pointer",
+    fontFamily: "inherit",
+
+    fontSize: "inherit",
+  },
+
+  "h1, h2, h3, h4, h5, h6": {
+    fontWeight: "600",
+    lineHeight: theme.lineHeights.small,
+    margin: 0,
   },
 
   html: {
@@ -167,16 +130,39 @@ export const providerReset = globalCss({
       fontSize: "68.5%",
     },
     fontSize: "62.5%",
+    scrollBehavior: "smooth",
   },
 
-  img: {
+  "img, svg": {
     display: "block",
     maxWidth: "100%",
   },
 
+  "input, textarea, select": {
+    "&:disabled": {
+      cursor: "not-allowed",
+      opacity: theme.opacities.light,
+    },
+    fontFamily: "inherit",
+
+    fontSize: "inherit",
+  },
+
+  p: {
+    lineHeight: theme.lineHeights.default,
+    margin: 0,
+  },
+
   svg: {
     alignSelf: "center",
+    fill: "currentColor",
     verticalAlign: "middle",
+  },
+
+  "ul, ol": {
+    listStyle: "none",
+    margin: 0,
+    padding: 0,
   },
 });
 

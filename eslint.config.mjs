@@ -1,4 +1,3 @@
-// import dolmios
 import dolmios from "eslint-config-dolmios";
 
 export default [

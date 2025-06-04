@@ -1,21 +1,17 @@
 import { styled } from "../../stitches.config";
 
 const highlight = {
-  borderRadius: "calc($small / 2)",
+  borderRadius: "$small",
   padding: "calc($smallest / 2) $smaller",
 };
+
 const link = {
   "&:hover": {
-    backgroundColor: "$default",
-
+    backgroundColor: "$surface",
     borderRadius: "$small",
-
-    darkModeSpec: {
-      backgroundColor: "$border",
-    },
   },
-
   borderBottom: "1px solid $border",
+  color: "$text",
   cursor: "pointer",
   margin: 0,
   transition: "$default",
@@ -56,11 +52,13 @@ export const TextSizes = {
     marginBottom: "$small",
   },
   label: {
-    color: "$accent",
+    color: "$text",
     display: "block",
     fontSize: "$small",
+    fontWeight: "bold",
     lineHeight: "$default",
     marginBottom: "$smaller",
+    opacity: "$default",
   },
   li: {
     fontSize: "$default",
@@ -73,16 +71,19 @@ export const TextSizes = {
     paddingLeft: "$small",
   },
   p: {
+    color: "$text",
     fontFamily: "$default",
     fontSize: "$default",
     lineHeight: "$default",
     marginBottom: "$small",
   },
   small: {
+    color: "$text",
     display: "block",
     fontSize: "$small",
     lineHeight: "$default",
     marginBottom: "$smaller",
+    opacity: "$default",
   },
   span: {
     fontSize: "inherit",
@@ -105,44 +106,42 @@ export const TextStyled = styled("div", {
   "&:last-child": {
     marginBottom: "0 !important",
   },
+  color: "$text",
 
   variants: {
     accent: {
       true: {
-        color: "$accent",
+        opacity: "$default",
       },
     },
     highlight: {
       alternate: {
         ...highlight,
-        backgroundColor: "$background",
+        backgroundColor: "$surfaceLight",
       },
       blue: {
         ...highlight,
-        backgroundColor: "$blueBackground",
+        backgroundColor: "$blue",
+        color: "white",
       },
       default: {
         ...highlight,
-        backgroundColor: "$default",
-        darkModeSpec: {
-          backgroundColor: "$defaultHover",
-        },
-      },
-      green: {
-        ...highlight,
-        backgroundColor: "$greenBackground",
+        backgroundColor: "$surface",
       },
       orange: {
         ...highlight,
-        backgroundColor: "$orangeBackground",
+        backgroundColor: "$orange",
+        color: "white",
       },
       purple: {
         ...highlight,
-        backgroundColor: "$purpleBackground",
+        backgroundColor: "$purple",
+        color: "white",
       },
       red: {
         ...highlight,
-        backgroundColor: "$redBackground",
+        backgroundColor: "$orange",
+        color: "white",
       },
     },
     inline: {
@@ -160,7 +159,7 @@ export const TextStyled = styled("div", {
       alternate: {
         ...link,
         "&:hover": {
-          backgroundColor: "$defaultHover",
+          backgroundColor: "$surfaceHover",
         },
       },
       blog: {

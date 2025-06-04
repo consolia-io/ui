@@ -4,13 +4,11 @@ import { useLocalStorage, useMountSSR } from "../index";
 
 type Theme = "system" | "dark" | "light";
 
-interface UseThemeOutput {
+export default function useTheme(): {
   isDarkTheme: boolean | undefined;
   setTheme: (theme: Theme) => void;
   theme: Theme;
-}
-
-export default function useTheme(): UseThemeOutput {
+} {
   const isBrowser = useMountSSR();
   const [systemTheme, setSystemTheme] = useState<boolean>(false);
   const [theme, setLocalStorageTheme] = useLocalStorage<Theme>("cosmo-ui-theme", "system");

@@ -19,7 +19,7 @@ export default function Badge({
   loading,
   onClick,
   small,
-  theme,
+  theme = "default",
 }: IBadge): JSX.Element | null {
   const [isOpen, setIsOpen] = useState(true);
   const [isMounted, setIsMounted] = useState(true);
@@ -28,15 +28,12 @@ export default function Badge({
     setIsOpen(false);
     setTimeout(() => {
       setIsMounted(false);
-    }, 250);
+    }, 150);
   }
 
   function handleCopy(): void {
     if (copy) {
-      navigator.clipboard.writeText(
-        copy?.toString() ||
-          "There was an error copying that value. Try again, or manually copy it.",
-      );
+      navigator.clipboard.writeText(copy.toString());
       toast("Copied to clipboard");
     } else {
       toast("Nothing to copy");
@@ -58,32 +55,41 @@ export default function Badge({
         ...css,
       }}
       link={link || !!onClick || !!copy}
+      loading={loading}
       small={small}
-      theme={theme || "default"}
-      onClick={copy ? (): void => handleCopy() : onClick}>
-      {icon && iconPosition !== "right" && !copy && (
-        <BadgeIconStyled align={small ? "smallLeft" : "left"}>{icon}</BadgeIconStyled>
-      )}
-      {copy && (
-        <BadgeIconStyled align={small ? "smallLeft" : "left"}>
-          <Icons.ClipboardText style={{ cursor: "pointer" }} />
-        </BadgeIconStyled>
-      )}
-
-      {loading ? (
+      theme={theme}
+      onClick={copy ? handleCopy : onClick}>
+      {loading && (
         <BadgeLoadingStyled>
           <Loading />
         </BadgeLoadingStyled>
-      ) : (
-        children || ""
       )}
+
+      {icon && iconPosition !== "right" && !copy && (
+        <BadgeIconStyled align={small ? "smallLeft" : "left"}>{icon}</BadgeIconStyled>
+      )}
+
+      {copy && (
+        <BadgeIconStyled align={small ? "smallLeft" : "left"} hover>
+          <Icons.ClipboardText />
+        </BadgeIconStyled>
+      )}
+
+      {children}
+
       {icon && iconPosition === "right" && !closable && !copy && (
         <BadgeIconStyled align={small ? "smallRight" : "right"}>{icon}</BadgeIconStyled>
       )}
 
       {closable && (
-        <BadgeIconStyled align={small ? "smallRight" : "right"} onClick={(): void => handleClose()}>
-          <Icons.X style={{ cursor: "pointer" }} />
+        <BadgeIconStyled
+          align={small ? "smallRight" : "right"}
+          hover
+          onClick={(e): void => {
+            e.stopPropagation();
+            handleClose();
+          }}>
+          <Icons.X />
         </BadgeIconStyled>
       )}
     </BadgeStyled>

@@ -15,8 +15,10 @@ export const paddingVariants = {
 };
 
 export const BoxStyled = styled("article", {
-  border: "0.1rem solid transparent",
-  borderRadius: "$large",
+  backgroundColor: "$background",
+  border: "1px solid $border",
+  borderRadius: "$medium",
+  color: "$text",
   display: "block",
   height: "100%",
   margin: 0,
@@ -24,24 +26,20 @@ export const BoxStyled = styled("article", {
   paddingBlock: 0,
   position: "relative",
   transition: "$default",
-
   variants: {
     animation: {
       true: {
-        animation: `${fadeOut} .15s linear`,
+        animation: `${fadeOut} 0.1s ease-in-out`,
         animationFillMode: "forwards",
       },
     },
     collapsed: {
       true: {
         "&::after": {
-          background: "linear-gradient(to bottom, rgba(14,22,35,0) 0%,rgba(14,22,35,0.1) 100%)",
+          background: "linear-gradient(to bottom, transparent 0%, $colors$background 100%)",
           bottom: 0,
           content: "",
-          darkModeSpec: {
-            background: "linear-gradient(to bottom, rgba(14,22,35,0) 0%,rgba(14,22,35,1) 100%)",
-          },
-          height: "50%",
+          height: "40%",
           left: 0,
           position: "absolute",
           right: 0,
@@ -58,12 +56,12 @@ export const BoxStyled = styled("article", {
     hover: {
       true: {
         "&:hover": {
-          boxShadow: "$large",
           img: {
-            transform: "scale(1.1)",
-            transition: "$default",
+            transform: "scale(1.02)",
           },
+          transform: "translateY(-1px)",
         },
+        cursor: "pointer",
         img: {
           transition: "$default",
         },
@@ -72,43 +70,55 @@ export const BoxStyled = styled("article", {
     loading: {
       true: {
         cursor: "wait",
-        opacity: 0.5,
+        opacity: 0.6,
       },
     },
-
     theme: {
+      blue: {
+        backgroundColor: "$blue",
+        borderColor: "$border",
+      },
+
       default: {
         backgroundColor: "$background",
         borderColor: "$border",
       },
-      error: {
-        backgroundColor: "$redBackground",
-        color: "$redText",
-      },
       fill: {
-        backgroundColor: "$default",
+        backgroundColor: "$surface",
+        borderColor: "$borderLight",
       },
-      success: {
-        backgroundColor: "$greenBackground",
-        color: "$greenText",
-      },
-      transparent: {
+      minimal: {
         backgroundColor: "transparent",
-        borderColor: "transparent",
+        border: "none",
       },
-      warning: {
-        backgroundColor: "$orangeBackground",
-        color: "$orangeText",
+      orange: {
+        backgroundColor: "$orange",
+        borderColor: "$border",
+      },
+      purple: {
+        backgroundColor: "$purple",
+        borderColor: "$border",
+      },
+      solid: {
+        backgroundColor: "$text",
+        borderColor: "$text",
+        color: "$background",
+      },
+      yellow: {
+        backgroundColor: "$yellow",
+        borderColor: "$border",
       },
     },
     ...paddingVariants,
   },
+
   width: "100%",
 });
 
 export const BoxHeaderStyled = styled("div", {
-  backgroundColor: "$defaultSubtle",
-  borderBottom: "0.1rem solid $borderSubtle",
+  borderBottom: "1px solid $borderLight",
+  color: "$text",
+  fontWeight: "bold",
   padding: "$small $medium",
   variants: {
     padding: {
@@ -116,27 +126,33 @@ export const BoxHeaderStyled = styled("div", {
         padding: "$small $medium",
       },
       none: {
+        borderBottom: "none",
         padding: 0,
       },
       small: {
-        padding: "$small $small",
+        padding: "$smaller $medium",
       },
     },
   },
 });
 
 export const BoxFooterStyled = styled("div", {
-  padding: "0 $medium $medium $medium",
+  backgroundColor: "$surfaceLight",
+  borderTop: "1px solid $borderLight",
+  color: "$text",
+  padding: "$small $medium",
   variants: {
     padding: {
       default: {
-        padding: "0 $medium $medium $medium",
+        padding: "$small $medium",
       },
       none: {
+        backgroundColor: "transparent",
+        borderTop: "none",
         padding: 0,
       },
       small: {
-        padding: "0 $small $small $small",
+        padding: "$smaller $medium",
       },
     },
   },
@@ -154,21 +170,20 @@ export const BoxFlexStyled = styled("div", {
 });
 
 export const BoxExitStyled = styled("div", {
-  cursor: "pointer",
-  padding: "1rem",
   position: "absolute",
-  right: 0,
-  top: 0,
-  transition: "$default",
+  right: "$small",
+  top: "$small",
 });
 
 export const BoxLoadingStyled = styled("div", {
   alignItems: "center",
-  backgroundColor: "$border",
+  backgroundColor: "$background",
+  borderRadius: "$medium",
   bottom: 0,
   display: "flex",
   justifyContent: "center",
   left: 0,
+  opacity: 0.95,
   position: "absolute",
   right: 0,
   top: 0,
@@ -187,12 +202,11 @@ export const BoxExpanderTrigger = styled("div", {
       true: {
         bottom: "auto",
         justifyContent: "flex-start",
-        paddingBottom: "$smallest",
-        paddingTop: "$medium",
+        padding: "$medium $medium $small",
         position: "relative",
       },
     },
   },
-
   zIndex: 1,
 });
+export default BoxStyled;

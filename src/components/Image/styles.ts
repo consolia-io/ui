@@ -6,5 +6,3 @@ export const ImageStyled = styled("div", {
   transition: "$default",
   width: "100%",
 });
-
-export default ImageStyled;

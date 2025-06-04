@@ -2,7 +2,7 @@ import { ChangeEvent, useState, type JSX } from "react";
 import toast from "react-hot-toast";
 
 import { Icons } from "../../icons";
-import { Button, Loading, useEventListener, useBreakpoints, Text } from "../../index";
+import { Badge, Button, Loading, useEventListener, useBreakpoints } from "../../index";
 import { IInput } from "../../types";
 import {
   InputAreaStyled,
@@ -45,6 +45,11 @@ export default function Input({
   const [isRevealed, setIsRevealed] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const isSubmitDisabled = !submitValid || !submitValid(inputValue) || isSubmitted || disabled;
+  const isSubmitValid = submitValid && submitValid(inputValue);
+  const hasFunctions = loading || submit || copy || reveal || reset;
+  const hasCallback = error || success || warning;
+
   function handleChange(event: ChangeEvent<HTMLInputElement>): void {
     setInputValue(event.target.value);
     setIsSubmitted(false);
@@ -72,21 +77,21 @@ export default function Input({
 
   function handleReset(): void {
     setInputValue("");
-
     if (resetFunction) {
       resetFunction();
     }
   }
 
-  useEventListener("keydown", (event: KeyboardEvent) => {
-    if (
-      listen &&
-      event.key === "Enter" &&
-      submitFunction &&
-      submitValid &&
-      submitValid(inputValue)
-    ) {
+  function handleSubmit(): void {
+    if (submitFunction && isSubmitValid) {
       submitFunction(inputValue || "");
+      setIsSubmitted(true);
+    }
+  }
+
+  useEventListener("keydown", (event: KeyboardEvent) => {
+    if (listen && event.key === "Enter" && submitFunction && isSubmitValid) {
+      handleSubmit();
     }
   });
 
@@ -107,30 +112,29 @@ export default function Input({
           placeholder={placeholder}
           type={isRevealed ? "text" : type || "text"}
           value={inputValue}
-          onChange={(e: ChangeEvent<HTMLInputElement>): void => {
-            handleChange(e);
-          }}
+          onChange={(event) => handleChange(event)}
         />
-        {(loading || submit || copy || reveal || reset) && (
+
+        {hasFunctions && (
           <InputFunctionStyled>
             {loading && <Loading css={{ marginRight: "$smaller" }} />}
+
             {copy && (
               <Button
                 disabled={isCopied || disabled}
                 icon={!isPhone ? <Icons.ClipboardText /> : undefined}
-                onClick={(): void => {
-                  handleCopy();
-                }}>
+                small
+                onClick={() => handleCopy()}>
                 {!isPhone ? "Copy" : <Icons.ClipboardText />}
               </Button>
             )}
+
             {reveal && (
               <Button
                 disabled={disabled}
                 icon={!isPhone ? !isRevealed ? <Icons.Eye /> : <Icons.EyeClosed /> : undefined}
-                onClick={(): void => {
-                  handleReveal();
-                }}>
+                small
+                onClick={() => handleReveal()}>
                 {!isPhone ? (
                   !isRevealed ? (
                     "Reveal"
@@ -146,50 +150,43 @@ export default function Input({
             )}
 
             {reset && inputValue && (
-              <Button
-                disabled={disabled}
-                onClick={(): void => {
-                  handleReset();
-                }}>
+              <Button disabled={disabled} small onClick={() => handleReset()}>
                 <Icons.X />
               </Button>
             )}
 
             {submit && (
               <Button
-                disabled={!submitValid || !submitValid(inputValue) || isSubmitted || disabled}
+                disabled={isSubmitDisabled}
                 icon={!isPhone ? <Icons.ArrowRight weight="regular" /> : undefined}
                 iconPosition="right"
-                theme={submitValid && submitValid(inputValue) ? "solid" : "default"}
+                small
+                theme={isSubmitValid ? "solid" : "default"}
                 type="submit"
-                onClick={(): void => {
-                  if (submitFunction && submitValid && submitValid(inputValue)) {
-                    submitFunction(inputValue || "");
-                    setIsSubmitted(true);
-                  }
-                }}>
+                onClick={() => handleSubmit()}>
                 {!isPhone ? submit : <Icons.ArrowRight weight="regular" />}
               </Button>
             )}
           </InputFunctionStyled>
         )}
       </InputCoreStyled>
-      {(error || success || warning) && (
+
+      {hasCallback && (
         <InputCallbackStyled>
           {error && (
-            <Text as="span" highlight="red">
-              {errorMessage || <Icons.Warning />}
-            </Text>
+            <Badge icon={!errorMessage ? <Icons.Warning /> : undefined} theme="orange">
+              {errorMessage || "Error"}
+            </Badge>
           )}
           {success && (
-            <Text as="span" highlight="green">
-              {successMessage || <Icons.CheckCircle />}
-            </Text>
+            <Badge icon={!successMessage ? <Icons.CheckCircle /> : undefined} theme="blue">
+              {successMessage || "Success"}
+            </Badge>
           )}
           {warning && (
-            <Text as="span" highlight="orange">
-              {warningMessage || <Icons.Warning />}
-            </Text>
+            <Badge icon={!warningMessage ? <Icons.Warning /> : undefined} theme="yellow">
+              {warningMessage || "Warning"}
+            </Badge>
           )}
         </InputCallbackStyled>
       )}

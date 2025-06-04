@@ -44,13 +44,13 @@ export default function Box({
     setIsOpen(false);
     setTimeout(() => {
       setIsMounted(false);
-    }, 250);
+    }, 100);
   }
 
-  if (!isMounted) return null;
+  const padding = header || footer || image || minimal ? "none" : small ? "small" : "default";
+  const hasInteraction = !!(cta || imageCTA);
 
-  const useHeaderOrFooter =
-    (theme && theme !== "warning" && theme !== "error" && theme !== "success") || !theme;
+  if (!isMounted) return null;
 
   return (
     <BoxStyled
@@ -61,11 +61,11 @@ export default function Box({
         ...(expandable && expandableHeight && !isExpanded && { maxHeight: expandableHeight }),
         ...css,
       }}
-      footer={footer ? true : false}
-      hover={cta || imageCTA ? true : false}
+      footer={!!footer}
+      hover={hasInteraction}
       href={cta}
-      loading={loading || false}
-      padding={header || footer || image || minimal ? "none" : small ? "small" : "default"}
+      loading={!!loading}
+      padding={padding}
       target={cta ? "_blank" : undefined}
       theme={theme || "default"}>
       {loading && (
@@ -73,6 +73,7 @@ export default function Box({
           <Loading />
         </BoxLoadingStyled>
       )}
+
       <BoxFlexStyled>
         {image &&
           (imageCTA && !cta ? (
@@ -87,7 +88,7 @@ export default function Box({
                 }}
                 fill
                 fillFit={imageFit}
-                fillHeight={imageHeight || "20rem"}
+                fillHeight={imageHeight}
                 fillPosition={imagePosition}
                 sizes={imageSizes || "50vw"}
                 src={image}
@@ -104,13 +105,14 @@ export default function Box({
               }}
               fill
               fillFit={imageFit}
-              fillHeight={imageHeight || "20rem"}
+              fillHeight={imageHeight}
               fillPosition={imagePosition}
               sizes={imageSizes || "50vw"}
               src={image}
             />
           ))}
-        {header && useHeaderOrFooter && (
+
+        {header && (
           <BoxHeaderStyled padding={minimal ? "none" : small ? "small" : "default"}>
             {header}
           </BoxHeaderStyled>
@@ -125,11 +127,12 @@ export default function Box({
         )}
       </BoxFlexStyled>
 
-      {footer && useHeaderOrFooter && (
+      {footer && (
         <BoxFooterStyled padding={minimal ? "none" : small ? "small" : "default"}>
           {footer}
         </BoxFooterStyled>
       )}
+
       {expandable && !cta && (
         <BoxExpanderTrigger expanded={isExpanded}>
           <Button
@@ -147,9 +150,10 @@ export default function Box({
           </Button>
         </BoxExpanderTrigger>
       )}
+
       {closable && !cta && (
-        <BoxExitStyled onClick={(): void => handleClose()}>
-          <Button small theme={"minimal"}>
+        <BoxExitStyled onClick={() => handleClose()}>
+          <Button small theme="minimal">
             <Icons.X />
           </Button>
         </BoxExitStyled>

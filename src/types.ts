@@ -61,7 +61,7 @@ export interface IBadge {
   loading?: boolean;
   onClick?: MouseEventHandler<HTMLDivElement>;
   small?: boolean;
-  theme?: "red" | "orange" | "purple" | "blue" | "green" | "border" | "default" | "alternate";
+  theme?: "default" | "solid" | "orange" | "purple" | "yellow" | "blue";
 }
 
 export interface IBox {
@@ -84,7 +84,7 @@ export interface IBox {
   loading?: boolean;
   minimal?: boolean;
   small?: boolean;
-  theme?: "default" | "success" | "warning" | "error" | "transparent" | "fill";
+  theme?: "default" | "fill" | "orange" | "purple" | "yellow" | "blue" | "minimal" | "solid";
 }
 
 export interface IButton extends ComponentPropsWithoutRef<"button"> {
@@ -96,7 +96,7 @@ export interface IButton extends ComponentPropsWithoutRef<"button"> {
   inline?: IThemeSpacing | "auto";
   loading?: boolean;
   small?: boolean;
-  theme?: "default" | "fill" | "minimal" | "solid";
+  theme?: "default" | "solid" | "minimal";
 }
 
 export interface ICalendar {
@@ -220,7 +220,7 @@ export interface IInput extends ComponentPropsWithRef<"input"> {
 export interface ILoading {
   css?: CSS;
   stroke?: string;
-  width?: number | string;
+  theme?: "default" | "colored";
 }
 
 export interface ILoadingOverlay extends ILoading {
@@ -228,39 +228,46 @@ export interface ILoadingOverlay extends ILoading {
 }
 
 export interface ILogo {
+  color?: keyof typeof theme.colors;
   css?: CSS;
-  height?: number | string;
-  inline?: IThemeSpacing | "auto";
-  width?: number | string;
+  hover?: boolean;
+  outline?: boolean;
+  type?: "icon" | "full" | "text";
+  width?: number;
 }
 
 export interface IMenu {
   children?: ReactNode;
   css?: CSS;
-  full?: boolean;
   initial?: string;
-  logo?: ReactNode;
   onSelection?: (value: string, label: string) => void;
   options: Array<{
+    icon?: ReactNode;
     label: string;
-    sub?: Array<{ label: string; value: string }>;
+    sub?: Array<{
+      icon?: ReactNode;
+      label: string;
+      value: string;
+    }>;
     value: string;
   }>;
   trigger: ReactNode;
 }
 
-export interface IPlaces extends IInput {
-  apiKey: string;
-  country?: string | string[];
-  handleAutocomplete?: (
-    data: {
-      address: string;
-      city: string;
-      restrictedAddress: string;
-      state: string;
-    } | null,
-  ) => void;
-  restrict?: boolean;
+export interface INodes {
+  nodes: Array<{
+    name: string;
+    theme?: "purple" | "orange" | "yellow" | "blue";
+    icon: ReactNode;
+  }>;
+  parent:
+    | {
+        name: string;
+        icon: ReactNode;
+      }
+    | ReactNode;
+  height?: number;
+  type?: "card" | "badge";
 }
 
 export interface IPopover {
@@ -323,6 +330,7 @@ export interface IStack {
   flex?: CSSProperties["alignItems"];
   flexduo?: boolean;
   id?: string;
+  inverted?: boolean;
   minimal?: boolean;
   noPrint?: boolean;
   offset?: number;
@@ -341,30 +349,26 @@ export interface IStack {
 }
 
 export interface ITable {
-  collapse?: boolean;
-  collapseDisabled?: number[];
-  collapseSortable?: boolean;
+  columns: Array<{
+    key: string;
+    label: string;
+    align?: "left" | "center" | "right";
+    width?: string;
+    sortable?: boolean;
+  }>;
+  rows: Array<{
+    id: string;
+    cells: Record<string, ReactNode>;
+    subRows?: Array<{
+      id: string;
+      cells: Record<string, ReactNode>;
+    }>;
+  }>;
   css?: CSS;
-  defaultDirection?: "asc" | "desc";
-  defaultLimit?: 10 | 25 | 50 | 100 | 200;
-  defaultSort?: number;
   error?: string;
-  filters?: ReactNode;
-  header?: {
-    full?: boolean;
-    options?: ReactNode;
-    title: string;
-  } | null;
-  identifier: string;
-  kbd?: boolean;
   loading?: boolean;
   pagination?: boolean;
-  restrictLimit?: number;
-  rowNumbers?: boolean;
-  sortDisabled?: number[];
-  sortable?: boolean;
-  tbody?: Array<Array<{ label?: ReactNode; value: string | number; width?: string | number }>>;
-  thead?: Array<string>;
+  kbd?: boolean;
 }
 
 export interface IText extends ComponentPropsWithRef<"p"> {
@@ -374,7 +378,7 @@ export interface IText extends ComponentPropsWithRef<"p"> {
   bottom?: IThemeSpacing;
   children: ReactNode;
   css?: CSS;
-  highlight?: "red" | "orange" | "purple" | "blue" | "green" | "default" | "alternate";
+  highlight?: "red" | "orange" | "purple" | "blue" | "blue" | "default" | "alternate";
   href?: string;
   inline?: IThemeSpacing | "auto";
   link?: "minimal" | "default" | "alternate" | "blog";
@@ -386,6 +390,8 @@ export interface IText extends ComponentPropsWithRef<"p"> {
 
 export interface IUpload<T extends boolean> {
   accept?: string;
+  css?: CSS;
+  disabled?: boolean;
   error?: boolean;
   errorMessage?: string;
   loading?: boolean;
@@ -395,17 +401,19 @@ export interface IUpload<T extends boolean> {
   onUpload: T extends true ? (files: FileList) => void : (file: File) => void;
   success?: boolean;
   successMessage?: string;
+  width?: number | string;
 }
 
 export type IToast = InferToastComponentProps<typeof Toaster>;
 
 export interface IView {
   app?: boolean;
+  as?: keyof JSX.IntrinsicElements;
   bottom?: IThemeSpacing;
   children: ReactNode;
   container?: boolean;
   css?: CSS;
-  gradient?: boolean;
+  hero?: boolean;
   id?: string;
   inverted?: boolean;
   noPrint?: boolean;
@@ -423,4 +431,14 @@ export interface IIcon {
   forceColor?: keyof typeof theme.colors;
   forceSize?: number;
   inline?: IThemeSpacing | "auto";
+}
+
+export interface ITabs {
+  initial?: string;
+  onSelection?: (value: string) => void;
+  options: Array<{
+    icon?: ReactNode;
+    label: string;
+    value: string;
+  }>;
 }

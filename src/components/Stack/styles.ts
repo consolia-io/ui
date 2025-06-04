@@ -36,6 +36,12 @@ export const StackStyled = styled("div", {
         verticalAlign: "middle",
       },
     },
+    inverted: {
+      true: {
+        backgroundColor: "$background",
+        color: "$text",
+      },
+    },
   },
 });
 
@@ -43,6 +49,15 @@ export const StackRowStyled = styled("div", {
   display: "flex",
   flexDirection: "row",
   flexFlow: "row wrap",
+  variants: {
+    inverted: {
+      true: {
+        backgroundColor: "$background",
+        color: "$text",
+      },
+    },
+  },
+
   width: "100%",
 });
 
@@ -55,7 +70,14 @@ export const StackColumnStyled = styled("div", {
     paddingLeft: "$smaller !important",
     paddingRight: "$smaller !important",
   },
+
   variants: {
+    inverted: {
+      true: {
+        backgroundColor: "$background",
+        color: "$text",
+      },
+    },
     minimal: {
       true: {
         paddingLeft: 0,

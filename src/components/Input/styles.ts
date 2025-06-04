@@ -1,5 +1,4 @@
 import { styled } from "../../stitches.config";
-import { ButtonStyled } from "../Button/styles";
 
 export const InputStyled = styled("div", {
   position: "relative",
@@ -7,24 +6,26 @@ export const InputStyled = styled("div", {
     disabled: {
       true: {
         cursor: "not-allowed",
-        opacity: 0.5,
+        opacity: "$light",
       },
     },
   },
-
   width: "100%",
 });
+
 export const InputCoreStyled = styled("div", {
   "&:focus-within": {
+    borderColor: "$text",
     boxShadow: "$small",
   },
   "&:hover": {
+    borderColor: "$text",
     boxShadow: "$small",
   },
   alignContent: "center",
   alignSelf: "center",
-  border: "0.1rem solid $border",
-  borderRadius: "$small",
+  border: "1px solid $border",
+  borderRadius: "$medium",
   display: "flex",
   justifyContent: "center",
   transition: "$default",
@@ -33,25 +34,21 @@ export const InputCoreStyled = styled("div", {
 
 export const InputAreaStyled = styled("input", {
   "&::placeholder": {
-    color: "$accent",
-    opacity: 0.7,
+    color: "$text",
+    opacity: "$light",
   },
   "&:after": {
     clear: "both",
     content: '""',
   },
-  "&:focus": {
-    outline: "none",
-  },
   appearance: "none",
   backgroundColor: "transparent",
   border: "none",
-  borderRadius: "$small",
   color: "$text",
   display: "block",
   fontFamily: "$default",
   fontSize: "$default",
-  height: "4rem",
+  height: "$large",
   margin: "0 auto",
   padding: "0 $small",
   phone: {
@@ -61,10 +58,6 @@ export const InputAreaStyled = styled("input", {
 });
 
 export const InputFunctionStyled = styled("div", {
-  [`& ${ButtonStyled}`]: {
-    minHeight: "none !important",
-    padding: "0 $smaller",
-  },
   alignItems: "center",
   alignSelf: "center",
   display: "flex",
@@ -80,5 +73,3 @@ export const InputCallbackStyled = styled("div", {
   paddingTop: "$small",
   textAlign: "left",
 });
-
-export default InputStyled;

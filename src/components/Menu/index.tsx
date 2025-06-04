@@ -1,11 +1,12 @@
 import { useRef, useState, type JSX } from "react";
 
 import { Icons } from "../../icons";
-import { Button, Text, useEventListener, useOutsideClick, useScrollLock } from "../../index";
+import { Button, Logo, useEventListener, useOutsideClick, useScrollLock } from "../../index";
 import { IMenu } from "../../types";
 import {
   MenuGroupStyled,
   MenuItemStyled,
+  MenuItemContentStyled,
   MenuStyled,
   MenuTriggerStyled,
   MenuContentStyled,
@@ -13,14 +14,13 @@ import {
   MenuSubItemStyled,
   MenuSubGroupStyled,
   MenuHeaderStyled,
+  MenuOverlayStyled,
 } from "./styles";
 
 export default function Menu({
   children,
   css,
-  full,
   initial,
-  logo,
   onSelection,
   options,
   trigger,
@@ -29,14 +29,16 @@ export default function Menu({
 
   const [isOpen, setIsOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-
   const [subMenu, setSubMenu] = useState<string | null>(null);
+
+  const animationDuration = 200;
+  const isMenuOpen = isOpen || isMounted;
 
   function handleClose(): void {
     setIsOpen(false);
     setTimeout(() => {
       setIsMounted(false);
-    }, 250);
+    }, animationDuration);
   }
 
   function handleOpen(): void {
@@ -45,7 +47,7 @@ export default function Menu({
   }
 
   function handleClick(): void {
-    if (isOpen || isMounted) {
+    if (isMenuOpen) {
       setIsOpen(false);
       setIsMounted(false);
     } else {
@@ -58,6 +60,15 @@ export default function Menu({
       onSelection(value, label);
     }
     handleClose();
+  }
+
+  function handleItemClick(option: IMenu["options"][number]): void {
+    if (option.sub) {
+      setSubMenu(subMenu === option.value ? null : option.value);
+    } else {
+      setSubMenu(null);
+      handleSelection(option.value, option.label);
+    }
   }
 
   useEventListener("keydown", (event: KeyboardEvent) => {
@@ -81,59 +92,51 @@ export default function Menu({
       </MenuTriggerStyled>
 
       {isMounted && (
-        <MenuGroupStyled ref={ref} animation={isOpen} full={full ? true : false}>
-          {full && (
+        <MenuOverlayStyled animation={isOpen}>
+          <MenuGroupStyled ref={ref} animation={isOpen}>
             <MenuHeaderStyled>
-              {logo ?? (
-                <Text as="h4" inline="auto">
-                  Menu
-                </Text>
-              )}
+              <Logo />
 
-              <Button small onClick={(): void => handleClose()}>
-                <Icons.ArrowsInSimple weight="regular" />
+              <Button icon={<Icons.X />} small onClick={() => handleClose()}>
+                Close
               </Button>
             </MenuHeaderStyled>
-          )}
-          {options.map((option) => (
-            <>
-              <MenuItemStyled
-                key={option.value}
-                selected={initial === option.value || subMenu === option.value}
-                onClick={(): void => {
-                  if (option.sub) {
-                    setSubMenu(subMenu === option.value ? null : option.value);
-                  } else {
-                    setSubMenu(null);
-                    handleSelection(option.value, option.label);
-                  }
-                }}>
-                {option.label}{" "}
-                {option.sub && (
-                  <MenuIconStyled open={subMenu === option.value}>
-                    <Icons.CaretDown />
-                  </MenuIconStyled>
-                )}
-              </MenuItemStyled>
-              {option.sub && subMenu === option.value && (
-                <MenuSubGroupStyled>
-                  {option.sub.map((subOption) => (
-                    <MenuSubItemStyled
-                      key={subOption.value}
-                      selected={initial === subOption.value ? true : false}
-                      onClick={(): void => {
-                        handleSelection(subOption.value, subOption.label);
-                      }}>
-                      {subOption.label}
-                    </MenuSubItemStyled>
-                  ))}
-                </MenuSubGroupStyled>
-              )}
-            </>
-          ))}
 
-          {children && <MenuContentStyled>{children}</MenuContentStyled>}
-        </MenuGroupStyled>
+            {options.map((option) => (
+              <div key={option.value}>
+                <MenuItemStyled
+                  selected={initial === option.value || subMenu === option.value}
+                  onClick={() => handleItemClick(option)}>
+                  <MenuItemContentStyled>
+                    {option.icon && option.icon}
+                    {option.label}
+                  </MenuItemContentStyled>
+                  {option.sub && (
+                    <MenuIconStyled open={subMenu === option.value}>
+                      <Icons.CaretDown />
+                    </MenuIconStyled>
+                  )}
+                </MenuItemStyled>
+
+                {option.sub && subMenu === option.value && (
+                  <MenuSubGroupStyled>
+                    {option.sub.map((subOption) => (
+                      <MenuSubItemStyled
+                        key={subOption.value}
+                        selected={initial === subOption.value}
+                        onClick={() => handleSelection(subOption.value, subOption.label)}>
+                        {subOption.icon && subOption.icon}
+                        {subOption.label}
+                      </MenuSubItemStyled>
+                    ))}
+                  </MenuSubGroupStyled>
+                )}
+              </div>
+            ))}
+
+            {children && <MenuContentStyled>{children}</MenuContentStyled>}
+          </MenuGroupStyled>
+        </MenuOverlayStyled>
       )}
     </MenuStyled>
   );

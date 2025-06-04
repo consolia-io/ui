@@ -1,21 +1,16 @@
-import { darkTheme, styled } from "../../stitches.config";
+import { styled } from "../../stitches.config";
 
 export const ViewStyled = styled("section", {
   backgroundColor: "$background",
   color: "$text",
-  paddingLeft: "$small",
-  paddingRight: "$small",
+  paddingLeft: "$medium",
+  paddingRight: "$medium",
   position: "relative",
   variants: {
-    gradient: {
-      true: {
-        backgroundImage: `linear-gradient(180deg, $background 0%, $background 50%, $defaultSubtle 100%)`,
-      },
-    },
     inverted: {
       true: {
-        backgroundColor: darkTheme.colors.background,
-        color: darkTheme.colors.text,
+        backgroundColor: "$background",
+        color: "$text",
       },
     },
     noPrint: {
@@ -40,7 +35,7 @@ export const ViewContainerStyled = styled("div", {
         desktopX: {
           maxWidth: "2000px",
         },
-        margin: "auto",
+        margin: "0 auto",
         wide: {
           maxWidth: "2400px",
         },
@@ -55,7 +50,7 @@ export const ViewContainerStyled = styled("div", {
         desktopX: {
           maxWidth: "1800px",
         },
-        margin: "auto",
+        margin: "0 auto",
         wide: {
           maxWidth: "2200px",
         },

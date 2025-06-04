@@ -26,10 +26,9 @@ export default function Icon({
           },
         }),
         svg: {
-          height: `${forceSize}px `,
+          height: `${forceSize}px`,
           width: `${forceSize}px`,
         },
-
         ...css,
       }}>
       {children}

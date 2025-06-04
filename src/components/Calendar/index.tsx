@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { useEffect, type JSX } from "react";
 
 import { Icons } from "../../icons";
-import { Stack, Text, Button, useBreakpoints } from "../../index";
+import { Stack, Text, Button } from "../../index";
 import { ICalendar } from "../../types";
 import {
   useCalendarState,
@@ -13,13 +13,17 @@ import {
   useCalendarViewChange,
 } from "./hooks";
 import {
-  CalendarFooterStyled,
+  CalendarContentStyled,
+  CalendarDescriptionStyled,
+  CalendarDayStyled,
+  CalendarHeaderNavigationStyled,
   CalendarGridStyled,
   CalendarHeaderStyled,
   CalendarStyled,
+  CalendarDayHeaderStyled,
 } from "./styles";
 
-const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const DAYS_OF_WEEK = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 export default function Calendar({
   blockedDates,
@@ -35,7 +39,8 @@ export default function Calendar({
   startDate,
   viewDate,
 }: ICalendar): JSX.Element {
-  const { isPhone } = useBreakpoints();
+  const isSingleMode = mode === "single";
+
   const { dates, setDates, setValues, values } = useCalendarState({
     endDate,
     maxDate,
@@ -59,22 +64,80 @@ export default function Calendar({
       minDate: values.minDate,
       viewDate: values.viewDate,
     });
-  const { handleDateChange } = useCalendarViewChange(setValues, onViewChange);
 
+  const { handleDateChange } = useCalendarViewChange(setValues, onViewChange);
   const { days, offset } = useDaysInMonth(values.viewDate);
 
+  const currentMonth = dayjs(values.viewDate);
+  const prevMonth = currentMonth.subtract(1, "month");
+  const nextMonth = currentMonth.add(1, "month");
+  const hasDescription = Boolean(description);
+  const shouldRenderRange = !isSingleMode;
+
   const handleDaySelection = (date: string): void => {
-    if (mode === "single") {
+    if (isSingleMode) {
       if (validateSingleDate(date)) {
         setDates({ endDate: date, startDate: date });
       }
     } else {
-      if (!dates.startDate || dates.endDate) {
+      const hasNoSelection = !dates.startDate || dates.endDate;
+
+      if (hasNoSelection) {
         setDates({ endDate: "", startDate: date });
-      } else if (validateRange(dates.startDate, date)) {
+      } else if (dates.startDate && validateRange(dates.startDate, date)) {
         setDates({ endDate: date, startDate: dates.startDate });
       }
     }
+  };
+
+  const isDateSelected = (date: string): boolean =>
+    date === dates.startDate || date === dates.endDate;
+
+  const isDateInRange = (date: string): boolean => {
+    if (!shouldRenderRange || !dates.startDate || !dates.endDate) return false;
+
+    const dateObj = dayjs(date);
+    const start = dayjs(dates.startDate);
+    const end = dayjs(dates.endDate);
+
+    return (
+      (dateObj.isAfter(start, "day") && dateObj.isBefore(end, "day")) ||
+      (dateObj.isAfter(end, "day") && dateObj.isBefore(start, "day"))
+    );
+  };
+
+  const isDateDisabled = (date: string): boolean => {
+    const dateObj = dayjs(date);
+    const hasMinConstraint = values.minDate && dateObj.isBefore(values.minDate, "day");
+    const hasMaxConstraint = values.maxDate && dateObj.isAfter(values.maxDate, "day");
+    const isBlocked = blockedDates?.includes(date);
+
+    return Boolean(hasMinConstraint || hasMaxConstraint || isBlocked);
+  };
+
+  const handleYearNavigation = (direction: "prev" | "next"): void => {
+    handleDateChange("year", direction);
+  };
+
+  const handleMonthNavigation = (direction: "prev" | "next"): void => {
+    handleDateChange("month", direction);
+  };
+
+  const renderCalendarDay = (date: string): JSX.Element => {
+    const isSelected = isDateSelected(date);
+    const isBetween = isDateInRange(date);
+    const isDisabled = isDateDisabled(date);
+
+    return (
+      <CalendarDayStyled
+        key={date}
+        disabled={isDisabled}
+        inRange={Boolean(isBetween && !isSelected)}
+        selected={isSelected}
+        onClick={() => !isDisabled && handleDaySelection(date)}>
+        {dayjs(date).format("D")}
+      </CalendarDayStyled>
+    );
   };
 
   useEffect(() => {
@@ -93,117 +156,60 @@ export default function Calendar({
   return (
     <CalendarStyled>
       <CalendarHeaderStyled>
-        <Text as={description ? "h4" : "h5"} bottom="none">
-          {dayjs(values.viewDate).format("MMMM YYYY")}
-        </Text>
-        <Stack>
-          {!prevMonthDisabled && (
-            <Button
-              disabled={prevMonthDisabled}
-              inline={description ? "small" : "auto"}
-              small={isPhone}
-              theme={description ? "solid" : "minimal"}
-              onClick={() => handleDateChange("month", "prev")}>
-              <Icons.ArrowLeft />
-            </Button>
-          )}
-          {!nextMonthDisabled && (
-            <Button
-              disabled={nextMonthDisabled}
-              small={isPhone}
-              theme={description ? "solid" : "minimal"}
-              onClick={() => handleDateChange("month", "next")}>
-              <Icons.ArrowRight />
-            </Button>
-          )}
-        </Stack>
-      </CalendarHeaderStyled>
-      {description && (
-        <Text accent as="p" bottom="medium">
-          {description}
-        </Text>
-      )}
-
-      <CalendarGridStyled mode="days">
-        {daysOfWeek.map((day) => (
-          <Text key={day} accent as="span">
-            {day}
-          </Text>
-        ))}
-        {Array.from({ length: offset }).map((_, i) => (
-          <div key={i} />
-        ))}
-        {days.map((date) => {
-          const isSelected = date === dates.startDate || date === dates.endDate;
-          const isBetween =
-            dates.startDate &&
-            dates.endDate &&
-            ((dayjs(date).isAfter(dates.startDate, "day") &&
-              dayjs(date).isBefore(dates.endDate, "day")) ||
-              (dayjs(date).isAfter(dates.endDate, "day") &&
-                dayjs(date).isBefore(dates.startDate, "day")));
-          const isDisabled = Boolean(
-            (values.minDate && dayjs(date).isBefore(values.minDate, "day")) ||
-              (values.maxDate && dayjs(date).isAfter(values.maxDate, "day")) ||
-              blockedDates?.includes(date),
-          );
-
-          return (
-            <Button
-              key={date}
-              css={{
-                ...(isSelected && {
-                  "&:hover": {
-                    backgroundColor: "$text !important",
-                    color: "$background !important",
-                    opacity: 0.7,
-                  },
-                }),
-                ...(isDisabled && {
-                  "&::after": {
-                    background: "$text",
-                    borderRadius: "$large",
-                    content: "''",
-                    height: "1px",
-                    left: "50%",
-                    position: "absolute",
-                    top: "50%",
-                    transform: "translate(-50%, -50%) rotate(45deg)",
-                    width: "100%",
-                  },
-                  opacity: 0.25,
-                }),
-              }}
-              disabled={isDisabled}
-              small
-              theme={isSelected ? "solid" : isBetween ? "fill" : "minimal"}
-              onClick={() => handleDaySelection(date)}>
-              {dayjs(date).format("D")}
-            </Button>
-          );
-        })}
-      </CalendarGridStyled>
-      <CalendarFooterStyled>
-        {!prevYearDisabled && (
-          <Button
-            disabled={prevYearDisabled}
-            icon={<Icons.CaretLeft />}
-            small
-            onClick={() => handleDateChange("year", "prev")}>
-            {dayjs(values.viewDate).subtract(1, "year").format("YYYY")}
+        <Stack align="center" css={{ gap: "$small" }} direction="row">
+          <Button disabled={prevYearDisabled} small onClick={() => handleYearNavigation("prev")}>
+            <Icons.CaretUp />
           </Button>
-        )}
-        {!nextYearDisabled && (
+          <Text as="h6" css={{ margin: 0 }}>
+            {currentMonth.format("MMMM YYYY")}
+          </Text>
+          <Button disabled={nextYearDisabled} small onClick={() => handleYearNavigation("next")}>
+            <Icons.CaretDown />
+          </Button>
+        </Stack>
+
+        <CalendarHeaderNavigationStyled>
           <Button
-            disabled={nextYearDisabled}
-            icon={<Icons.CaretRight />}
+            disabled={prevMonthDisabled}
+            icon={<Icons.ArrowLeft />}
+            small
+            onClick={() => handleMonthNavigation("prev")}>
+            {prevMonth.format("MMM")}
+          </Button>
+          <Button
+            disabled={nextMonthDisabled}
+            icon={<Icons.ArrowRight />}
             iconPosition="right"
             small
-            onClick={() => handleDateChange("year", "next")}>
-            {dayjs(values.viewDate).add(1, "year").format("YYYY")}
+            onClick={() => handleMonthNavigation("next")}>
+            {nextMonth.format("MMM")}
           </Button>
-        )}
-      </CalendarFooterStyled>
+        </CalendarHeaderNavigationStyled>
+      </CalendarHeaderStyled>
+
+      {hasDescription && (
+        <CalendarDescriptionStyled>
+          <Text accent as="small">
+            {description}
+          </Text>
+        </CalendarDescriptionStyled>
+      )}
+
+      <CalendarContentStyled>
+        <CalendarGridStyled mode="days">
+          {DAYS_OF_WEEK.map((day) => (
+            <CalendarDayHeaderStyled key={day}>
+              <Text as="small">{day}</Text>
+            </CalendarDayHeaderStyled>
+          ))}
+
+          {Array.from({ length: offset }).map((_, i) => (
+            <div key={i} />
+          ))}
+
+          {days.map(renderCalendarDay)}
+        </CalendarGridStyled>
+      </CalendarContentStyled>
     </CalendarStyled>
   );
 }

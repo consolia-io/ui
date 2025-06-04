@@ -2,7 +2,7 @@ import { ChangeEvent, useState, type JSX } from "react";
 import toast from "react-hot-toast";
 
 import { Icons } from "../../icons";
-import { Button, Loading, Text } from "../../index";
+import { Badge, Button, Loading, useBreakpoints } from "../../index";
 import { IField } from "../../types";
 import {
   FieldStyled,
@@ -37,9 +37,15 @@ export default function Field({
   warningMessage,
   width,
 }: IField): JSX.Element {
-  const [inputValue, setInputValue] = useState(value || "") as [string, (value: string) => void];
+  const { isPhone } = useBreakpoints();
+  const [inputValue, setInputValue] = useState((value as string) || "");
   const [isCopied, setIsCopied] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const isSubmitDisabled = !submitValid || !submitValid(inputValue) || isSubmitted || disabled;
+  const isSubmitValid = submitValid && submitValid(inputValue);
+  const hasFunctions = loading || submit || copy || reset;
+  const hasCallback = error || success || warning;
 
   function handleChange(event: ChangeEvent<HTMLTextAreaElement>): void {
     setInputValue(event.target.value);
@@ -51,7 +57,7 @@ export default function Field({
 
   function handleCopy(): void {
     if (copy && inputValue) {
-      navigator.clipboard.writeText(inputValue.toString());
+      navigator?.clipboard?.writeText(inputValue.toString());
       setIsCopied(true);
       toast("Copied to clipboard");
       setTimeout(() => {
@@ -64,92 +70,90 @@ export default function Field({
 
   function handleReset(): void {
     setInputValue("");
-
     if (resetFunction) {
       resetFunction();
     }
   }
 
+  function handleSubmit(): void {
+    if (submitFunction && isSubmitValid) {
+      submitFunction(inputValue || "");
+      setIsSubmitted(true);
+    }
+  }
+
   return (
-    <FieldStyled>
-      <FieldCoreStyled
-        css={{
-          maxWidth: width || "100%",
-          width: width || "100%",
-        }}
-        disabled={disabled}>
+    <FieldStyled
+      css={{
+        maxWidth: width || "100%",
+        width: width || "100%",
+        ...css,
+      }}
+      disabled={disabled}>
+      <FieldCoreStyled>
         <FieldAreaStyled
           cols={cols}
-          css={css}
           disabled={disabled}
           id={id || name}
           name={name}
           placeholder={placeholder}
           rows={rows}
           value={inputValue}
-          onChange={(event: ChangeEvent<HTMLTextAreaElement>): void => {
-            handleChange(event);
-          }}
+          onChange={(event) => handleChange(event)}
         />
-        {(loading || submit || copy) && (
+
+        {hasFunctions && (
           <FieldFunctionStyled>
             {loading && <Loading css={{ marginRight: "$smaller" }} />}
+
             {copy && (
               <Button
-                disabled={isCopied}
-                icon={<Icons.ClipboardText />}
-                onClick={(): void => {
-                  handleCopy();
-                }}>
-                Copy
+                disabled={isCopied || disabled}
+                icon={!isPhone ? <Icons.ClipboardText /> : undefined}
+                small
+                onClick={() => handleCopy()}>
+                {!isPhone ? "Copy" : <Icons.ClipboardText />}
               </Button>
             )}
 
             {reset && inputValue && (
-              <Button
-                css={{
-                  marginLeft: "$smaller",
-                }}
-                onClick={(): void => {
-                  handleReset();
-                }}>
+              <Button disabled={disabled} small onClick={() => handleReset()}>
                 <Icons.X />
               </Button>
             )}
 
             {submit && (
               <Button
-                disabled={!submitValid || !submitValid(inputValue) || isSubmitted}
-                inline={loading ? "small" : undefined}
+                disabled={isSubmitDisabled}
+                icon={!isPhone ? <Icons.ArrowRight /> : undefined}
+                iconPosition="right"
+                small
+                theme={isSubmitValid ? "solid" : "default"}
                 type="submit"
-                onClick={(): void => {
-                  if (submitFunction && submitValid && submitValid(inputValue)) {
-                    submitFunction(inputValue);
-                    setIsSubmitted(true);
-                  }
-                }}>
-                {submit}
+                onClick={() => handleSubmit()}>
+                {!isPhone ? submit : <Icons.ArrowRight />}
               </Button>
             )}
           </FieldFunctionStyled>
         )}
       </FieldCoreStyled>
-      {(error || success || warning) && (
+
+      {hasCallback && (
         <FieldCallbackStyled>
           {error && (
-            <Text as="span" highlight="red">
-              {errorMessage || <Icons.Warning />}
-            </Text>
+            <Badge icon={!errorMessage ? <Icons.Warning /> : undefined} theme="orange">
+              {errorMessage || "Error"}
+            </Badge>
           )}
           {success && (
-            <Text as="span" highlight="green">
-              {successMessage || <Icons.CheckCircle />}
-            </Text>
+            <Badge icon={!successMessage ? <Icons.CheckCircle /> : undefined} theme="blue">
+              {successMessage || "Success"}
+            </Badge>
           )}
           {warning && (
-            <Text as="span" highlight="orange">
-              {warningMessage || <Icons.Warning />}
-            </Text>
+            <Badge icon={!warningMessage ? <Icons.Warning /> : undefined} theme="yellow">
+              {warningMessage || "Warning"}
+            </Badge>
           )}
         </FieldCallbackStyled>
       )}

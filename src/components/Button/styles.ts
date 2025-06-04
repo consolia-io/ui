@@ -7,22 +7,19 @@ export const ButtonStyled = styled("button", {
 
   "&:disabled": {
     cursor: "not-allowed",
-    opacity: 0.5,
-  },
-  "&:focus": {
-    outline: 0,
+    opacity: "$light",
   },
 
   "&:not(:disabled):hover": {
-    backgroundColor: "$defaultHover",
+    backgroundColor: "$surfaceHover",
     borderColor: "$border",
     boxShadow: "$large",
-    color: "$text",
   },
   alignContent: "center",
   alignItems: "center",
   appearance: "none",
-  border: "0.1rem solid $border",
+  backgroundColor: "$background",
+  border: "1px solid $border",
   borderRadius: "$large",
   boxShadow: "$small",
   color: "$text",
@@ -30,19 +27,20 @@ export const ButtonStyled = styled("button", {
   display: "inline-flex",
   fontFamily: "$default",
   fontSize: "$default",
+  fontWeight: "bold",
   justifyContent: "center",
+  letterSpacing: "-0.02em",
   lineHeight: "$default",
   margin: 0,
-  minHeight: "3.4rem",
+  minHeight: "$small",
   outline: 0,
   padding: "$smallest $small",
   phone: {
-    minHeight: "3.4rem",
-    padding: "$smallest calc($small * 1.1)",
+    minHeight: "$smaller",
+    padding: "$smallest $small",
   },
   position: "relative",
   textOverflow: "ellipsis",
-
   transition: "$default",
 
   variants: {
@@ -52,32 +50,48 @@ export const ButtonStyled = styled("button", {
         width: "100%",
       },
     },
+    loading: {
+      true: {
+        cursor: "wait",
+        opacity: "$light",
+      },
+    },
     small: {
       true: {
         fontSize: "$small",
         lineHeight: "$small",
-        minHeight: "3rem",
+        minHeight: "$smaller",
 
         phone: {
-          minHeight: "3.1rem",
+          minHeight: "$smallest",
         },
       },
     },
     theme: {
       default: {
-        backgroundColor: "transparent",
-        borderColor: "$border",
-      },
-      fill: {
-        backgroundColor: "$default",
+        "&:not(:disabled):hover": {
+          backgroundColor: "$surfaceHover",
+          borderColor: "$border",
+        },
       },
       minimal: {
+        "&:not(:disabled):hover": {
+          backgroundColor: "$surfaceHover",
+          borderColor: "$border",
+          boxShadow: "$large",
+        },
         backgroundColor: "transparent",
         borderColor: "transparent",
         boxShadow: "none",
       },
       solid: {
+        "&:not(:disabled):hover": {
+          backgroundColor: "$text",
+          borderColor: "$text",
+          opacity: "$default",
+        },
         backgroundColor: "$text",
+        borderColor: "$text",
         color: "$background",
       },
     },
@@ -102,8 +116,18 @@ export const ButtonIconStyled = styled("span", {
       },
     },
   },
-
   verticalAlign: "middle",
 });
 
-export default ButtonStyled;
+export const ButtonLoadingStyled = styled("div", {
+  alignItems: "center",
+  backgroundColor: "$surface",
+  bottom: 0,
+  display: "flex",
+  justifyContent: "center",
+  left: 0,
+  position: "absolute",
+  right: 0,
+  top: 0,
+  zIndex: 1,
+});

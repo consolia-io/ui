@@ -19,7 +19,6 @@ export default function Dialog({
   disabled,
   forceHeight,
   portal = true,
-  small,
   title,
   trigger,
   triggerCSS,
@@ -33,7 +32,7 @@ export default function Dialog({
     setIsOpen(false);
     setTimeout(() => {
       setIsMounted(false);
-    }, 250);
+    }, 200);
   }
 
   function handleOpen(): void {
@@ -81,6 +80,7 @@ export default function Dialog({
       ) : (
         "Missing trigger"
       )}
+
       {isMounted && (
         <Portal disabled={!portal}>
           <DialogOverlayStyled animation={isOpen}>
@@ -90,20 +90,17 @@ export default function Dialog({
               css={{
                 ...css,
                 ...(forceHeight && {
-                  phone: {
-                    height: `${forceHeight}%`,
-                    maxHeight: `${forceHeight}%`,
-                    minHeight: `${forceHeight}%`,
-                  },
+                  maxHeight: `${forceHeight}vh`,
+                  minHeight: `${forceHeight}vh`,
                 }),
-              }}
-              small={small || false}>
+              }}>
               <DialogHeaderStyled>
                 <Text as="h4">{title}</Text>
-                <Button small theme="fill" onClick={(): void => handleClose()}>
-                  <Icons.ArrowsInSimple weight="regular" />
+                <Button icon={<Icons.X />} small onClick={() => handleClose()}>
+                  Close
                 </Button>
               </DialogHeaderStyled>
+
               <DialogContentStyled>{children}</DialogContentStyled>
             </DialogCoreStyled>
           </DialogOverlayStyled>

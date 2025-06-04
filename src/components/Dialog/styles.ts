@@ -1,25 +1,7 @@
 import { fadeIn, fadeOut, keyframes, styled } from "../../stitches.config";
 import { TextStyled } from "../Text/styles";
 
-const slideInRight = keyframes({
-  from: {
-    transform: "translateX(100%)",
-  },
-  to: {
-    transform: "translateX(0)",
-  },
-});
-
-const slideOutRight = keyframes({
-  from: {
-    transform: "translateX(0)",
-  },
-  to: {
-    transform: "translateX(100%)",
-  },
-});
-
-const slideInBottom = keyframes({
+const slideIn = keyframes({
   from: {
     transform: "translateY(100%)",
   },
@@ -28,7 +10,7 @@ const slideInBottom = keyframes({
   },
 });
 
-const slideOutBottom = keyframes({
+const slideOut = keyframes({
   from: {
     transform: "translateY(0)",
   },
@@ -51,8 +33,8 @@ export const DialogTriggerStyled = styled("div", {
 });
 
 export const DialogOverlayStyled = styled("div", {
-  backdropFilter: "blur(0.2px)",
-  backgroundColor: "$dialog",
+  backdropFilter: "blur(2px)",
+  backgroundColor: "$overlay",
   bottom: 0,
   height: "100%",
   left: 0,
@@ -63,11 +45,11 @@ export const DialogOverlayStyled = styled("div", {
   variants: {
     animation: {
       false: {
-        animation: `${fadeOut} .3s linear`,
+        animation: `${fadeOut} 0.2s ease-in-out`,
         animationFillMode: "forwards",
       },
       true: {
-        animation: `${fadeIn} .2s linear`,
+        animation: `${fadeIn} 0.2s ease-in-out`,
         animationFillMode: "forwards",
       },
     },
@@ -77,98 +59,62 @@ export const DialogOverlayStyled = styled("div", {
 });
 
 export const DialogCoreStyled = styled("div", {
+  "&::-webkit-scrollbar": {
+    display: "none",
+  },
   backgroundColor: "$background",
+  borderRadius: "$large $large 0 0",
+  bottom: 0,
   boxShadow: "$large",
-  height: "100%",
+  left: 0,
+  maxHeight: "70vh",
+  minHeight: "30vh",
   overflowX: "hidden",
   overflowY: "auto",
+  phone: {
+    maxHeight: "90vh",
+    minHeight: "50vh",
+  },
   position: "fixed",
   right: 0,
-  textAlign: "left",
-  top: 0,
-  transition: "$default",
 
+  transition: "$default",
   variants: {
     animation: {
       false: {
-        animation: `${slideOutRight} .3s ease-out`,
+        animation: `${slideOut} 0.2s ease-in-out`,
         animationFillMode: "forwards",
-        phone: {
-          animation: `${slideOutBottom} .3s ease-out`,
-        },
       },
       true: {
-        animation: `${slideInRight} .15s ease-in`,
+        animation: `${slideIn} 0.2s ease-in-out`,
         animationFillMode: "forwards",
-        phone: {
-          animation: `${slideInBottom} .15s ease-in`,
-        },
-      },
-    },
-    small: {
-      false: {
-        phone: {
-          bottom: 0,
-          height: "auto",
-          left: 0,
-          maxHeight: "100%",
-          minHeight: "70%",
-          right: 0,
-          top: "auto",
-          width: "100% !important",
-        },
-        tabletX: {
-          width: "75% !important",
-        },
-        width: "55%",
-      },
-      true: {
-        phone: {
-          bottom: 0,
-          height: "auto",
-          left: 0,
-          maxHeight: "90%",
-          minHeight: "40%",
-          right: 0,
-          top: "auto",
-          width: "100% !important",
-        },
-        tabletX: {
-          width: "50% !important",
-        },
-        width: "35%",
       },
     },
   },
+
+  width: "100%",
 });
 
 export const DialogHeaderStyled = styled("div", {
   [`& ${TextStyled}`]: {
     marginBottom: "0 !important",
     verticalAlign: "middle",
-    whiteSpace: "pre-wrap",
   },
   alignItems: "center",
-  backgroundColor: "$defaultSubtle",
-  borderBottom: "0.1rem solid $borderSubtle",
+  backgroundColor: "$background",
+  borderBottom: "1px solid $borderLight",
   display: "flex",
-  gap: "$small",
   justifyContent: "space-between",
-  padding: "$medium calc($medium * 1.25)",
-  phone: {
-    padding: "$medium",
-  },
+  padding: "$medium",
   position: "sticky",
   top: 0,
-  verticalAlign: "middle",
   zIndex: "$special",
 });
 
 export const DialogContentStyled = styled("div", {
-  padding: "calc($medium * 1.25)",
-  phone: {
-    padding: "$medium",
-  },
+  margin: "0 auto",
+  maxWidth: "60rem",
+  padding: "$large $medium",
+  paddingBottom: "calc($medium + env(safe-area-inset-bottom))",
+  width: "100%",
 });
-
-export default DialogStyled;

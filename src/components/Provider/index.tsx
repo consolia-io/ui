@@ -12,6 +12,16 @@ import { ToastController } from "./ToastController";
 const tag = `Consolia UI v${packageJson.version}`;
 
 export default function Provider({ children, css, dark }: IProvider): JSX.Element {
+  const isDarkMode = Boolean(dark);
+  const themeClassName = isDarkMode ? darkTheme : "";
+
+  const iconContextValue = {
+    alignmentBaseline: "middle" as const,
+    height: BASE_SIZE,
+    weight: "duotone" as const,
+    width: BASE_SIZE,
+  };
+
   providerReset();
 
   useEffect(() => {
@@ -20,16 +30,9 @@ export default function Provider({ children, css, dark }: IProvider): JSX.Elemen
   }, []);
 
   return (
-    <ProviderStyled className={dark ? darkTheme : ""} css={css}>
-      <IconContext.Provider
-        value={{
-          alignmentBaseline: "middle",
-          height: BASE_SIZE,
-          weight: "regular",
-          width: BASE_SIZE,
-        }}>
+    <ProviderStyled className={themeClassName} css={css}>
+      <IconContext.Provider value={iconContextValue}>
         <ToastController />
-
         {children}
         <Portal />
       </IconContext.Provider>

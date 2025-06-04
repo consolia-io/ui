@@ -3,7 +3,7 @@ import type { JSX } from "react";
 import { Icons } from "../../icons";
 import { Loading } from "../../index";
 import { IButton } from "../../types";
-import { ButtonIconStyled, ButtonStyled } from "./styles";
+import { ButtonIconStyled, ButtonLoadingStyled, ButtonStyled } from "./styles";
 
 export default function Button({
   block,
@@ -20,6 +20,10 @@ export default function Button({
   theme,
   ...rest
 }: IButton): JSX.Element {
+  const isDisabled = disabled || loading;
+  const showLeftIcon = icon && (iconPosition === "left" || !iconPosition) && !external;
+  const showRightIcon = icon && iconPosition === "right" && !external;
+
   return (
     <ButtonStyled
       block={block}
@@ -31,23 +35,24 @@ export default function Button({
         }),
         ...css,
       }}
-      disabled={disabled || loading || false}
+      disabled={isDisabled}
+      loading={loading}
       small={small}
       theme={theme || "default"}
-      onClick={!disabled ? onClick : undefined}
+      onClick={!isDisabled ? onClick : undefined}
       {...rest}>
       {loading && (
-        <ButtonIconStyled align="left">
+        <ButtonLoadingStyled>
           <Loading />
-        </ButtonIconStyled>
+        </ButtonLoadingStyled>
       )}
-      {icon && (iconPosition === "left" || !iconPosition) && !external && (
-        <ButtonIconStyled align="left">{icon}</ButtonIconStyled>
-      )}
+
+      {showLeftIcon && <ButtonIconStyled align="left">{icon}</ButtonIconStyled>}
+
       {children}
-      {icon && iconPosition === "right" && !external && (
-        <ButtonIconStyled align="right">{icon}</ButtonIconStyled>
-      )}
+
+      {showRightIcon && <ButtonIconStyled align="right">{icon}</ButtonIconStyled>}
+
       {external && (
         <ButtonIconStyled align="right">
           <Icons.ArrowUpRight weight="regular" />

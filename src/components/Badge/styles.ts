@@ -1,21 +1,26 @@
 import { styled, fadeOut } from "../../stitches.config";
 
-export const BadgeStyled = styled("div", {
+export const BadgeStyled = styled("span", {
   alignContent: "center !important",
   alignItems: "center !important",
-  border: "0.1rem solid transparent",
+  backgroundColor: "$background",
+  border: "1px solid $border",
   borderRadius: "$small",
+  boxShadow: "$small",
+  color: "$text",
   display: "inline-flex",
-  fontSize: "$default",
+  fontSize: "$small",
+  fontWeight: "bold",
   justifyContent: "center",
   lineHeight: "$default",
   marginBottom: "0 !important",
-  padding: "calc($smallest * 0.5) calc($small * 0.6)",
+  padding: "$smallest $small",
+  position: "relative",
 
   variants: {
     animation: {
       true: {
-        animation: `${fadeOut} .15s linear`,
+        animation: `${fadeOut} 0.15s linear`,
         animationFillMode: "forwards",
       },
     },
@@ -25,68 +30,65 @@ export const BadgeStyled = styled("div", {
         width: "100%",
       },
     },
-
     link: {
       true: {
         "&:hover": {
-          backgroundColor: "$defaultHover",
-          borderColor: "$defaultHover",
-          color: "$text",
+          backgroundColor: "$surfaceHover",
+          borderColor: "$border",
         },
         cursor: "pointer",
         transition: "$default",
       },
     },
-
-    small: {
+    loading: {
       true: {
-        fontSize: "$small",
+        cursor: "wait",
+        opacity: "$light",
       },
     },
-
+    small: {
+      true: {
+        fontSize: "1.2rem",
+        padding: "$smallest $smaller",
+      },
+    },
     theme: {
-      alternate: {
-        backgroundColor: "$background",
-        darkModeSpec: {
-          backgroundColor: "$defaultHover",
-        },
-      },
       blue: {
-        backgroundColor: "$blueBackground",
-        color: "$blueText",
-      },
-      border: {
         backgroundColor: "$background",
-        borderColor: "$border",
-        color: "$text",
+        borderColor: "$borderLight",
+        borderLeft: "5px solid $blue",
       },
       default: {
-        backgroundColor: "$default",
-        color: "$text",
-      },
-      green: {
-        backgroundColor: "$greenBackground",
-        color: "$greenText",
+        backgroundColor: "$background",
+        borderColor: "$border",
       },
       orange: {
-        backgroundColor: "$orangeBackground",
-        color: "$orangeText",
+        backgroundColor: "$background",
+        borderColor: "$borderLight",
+        borderLeft: "5px solid $orange",
       },
       purple: {
-        backgroundColor: "$purpleBackground",
-        color: "$purpleText",
+        backgroundColor: "$background",
+        borderColor: "$borderLight",
+        borderLeft: "5px solid $purple",
       },
-      red: {
-        backgroundColor: "$redBackground",
-        color: "$redText",
+      solid: {
+        backgroundColor: "$text",
+        borderColor: "$text",
+        color: "$background",
+      },
+      yellow: {
+        backgroundColor: "$background",
+        borderColor: "$borderLight",
+        borderLeft: "5px solid $yellow",
       },
     },
   },
-
   verticalAlign: "middle",
 });
 
 export const BadgeIconStyled = styled("span", {
+  color: "inherit",
   display: "inline-flex",
   variants: {
     align: {
@@ -103,13 +105,28 @@ export const BadgeIconStyled = styled("span", {
         marginLeft: "$smaller",
       },
     },
+    hover: {
+      true: {
+        "&:hover": {
+          opacity: "$light",
+          transition: "$default",
+        },
+        cursor: "pointer",
+      },
+    },
   },
   verticalAlign: "middle",
 });
 
-export const BadgeLoadingStyled = styled("span", {
-  display: "inline",
-  verticalAlign: "middle",
+export const BadgeLoadingStyled = styled("div", {
+  alignItems: "center",
+  backgroundColor: "$surface",
+  bottom: 0,
+  display: "flex",
+  justifyContent: "center",
+  left: 0,
+  position: "absolute",
+  right: 0,
+  top: 0,
+  zIndex: 1,
 });
-
-export default BadgeStyled;

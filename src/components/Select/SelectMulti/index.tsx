@@ -9,7 +9,7 @@ import {
   useBreakpoints,
   useEventListener,
   useOutsideClick,
-  usePopper,
+  useFloatingUI,
   useWindowDimensions,
 } from "../../../index";
 import { ISelectMulti } from "../../../types";
@@ -41,14 +41,26 @@ export default function SelectMulti({
   width,
   wrapperCSS,
 }: ISelectMulti): JSX.Element {
-  const { contentRef, handleClick, handleClose, isMounted, isOpen, triggerRef } = usePopper();
-
-  const { breakpoint } = useBreakpoints();
+  const { contentRef, handleClick, handleClose, isMounted, isOpen, triggerRef } = useFloatingUI();
+  const { isPhone } = useBreakpoints();
   const { height: windowHeight } = useWindowDimensions();
 
   const [search, setSearch] = useState("");
   const [focused, setFocused] = useState("");
   const [selected, setSelected] = useState<Array<{ label: string; value: string }>>(initial || []);
+
+  const shouldShowFilter = options.length > 10 && filter;
+  const hasSelections = selected.length > 0;
+  const canReset = reset && hasSelections;
+  const filteredOptions = options
+    ? options.filter((option) => {
+        if (search) {
+          return option.label.toLowerCase().includes(search.toLowerCase());
+        }
+
+        return option;
+      })
+    : [];
 
   useEffect(() => {
     if (!isOpen) {
@@ -90,35 +102,48 @@ export default function SelectMulti({
     }
   }
 
-  const deviceWidth = typeof window !== "undefined" ? Number(window?.innerWidth || 0) : 0;
+  function handleKeyDown(event: KeyboardEvent): void {
+    if (isPhone) return;
 
-  useOutsideClick(contentRef, () => handleClose());
-
-  useEventListener("keydown", (event: KeyboardEvent) => {
-    if (breakpoint === "phone") {
-      return;
-    }
     if (event.key === "Escape") {
       event.preventDefault();
       handleClose();
     }
-    if (isOpen && event.key === "ArrowDown") {
+
+    if (!isOpen) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        handleClick();
+      }
+
+      return;
+    }
+
+    if (event.key === "ArrowDown") {
       event.preventDefault();
       const index = options.findIndex((option) => option.value === focused);
 
       if (index < options.length - 1) {
         setFocused(options[index + 1].value);
+        const element = document.querySelector(`[data-value="${options[index + 1].value}"]`);
+
+        element?.scrollIntoView({ behavior: "smooth", block: "nearest" });
       }
     }
-    if (isOpen && event.key === "ArrowUp") {
+
+    if (event.key === "ArrowUp") {
       event.preventDefault();
       const index = options.findIndex((option) => option.value === focused);
 
       if (index > 0) {
         setFocused(options[index - 1].value);
+        const element = document.querySelector(`[data-value="${options[index - 1].value}"]`);
+
+        element?.scrollIntoView({ behavior: "smooth", block: "nearest" });
       }
     }
-    if (isOpen && event.key === "Enter") {
+
+    if (event.key === "Enter") {
       event.preventDefault();
       const index = options.findIndex((option) => option.value === focused);
 
@@ -126,17 +151,26 @@ export default function SelectMulti({
         handleSelection(options[index]);
       }
     }
-  });
+  }
 
-  const filteredOptions = options
-    ? options.filter((option) => {
-        if (search) {
-          return option.label.toLowerCase().includes(search.toLowerCase());
-        } else {
-          return option;
-        }
-      })
-    : [];
+  function handleItemMouseOver(value: string): void {
+    if (!isPhone) {
+      setFocused(value);
+    }
+  }
+
+  function handleResetMouseOver(): void {
+    if (!isPhone) {
+      setFocused("");
+    }
+  }
+
+  function isOptionSelected(optionValue: string): boolean {
+    return selected.findIndex((item) => item.value === optionValue) !== -1;
+  }
+
+  useOutsideClick(contentRef, () => handleClose());
+  useEventListener("keydown", handleKeyDown);
 
   return (
     <SelectStyled css={wrapperCSS}>
@@ -161,24 +195,22 @@ export default function SelectMulti({
             maxWidth: width || "50rem",
             minWidth: width || filter ? "20rem" : "12.5rem",
             phone: {
-              maxWidth: deviceWidth ? deviceWidth * 0.8 : "80vw",
+              maxWidth: "100%",
             },
             width: width || "auto",
             ...css,
           }}>
           {label && (
             <SelectLabelStyled>
-              <Text as="h5" bottom="none">
-                {label}
-              </Text>
+              <Text as="h6">{label}</Text>
             </SelectLabelStyled>
           )}
-          {options.length > 10 && filter && (
+          {shouldShowFilter && (
             <SelectFilterStyled>
               <Input
                 disabled={!options}
                 name="select-multi-filter"
-                placeholder="Search..."
+                placeholder="Type to search..."
                 submitValid={(): boolean => search.length > 0}
                 value={search}
                 onChange={(event): void => setSearch(event.target.value)}
@@ -191,36 +223,29 @@ export default function SelectMulti({
             filteredOptions.map((option) => (
               <SelectItemStyled
                 key={option.value}
-                focused={option.value === focused && breakpoint !== "phone"}
-                selected={selected.findIndex((item) => item.value === option.value) !== -1}
-                onClick={(): void => handleSelection(option)}
-                onMouseOver={(): void => {
-                  if (breakpoint !== "phone" && focused !== "") {
-                    setFocused(option.value);
-                  }
-                }}>
-                {option.icon && option.iconPosition !== "right" && (
+                data-value={option.value}
+                focused={option.value === focused && !isPhone}
+                selected={isOptionSelected(option.value)}
+                onClick={() => handleSelection(option)}
+                onMouseOver={() => handleItemMouseOver(option.value)}>
+                {option.icon && option.iconPosition === "left" && (
                   <SelectIconStyled align="left">{option.icon}</SelectIconStyled>
                 )}
                 {option.label}
-                {option.icon && option.iconPosition === "right" && (
+                {option.icon && option.iconPosition !== "left" && (
                   <SelectIconStyled align="right">{option.icon}</SelectIconStyled>
                 )}
               </SelectItemStyled>
             ))
           ) : (
-            <SelectEmptyStyled>No results</SelectEmptyStyled>
+            <SelectEmptyStyled>No matching options</SelectEmptyStyled>
           )}
-          {reset && selected.length > 0 && (
+          {canReset && (
             <SelectItemStyled
               key="reset"
               last
-              onClick={(): void => handleReset()}
-              onMouseOver={(): void => {
-                if (breakpoint !== "phone" && focused !== "") {
-                  setFocused("");
-                }
-              }}>
+              onClick={() => handleReset()}
+              onMouseOver={() => handleResetMouseOver()}>
               Reset
               <SelectIconStyled align="right">
                 <Icons.X />

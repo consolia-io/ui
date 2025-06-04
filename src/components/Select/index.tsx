@@ -7,7 +7,7 @@ import {
   useBreakpoints,
   useEventListener,
   useOutsideClick,
-  usePopper,
+  useFloatingUI,
   useWindowDimensions,
 } from "../../index";
 import { ISelect } from "../../types";
@@ -38,21 +38,37 @@ export default function Select({
   width,
   wrapperCSS,
 }: ISelect): JSX.Element {
-  const { contentRef, handleClick, handleClose, isMounted, isOpen, triggerRef } = usePopper();
-
-  const { breakpoint } = useBreakpoints();
+  const { contentRef, handleClick, handleClose, isMounted, isOpen, triggerRef } = useFloatingUI();
+  const { isPhone } = useBreakpoints();
   const { height: windowHeight } = useWindowDimensions();
 
   const [search, setSearch] = useState("");
   const [focused, setFocused] = useState("");
   const [selected, setSelected] = useState<string>(initial || "");
 
+  const shouldShowFilter = options.length > 8 || filter;
+  const filteredOptions = options
+    ? options.filter((option) => {
+        if (search) {
+          return option.label.toLowerCase().includes(search.toLowerCase());
+        }
+
+        return option;
+      })
+    : [];
+
   useEffect(() => {
     if (!isOpen) {
       setSearch("");
       setFocused("");
+    } else {
+      const searchInput = document.querySelector('input[name="select-filter"]') as HTMLInputElement;
+
+      if (searchInput && filter) {
+        searchInput.focus();
+      }
     }
-  }, [isOpen]);
+  }, [isOpen, filter]);
 
   function handleSelection(value: string, label: string): void {
     setSelected(value);
@@ -62,35 +78,48 @@ export default function Select({
     handleClose();
   }
 
-  const deviceWidth = typeof window !== "undefined" ? Number(window?.innerWidth || 0) : 0;
+  function handleKeyDown(event: KeyboardEvent): void {
+    if (isPhone) return;
 
-  useOutsideClick(contentRef, () => handleClose());
-
-  useEventListener("keydown", (event: KeyboardEvent) => {
-    if (breakpoint === "phone") {
-      return;
-    }
     if (event.key === "Escape") {
       event.preventDefault();
       handleClose();
     }
-    if (isOpen && event.key === "ArrowDown") {
+
+    if (!isOpen) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        handleClick();
+      }
+
+      return;
+    }
+
+    if (event.key === "ArrowDown") {
       event.preventDefault();
       const index = options.findIndex((option) => option.value === focused);
 
       if (index < options.length - 1) {
         setFocused(options[index + 1].value);
+        const element = document.querySelector(`[data-value="${options[index + 1].value}"]`);
+
+        element?.scrollIntoView({ behavior: "smooth", block: "nearest" });
       }
     }
-    if (isOpen && event.key === "ArrowUp") {
+
+    if (event.key === "ArrowUp") {
       event.preventDefault();
       const index = options.findIndex((option) => option.value === focused);
 
       if (index > 0) {
         setFocused(options[index - 1].value);
+        const element = document.querySelector(`[data-value="${options[index - 1].value}"]`);
+
+        element?.scrollIntoView({ behavior: "smooth", block: "nearest" });
       }
     }
-    if (isOpen && event.key === "Enter") {
+
+    if (event.key === "Enter") {
       event.preventDefault();
       const index = options.findIndex((option) => option.value === focused);
 
@@ -98,17 +127,16 @@ export default function Select({
         handleSelection(options[index].value, options[index].label);
       }
     }
-  });
+  }
 
-  const filteredOptions = options
-    ? options.filter((option) => {
-        if (search) {
-          return option.label.toLowerCase().includes(search.toLowerCase());
-        } else {
-          return option;
-        }
-      })
-    : [];
+  function handleItemMouseOver(value: string): void {
+    if (!isPhone) {
+      setFocused(value);
+    }
+  }
+
+  useOutsideClick(contentRef, () => handleClose());
+  useEventListener("keydown", handleKeyDown);
 
   return (
     <SelectStyled css={wrapperCSS}>
@@ -133,24 +161,22 @@ export default function Select({
             maxWidth: width || "50rem",
             minWidth: width || filter ? "20rem" : "12.5rem",
             phone: {
-              maxWidth: deviceWidth ? deviceWidth * 0.8 : "80vw",
+              maxWidth: "100%",
             },
             width: width || "auto",
             ...css,
           }}>
           {label && (
             <SelectLabelStyled>
-              <Text as="h5" bottom="none">
-                {label}
-              </Text>
+              <Text as="h6">{label}</Text>
             </SelectLabelStyled>
           )}
-          {options.length > 10 && filter && (
+          {shouldShowFilter && (
             <SelectFilterStyled>
               <Input
                 disabled={!options}
                 name="select-filter"
-                placeholder="Search..."
+                placeholder="Type to search..."
                 submitValid={(): boolean => search.length > 0}
                 value={search}
                 onChange={(event): void => setSearch(event.target.value)}
@@ -163,15 +189,12 @@ export default function Select({
             filteredOptions.map((option) => (
               <SelectItemStyled
                 key={option.value}
-                focused={option.value === focused && breakpoint !== "phone"}
+                data-value={option.value}
+                focused={option.value === focused && !isPhone}
                 last={last && !search}
                 selected={option.value === selected}
-                onClick={(): void => handleSelection(option.value, option.label)}
-                onMouseOver={(): void => {
-                  if (breakpoint !== "phone" && focused !== "") {
-                    setFocused(option.value);
-                  }
-                }}>
+                onClick={() => handleSelection(option.value, option.label)}
+                onMouseOver={() => handleItemMouseOver(option.value)}>
                 {option.icon && option.iconPosition === "left" && (
                   <SelectIconStyled align="left">{option.icon}</SelectIconStyled>
                 )}
@@ -182,7 +205,7 @@ export default function Select({
               </SelectItemStyled>
             ))
           ) : (
-            <SelectEmptyStyled>No results</SelectEmptyStyled>
+            <SelectEmptyStyled>No matching options</SelectEmptyStyled>
           )}
         </SelectGroupStyled>
       )}

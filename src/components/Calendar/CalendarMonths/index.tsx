@@ -1,12 +1,19 @@
 import dayjs from "dayjs";
-import { useState, useMemo, useEffect, type JSX } from "react";
+import { useEffect, useState, useMemo, type JSX } from "react";
 
-import { Text, Stack, Button } from "../../../";
 import { Icons } from "../../../icons";
+import { Stack, Text, Button } from "../../../index";
 import { ICalendarMonths } from "../../../types";
-import { CalendarStyled, CalendarHeaderStyled, CalendarGridStyled } from "../styles";
+import {
+  CalendarContentStyled,
+  CalendarHeaderNavigationStyled,
+  CalendarGridStyled,
+  CalendarHeaderStyled,
+  CalendarStyled,
+  CalendarMonthStyled,
+} from "../styles";
 
-const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 export default function CalendarMonths({
   maxDate,
@@ -15,93 +22,109 @@ export default function CalendarMonths({
   selectedDate,
   viewDate,
 }: ICalendarMonths): JSX.Element {
-  const [viewYear, setViewYear] = useState(
-    dayjs(selectedDate || viewDate || dayjs().startOf("month")),
-  );
+  const initialViewDate = viewDate || selectedDate || dayjs().startOf("month").format("YYYY-MM-DD");
 
-  const handleYearChange = (direction: "prev" | "next"): void => {
-    const newDate = direction === "prev" ? viewYear.subtract(1, "year") : viewYear.add(1, "year");
+  const [values, setValues] = useState({
+    maxDate,
+    minDate,
+    selectedDate,
+    viewDate: initialViewDate,
+  });
 
-    setViewYear(newDate);
+  const currentYear = dayjs(values.viewDate);
+  const prevYear = currentYear.subtract(1, "year");
+  const nextYear = currentYear.add(1, "year");
+
+  const handleDateChange = (type: "month" | "year", direction: "next" | "prev"): void => {
+    const amount = direction === "next" ? 1 : -1;
+    const unit = type === "year" ? "year" : "month";
+
+    setValues((currentValues) => ({
+      ...currentValues,
+      viewDate: dayjs(currentValues.viewDate).add(amount, unit).format("YYYY-MM-DD"),
+    }));
+  };
+
+  const handleYearNavigation = (direction: "next" | "prev"): void => {
+    handleDateChange("year", direction);
+  };
+
+  const isPrevYearDisabled = useMemo(() => {
+    if (!values.minDate) return false;
+
+    return prevYear.endOf("year").isBefore(dayjs(values.minDate));
+  }, [values.viewDate, values.minDate, prevYear]);
+
+  const isNextYearDisabled = useMemo(() => {
+    if (!values.maxDate) return false;
+
+    return nextYear.startOf("year").isAfter(dayjs(values.maxDate));
+  }, [values.viewDate, values.maxDate, nextYear]);
+
+  const isMonthDisabled = (month: number): boolean => {
+    const monthDate = dayjs(values.viewDate).month(month).startOf("month");
+    const hasMinConstraint = values.minDate && monthDate.isBefore(dayjs(values.minDate), "month");
+    const hasMaxConstraint = values.maxDate && monthDate.isAfter(dayjs(values.maxDate), "month");
+
+    return Boolean(hasMinConstraint || hasMaxConstraint);
+  };
+
+  const isMonthSelected = (month: number): boolean => {
+    if (!values.selectedDate) return false;
+
+    return dayjs(values.selectedDate).isSame(dayjs(values.viewDate).month(month), "month");
   };
 
   const handleMonthSelection = (month: number): void => {
-    const newDate = viewYear.month(month).date(1);
+    const newDate = dayjs(values.viewDate).month(month).startOf("month");
 
     onSelection(newDate.format("YYYY-MM-DD"));
   };
 
-  const isPrevYearDisabled = useMemo(() => {
-    return minDate ? viewYear.subtract(1, "year").endOf("year").isBefore(dayjs(minDate)) : false;
-  }, [viewYear, minDate]);
+  const renderMonthButton = (monthName: string, index: number): JSX.Element => {
+    const isSelected = isMonthSelected(index);
+    const isDisabled = isMonthDisabled(index);
 
-  const isNextYearDisabled = useMemo(() => {
-    return maxDate ? viewYear.add(1, "year").startOf("year").isAfter(dayjs(maxDate)) : false;
-  }, [viewYear, maxDate]);
-
-  const isMonthDisabled = (month: number): boolean => {
-    const monthDate = viewYear.month(month).date(1);
-
-    if (minDate && maxDate) {
-      return monthDate.isBefore(dayjs(minDate)) || monthDate.isAfter(dayjs(maxDate));
-    } else if (minDate) {
-      return monthDate.isBefore(dayjs(minDate));
-    } else if (maxDate) {
-      return monthDate.isAfter(dayjs(maxDate));
-    }
-
-    return false;
+    return (
+      <CalendarMonthStyled
+        key={monthName}
+        disabled={isDisabled}
+        selected={isSelected}
+        onClick={() => !isDisabled && handleMonthSelection(index)}>
+        {monthName}
+      </CalendarMonthStyled>
+    );
   };
 
   useEffect(() => {
-    const initialViewDate =
-      selectedDate || viewYear || dayjs().startOf("month").format("YYYY-MM-DD");
-
-    setViewYear(dayjs(initialViewDate));
-  }, []);
+    setValues((currentValues) => ({
+      ...currentValues,
+      selectedDate,
+      viewDate: selectedDate || viewDate || currentValues.viewDate,
+    }));
+  }, [selectedDate, viewDate]);
 
   return (
     <CalendarStyled>
       <CalendarHeaderStyled>
-        <Text as="h5" bottom="none">
-          {viewYear.year()}
-        </Text>
-        <Stack>
-          <Button
-            disabled={isPrevYearDisabled}
-            inline="small"
-            small
-            theme="solid"
-            onClick={() => handleYearChange("prev")}>
-            <Icons.ArrowLeft />
+        <Stack align="center" css={{ gap: "$small" }} direction="row">
+          <Button disabled={isPrevYearDisabled} small onClick={() => handleYearNavigation("prev")}>
+            <Icons.CaretUp />
           </Button>
-          <Button
-            disabled={isNextYearDisabled}
-            small
-            theme="solid"
-            onClick={() => handleYearChange("next")}>
-            <Icons.ArrowRight />
+          <Text as="h6" css={{ margin: 0 }}>
+            {currentYear.format("YYYY")}
+          </Text>
+          <Button disabled={isNextYearDisabled} small onClick={() => handleYearNavigation("next")}>
+            <Icons.CaretDown />
           </Button>
         </Stack>
+
+        <CalendarHeaderNavigationStyled />
       </CalendarHeaderStyled>
 
-      <CalendarGridStyled mode="months">
-        {months.map((monthName, index) => {
-          const isSelected = dayjs(selectedDate).isSame(viewYear.month(index), "month");
-          const isDisabled = isMonthDisabled(index);
-
-          return (
-            <Button
-              key={monthName}
-              disabled={isDisabled}
-              small
-              theme={isSelected ? "solid" : "minimal"}
-              onClick={() => handleMonthSelection(index)}>
-              {monthName}
-            </Button>
-          );
-        })}
-      </CalendarGridStyled>
+      <CalendarContentStyled>
+        <CalendarGridStyled mode="months">{MONTHS.map(renderMonthButton)}</CalendarGridStyled>
+      </CalendarContentStyled>
     </CalendarStyled>
   );
 }
