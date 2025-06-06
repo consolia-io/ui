@@ -1,67 +1,23 @@
 import { JSX, ReactNode } from "react";
 
 import { INodes } from "../../types";
-import Badge from "../Badge";
-import Box from "../Box";
 import { useNodesLogic } from "./hooks";
 import { ConnectingLine, NodeRow, NodesContainer } from "./styles";
 
-export default function Nodes({ height, nodes, parent, type = "badge" }: INodes): JSX.Element {
-  const { containerRef, isCardType, isParentReactNode, nodesRef, parentRef, paths } = useNodesLogic(
-    nodes,
-    parent,
-    type,
-  );
+export default function Nodes({ height, nodes, parent }: INodes): JSX.Element {
+  const { containerRef, nodesRef, parentRef, paths } = useNodesLogic(nodes, parent);
 
   const hasCustomHeight = Boolean(height);
   const containerHeight = hasCustomHeight ? `${height}px` : undefined;
 
   const renderNode = (
-    node: { name: string; icon: ReactNode; theme?: string },
+    node: { children: ReactNode; color?: string },
     index: number,
   ): JSX.Element => {
-    const validTheme = node.theme as
-      | "blue"
-      | "orange"
-      | "purple"
-      | "yellow"
-      | "default"
-      | "solid"
-      | undefined;
-
     return (
-      <div key={node.name} ref={(el) => void (nodesRef.current[index] = el)}>
-        {isCardType ? (
-          <Box
-            css={{ alignItems: "center", display: "flex", gap: "$small" }}
-            small
-            theme={validTheme}>
-            {node.icon}
-            {node.name}
-          </Box>
-        ) : (
-          <Badge icon={node.icon} theme={validTheme}>
-            {node.name}
-          </Badge>
-        )}
+      <div key={index} ref={(el) => void (nodesRef.current[index] = el)}>
+        {node.children}
       </div>
-    );
-  };
-
-  const renderParentNode = (): ReactNode => {
-    if (isParentReactNode) {
-      return parent as ReactNode;
-    }
-
-    const parentData = parent as { name: string; icon: ReactNode };
-
-    return isCardType ? (
-      <Box css={{ alignItems: "center", display: "flex", gap: "$small" }}>
-        {parentData.icon}
-        {parentData.name}
-      </Box>
-    ) : (
-      <Badge icon={parentData.icon}>{parentData.name}</Badge>
     );
   };
 
@@ -77,12 +33,12 @@ export default function Nodes({ height, nodes, parent, type = "badge" }: INodes)
       }}>
       {/* Base lines */}
       {paths.map((path, i) => (
-        <ConnectingLine key={`base-${i}`} css={{ stroke: "$text" }} d={path} />
+        <ConnectingLine key={`base-${i}`} css={{ stroke: "$border" }} d={path} />
       ))}
       {/* Animated flow lines */}
       {paths.map((path, i) => {
-        const nodeTheme = nodes[i]?.theme;
-        const strokeColor = nodeTheme ? `$${nodeTheme}` : "$text";
+        const nodeColor = nodes[i]?.color;
+        const strokeColor = nodeColor ? `$${nodeColor}` : "$text";
 
         return <ConnectingLine key={`flow-${i}`} animate css={{ stroke: strokeColor }} d={path} />;
       })}
@@ -99,7 +55,7 @@ export default function Nodes({ height, nodes, parent, type = "badge" }: INodes)
       {renderConnectingLines()}
 
       <NodeRow css={{ marginBottom: "$large", marginTop: "auto" }}>
-        <div ref={parentRef}>{renderParentNode()}</div>
+        <div ref={parentRef}>{parent}</div>
       </NodeRow>
     </NodesContainer>
   );

@@ -30,7 +30,7 @@ export default function Text({
   const isExternalLink = isAnchor && target === "_blank";
   const shouldShowInline = inline && !["span", "strong"].includes(as);
 
-  function getCustomStyles(): CSS {
+  function getDynamicStyles(): CSS {
     return {
       ...(top && {
         marginTop: 0,
@@ -51,7 +51,7 @@ export default function Text({
     <TextStyled
       accent={accent}
       as={elementType}
-      css={getCustomStyles()}
+      css={getDynamicStyles()}
       highlight={highlight}
       href={isAnchor ? href : undefined}
       inline={shouldShowInline ? true : false}

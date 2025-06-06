@@ -7,6 +7,13 @@ export const ViewStyled = styled("section", {
   paddingRight: "$medium",
   position: "relative",
   variants: {
+    hero: {
+      true: {
+        backgroundColor: "transparent",
+        overflow: "hidden",
+        position: "relative",
+      },
+    },
     inverted: {
       true: {
         backgroundColor: "$background",
@@ -26,6 +33,7 @@ export const ViewStyled = styled("section", {
 });
 
 export const ViewContainerStyled = styled("div", {
+  position: "relative",
   variants: {
     app: {
       false: {
@@ -58,6 +66,7 @@ export const ViewContainerStyled = styled("div", {
       },
     },
   },
+  zIndex: 2,
 });
 
 export default ViewStyled;

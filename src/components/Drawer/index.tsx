@@ -2,7 +2,7 @@ import { useRef, useState, type JSX } from "react";
 
 import { Icons } from "../../icons";
 import { Button, Text, useEventListener, useOutsideClick, useScrollLock } from "../../index";
-import { IDialog } from "../../types";
+import { IDrawer } from "../../types";
 import Portal from "../Provider/ProviderPortal";
 import {
   DialogContentStyled,
@@ -13,7 +13,7 @@ import {
   DialogTriggerStyled,
 } from "./styles";
 
-export default function Dialog({
+export default function Drawer({
   children,
   css,
   disabled,
@@ -23,7 +23,7 @@ export default function Dialog({
   trigger,
   triggerCSS,
   wrapperCSS,
-}: IDialog): JSX.Element {
+}: IDrawer): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);

@@ -18,6 +18,7 @@ export const BoxStyled = styled("article", {
   backgroundColor: "$background",
   border: "1px solid $border",
   borderRadius: "$medium",
+  boxShadow: "$small",
   color: "$text",
   display: "block",
   height: "100%",
@@ -56,6 +57,7 @@ export const BoxStyled = styled("article", {
     hover: {
       true: {
         "&:hover": {
+          boxShadow: "$large",
           img: {
             transform: "scale(1.02)",
           },

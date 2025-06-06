@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState, ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, ReactNode, RefObject } from "react";
 
 const CALCULATION_DELAY = 100;
 const RESIZE_DEBOUNCE_DELAY = 100;
@@ -35,9 +35,9 @@ const createPath = (
 };
 
 export const useNodeRefs = (): {
-  nodesRef: React.MutableRefObject<(HTMLDivElement | null)[]>;
-  parentRef: React.MutableRefObject<HTMLDivElement | null>;
-  containerRef: React.MutableRefObject<HTMLDivElement | null>;
+  nodesRef: RefObject<(HTMLDivElement | null)[]>;
+  parentRef: RefObject<HTMLDivElement | null>;
+  containerRef: RefObject<HTMLDivElement | null>;
   getNodeRefs: () => (HTMLDivElement | null)[];
   getContainerRect: () => DOMRect | undefined;
   getParentRect: () => DOMRect | undefined;
@@ -57,27 +57,6 @@ export const useNodeRefs = (): {
     getParentRect,
     nodesRef,
     parentRef,
-  };
-};
-
-export const useNodeTypes = (
-  parent: { name: string; icon: ReactNode } | ReactNode,
-  type: "badge" | "card" = "badge",
-): {
-  isParentReactNode: boolean;
-  effectiveType: "badge" | "card";
-  isCardType: boolean;
-} => {
-  const isParentReactNode =
-    typeof parent === "object" && parent !== null && !("name" in parent && "icon" in parent);
-
-  const effectiveType = isParentReactNode ? "card" : type;
-  const isCardType = effectiveType === "card";
-
-  return {
-    effectiveType,
-    isCardType,
-    isParentReactNode,
   };
 };
 
@@ -138,7 +117,8 @@ export const useNodePaths = (
 
 export const useResizeHandler = (
   calculatePaths: () => void,
-  nodes: { name: string; icon: ReactNode; theme?: string }[],
+  nodes: { children: ReactNode; color?: string }[],
+  parent: ReactNode,
 ): void => {
   useEffect(() => {
     const timer = setTimeout(calculatePaths, CALCULATION_DELAY);
@@ -150,32 +130,23 @@ export const useResizeHandler = (
       clearTimeout(timer);
       window.removeEventListener("resize", debouncedResize);
     };
-  }, [calculatePaths, nodes]);
+  }, [calculatePaths, nodes, parent]);
 };
 
 export const useNodesLogic = (
-  nodes: { name: string; icon: ReactNode; theme?: string }[],
-  parent: { name: string; icon: ReactNode } | ReactNode,
-  type: "badge" | "card" = "badge",
+  nodes: { children: ReactNode; color?: string }[],
+  parent: ReactNode,
 ): {
-  nodesRef: React.MutableRefObject<(HTMLDivElement | null)[]>;
-  parentRef: React.MutableRefObject<HTMLDivElement | null>;
-  containerRef: React.MutableRefObject<HTMLDivElement | null>;
-
+  nodesRef: RefObject<(HTMLDivElement | null)[]>;
+  parentRef: RefObject<HTMLDivElement | null>;
+  containerRef: RefObject<HTMLDivElement | null>;
   paths: string[];
-
-  isParentReactNode: boolean;
-  effectiveType: "badge" | "card";
-  isCardType: boolean;
-
   calculatePaths: () => void;
 } => {
   const nodeCount = nodes.length;
 
   const { containerRef, getContainerRect, getNodeRefs, getParentRect, nodesRef, parentRef } =
     useNodeRefs();
-
-  const { effectiveType, isCardType, isParentReactNode } = useNodeTypes(parent, type);
 
   const { calculatePaths, paths } = useNodePaths(
     nodeCount,
@@ -184,19 +155,13 @@ export const useNodesLogic = (
     getNodeRefs,
   );
 
-  useResizeHandler(calculatePaths, nodes);
+  useResizeHandler(calculatePaths, nodes, parent);
 
   return {
     calculatePaths,
     containerRef,
-    effectiveType,
-
-    isCardType,
-
-    isParentReactNode,
     nodesRef,
     parentRef,
-
     paths,
   };
 };

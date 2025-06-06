@@ -1,70 +1,71 @@
-import React from "react";
-import * as C from "../../src/index";
-import { Icons } from "../../src/icons";
+import { JSX } from "react";
 
-export default function DialogDemo() {
+import { Icons } from "../../src/icons";
+import * as C from "../../src/index";
+
+export default function DrawerDemo(): JSX.Element {
   return (
     <C.Stack css={{ 
       display: "grid",
-      gridTemplateColumns: "repeat(2, 1fr)",
-      gap: "$large" 
+      gap: "$large",
+      gridTemplateColumns: "repeat(2, 1fr)" 
     }}>
-      {/* Basic Dialog */}
-      <C.Stack>
+      {/* Basic Drawer */}
+      <C.Stack> 
         <C.Text as="h4">Basic</C.Text>
-        <C.Stack direction="row" css={{ gap: "$medium" }}>
-          <C.Dialog
-            title="Basic Dialog"
-            trigger={<C.Button>Open Dialog</C.Button>}
+        <C.Stack css={{ gap: "$medium" }} direction="row">
+          <C.Drawer
+            title="Basic Drawer"
+            trigger={<C.Button>Open Drawer</C.Button>}
           >
-            <C.Text>This is a basic dialog with default width.</C.Text>
-          </C.Dialog>
+            <C.Text>This is a basic drawer with default width.</C.Text>
+          </C.Drawer>
 
-          <C.Dialog
+          <C.Drawer
             small
-            title="Small Dialog"
-            trigger={<C.Button theme="minimal">Small Dialog</C.Button>}
+            title="Small Drawer"
+            trigger={<C.Button theme="minimal">Small Drawer</C.Button>}
           >
-            <C.Text>This dialog uses the small variant for a narrower width.</C.Text>
-          </C.Dialog>
+            <C.Text>This drawer uses the small variant for a narrower width.</C.Text>
+          </C.Drawer>
         </C.Stack>
       </C.Stack>
 
       {/* Custom Triggers */}
       <C.Stack>
         <C.Text as="h4">Custom Triggers</C.Text>
-        <C.Stack direction="row" css={{ gap: "$medium" }}>
-          <C.Dialog
+        <C.Stack css={{ gap: "$medium" }} direction="row">
+          <C.Drawer
             title="Icon Trigger"
             trigger={
               <C.Button 
                 icon={<C.Icon><Icons.ArrowsOutSimple /></C.Icon>}
-                theme="minimal"
                 small
+                theme="minimal"
               />
             }
           >
             <C.Text>Triggered by an icon button.</C.Text>
-          </C.Dialog>
+          </C.Drawer>
 
-          <C.Dialog
+          <C.Drawer
             title="Custom Trigger"
             trigger={<C.Text>Click this text to open</C.Text>}
           >
             <C.Text>Triggered by custom text.</C.Text>
-          </C.Dialog>
+          </C.Drawer>
         </C.Stack>
       </C.Stack>
 
       {/* Rich Content */}
       <C.Stack>
         <C.Text as="h4">Rich Content</C.Text>
-        <C.Dialog
-          title="Form Dialog"
+        <C.Drawer
+          title="Form Drawer"
           trigger={<C.Button theme="solid">Open Form</C.Button>}
         >
           <C.Stack css={{ gap: "$medium" }}>
-            <C.Text>This dialog contains a form with various elements:</C.Text>
+            <C.Text>This drawer contains a form with various elements:</C.Text>
             
             <C.Stack css={{ gap: "$small" }}>
               <C.Text>Name:</C.Text>
@@ -79,21 +80,21 @@ export default function DialogDemo() {
               />
             </C.Stack>
 
-            <C.Stack direction="row" css={{ gap: "$small", justifyContent: "flex-end" }}>
+            <C.Stack css={{ gap: "$small", justifyContent: "flex-end" }} direction="row">
               <C.Button theme="minimal">Cancel</C.Button>
               <C.Button theme="solid">Submit</C.Button>
             </C.Stack>
           </C.Stack>
-        </C.Dialog>
+        </C.Drawer>
       </C.Stack>
 
       {/* Forced Height */}
       <C.Stack>
         <C.Text as="h4">Forced Height</C.Text>
-        <C.Dialog
+        <C.Drawer
+          forceHeight={70}
           title="Scrollable Content"
           trigger={<C.Button>Long Content</C.Button>}
-          forceHeight={70}
         >
           <C.Stack css={{ gap: "$medium" }}>
             {Array.from({ length: 10 }).map((_, i) => (
@@ -104,19 +105,19 @@ export default function DialogDemo() {
               </C.Text>
             ))}
           </C.Stack>
-        </C.Dialog>
+        </C.Drawer>
       </C.Stack>
 
       {/* States */}
       <C.Stack>
         <C.Text as="h4">States</C.Text>
-        <C.Dialog
+        <C.Drawer
           disabled
-          title="Disabled Dialog"
+          title="Disabled Drawer"
           trigger={<C.Button disabled>Can't Open</C.Button>}
         >
           <C.Text>This content won't be shown.</C.Text>
-        </C.Dialog>
+        </C.Drawer>
       </C.Stack>
     </C.Stack>
   );

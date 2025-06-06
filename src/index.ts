@@ -1,12 +1,13 @@
 export * from "./stitches.config";
 
+export { default as Accordion } from "./components/Accordion";
 export { default as Avatar } from "./components/Avatar";
 export { default as Badge } from "./components/Badge";
 export { default as Box } from "./components/Box";
 export { default as Button } from "./components/Button";
 export { default as Calendar } from "./components/Calendar";
 export { default as CalendarMonths } from "./components/Calendar/CalendarMonths";
-export { default as Dialog } from "./components/Dialog";
+export { default as Drawer } from "./components/Drawer";
 export { default as Divider } from "./components/Divider";
 export { default as Field } from "./components/Field";
 export { default as Form } from "./components/Form";
@@ -17,6 +18,7 @@ export { default as Loading } from "./components/Loading";
 export { default as LoadingOverlay } from "./components/Loading/LoadingOverlay";
 export { default as Logo } from "./components/Logo";
 export { default as Menu } from "./components/Menu";
+export { default as Modal } from "./components/Modal";
 
 export { default as Popover } from "./components/Popover";
 export { default as Provider } from "./components/Provider";

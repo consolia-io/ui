@@ -36,7 +36,7 @@ export default function Stack({
   widthWide,
   ...rest
 }: IStack): JSX.Element {
-  function getSharedStyles(): CSS {
+  function getDynamicStyles(): CSS {
     return {
       ...(align && { textAlign: align }),
       ...(top && { marginTop: 0, paddingTop: `$${top}` }),
@@ -76,7 +76,7 @@ export default function Stack({
     };
   }
 
-  const sharedStyles = getSharedStyles();
+  const dynamicStyles = getDynamicStyles();
   const appliedClassName = inverted ? darkTheme.className : className;
 
   if (direction === "row") {
@@ -86,7 +86,7 @@ export default function Stack({
         css={{
           alignItems: flex || "normal",
           justifyContent: flex || "normal",
-          ...sharedStyles,
+          ...dynamicStyles,
         }}
         id={id}
         inverted={inverted}>
@@ -101,7 +101,7 @@ export default function Stack({
         className={appliedClassName}
         css={{
           ...getResponsiveColumnStyles(),
-          ...sharedStyles,
+          ...dynamicStyles,
         }}
         inverted={inverted}
         minimal={minimal}>
@@ -115,7 +115,7 @@ export default function Stack({
       as={as}
       className={appliedClassName}
       collapseduo={collapseduo}
-      css={sharedStyles}
+      css={dynamicStyles}
       flexduo={flexduo}
       inverted={inverted}
       {...rest}>

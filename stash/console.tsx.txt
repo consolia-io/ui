@@ -1,0 +1,319 @@
+import { useState, type JSX } from "react";
+
+import { Icons } from "../../icons";
+import { Avatar, Badge, Button, Select, Stack, Text } from "../../index";
+import {
+  ActivityItem,
+  ActivitySection,
+  ChartArea,
+  ConsoleContainer,
+  ConsoleContent,
+  ConsoleHeader,
+  MetricCard,
+  MetricsGrid,
+  PerformanceSection,
+  RecommendationItem,
+  RecommendationsSection,
+  StatusIndicator,
+} from "./styles";
+
+interface ConsoleProtoProps {
+  scale?: number;
+}
+
+// Mock data matching the screenshot
+const performanceMetrics = [
+  { highlighted: true, label: "Revenue", value: "$7,732" },
+  { highlighted: false, label: "Nightly Rate", value: "$325" },
+  { highlighted: false, label: "Nights Booked", value: "21" },
+  { highlighted: false, label: "Occupancy", value: "68%" },
+];
+
+const activityItems = [
+  {
+    action: "View Details",
+    details: "Apr 15-20 • 5 nights • $1,225",
+    guest: "Sarah Johnson",
+    id: "1",
+    time: "Today",
+    type: "check-in",
+  },
+  {
+    action: "Request Review",
+    details: "Apr 8-15 • 7 nights • $1,575",
+    guest: "Anna Roberts",
+    id: "2",
+    time: "Today",
+    type: "check-out",
+  },
+  {
+    action: null,
+    details: "Apr 20-23 • 3 nights • $950",
+    guest: "Michael Brown",
+    id: "3",
+    time: "In 5 days",
+    type: "upcoming",
+  },
+];
+
+const recommendations = [
+  {
+    actions: ["Send Reminder", "Dismiss"],
+    category: "Payments",
+    description: "Due in 3 days • $850 • Guest: Wilson",
+    id: "1",
+    priority: "urgent" as const,
+    title: "Payment reminder needed",
+  },
+  {
+    actions: ["Adjust Pricing", "Ignore"],
+    category: "Pricing",
+    description: "Consider increasing rates for Apr 25-30",
+    id: "2",
+    priority: "urgent" as const,
+    title: "Pricing alert: Demand spike detected",
+  },
+  {
+    actions: ["Write Review", "Skip"],
+    category: "Reviews",
+    description: "Michael Brown • Stayed Apr 1-5",
+    id: "3",
+    priority: "normal" as const,
+    title: "Review your recent guest",
+  },
+  {
+    actions: ["Update Now", "Remind Later"],
+    category: "Guest",
+    description: "Last updated 6 months ago",
+    id: "4",
+    priority: "normal" as const,
+    title: "Update guest instructions",
+  },
+];
+
+const timeRangeOptions = [
+  { label: "Month to Date", value: "mtd" },
+  { label: "Last 7 Days", value: "7d" },
+  { label: "Last 30 Days", value: "30d" },
+  { label: "Year to Date", value: "ytd" },
+];
+
+const activityFilterOptions = [
+  { label: "All Activity", value: "all" },
+  { label: "Check-ins", value: "checkin" },
+  { label: "Check-outs", value: "checkout" },
+  { label: "Upcoming", value: "upcoming" },
+];
+
+export default function ConsoleProto({ scale = 0.6 }: ConsoleProtoProps): JSX.Element {
+  const [timeRange, setTimeRange] = useState("mtd");
+  const [activityFilter, setActivityFilter] = useState("all");
+
+  const getActivityIcon = (type: string) => {
+    switch (type) {
+      case "check-in":
+        return <Icons.ArrowDown weight="regular" />;
+      case "check-out":
+        return <Icons.ArrowUp weight="regular" />;
+      case "upcoming":
+        return <Icons.ClockClockwise weight="regular" />;
+      default:
+        return <Icons.Circle weight="regular" />;
+    }
+  };
+
+  const getActivityColor = (type: string) => {
+    switch (type) {
+      case "check-in":
+        return "$blue";
+      case "check-out":
+        return "$orange";
+      case "upcoming":
+        return "$purple";
+      default:
+        return "$text";
+    }
+  };
+
+  return (
+    <div
+      style={{
+        height: `${100 / scale}%`,
+        overflow: "hidden",
+        transform: `scale(${scale})`,
+        transformOrigin: "top left",
+        width: `${100 / scale}%`,
+      }}>
+      <ConsoleContainer>
+        {/* Header */}
+        <ConsoleHeader>
+          <Text as="h1" css={{ fontSize: "$h3", margin: 0 }}>
+            Performance Overview
+          </Text>
+          <Stack css={{ gap: "$small" }} direction="row">
+            <Select
+              initial={timeRange}
+              options={timeRangeOptions}
+              trigger={
+                <Button small theme="minimal">
+                  {timeRangeOptions.find((opt) => opt.value === timeRange)?.label}
+                  <Icons.CaretDown />
+                </Button>
+              }
+              onSelection={setTimeRange}
+            />
+            <Avatar colors fallback="U" width={32} />
+          </Stack>
+        </ConsoleHeader>
+
+        <ConsoleContent>
+          {/* Performance Metrics */}
+          <PerformanceSection>
+            <Text as="span" css={{ fontSize: "$small", opacity: "$light" }}>
+              June 2025
+            </Text>
+            <MetricsGrid>
+              {performanceMetrics.map((metric, index) => (
+                <MetricCard key={index} highlighted={metric.highlighted}>
+                  <Stack css={{ gap: "$smallest" }}>
+                    <Text as="span" css={{ fontSize: "$small", opacity: 0.8 }}>
+                      {metric.label}
+                    </Text>
+                    <Text as="span" css={{ fontSize: "$h3", fontWeight: 600 }}>
+                      {metric.value}
+                    </Text>
+                  </Stack>
+                </MetricCard>
+              ))}
+            </MetricsGrid>
+
+            {/* Chart Area */}
+            <ChartArea>
+              <Text css={{ opacity: "$light" }}>📊 Performance Chart</Text>
+            </ChartArea>
+          </PerformanceSection>
+
+          {/* Activity Feed */}
+          <ActivitySection>
+            <Stack
+              css={{ alignItems: "flex-start", justifyContent: "space-between" }}
+              direction="row">
+              <div>
+                <Text as="h2" css={{ fontSize: "$h5", margin: 0 }}>
+                  Activity Feed
+                </Text>
+                <Text as="span" css={{ fontSize: "$small", opacity: "$light" }}>
+                  Recent guest activity
+                </Text>
+              </div>
+              <Select
+                initial={activityFilter}
+                options={activityFilterOptions}
+                trigger={
+                  <Button small theme="minimal">
+                    {activityFilterOptions.find((opt) => opt.value === activityFilter)?.label}
+                    <Icons.CaretDown />
+                  </Button>
+                }
+                onSelection={setActivityFilter}
+              />
+            </Stack>
+
+            <Stack css={{ gap: "$small" }}>
+              {activityItems.map((item) => (
+                <ActivityItem key={item.id}>
+                  <div style={{ color: getActivityColor(item.type) }}>
+                    {getActivityIcon(item.type)}
+                  </div>
+                  <Stack css={{ flex: 1, gap: "$smallest" }}>
+                    <Stack
+                      css={{ alignItems: "center", justifyContent: "space-between" }}
+                      direction="row">
+                      <Text as="span" css={{ fontWeight: 500 }}>
+                        {item.type === "check-in"
+                          ? "Check-in: "
+                          : item.type === "check-out"
+                            ? "Check-out: "
+                            : "Upcoming check-in: "}
+                        {item.guest}
+                      </Text>
+                      <Text as="span" css={{ fontSize: "$small", opacity: "$light" }}>
+                        {item.time}
+                      </Text>
+                    </Stack>
+                    <Text as="span" css={{ fontSize: "$small", opacity: "$light" }}>
+                      {item.details}
+                    </Text>
+                    {item.action && (
+                      <Button
+                        css={{ alignSelf: "flex-start", marginTop: "$smallest" }}
+                        small
+                        theme="minimal">
+                        {item.action}
+                      </Button>
+                    )}
+                  </Stack>
+                </ActivityItem>
+              ))}
+            </Stack>
+          </ActivitySection>
+
+          {/* AI Recommendations */}
+          <RecommendationsSection>
+            <div>
+              <Text as="h2" css={{ fontSize: "$h5", margin: 0 }}>
+                AI Recommendations
+              </Text>
+              <Text as="span" css={{ fontSize: "$small", opacity: "$light" }}>
+                Actions requiring your attention
+              </Text>
+            </div>
+
+            <Stack css={{ gap: "$small" }}>
+              {recommendations.map((rec) => (
+                <RecommendationItem key={rec.id} priority={rec.priority}>
+                  <Stack css={{ gap: "$small" }}>
+                    <Stack
+                      css={{ alignItems: "flex-start", justifyContent: "space-between" }}
+                      direction="row">
+                      <Stack css={{ flex: 1, gap: "$smallest" }}>
+                        <Stack css={{ alignItems: "center", gap: "$small" }} direction="row">
+                          <Text as="span" css={{ fontWeight: 500 }}>
+                            {rec.title}
+                          </Text>
+                          {rec.priority === "urgent" && (
+                            <Badge small theme="orange">
+                              Urgent
+                            </Badge>
+                          )}
+                        </Stack>
+                        <Text as="span" css={{ fontSize: "$small", opacity: "$light" }}>
+                          {rec.description}
+                        </Text>
+                      </Stack>
+                      <Badge small theme="purple">
+                        {rec.category}
+                      </Badge>
+                    </Stack>
+                    <Stack css={{ gap: "$smallest" }} direction="row">
+                      {rec.actions.map((action, index) => (
+                        <Button key={index} small theme={index === 0 ? "solid" : "minimal"}>
+                          {action}
+                        </Button>
+                      ))}
+                    </Stack>
+                  </Stack>
+                </RecommendationItem>
+              ))}
+            </Stack>
+
+            <Button css={{ alignSelf: "flex-start" }} small theme="minimal">
+              View All Recommendations
+              <Icons.ArrowRight />
+            </Button>
+          </RecommendationsSection>
+        </ConsoleContent>
+      </ConsoleContainer>
+    </div>
+  );
+}

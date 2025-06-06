@@ -55,7 +55,7 @@ export const DialogOverlayStyled = styled("div", {
     },
   },
   width: "100%",
-  zIndex: "$dialog",
+  zIndex: "$modal",
 });
 
 export const DialogCoreStyled = styled("div", {

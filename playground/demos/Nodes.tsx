@@ -4,47 +4,127 @@ import { Icons } from "../../src/icons";
 import * as C from "../../src/index";
 
 export default function NodesDemo(): JSX.Element {
-  const nodes = [
+  // Badge-style nodes
+  const badgeNodes = [
     {
-      icon: <Icons.ArrowDown weight="regular" />,
-      name: "Database",
-      theme: "purple" as const
+      children: (
+        <C.Badge icon={<Icons.ArrowDown weight="regular" />} theme="purple">
+          Database
+        </C.Badge>
+      ),
+      color: "purple" as const
     },
     {
-      icon: <Icons.ArrowRight weight="regular" />,
-      name: "API",
-      theme: "orange" as const
+      children: (
+        <C.Badge icon={<Icons.ArrowRight weight="regular" />} theme="orange">
+          API
+        </C.Badge>
+      ),
+      color: "orange" as const
     },
     {
-      icon: <Icons.ArrowUp weight="regular" />,
-      name: "Frontend",
-      theme: "yellow" as const
+      children: (
+        <C.Badge icon={<Icons.ArrowUp weight="regular" />} theme="yellow">
+          Frontend
+        </C.Badge>
+      ),
+      color: "yellow" as const
     },
     {
-      icon: <Icons.ArrowLeft weight="regular" />,
-      name: "Analytics",
-      theme: "blue" as const
+      children: (
+        <C.Badge icon={<Icons.ArrowLeft weight="regular" />} theme="blue">
+          Analytics
+        </C.Badge>
+      ),
+      color: "blue" as const
     }
   ];
 
-  const parent = {
-    icon: <Icons.ArrowsOutSimple weight="regular" />,
-    name: "System"
-  };
+  // Box-style nodes
+  const boxNodes = [
+    {
+      children: (
+        <C.Box css={{ alignItems: "center", display: "flex", gap: "$small" }} small theme="purple">
+          <Icons.Database weight="regular" />
+          Storage
+        </C.Box>
+      ),
+      color: "purple" as const
+    },
+    {
+      children: (
+        <C.Box css={{ alignItems: "center", display: "flex", gap: "$small" }} small theme="orange">
+          <Icons.ArrowClockwise weight="regular" />
+          Network
+        </C.Box>
+      ),
+      color: "orange" as const
+    },
+    {
+      children: (
+        <C.Box css={{ alignItems: "center", display: "flex", gap: "$small" }} small theme="blue">
+          <Icons.Monitor weight="regular" />
+          Monitor
+        </C.Box>
+      ),
+      color: "blue" as const
+    }
+  ];
 
-  const customParentContent = (
-    <C.Box theme="blue" small css={{ display: "flex", alignItems: "center", gap: "$small" }}>
+  // Custom styled nodes
+  const customNodes = [
+    {
+              children: (
+          <C.Stack css={{ 
+            alignItems: "center", 
+            backgroundColor: "$purple", 
+            borderRadius: "$medium",
+            color: "white",
+            gap: "$smaller", 
+            padding: "$small $medium" 
+          }}>
+            <Icons.CheckCircle weight="fill" />
+            <C.Text as="small" css={{ color: "white" }}>Security</C.Text>
+          </C.Stack>
+        ),
+    },
+    {
+              children: (
+          <C.Stack css={{ 
+            alignItems: "center", 
+            backgroundColor: "$yellow", 
+            borderRadius: "$medium",
+            color: "$text",
+            gap: "$smaller", 
+            padding: "$small $medium" 
+          }}>
+            <Icons.ArrowUp weight="fill" />
+            <C.Text as="small">Performance</C.Text>
+          </C.Stack>
+        ),
+    }
+  ];
+
+  // Parent node examples
+  const badgeParent = (
+    <C.Badge icon={<Icons.ArrowsOutSimple weight="regular" />} theme="default">
+      System
+    </C.Badge>
+  );
+
+  const boxParent = (
+    <C.Box css={{ alignItems: "center", display: "flex", gap: "$small" }} theme="blue">
       <Icons.ArrowsOutSimple weight="bold" />
-      <C.Stack css={{ textAlign: "center", gap: "$smaller" }}>
+      <C.Stack css={{ gap: "$smaller", textAlign: "center" }}>
         <C.Text as="strong" css={{ color: "white" }}>Main System</C.Text>
         <C.Text as="small" css={{ color: "white", opacity: 0.8 }}>v2.1.0</C.Text>
       </C.Stack>
     </C.Box>
   );
 
-  const badgeParent = (
-    <C.Badge theme="purple" css={{ padding: "$medium" }}>
-      <C.Stack direction="row" css={{ alignItems: "center", gap: "$small" }}>
+  const customParent = (
+    <C.Badge css={{ padding: "$medium" }} theme="purple">
+      <C.Stack css={{ alignItems: "center", gap: "$small" }} direction="row">
         <Icons.CheckCircle weight="fill" />
         Premium Service
       </C.Stack>
@@ -53,12 +133,6 @@ export default function NodesDemo(): JSX.Element {
 
   const complexParent = (
     <C.Stack css={{ alignItems: "center", gap: "$small", textAlign: "center" }}>
-      <C.Avatar
-        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
-        alt="System Admin"
-        fallback="SA"
-        width={40}
-      />
       <C.Stack css={{ gap: "$smaller" }}>
         <C.Text as="strong">John Doe</C.Text>
         <C.Text as="small">System Administrator</C.Text>
@@ -69,99 +143,97 @@ export default function NodesDemo(): JSX.Element {
 
   return (
     <C.Stack css={{ gap: "$xlarge" }}>
-      {/* Default Badge Type */}
+      {/* Badge Nodes */}
       <C.Stack>
-        <C.Text as="h4">Default Badge Type</C.Text>
+        <C.Text as="h4">Badge Nodes</C.Text>
+        <C.Text as="small" bottom="medium">Using Badge components as node children</C.Text>
         <C.Nodes
-          nodes={nodes}
-          parent={parent}
           height={400}
-        />
-      </C.Stack>
-
-      {/* Card Type */}
-      <C.Stack>
-        <C.Text as="h4">Card Type</C.Text>
-        <C.Nodes
-          nodes={nodes}
-          parent={parent}
-          height={400}
-          type="card"
-        />
-      </C.Stack>
-
-      {/* ReactNode Parent - Custom Box */}
-      <C.Stack>
-        <C.Text as="h4">ReactNode Parent - Custom Box</C.Text>
-        <C.Text as="small" bottom="medium">ReactNode parent rendered directly with full styling control</C.Text>
-        <C.Nodes
-          nodes={nodes.slice(0, 3)}
-          parent={customParentContent}
-          height={400}
-        />
-      </C.Stack>
-
-      {/* ReactNode Parent - Custom Badge */}
-      <C.Stack>
-        <C.Text as="h4">ReactNode Parent - Custom Badge</C.Text>
-        <C.Text as="small" bottom="medium">Using a custom Badge with enhanced styling</C.Text>
-        <C.Nodes
-          nodes={nodes.slice(0, 2)}
+          nodes={badgeNodes}
           parent={badgeParent}
-          height={350}
         />
       </C.Stack>
 
-      {/* ReactNode Parent - Complex Content */}
+      {/* Box Nodes */}
       <C.Stack>
-        <C.Text as="h4">ReactNode Parent - Complex Content</C.Text>
-        <C.Text as="small" bottom="medium">Complex parent with Avatar, text, and status badge</C.Text>
+        <C.Text as="h4">Box Nodes</C.Text>
+        <C.Text as="small" bottom="medium">Using Box components as node children</C.Text>
         <C.Nodes
-          nodes={nodes.slice(0, 3)}
-          parent={complexParent}
           height={400}
+          nodes={boxNodes}
+          parent={boxParent}
         />
       </C.Stack>
 
-      {/* Custom Height Comparison */}
+      {/* Custom Styled Nodes */}
       <C.Stack>
-        <C.Text as="h4">Comparison - Badge vs Card vs ReactNode</C.Text>
+        <C.Text as="h4">Custom Styled Nodes</C.Text>
+        <C.Text as="small" bottom="medium">Using custom Stack components with inline styling</C.Text>
+        <C.Nodes
+          height={350}
+          nodes={customNodes}
+          parent={customParent}
+        />
+      </C.Stack>
+
+      {/* Complex Parent */}
+      <C.Stack>
+        <C.Text as="h4">Complex Parent Example</C.Text>
+        <C.Text as="small" bottom="medium">Parent with multiple text elements and status badge</C.Text>
+        <C.Nodes
+          height={400}
+          nodes={badgeNodes.slice(0, 3)}
+          parent={complexParent}
+        />
+      </C.Stack>
+
+      {/* Mixed Node Types Comparison */}
+      <C.Stack>
+        <C.Text as="h4">Mixed Node Types</C.Text>
+        <C.Text as="small" bottom="medium">Comparison of different node styling approaches</C.Text>
         <C.Stack css={{ 
           display: "grid", 
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", 
-          gap: "$large" 
+          gap: "$large", 
+          gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))" 
         }}>
           <C.Stack>
-            <C.Text as="small" bottom="small">Badge Type</C.Text>
+            <C.Text as="small" bottom="small">Badge Style</C.Text>
             <C.Nodes
               height={250}
-              nodes={nodes.slice(0, 2)}
-              parent={parent}
-              type="badge"
+              nodes={badgeNodes.slice(0, 2)}
+                              parent={
+                  <C.Badge icon={<Icons.Funnel weight="regular" />} theme="default">
+                    Control Panel
+                  </C.Badge>
+                }
             />
           </C.Stack>
           
           <C.Stack>
-            <C.Text as="small" bottom="small">Card Type</C.Text>
+            <C.Text as="small" bottom="small">Box Style</C.Text>
             <C.Nodes
               height={250}
-              nodes={nodes.slice(0, 2)}
-              parent={parent}
-              type="card"
+              nodes={boxNodes.slice(0, 2)}
+                              parent={
+                  <C.Box css={{ alignItems: "center", display: "flex", gap: "$small" }} small theme="minimal">
+                    <Icons.Monitor weight="fill" />
+                    Dashboard
+                  </C.Box>
+                }
             />
           </C.Stack>
           
           <C.Stack>
-            <C.Text as="small" bottom="small">ReactNode Type</C.Text>
+            <C.Text as="small" bottom="small">Custom Style</C.Text>
             <C.Nodes
               height={250}
-              nodes={nodes.slice(0, 2)}
+              nodes={customNodes}
               parent={
-                <C.Box theme="minimal" css={{ 
+                <C.Box css={{ 
                   border: "2px dashed $purple", 
-                  padding: "$small",
-                  borderRadius: "$medium"
-                }}>
+                  borderRadius: "$medium",
+                  padding: "$small"
+                }} theme="minimal">
                   <C.Stack css={{ alignItems: "center", gap: "$smaller" }}>
                     <Icons.Database weight="fill" />
                     <C.Text as="small">Custom Node</C.Text>

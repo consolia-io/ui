@@ -1,31 +1,21 @@
-import React from "react";
+import { JSX } from "react";
+
 import * as C from "../../src/index";
 
-export default function ViewDemo() {
+export default function ViewDemo(): JSX.Element {
   return (
     <C.Stack css={{ gap: "$large" }}>
       {/* Basic View */}
         <C.View 
-          hero
-          inverted 
           css={{
-            height: "90vh",
-            display: "flex",
             alignItems: "center",
+            display: "flex",
+            height: "90vh",
             justifyContent: "center"
-          }}>
-          <C.Logo 
-            type="icon"
-            width={900} 
-            css={{
-              position: "absolute",
-              top: "50%",
-              left: "-10rem",
-              transform: "translateY(-50%)",
-              opacity: 0.03,
-              zIndex: 0,
-            }}
-          />
+          }}
+          hero 
+          inverted>
+        
           <C.Stack align="center">
             <C.Text as="h1">Default view with no custom styling</C.Text>
             <C.Text as="p">
@@ -37,7 +27,7 @@ export default function ViewDemo() {
       {/* Hero View */}
       <C.Stack>
         <C.Text as="h4" bottom="medium">Hero View</C.Text>
-        <C.View hero inverted css={{ height: "60vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <C.View css={{ alignItems: "center", display: "flex", height: "60vh", justifyContent: "center" }} hero inverted>
           <C.Stack align="center">
             <C.Text as="h2">Hero view with animated sunset gradient</C.Text>
             <C.Text as="p">Perfect for landing pages and hero sections</C.Text>
@@ -78,7 +68,7 @@ export default function ViewDemo() {
       {/* View with Spacing */}
       <C.Stack>
         <C.Text as="h4" bottom="medium">View with Spacing</C.Text>
-        <C.View top="large" bottom="large">
+        <C.View bottom="large" top="large">
           <C.Box css={{ padding: "$large" }}>
             <C.Text>View with top and bottom spacing</C.Text>
           </C.Box>

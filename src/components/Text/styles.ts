@@ -115,14 +115,9 @@ export const TextStyled = styled("div", {
       },
     },
     highlight: {
-      alternate: {
-        ...highlight,
-        backgroundColor: "$surfaceLight",
-      },
       blue: {
         ...highlight,
         backgroundColor: "$blue",
-        color: "white",
       },
       default: {
         ...highlight,
@@ -131,17 +126,14 @@ export const TextStyled = styled("div", {
       orange: {
         ...highlight,
         backgroundColor: "$orange",
-        color: "white",
       },
       purple: {
         ...highlight,
         backgroundColor: "$purple",
-        color: "white",
       },
-      red: {
+      yellow: {
         ...highlight,
-        backgroundColor: "$orange",
-        color: "white",
+        backgroundColor: "$yellow",
       },
     },
     inline: {
@@ -156,16 +148,6 @@ export const TextStyled = styled("div", {
       },
     },
     link: {
-      alternate: {
-        ...link,
-        "&:hover": {
-          backgroundColor: "$surfaceHover",
-        },
-      },
-      blog: {
-        ...link,
-        borderColor: "$text",
-      },
       default: {
         ...link,
       },

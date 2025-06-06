@@ -38,17 +38,17 @@ const defaultTheme = {
   },
   fontSizes: {
     default: "1.7rem",
-    h1: "4rem",
-    h2: "3.5rem",
+    h1: "4.5rem",
+    h2: "3.6rem",
     h3: "3rem",
     h4: "2.5rem",
-    h5: "2rem",
-    h6: "1.75rem",
-    small: "1.5rem",
+    h5: "2.1rem",
+    h6: "1.9rem",
+    small: "1.4rem",
   },
   lineHeights: {
-    default: "1.5",
-    small: "1.25",
+    default: "1.45",
+    small: "1.1",
   },
   opacities: {
     default: 0.75,
@@ -60,8 +60,8 @@ const defaultTheme = {
     small: "0.15rem",
   },
   shadows: {
-    large: "0 0.4rem 0.8rem 0 rgba(45, 25, 55, 0.08)",
-    small: "0 1px 3px 0 rgba(45, 25, 55, 0.1)",
+    large: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+    small: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
   },
   sizes: {
     excess: "16rem",
@@ -89,8 +89,8 @@ const defaultTheme = {
     default: "all 0.23s ease",
   },
   zIndices: {
-    dialog: 997,
     menu: 999,
+    modal: 997,
     popover: 996,
     select: 995,
     special: 100,
@@ -115,8 +115,8 @@ export const darkTheme = createTheme({
     yellow: "#e8965f",
   },
   shadows: {
-    large: "0 0.6rem 1.2rem 0 rgba(0, 0, 0, 0.7)",
-    small: "0 2px 4px 0 rgba(0, 0, 0, 0.5)",
+    large: "0 4px 6px -1px rgba(0, 0, 0, 0.25), 0 2px 4px -1px rgba(0, 0, 0, 0.15)",
+    small: "0 1px 2px 0 rgba(0, 0, 0, 0.25)",
   },
 });
 
@@ -124,7 +124,7 @@ export const { css, getCssText, globalCss, keyframes, styled, theme } = createSt
   theme: defaultTheme,
   themeMap: { ...defaultThemeMap, opacity: "opacities" },
   utils: {
-    darkModeSpec: (value: unknown) => ({
+    darkOnly: (value: unknown) => ({
       [`.${darkTheme} &`]: value,
     }),
     desktop: (value: unknown) => ({
@@ -175,7 +175,7 @@ export const { css, getCssText, globalCss, keyframes, styled, theme } = createSt
     laptopX: (value: unknown) => ({
       [breakpoints.laptopX]: value,
     }),
-    lightThemeSpec: (value: unknown) => ({
+    lightOnly: (value: unknown) => ({
       "@media (prefers-color-scheme: light)": value,
     }),
     micro: (value: unknown) => ({

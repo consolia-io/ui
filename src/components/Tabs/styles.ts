@@ -5,6 +5,7 @@ export const TabsStyled = styled("div", {
   background: "$surface",
   border: "1px solid $borderLight",
   borderRadius: "$medium",
+  boxShadow: "$small",
   display: "flex",
   gap: "$smallest",
   padding: "$smallest",

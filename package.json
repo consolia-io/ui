@@ -1,7 +1,7 @@
 {
   "name": "@consolia/ui",
   "description": "Consolia's internal component library, built with React, Next.js, and Stitches.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Jackson Dolman <mail@dolmios.com>",
   "browserslist": {
     "production": [
@@ -31,7 +31,7 @@
     "@parcel/optimizer-htmlnano": "^2.15.2",
     "@parcel/packager-ts": "^2.15.2",
     "@parcel/transformer-typescript-types": "^2.15.2",
-    "@types/node": "^22.15.29",
+    "@types/node": "^22.15.30",
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.6",
     "eslint": "^9.28.0",
@@ -44,6 +44,8 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tslib": "^2.8.1",
+    "typedoc": "^0.28.5",
+    "typedoc-plugin-markdown": "^4.6.4",
     "typescript": "^5.8.3",
     "util": "^0.12.5"
   },
@@ -80,9 +82,11 @@
     "url": "git://github.com/consolia-io/ui.git"
   },
   "scripts": {
-    "build": "pnpm tidy && pnpm prebuild && parcel build src/index.ts --dist-dir dist",
+    "build": "pnpm tidy && pnpm docs && pnpm prebuild && parcel build src/index.ts --dist-dir dist",
     "bump": "pnpm up && pnpm tidy && pnpm build",
     "dev": "echo '⚡️ Fetching device IP for development...' && ipconfig getifaddr en0 && echo '🫡' && parcel playground/index.html --dist-dir playground/dist --open --no-cache --port 420",
+    "docs": "node scripts/generate-docs.js",
+    "docs:only": "pnpm docs",
     "kill": "lsof -ti tcp:420 | xargs kill",
     "lint": "eslint src --ext .ts,.tsx --fix",
     "prebuild": "rm -rf dist .parcel-cache",

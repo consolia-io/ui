@@ -2,19 +2,21 @@ import { JSX, useState } from "react";
 
 import { Icons } from "../src/icons";
 import * as C from "../src/index";
+import AccordionDemo from "./demos/Accordion";
 import AvatarDemo from "./demos/Avatar";
 import BadgeDemo from "./demos/Badge";
 import BoxDemo from "./demos/Box";
 import ButtonDemo from "./demos/Button";
 import CalendarDemo from "./demos/Calendar";
-import DialogDemo from "./demos/Dialog";
 import DividerDemo from "./demos/Divider";
+import DrawerDemo from "./demos/Drawer";
 import FieldDemo from "./demos/Field";
 import IconDemo from "./demos/Icon";
 import InputDemo from "./demos/Input";
 import LoadingDemo from "./demos/Loading";
 import LogoDemo from "./demos/Logo";
 import MenuDemo from "./demos/Menu";
+import ModalDemo from "./demos/Modal";
 import NodesDemo from "./demos/Nodes";
 import PopoverDemo from "./demos/Popover";
 import SelectDemo from "./demos/Select";
@@ -26,23 +28,28 @@ import ToastDemo from "./demos/Toast";
 import UploadDemo from "./demos/Upload";
 import ViewDemo from "./demos/View";
 
+// Proto demo has been stashed to proto-demo-stash.txt
+
 // Demo components map
 const DEMOS = {
+  Accordion: AccordionDemo,
   Avatar: AvatarDemo,
   Badge: BadgeDemo,
   Box: BoxDemo,
   Button: ButtonDemo,
   Calendar: CalendarDemo,
-  Dialog: DialogDemo,
   Divider: DividerDemo,
+  Drawer: DrawerDemo,
   Field: FieldDemo,
   Icon: IconDemo,
   Input: InputDemo,
   Loading: LoadingDemo,
   Logo: LogoDemo,
   Menu: MenuDemo,
+  Modal: ModalDemo,
   Nodes: NodesDemo,
   Popover: PopoverDemo,
+
   Select: SelectDemo,
   Stack: StackDemo,
   Table: TableDemo,

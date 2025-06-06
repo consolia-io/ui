@@ -48,14 +48,14 @@ export const providerReset = globalCss({
       fontDisplay: "swap",
       fontFamily: "Untitled Sans",
       fontStyle: "normal",
-      fontWeight: "400",
+      fontWeight: "normal",
       src: `url(${baseFontURL}/untitled-sans-web-regular.woff2) format('woff2')`,
     },
     {
       fontDisplay: "swap",
       fontFamily: "Untitled Sans",
       fontStyle: "normal",
-      fontWeight: "600",
+      fontWeight: "bold",
       src: `url(${baseFontURL}/untitled-sans-web-medium.woff2) format('woff2')`,
     },
   ],
@@ -85,9 +85,10 @@ export const providerReset = globalCss({
     color: theme.colors.text,
     fontFamily: theme.fonts.default,
     fontSize: theme.fontSizes.default,
-    fontWeight: "400",
+    fontWeight: "normal",
     lineHeight: theme.lineHeights.default,
     margin: 0,
+
     minHeight: "100vh",
     MozOsxFontSmoothing: "grayscale",
     overflowX: "hidden",
@@ -108,7 +109,7 @@ export const providerReset = globalCss({
   },
 
   "h1, h2, h3, h4, h5, h6": {
-    fontWeight: "600",
+    fontWeight: "bold",
     lineHeight: theme.lineHeights.small,
     margin: 0,
   },

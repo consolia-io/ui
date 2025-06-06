@@ -1,0 +1,33 @@
+{
+  "entryPoints": ["src/types.ts"],
+  "out": "docs",
+  "plugin": ["typedoc-plugin-markdown"],
+  "readme": "none",
+  "githubPages": false,
+  "gitRevision": "main",
+  "sort": ["source-order"],
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeExternals": true,
+  "hideGenerator": true,
+  "disableSources": false,
+  "includeVersion": true,
+  "categorizeByGroup": true,
+  "defaultCategory": "Components",
+  "categoryOrder": [
+    "Components",
+    "Utilities",
+    "*"
+  ],
+  "groupOrder": [
+    "Interfaces",
+    "*"
+  ],
+  "exclude": [
+    "playground/**/*",
+    "dist/**/*",
+    "node_modules/**/*"
+  ],
+  "skipErrorChecking": true,
+  "customFooterHtml": "Generated from TypeScript definitions in <code>src/types.ts</code>"
+} 
