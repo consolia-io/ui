@@ -16,7 +16,6 @@ export default function Provider({ children, css, dark }: IProvider): JSX.Elemen
   const themeClassName = isDarkMode ? darkTheme : "";
 
   const iconContextValue = {
-    alignmentBaseline: "middle" as const,
     size: BASE_SIZE,
     weight: "duotone" as const,
   };
