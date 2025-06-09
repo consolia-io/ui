@@ -11,6 +11,7 @@ export { default as Drawer } from "./components/Drawer";
 export { default as Divider } from "./components/Divider";
 export { default as Field } from "./components/Field";
 export { default as Form } from "./components/Form";
+export { default as Gradient } from "./components/Gradient";
 export { default as Icon } from "./components/Icon";
 export { default as Image } from "./components/Image";
 export { default as Input } from "./components/Input";
