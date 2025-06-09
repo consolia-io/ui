@@ -55,8 +55,8 @@ importers:
         specifier: ^9.28.0
         version: 9.28.0
       eslint-config-dolmios:
-        specifier: ^2.0.7
-        version: 2.0.7(eslint@9.28.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)
+        specifier: ^2.0.8
+        version: 2.0.8(eslint@9.28.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)
       next:
         specifier: ^15.3.3
         version: 15.3.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -154,8 +154,8 @@ packages:
   '@floating-ui/utils@0.2.9':
     resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
 
-  '@gerrit0/mini-shiki@3.5.0':
-    resolution: {integrity: sha512-RQ1YHbN0EsRMP62QB61jFxrgpb8VIUE+PhR8CjBarIat6b2UeYHBo2s+IL7Fny6F4FuV4S63ksSNWiImsUKR+A==}
+  '@gerrit0/mini-shiki@3.6.0':
+    resolution: {integrity: sha512-KaeJvPNofTEZR9EzVNp/GQzbQqkGfjiu6k3CXKvhVTX+8OoAKSX/k7qxLKOX3B0yh2XqVAc93rsOu48CGt2Qug==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -1016,8 +1016,8 @@ packages:
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
 
-  acorn@8.14.1:
-    resolution: {integrity: sha512-OvQ/2pUDKmgfCg++xsTX1wGxfTaszcHVcTctW4UJB4hibJx2HXxxO5UmVgyjMa+ZDsiaf5wWLXYpRWMmBI0QHg==}
+  acorn@8.15.0:
+    resolution: {integrity: sha512-NZyJarBfL7nWwIq+FDL6Zp/yHEhePMNnnJ0y3qfieCrmNvYct8uvtiV41UvlSe6apAfk0fY1FbWx+NwfmpvtTg==}
     engines: {node: '>=0.4.0'}
     hasBin: true
 
@@ -1318,8 +1318,8 @@ packages:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
 
-  eslint-config-dolmios@2.0.7:
-    resolution: {integrity: sha512-VpwpNp5D2mibeyccAsjvImYPZ2YtQLf3UL4nNL0SJJOTpBRYJt/O9Ro3vP2OgxbEE76DI2Styv5rAecWh/KiiA==}
+  eslint-config-dolmios@2.0.8:
+    resolution: {integrity: sha512-p3v4oebXCdrWScyNkSwQtcArNz45uhIxlF9Q3IiXB2Y+ysdA4RBJLBNwfkely0pWQz1fofzPr1T0iuzjL7dsvQ==}
     peerDependencies:
       eslint: ^9.0.0
       react: '>=19.0.0'
@@ -2430,7 +2430,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.9': {}
 
-  '@gerrit0/mini-shiki@3.5.0':
+  '@gerrit0/mini-shiki@3.6.0':
     dependencies:
       '@shikijs/engine-oniguruma': 3.6.0
       '@shikijs/langs': 3.6.0
@@ -3520,11 +3520,11 @@ snapshots:
       '@typescript-eslint/types': 8.33.1
       eslint-visitor-keys: 4.2.0
 
-  acorn-jsx@5.3.2(acorn@8.14.1):
+  acorn-jsx@5.3.2(acorn@8.15.0):
     dependencies:
-      acorn: 8.14.1
+      acorn: 8.15.0
 
-  acorn@8.14.1: {}
+  acorn@8.15.0: {}
 
   ajv@6.12.6:
     dependencies:
@@ -3910,7 +3910,7 @@ snapshots:
 
   escape-string-regexp@4.0.0: {}
 
-  eslint-config-dolmios@2.0.7(eslint@9.28.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3):
+  eslint-config-dolmios@2.0.8(eslint@9.28.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3):
     dependencies:
       '@eslint/js': 9.28.0
       '@next/eslint-plugin-next': 15.3.3
@@ -4034,8 +4034,8 @@ snapshots:
 
   espree@10.3.0:
     dependencies:
-      acorn: 8.14.1
-      acorn-jsx: 5.3.2(acorn@8.14.1)
+      acorn: 8.15.0
+      acorn-jsx: 5.3.2(acorn@8.15.0)
       eslint-visitor-keys: 4.2.0
 
   esquery@1.6.0:
@@ -5019,7 +5019,7 @@ snapshots:
 
   typedoc@0.28.5(typescript@5.8.3):
     dependencies:
-      '@gerrit0/mini-shiki': 3.5.0
+      '@gerrit0/mini-shiki': 3.6.0
       lunr: 2.3.9
       markdown-it: 14.1.0
       minimatch: 9.0.5
