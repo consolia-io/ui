@@ -141,7 +141,16 @@ export interface IBox {
   /** Whether to render a smaller version */
   small?: boolean;
   /** Visual theme/color scheme for the box */
-  theme?: "default" | "fill" | "orange" | "purple" | "yellow" | "blue" | "minimal" | "solid";
+  theme?:
+    | "default"
+    | "fill"
+    | "orange"
+    | "purple"
+    | "yellow"
+    | "blue"
+    | "minimal"
+    | "solid"
+    | "gradient";
 }
 
 /**
@@ -554,7 +563,7 @@ export interface ILoadingOverlay extends ILoading {
  */
 export interface ILogo {
   /** Color from theme palette */
-  color?: keyof typeof theme.colors;
+  theme?: "default" | "light" | "dark" | "orange" | "purple" | "yellow" | "blue";
   /** Custom CSS styles */
   css?: CSS;
   /** Whether to show hover effects */

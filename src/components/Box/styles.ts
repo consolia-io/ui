@@ -54,6 +54,7 @@ export const BoxStyled = styled("article", {
         justifyContent: "space-between",
       },
     },
+
     hover: {
       true: {
         "&:hover": {
@@ -88,6 +89,13 @@ export const BoxStyled = styled("article", {
       fill: {
         backgroundColor: "$surface",
         borderColor: "$borderLight",
+      },
+      gradient: {
+        backgroundColor: "transparent",
+        borderColor: "$surfaceLight",
+        darkOnly: {
+          border: "1px solid $border",
+        },
       },
       minimal: {
         backgroundColor: "transparent",
@@ -132,7 +140,7 @@ export const BoxHeaderStyled = styled("div", {
         padding: 0,
       },
       small: {
-        padding: "$smaller $medium",
+        padding: "$small",
       },
     },
   },
@@ -154,7 +162,7 @@ export const BoxFooterStyled = styled("div", {
         padding: 0,
       },
       small: {
-        padding: "$smaller $medium",
+        padding: "$small",
       },
     },
   },
@@ -168,7 +176,9 @@ export const BoxInnerStyled = styled("div", {
 
 export const BoxFlexStyled = styled("div", {
   height: "100%",
+  position: "relative",
   width: "100%",
+  zIndex: 2,
 });
 
 export const BoxExitStyled = styled("div", {
