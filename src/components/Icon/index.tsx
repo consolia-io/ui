@@ -5,13 +5,7 @@ import { IconStyled } from "./styles";
 
 export const BASE_SIZE = 21;
 
-export default function Icon({
-  children,
-  css,
-  forceColor,
-  forceSize = BASE_SIZE,
-  inline,
-}: IIcon): JSX.Element {
+export default function Icon({ children, css, forceColor, forceSize, inline }: IIcon): JSX.Element {
   return (
     <IconStyled
       css={{
@@ -25,12 +19,15 @@ export default function Icon({
             color: `$${forceColor} !important`,
           },
         }),
-        svg: {
-          height: `${forceSize}px`,
-          width: `${forceSize}px`,
-        },
+        ...(forceSize && {
+          svg: {
+            height: `${forceSize}px`,
+            width: `${forceSize}px`,
+          },
+        }),
         ...css,
-      }}>
+      }}
+      suppressHydrationWarning>
       {children}
     </IconStyled>
   );

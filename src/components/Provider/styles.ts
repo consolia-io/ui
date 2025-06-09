@@ -60,15 +60,6 @@ export const providerReset = globalCss({
     },
   ],
 
-  "@media (prefers-reduced-motion: reduce)": {
-    "*": {
-      animationDuration: "0.01ms !important",
-      animationIterationCount: "1 !important",
-      scrollBehavior: "auto !important",
-      transitionDuration: "0.01ms !important",
-    },
-  },
-
   "a, a:visited, a:active, a:hover": {
     color: "inherit",
     textDecoration: "none",

@@ -17,9 +17,8 @@ export default function Provider({ children, css, dark }: IProvider): JSX.Elemen
 
   const iconContextValue = {
     alignmentBaseline: "middle" as const,
-    height: BASE_SIZE,
+    size: BASE_SIZE,
     weight: "duotone" as const,
-    width: BASE_SIZE,
   };
 
   providerReset();
