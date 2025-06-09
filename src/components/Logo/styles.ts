@@ -76,5 +76,34 @@ export const LogoStyled = styled("div", {
         },
       },
     },
+    theme: {
+      blue: {
+        color: "$blue",
+      },
+      dark: {
+        color: "$background",
+        darkOnly: {
+          color: "$text",
+        },
+      },
+      default: {
+        color: "$text",
+      },
+      light: {
+        color: "$text",
+        darkOnly: {
+          color: "$background",
+        },
+      },
+      orange: {
+        color: "$orange",
+      },
+      purple: {
+        color: "$purple",
+      },
+      yellow: {
+        color: "$yellow",
+      },
+    },
   },
 });

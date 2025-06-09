@@ -45,10 +45,10 @@ const assets = {
 } as const;
 
 export default function Logo({
-  color = "text",
   css,
   hover = false,
   outline = false,
+  theme = "default",
   type = "full",
   width = 120,
 }: ILogo): JSX.Element {
@@ -62,12 +62,12 @@ export default function Logo({
     <LogoStyled
       css={{
         ...css,
-        color: `$${color}`,
         height,
         width,
       }}
       hover={useHover}
-      outline={useOutline}>
+      outline={useOutline}
+      theme={theme}>
       <LogoComponent />
     </LogoStyled>
   );
