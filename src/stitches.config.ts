@@ -30,7 +30,7 @@ const defaultTheme = {
     surface: "rgba(60, 30, 90, 0.06)",
     surfaceHover: "rgba(60, 30, 90, 0.12)",
     surfaceLight: "rgba(60, 30, 90, 0.03)",
-    text: "rgb(45, 25, 55)",
+    text: "#170e1f",
     yellow: "#f1de8e",
   },
   fonts: {
@@ -101,7 +101,7 @@ const defaultTheme = {
 
 export const darkTheme = createTheme({
   colors: {
-    background: "rgb(16, 16, 20)",
+    background: "#170e1f",
     blue: "#6b7db0",
     border: "rgba(255, 255, 255, 0.20)",
     borderLight: "rgba(255, 255, 255, 0.12)",
