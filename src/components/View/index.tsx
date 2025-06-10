@@ -2,6 +2,7 @@ import type { JSX } from "react";
 
 import { CSS } from "@stitches/react";
 
+import useBreakpoints from "../../hooks/useBreakpoints";
 import { darkTheme } from "../../stitches.config";
 import { IView } from "../../types";
 import Gradient from "../Gradient";
@@ -9,8 +10,11 @@ import Logo from "../Logo";
 import { ViewStyled, ViewContainerStyled } from "./styles";
 
 function HeroBackground(): JSX.Element {
+  const { isPhone } = useBreakpoints();
+
   return (
     <>
+      <Gradient />
       <Logo
         css={{
           left: "-10rem",
@@ -20,12 +24,11 @@ function HeroBackground(): JSX.Element {
           top: "50%",
           transform: "translateY(-50%)",
           userSelect: "none",
-          zIndex: 0,
+          zIndex: 1.5,
         }}
         type="icon"
-        width={900}
+        width={isPhone ? 750 : 900}
       />
-      <Gradient />
     </>
   );
 }
