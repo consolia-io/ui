@@ -1,4 +1,5 @@
 import { fadeOut, styled } from "../../stitches.config";
+import { TextStyled } from "../Text/styles";
 
 export const paddingVariants = {
   padding: {
@@ -78,23 +79,28 @@ export const BoxStyled = styled("article", {
     },
     theme: {
       blue: {
-        backgroundColor: "$blue",
-        borderColor: "$border",
+        background: "$blueGradient",
       },
 
       default: {
         backgroundColor: "$background",
-        borderColor: "$border",
       },
       fill: {
-        backgroundColor: "$surface",
-        borderColor: "$borderLight",
+        background: "$surfaceGradient",
       },
       gradient: {
+        [`${TextStyled}`]: {
+          color: "$background",
+        },
         backgroundColor: "transparent",
         borderColor: "$surfaceLight",
+        color: "$background",
         darkOnly: {
+          [`${TextStyled}`]: {
+            color: "$text",
+          },
           border: "1px solid $border",
+          color: "$text",
         },
       },
       minimal: {
@@ -102,21 +108,20 @@ export const BoxStyled = styled("article", {
         border: "none",
       },
       orange: {
-        backgroundColor: "$orange",
-        borderColor: "$border",
+        background: "$orangeGradient",
       },
       purple: {
-        backgroundColor: "$purple",
-        borderColor: "$border",
+        background: "$purpleGradient",
       },
       solid: {
-        backgroundColor: "$text",
-        borderColor: "$text",
+        [`${TextStyled}`]: {
+          color: "$background",
+        },
+        background: "$solidGradient",
         color: "$background",
       },
       yellow: {
-        backgroundColor: "$yellow",
-        borderColor: "$border",
+        background: "$yellowGradient",
       },
     },
     ...paddingVariants,
@@ -178,7 +183,7 @@ export const BoxFlexStyled = styled("div", {
   height: "100%",
   position: "relative",
   width: "100%",
-  zIndex: 2,
+  zIndex: 1,
 });
 
 export const BoxExitStyled = styled("div", {

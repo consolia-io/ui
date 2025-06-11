@@ -1,8 +1,11 @@
 import { styled } from "../../stitches.config";
 
 export const GradientStyled = styled("div", {
-  backgroundColor: "rgb(20, 16, 25)",
+  backgroundColor: "$text",
   bottom: 0,
+  darkOnly: {
+    backgroundColor: "$background",
+  },
   left: 0,
   position: "absolute",
   right: 0,

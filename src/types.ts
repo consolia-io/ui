@@ -96,6 +96,7 @@ export interface IBadge {
  *   header={<Text as="h3">Card Title</Text>}
  *   image="/hero.jpg"
  *   expandable
+ *   onClick={() => console.log('Box clicked')}
  * >
  *   Card content goes here
  * </Box>
@@ -138,6 +139,8 @@ export interface IBox {
   loading?: boolean;
   /** Whether to render with minimal styling */
   minimal?: boolean;
+  /** Click handler for the box */
+  onClick?: MouseEventHandler<HTMLDivElement>;
   /** Whether to render a smaller version */
   small?: boolean;
   /** Visual theme/color scheme for the box */
@@ -791,6 +794,7 @@ export interface ISelectMulti extends Omit<ISelect, "onSelection" | "initial" | 
  *   widthPhone={100}
  *   top="large"
  *   bottom="medium"
+ *   onClick={() => console.log('Stack clicked')}
  * >
  *   <Text>Item 1</Text>
  *   <Text>Item 2</Text>
@@ -832,6 +836,8 @@ export interface IStack {
   offsetDesktop?: number;
   /** Laptop offset percentage */
   offsetLaptop?: number;
+  /** Click handler for the stack */
+  onClick?: MouseEventHandler<HTMLDivElement>;
   /** Phone offset percentage */
   offsetPhone?: number;
   /** Tablet offset percentage */

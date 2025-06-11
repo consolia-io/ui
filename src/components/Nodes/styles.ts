@@ -29,7 +29,7 @@ export const NodesContainer = styled("div", {
 
 export const NodeRow = styled("div", {
   display: "flex",
-  gap: "calc($large * 2)",
+  gap: "$medium",
   justifyContent: "center",
   padding: "0 $large",
   position: "relative",

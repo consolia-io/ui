@@ -34,8 +34,9 @@ export default function Box({
   imageTarget,
   loading,
   minimal,
+  onClick,
   small,
-  theme,
+  theme = "default",
 }: IBox): JSX.Element | null {
   const [isOpen, setIsOpen] = useState(true);
   const [isMounted, setIsMounted] = useState(true);
@@ -49,7 +50,7 @@ export default function Box({
   }
 
   const padding = header || footer || image || minimal ? "none" : small ? "small" : "default";
-  const hasInteraction = !!(cta || imageCTA);
+  const hasInteraction = !!(cta || imageCTA || onClick);
 
   if (!isMounted) return null;
 
@@ -68,7 +69,8 @@ export default function Box({
       loading={!!loading}
       padding={padding}
       target={cta ? "_blank" : undefined}
-      theme={theme || "default"}>
+      theme={theme || "default"}
+      onClick={onClick}>
       {theme === "gradient" && <Gradient />}
       {loading && (
         <BoxLoadingStyled>

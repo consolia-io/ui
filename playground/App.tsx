@@ -109,15 +109,20 @@ export function App(): JSX.Element {
           <C.ProviderToggle />
         </C.Stack>
       </C.View>
+      <C.View bottom="largest" hero inverted top="largest">
+        <C.Stack align="center">
+          <C.Text as="h1">
+            {DEMO_OPTIONS.find((opt) => opt.value === selectedDemo)?.label || "Select Component"}
+          </C.Text>
+        </C.Stack>
+      </C.View>
 
       {/* Current Demo */}
       <C.View bottom="largest" container top="largest">
-        <C.Stack bottom="larger">
-          <C.Badge theme="purple">
-            Demo: "{DEMO_OPTIONS.find((opt) => opt.value === selectedDemo)?.label}"
-          </C.Badge>
-        </C.Stack>
-        <C.Stack>
+        <C.Stack
+          css={{
+            minHeight: "90vh",
+          }}>
           <DemoComponent />
         </C.Stack>
       </C.View>

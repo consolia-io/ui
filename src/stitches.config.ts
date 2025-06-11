@@ -22,16 +22,28 @@ const defaultTheme = {
   colors: {
     background: "#FFFFFF",
     blue: "#8fbdd8",
+    blueGradient:
+      "radial-gradient(ellipse at 50% 120%, rgba(143, 189, 216, 0.4) 0%, rgba(143, 189, 216, 0.8) 50%, rgba(143, 189, 216, 1) 100%)",
     border: "rgba(60, 30, 90, 0.2)",
     borderLight: "rgba(60, 30, 90, 0.1)",
-    orange: "#E4956A",
+    orange: "#E49580",
+    orangeGradient:
+      "radial-gradient(ellipse at 50% 120%, rgba(228, 149, 128, 0.4) 0%, rgba(228, 149, 128, 0.8) 50%, rgba(228, 149, 128, 1) 100%)",
     overlay: "rgba(15, 8, 18, 0.2)",
     purple: "#a79bd0",
+    purpleGradient:
+      "radial-gradient(ellipse at 50% 120%, rgba(167, 155, 208, 0.4) 0%, rgba(167, 155, 208, 0.8) 50%, rgba(167, 155, 208, 1) 100%)",
+    solidGradient:
+      "radial-gradient(ellipse at 50% 120%, rgba(23, 14, 31, 0.6) 0%, rgba(23, 14, 31, 1) 50%, rgba(23, 14, 31, 0.8) 100%)",
     surface: "rgba(60, 30, 90, 0.06)",
+    surfaceGradient:
+      "radial-gradient(ellipse at 50% 120%, rgba(23, 14, 31, 0) 0%, rgba(23, 14, 31, 0.12) 50%, rgba(23, 14, 31, 0.06) 100%)",
     surfaceHover: "rgba(60, 30, 90, 0.12)",
     surfaceLight: "rgba(60, 30, 90, 0.03)",
-    text: "#170e1f",
-    yellow: "#f1de8e",
+    text: "rgb(23, 14, 31)",
+    yellow: "#ffbe7a",
+    yellowGradient:
+      "radial-gradient(ellipse at 50% 120%, rgba(255, 190, 122, 0.4) 0%, rgba(255, 190, 122, 0.8) 50%, rgba(255, 190, 122, 1) 100%)",
   },
   fonts: {
     default: "Untitled Sans, apple-system, sans-serif",
@@ -103,16 +115,28 @@ export const darkTheme = createTheme({
   colors: {
     background: "#170e1f",
     blue: "#6b7db0",
+    blueGradient:
+      "radial-gradient(ellipse at 50% 120%, rgba(107, 125, 176, 0.8) 0%, rgba(80, 100, 140, 0.4) 50%, rgba(40, 60, 100, 0.2) 100%)",
     border: "rgba(255, 255, 255, 0.20)",
     borderLight: "rgba(255, 255, 255, 0.12)",
-    orange: "#c4746b",
+    orange: "rgb(196, 116, 107)",
+    orangeGradient:
+      "radial-gradient(ellipse at 50% 120%, rgba(255, 150, 120, 0.8) 0%, rgba(200, 90, 60, 0.4) 50%, rgba(160, 50, 20, 0.2) 100%)",
     overlay: "rgba(255, 255, 255, 0.15)",
     purple: "#8b7ba8",
+    purpleGradient:
+      "radial-gradient(ellipse at 50% 120%, rgba(180, 120, 150, 0.8) 0%, rgba(140, 60, 120, 0.4) 50%, rgba(100, 20, 100, 0.2) 100%)",
+    solidGradient:
+      "radial-gradient(ellipse at 50% 120%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.85) 50%, rgba(255, 255, 255, 0.65) 100%)",
     surface: "rgba(245, 243, 255, 0.12)",
+    surfaceGradient:
+      "radial-gradient(ellipse at 50% 120%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.12) 50%, rgba(255, 255, 255, 0.03) 100%)",
     surfaceHover: "rgba(245, 243, 255, 0.18)",
     surfaceLight: "rgba(245, 243, 255, 0.08)",
     text: "#FFFFFF",
-    yellow: "#e8965f",
+    yellow: "rgb(255, 210, 140)",
+    yellowGradient:
+      "radial-gradient(ellipse at 50% 120%, rgba(255, 210, 140, 0.8) 0%, rgba(240, 150, 80, 0.4) 50%, rgba(230, 110, 40, 0.2) 100%)",
   },
   shadows: {
     large: "0 4px 6px -1px rgba(0, 0, 0, 0.25), 0 2px 4px -1px rgba(0, 0, 0, 0.15)",

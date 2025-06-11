@@ -27,6 +27,7 @@ export default function Stack({
   offsetPhone,
   offsetTablet,
   offsetWide,
+  onClick,
   top,
   width = 100,
   widthDesktop,
@@ -89,7 +90,8 @@ export default function Stack({
           ...dynamicStyles,
         }}
         id={id}
-        inverted={inverted}>
+        inverted={inverted}
+        onClick={onClick}>
         {children}
       </StackRowStyled>
     );
@@ -104,7 +106,8 @@ export default function Stack({
           ...dynamicStyles,
         }}
         inverted={inverted}
-        minimal={minimal}>
+        minimal={minimal}
+        onClick={onClick}>
         {children}
       </StackColumnStyled>
     );
@@ -118,6 +121,7 @@ export default function Stack({
       css={dynamicStyles}
       flexduo={flexduo}
       inverted={inverted}
+      onClick={onClick}
       {...rest}>
       {children}
     </StackStyled>

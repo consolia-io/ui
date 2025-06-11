@@ -55,8 +55,8 @@ export const BadgeStyled = styled("span", {
     theme: {
       blue: {
         backgroundColor: "$background",
-        borderColor: "$borderLight",
-        borderLeft: "5px solid $blue",
+        borderColor: "$blue",
+        borderLeftWidth: "5px",
       },
       default: {
         backgroundColor: "$background",
@@ -64,13 +64,13 @@ export const BadgeStyled = styled("span", {
       },
       orange: {
         backgroundColor: "$background",
-        borderColor: "$borderLight",
-        borderLeft: "5px solid $orange",
+        borderColor: "$orange",
+        borderLeftWidth: "5px",
       },
       purple: {
         backgroundColor: "$background",
-        borderColor: "$borderLight",
-        borderLeft: "5px solid $purple",
+        borderColor: "$purple",
+        borderLeftWidth: "5px",
       },
       solid: {
         backgroundColor: "$text",
@@ -79,8 +79,8 @@ export const BadgeStyled = styled("span", {
       },
       yellow: {
         backgroundColor: "$background",
-        borderColor: "$borderLight",
-        borderLeft: "5px solid $yellow",
+        borderColor: "$yellow",
+        borderLeftWidth: "5px",
       },
     },
   },
