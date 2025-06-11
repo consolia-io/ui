@@ -86,7 +86,7 @@ export const BoxStyled = styled("article", {
         backgroundColor: "$background",
       },
       fill: {
-        background: "$surfaceGradient",
+        background: "$surface",
       },
       gradient: {
         [`${TextStyled}`]: {
@@ -117,7 +117,7 @@ export const BoxStyled = styled("article", {
         [`${TextStyled}`]: {
           color: "$background",
         },
-        background: "$solidGradient",
+        background: "$text",
         color: "$background",
       },
       yellow: {

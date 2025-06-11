@@ -33,11 +33,7 @@ const defaultTheme = {
     purple: "#a79bd0",
     purpleGradient:
       "radial-gradient(ellipse at 50% 120%, rgba(167, 155, 208, 0.4) 0%, rgba(167, 155, 208, 0.8) 50%, rgba(167, 155, 208, 1) 100%)",
-    solidGradient:
-      "radial-gradient(ellipse at 50% 120%, rgba(23, 14, 31, 0.6) 0%, rgba(23, 14, 31, 1) 50%, rgba(23, 14, 31, 0.8) 100%)",
     surface: "rgba(60, 30, 90, 0.06)",
-    surfaceGradient:
-      "radial-gradient(ellipse at 50% 120%, rgba(23, 14, 31, 0) 0%, rgba(23, 14, 31, 0.12) 50%, rgba(23, 14, 31, 0.06) 100%)",
     surfaceHover: "rgba(60, 30, 90, 0.12)",
     surfaceLight: "rgba(60, 30, 90, 0.03)",
     text: "rgb(23, 14, 31)",
@@ -126,11 +122,7 @@ export const darkTheme = createTheme({
     purple: "#8b7ba8",
     purpleGradient:
       "radial-gradient(ellipse at 50% 120%, rgba(180, 120, 150, 0.8) 0%, rgba(140, 60, 120, 0.4) 50%, rgba(100, 20, 100, 0.2) 100%)",
-    solidGradient:
-      "radial-gradient(ellipse at 50% 120%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.85) 50%, rgba(255, 255, 255, 0.65) 100%)",
     surface: "rgba(245, 243, 255, 0.12)",
-    surfaceGradient:
-      "radial-gradient(ellipse at 50% 120%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.12) 50%, rgba(255, 255, 255, 0.03) 100%)",
     surfaceHover: "rgba(245, 243, 255, 0.18)",
     surfaceLight: "rgba(245, 243, 255, 0.08)",
     text: "#FFFFFF",
