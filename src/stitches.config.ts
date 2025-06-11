@@ -23,23 +23,23 @@ const defaultTheme = {
     background: "#FFFFFF",
     blue: "#8fbdd8",
     blueGradient:
-      "radial-gradient(ellipse at 50% 120%, rgba(143, 189, 216, 0.4) 0%, rgba(143, 189, 216, 0.8) 50%, rgba(143, 189, 216, 1) 100%)",
+      "radial-gradient(ellipse at 50% 120%, rgba(143, 189, 216, 0.05) 0%, rgba(143, 189, 216, 0.15) 50%, rgba(143, 189, 216, 0.3) 100%)",
     border: "rgba(60, 30, 90, 0.2)",
     borderLight: "rgba(60, 30, 90, 0.1)",
     orange: "#E49580",
     orangeGradient:
-      "radial-gradient(ellipse at 50% 120%, rgba(228, 149, 128, 0.4) 0%, rgba(228, 149, 128, 0.8) 50%, rgba(228, 149, 128, 1) 100%)",
+      "radial-gradient(ellipse at 50% 120%, rgba(228, 149, 128, 0.05) 0%, rgba(228, 149, 128, 0.15) 50%, rgba(228, 149, 128, 0.3) 100%)",
     overlay: "rgba(15, 8, 18, 0.2)",
     purple: "#a79bd0",
     purpleGradient:
-      "radial-gradient(ellipse at 50% 120%, rgba(167, 155, 208, 0.4) 0%, rgba(167, 155, 208, 0.8) 50%, rgba(167, 155, 208, 1) 100%)",
+      "radial-gradient(ellipse at 50% 120%, rgba(167, 155, 208, 0.05) 0%, rgba(167, 155, 208, 0.15) 50%, rgba(167, 155, 208, 0.3) 100%)",
     surface: "rgba(60, 30, 90, 0.06)",
     surfaceHover: "rgba(60, 30, 90, 0.12)",
     surfaceLight: "rgba(60, 30, 90, 0.03)",
     text: "rgb(23, 14, 31)",
     yellow: "#ffbe7a",
     yellowGradient:
-      "radial-gradient(ellipse at 50% 120%, rgba(255, 190, 122, 0.4) 0%, rgba(255, 190, 122, 0.8) 50%, rgba(255, 190, 122, 1) 100%)",
+      "radial-gradient(ellipse at 50% 120%, rgba(255, 190, 122, 0.05) 0%, rgba(255, 190, 122, 0.15) 50%, rgba(255, 190, 122, 0.3) 100%)",
   },
   fonts: {
     default: "Untitled Sans, apple-system, sans-serif",
