@@ -1,15 +1,16 @@
-import React, { useState } from "react";
-import * as C from "../../src/index";
+import { useState } from "react";
+
 import { Icons } from "../../src/icons";
+import * as C from "../../src/index";
 
 // Content components for tab panels
 function TabContent({ color, title }: { color: string; title: string }) {
   return (
     <C.Box css={{ 
       backgroundColor: color,
-      padding: "$large",
       borderRadius: "$medium",
-      marginTop: "$medium"
+      marginTop: "$medium",
+      padding: "$large"
     }}>
       <C.Text css={{ color: "white" }}>Content for {title}</C.Text>
     </C.Box>
@@ -31,19 +32,19 @@ export default function TabsDemo() {
   // Tabs with icons
   const iconOptions = [
     { 
+      icon: <Icons.ArrowRight weight="regular" />,
       label: "Home",
-      value: "home",
-      icon: <Icons.ArrowRight weight="regular" />
+      value: "home"
     },
     {
+      icon: <Icons.MagnifyingGlass weight="regular" />,
       label: "Search",
-      value: "search",
-      icon: <Icons.MagnifyingGlass weight="regular" />
+      value: "search"
     },
     {
+      icon: <Icons.Info weight="regular" />,
       label: "Settings",
-      value: "settings",
-      icon: <Icons.Info weight="regular" />
+      value: "settings"
     }
   ];
 
@@ -60,7 +61,8 @@ export default function TabsDemo() {
       <C.Stack>
         <C.Text as="h4" bottom="medium">Basic Tabs</C.Text>
         <C.Tabs
-          options={basicOptions}
+        options={basicOptions}
+          small
           onSelection={setBasicTab}
         />
         <TabContent 

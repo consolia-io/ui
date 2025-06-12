@@ -3,7 +3,7 @@ import { useState, type JSX } from "react";
 import { ITabs } from "../../types";
 import { TabStyled, TabsStyled } from "./styles";
 
-export default function Tabs({ initial, onSelection, options }: ITabs): JSX.Element {
+export default function Tabs({ css, initial, onSelection, options, small }: ITabs): JSX.Element {
   const [selected, setSelected] = useState<string>(initial || options[0].value);
 
   const hasOptions = options && options.length > 0;
@@ -24,12 +24,13 @@ export default function Tabs({ initial, onSelection, options }: ITabs): JSX.Elem
   }
 
   return (
-    <TabsStyled>
+    <TabsStyled css={css}>
       {options.map((option) => (
         <TabStyled
           key={option.value}
           icon={option.icon}
           selected={selected === option.value}
+          small={small}
           onClick={handleTabClick(option.value)}>
           {option.label}
         </TabStyled>

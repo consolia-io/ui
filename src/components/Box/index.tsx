@@ -132,7 +132,7 @@ export default function Box({
       </BoxFlexStyled>
 
       {footer && (
-        <BoxFooterStyled padding={minimal ? "none" : small ? "small" : "default"}>
+        <BoxFooterStyled fill={!header} padding={minimal ? "none" : small ? "small" : "default"}>
           {footer}
         </BoxFooterStyled>
       )}

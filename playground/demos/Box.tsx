@@ -35,11 +35,24 @@ export default function BoxDemo(): JSX.Element {
           gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))" 
         }}>
           <C.Box theme="default">Default theme</C.Box>
-          <C.Box theme="fill">Fill theme</C.Box>
-          <C.Box theme="blue">Blue theme</C.Box>
-          <C.Box theme="purple">Purple theme</C.Box>
-          <C.Box theme="orange">Orange theme</C.Box>
-          <C.Box theme="yellow">Yellow theme</C.Box>
+          <C.Box theme="fill">
+            Fill theme</C.Box>
+          <C.Box header={<C.Badge theme="blue">New</C.Badge>} theme="blue">
+            <br/>
+            Blue theme
+          </C.Box>
+          <C.Box theme="purple">
+            <C.Badge theme="purple">New</C.Badge><br/>
+            Purple theme
+          </C.Box>
+          <C.Box theme="orange">
+            <C.Badge theme="orange">New</C.Badge><br/>
+            Orange theme
+          </C.Box>
+          <C.Box theme="yellow">
+            <C.Badge theme="yellow">New</C.Badge><br/>
+            Yellow theme
+          </C.Box>
           <C.Box theme="minimal">Minimal theme</C.Box>
           <C.Box theme="solid">Solid theme</C.Box>
         </C.Stack>

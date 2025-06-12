@@ -63,7 +63,6 @@ export const BoxStyled = styled("article", {
           img: {
             transform: "scale(1.02)",
           },
-          transform: "translateY(-1px)",
         },
         cursor: "pointer",
         img: {
@@ -79,7 +78,7 @@ export const BoxStyled = styled("article", {
     },
     theme: {
       blue: {
-        background: "$blueGradient",
+        background: "$blueLight",
       },
 
       default: {
@@ -108,10 +107,10 @@ export const BoxStyled = styled("article", {
         border: "none",
       },
       orange: {
-        background: "$orangeGradient",
+        background: "$orangeLight",
       },
       purple: {
-        background: "$purpleGradient",
+        background: "$purpleLight",
       },
       solid: {
         [`${TextStyled}`]: {
@@ -121,7 +120,7 @@ export const BoxStyled = styled("article", {
         color: "$background",
       },
       yellow: {
-        background: "$yellowGradient",
+        background: "$yellowLight",
       },
     },
     ...paddingVariants,
@@ -131,7 +130,9 @@ export const BoxStyled = styled("article", {
 });
 
 export const BoxHeaderStyled = styled("div", {
+  backgroundColor: "$surfaceLight",
   borderBottom: "1px solid $borderLight",
+  boxShadow: "$small",
   color: "$text",
   fontWeight: "bold",
   padding: "$small $medium",
@@ -152,11 +153,15 @@ export const BoxHeaderStyled = styled("div", {
 });
 
 export const BoxFooterStyled = styled("div", {
-  backgroundColor: "$surfaceLight",
   borderTop: "1px solid $borderLight",
   color: "$text",
   padding: "$small $medium",
   variants: {
+    fill: {
+      true: {
+        backgroundColor: "$surfaceLight",
+      },
+    },
     padding: {
       default: {
         padding: "$small $medium",

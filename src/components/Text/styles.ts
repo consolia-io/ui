@@ -25,16 +25,25 @@ export const TextSizes = {
     fontSize: "$h1",
     lineHeight: "$small",
     marginBottom: "$medium",
+    phone: {
+      fontSize: "calc($h1 * 0.8)",
+    },
   },
   h2: {
     fontSize: "$h2",
     lineHeight: "$small",
     marginBottom: "$medium",
+    phone: {
+      fontSize: "calc($h2 * 0.85)",
+    },
   },
   h3: {
     fontSize: "$h3",
     lineHeight: "$small",
     marginBottom: "$medium",
+    phone: {
+      fontSize: "calc($h3 * 0.9)",
+    },
   },
   h4: {
     fontSize: "$h4",
