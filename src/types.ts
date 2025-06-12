@@ -1092,6 +1092,8 @@ export interface IIcon {
 export interface ITabs {
   /** Initially selected tab value */
   initial?: string;
+  /** Whether to use small tabs */
+  small?: boolean;
   /** Callback when tab is selected */
   onSelection?: (value: string) => void;
   /** Array of tab options */
@@ -1100,6 +1102,8 @@ export interface ITabs {
     label: string;
     value: string;
   }>;
+  /** Custom CSS styles */
+  css?: CSS;
 }
 
 /**
@@ -1142,4 +1146,6 @@ export interface IAccordion {
     value: string;
     large?: boolean;
   }>;
+  /** Display mode: 'list' (default) or 'grid' */
+  mode?: "list" | "grid";
 }
