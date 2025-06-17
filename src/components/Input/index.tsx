@@ -1,9 +1,9 @@
 import { ChangeEvent, useState, type JSX } from "react";
 import toast from "react-hot-toast";
 
-import { Icons } from "../../icons";
 import { Badge, Button, Loading, useEventListener, useBreakpoints } from "../../index";
 import { IInput } from "../../types";
+import Icon from "../Icon";
 import {
   InputAreaStyled,
   InputCallbackStyled,
@@ -122,17 +122,25 @@ export default function Input({
             {copy && (
               <Button
                 disabled={isCopied || disabled}
-                icon={!isPhone ? <Icons.ClipboardText /> : undefined}
+                icon={!isPhone ? <Icon system="ClipboardTextIcon" /> : undefined}
                 small
                 onClick={() => handleCopy()}>
-                {!isPhone ? "Copy" : <Icons.ClipboardText />}
+                {!isPhone ? "Copy" : <Icon system="ClipboardTextIcon" />}
               </Button>
             )}
 
             {reveal && (
               <Button
                 disabled={disabled}
-                icon={!isPhone ? !isRevealed ? <Icons.Eye /> : <Icons.EyeClosed /> : undefined}
+                icon={
+                  !isPhone ? (
+                    !isRevealed ? (
+                      <Icon system="EyeIcon" />
+                    ) : (
+                      <Icon system="EyeClosedIcon" />
+                    )
+                  ) : undefined
+                }
                 small
                 onClick={() => handleReveal()}>
                 {!isPhone ? (
@@ -142,29 +150,29 @@ export default function Input({
                     "Hide"
                   )
                 ) : !isRevealed ? (
-                  <Icons.Eye />
+                  <Icon system="EyeIcon" />
                 ) : (
-                  <Icons.EyeClosed />
+                  <Icon system="EyeClosedIcon" />
                 )}
               </Button>
             )}
 
             {reset && inputValue && (
               <Button disabled={disabled} small onClick={() => handleReset()}>
-                <Icons.X />
+                <Icon system="XCircleIcon" />
               </Button>
             )}
 
             {submit && (
               <Button
                 disabled={isSubmitDisabled}
-                icon={!isPhone ? <Icons.ArrowRight weight="regular" /> : undefined}
+                icon={!isPhone ? <Icon system="ArrowRightIcon" /> : undefined}
                 iconPosition="right"
                 small
                 theme={isSubmitValid ? "solid" : "default"}
                 type="submit"
                 onClick={() => handleSubmit()}>
-                {!isPhone ? submit : <Icons.ArrowRight weight="regular" />}
+                {!isPhone ? submit : <Icon system="ArrowRightIcon" />}
               </Button>
             )}
           </InputFunctionStyled>
@@ -174,17 +182,23 @@ export default function Input({
       {hasCallback && (
         <InputCallbackStyled>
           {error && (
-            <Badge icon={!errorMessage ? <Icons.Warning /> : undefined} theme="orange">
+            <Badge
+              icon={!errorMessage ? <Icon system="WarningCircleIcon" /> : undefined}
+              theme="orange">
               {errorMessage || "Error"}
             </Badge>
           )}
           {success && (
-            <Badge icon={!successMessage ? <Icons.CheckCircle /> : undefined} theme="blue">
+            <Badge
+              icon={!successMessage ? <Icon system="CheckCircleIcon" /> : undefined}
+              theme="blue">
               {successMessage || "Success"}
             </Badge>
           )}
           {warning && (
-            <Badge icon={!warningMessage ? <Icons.Warning /> : undefined} theme="yellow">
+            <Badge
+              icon={!warningMessage ? <Icon system="WarningCircleIcon" /> : undefined}
+              theme="yellow">
               {warningMessage || "Warning"}
             </Badge>
           )}

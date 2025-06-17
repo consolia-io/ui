@@ -83,7 +83,7 @@ export const TableMobileLabel = styled("span", {
   color: "$text",
   fontSize: "$small",
   fontWeight: 500,
-  minWidth: "5rem",
+  minWidth: "50px",
   opacity: "$light",
 });
 
@@ -205,8 +205,13 @@ export const TableCellBlock = styled("div", {
   alignItems: "center",
   display: "flex",
   gap: "$smaller",
-  minHeight: "2.5rem",
+  minHeight: "25px",
   width: "100%",
+});
+
+export const TableEmptyStateCell = styled("td", {
+  padding: "40px 0",
+  textAlign: "center",
 });
 
 export const TableSubRowStitches = styled("tr", {

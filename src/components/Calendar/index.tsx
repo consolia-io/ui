@@ -1,9 +1,9 @@
 import dayjs from "dayjs";
 import { useEffect, type JSX } from "react";
 
-import { Icons } from "../../icons";
 import { Stack, Text, Button } from "../../index";
 import { ICalendar } from "../../types";
+import Icon from "../Icon";
 import {
   useCalendarState,
   useCalendarSingleValidation,
@@ -158,27 +158,27 @@ export default function Calendar({
       <CalendarHeaderStyled>
         <Stack align="center" css={{ gap: "$small" }} direction="row">
           <Button disabled={prevYearDisabled} small onClick={() => handleYearNavigation("prev")}>
-            <Icons.CaretUp />
+            <Icon system="CaretUpIcon" />
           </Button>
           <Text as="h6" css={{ margin: 0 }}>
             {currentMonth.format("MMMM YYYY")}
           </Text>
           <Button disabled={nextYearDisabled} small onClick={() => handleYearNavigation("next")}>
-            <Icons.CaretDown />
+            <Icon system="CaretDownIcon" />
           </Button>
         </Stack>
 
         <CalendarHeaderNavigationStyled>
           <Button
             disabled={prevMonthDisabled}
-            icon={<Icons.ArrowLeft />}
+            icon={<Icon system="ArrowLeftIcon" />}
             small
             onClick={() => handleMonthNavigation("prev")}>
             {prevMonth.format("MMM")}
           </Button>
           <Button
             disabled={nextMonthDisabled}
-            icon={<Icons.ArrowRight />}
+            icon={<Icon system="ArrowRightIcon" />}
             iconPosition="right"
             small
             onClick={() => handleMonthNavigation("next")}>

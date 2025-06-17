@@ -158,8 +158,8 @@ export default function Select({
           css={{
             height: height || "auto",
             maxHeight: windowHeight < 700 ? "50vh" : "70vh",
-            maxWidth: width || "50rem",
-            minWidth: width || filter ? "20rem" : "12.5rem",
+            maxWidth: width || "500px",
+            minWidth: width || filter ? "200px" : "125px",
             phone: {
               maxWidth: "100%",
             },

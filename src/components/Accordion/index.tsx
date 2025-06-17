@@ -1,7 +1,7 @@
 import { useState, useRef, type JSX } from "react";
 
-import { Icons } from "../../icons";
 import { IAccordion } from "../../types";
+import Icon from "../Icon";
 import Stack from "../Stack";
 import Text from "../Text";
 import {
@@ -80,14 +80,17 @@ export default function Accordion({
               <AccordionCardStyled
                 header={
                   <Stack
+                    alignItems="center"
                     css={{
                       borderBottom: isOpen ? "1px solid $borderLight" : "1px solid transparent",
                       padding: !isOpen ? "$medium" : "$small $medium",
                       transition: "$default",
                     }}
-                    flexduo>
+                    direction="row"
+                    inline
+                    justify="space-between">
                     <Text as="h6">{option.label}</Text>
-                    {isOpen ? <Icons.ArrowDown /> : <Icons.ArrowRight />}
+                    <Icon system={isOpen ? "ArrowDownIcon" : "ArrowRightIcon"} />
                   </Stack>
                 }
                 minimal
@@ -112,7 +115,7 @@ export default function Accordion({
           <AccordionItemStyled key={option.value}>
             <AccordionButtonStyled
               expanded={isOpen}
-              icon={isOpen ? <Icons.ArrowDown /> : <Icons.ArrowRight />}
+              icon={isOpen ? <Icon system="ArrowDownIcon" /> : <Icon system="ArrowRightIcon" />}
               iconPosition="right"
               large={option.large}
               onClick={handleItemClick(option.value)}>

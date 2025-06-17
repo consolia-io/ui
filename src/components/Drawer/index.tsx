@@ -1,8 +1,8 @@
 import { useRef, useState, type JSX } from "react";
 
-import { Icons } from "../../icons";
 import { Button, Text, useEventListener, useOutsideClick, useScrollLock } from "../../index";
 import { IDrawer } from "../../types";
+import Icon from "../Icon";
 import Portal from "../Provider/ProviderPortal";
 import {
   DialogContentStyled,
@@ -96,7 +96,7 @@ export default function Drawer({
               }}>
               <DialogHeaderStyled>
                 <Text as="h4">{title}</Text>
-                <Button icon={<Icons.X />} small onClick={() => handleClose()}>
+                <Button icon={<Icon system="XCircleIcon" />} small onClick={() => handleClose()}>
                   Close
                 </Button>
               </DialogHeaderStyled>

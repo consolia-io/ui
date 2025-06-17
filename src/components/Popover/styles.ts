@@ -26,9 +26,7 @@ export const PopoverContentStyled = styled("div", {
   maxHeight: "85vh",
   overflowY: "auto",
   pointerEvents: "auto",
-  position: "relative",
   textAlign: "left !important",
-
   transition: "$default",
 
   variants: {
@@ -52,19 +50,21 @@ export const PopoverContentStyled = styled("div", {
     },
     small: {
       false: {
-        maxWidth: "42rem",
+        maxWidth: "420px",
         phone: {
           maxWidth: "calc(100vw - $large)",
         },
       },
       true: {
-        maxWidth: "28rem",
+        maxWidth: "280px",
         phone: {
           maxWidth: "calc(100vw - $large)",
         },
       },
     },
   },
+
+  width: "auto",
   zIndex: "$popover",
 });
 

@@ -8,6 +8,117 @@ export const BadgeStyled = styled("span", {
   borderRadius: "$small",
   boxShadow: "$small",
   color: "$text",
+  compoundVariants: [
+    // Border variant (current theme styles with left border)
+    {
+      css: {
+        backgroundColor: "$background",
+        borderColor: "$blue",
+        borderLeftWidth: "5px",
+      },
+      theme: "blue",
+      variant: "border",
+    },
+    {
+      css: {
+        backgroundColor: "$background",
+        borderColor: "$border",
+      },
+      theme: "default",
+      variant: "border",
+    },
+    {
+      css: {
+        backgroundColor: "$background",
+        borderColor: "$orange",
+        borderLeftWidth: "5px",
+      },
+      theme: "orange",
+      variant: "border",
+    },
+    {
+      css: {
+        backgroundColor: "$background",
+        borderColor: "$purple",
+        borderLeftWidth: "5px",
+      },
+      theme: "purple",
+      variant: "border",
+    },
+    {
+      css: {
+        backgroundColor: "$text",
+        borderColor: "$text",
+        color: "$background",
+      },
+      theme: "solid",
+      variant: "border",
+    },
+    {
+      css: {
+        backgroundColor: "$background",
+        borderColor: "$yellow",
+        borderLeftWidth: "5px",
+      },
+      theme: "yellow",
+      variant: "border",
+    },
+    // Theme variant (filled with color, text always $text)
+    {
+      css: {
+        backgroundColor: "$blue",
+        borderColor: "$blue",
+        color: "$text",
+      },
+      theme: "blue",
+      variant: "theme",
+    },
+    {
+      css: {
+        backgroundColor: "$background",
+        borderColor: "$border",
+        color: "$text",
+      },
+      theme: "default",
+      variant: "theme",
+    },
+    {
+      css: {
+        backgroundColor: "$orange",
+        borderColor: "$orange",
+        color: "$text",
+      },
+      theme: "orange",
+      variant: "theme",
+    },
+    {
+      css: {
+        backgroundColor: "$purple",
+        borderColor: "$purple",
+        color: "$text",
+      },
+      theme: "purple",
+      variant: "theme",
+    },
+    {
+      css: {
+        backgroundColor: "$text",
+        borderColor: "$text",
+        color: "$background",
+      },
+      theme: "solid",
+      variant: "theme",
+    },
+    {
+      css: {
+        backgroundColor: "$yellow",
+        borderColor: "$yellow",
+        color: "$text",
+      },
+      theme: "yellow",
+      variant: "theme",
+    },
+  ],
   display: "inline-flex",
   fontSize: "$small",
   fontWeight: "bold",
@@ -15,8 +126,8 @@ export const BadgeStyled = styled("span", {
   lineHeight: "$default",
   marginBottom: "0 !important",
   padding: "$smallest $small",
-  position: "relative",
 
+  position: "relative",
   variants: {
     animation: {
       true: {
@@ -48,7 +159,7 @@ export const BadgeStyled = styled("span", {
     },
     small: {
       true: {
-        fontSize: "1.2rem",
+        fontSize: "$micro",
         padding: "$smallest $smaller",
       },
     },
@@ -82,6 +193,10 @@ export const BadgeStyled = styled("span", {
         borderColor: "$yellow",
         borderLeftWidth: "5px",
       },
+    },
+    variant: {
+      border: {},
+      theme: {},
     },
   },
   verticalAlign: "middle",

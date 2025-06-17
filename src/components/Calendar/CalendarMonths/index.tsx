@@ -1,9 +1,9 @@
 import dayjs from "dayjs";
 import { useEffect, useState, useMemo, type JSX } from "react";
 
-import { Icons } from "../../../icons";
 import { Stack, Text, Button } from "../../../index";
 import { ICalendarMonths } from "../../../types";
+import Icon from "../../Icon";
 import {
   CalendarContentStyled,
   CalendarHeaderNavigationStyled,
@@ -109,13 +109,13 @@ export default function CalendarMonths({
       <CalendarHeaderStyled>
         <Stack align="center" css={{ gap: "$small" }} direction="row">
           <Button disabled={isPrevYearDisabled} small onClick={() => handleYearNavigation("prev")}>
-            <Icons.CaretUp />
+            <Icon system="CaretUpIcon" />
           </Button>
           <Text as="h6" css={{ margin: 0 }}>
             {currentYear.format("YYYY")}
           </Text>
           <Button disabled={isNextYearDisabled} small onClick={() => handleYearNavigation("next")}>
-            <Icons.CaretDown />
+            <Icon system="CaretDownIcon" />
           </Button>
         </Stack>
 

@@ -1,23 +1,5 @@
-import { fadeIn, fadeOut, keyframes, styled } from "../../stitches.config";
+import { fadeIn, fadeOut, slideInUp, slideOutDown, styled } from "../../stitches.config";
 import { TextStyled } from "../Text/styles";
-
-const slideIn = keyframes({
-  from: {
-    transform: "translateY(100%)",
-  },
-  to: {
-    transform: "translateY(0)",
-  },
-});
-
-const slideOut = keyframes({
-  from: {
-    transform: "translateY(0)",
-  },
-  to: {
-    transform: "translateY(100%)",
-  },
-});
 
 export const DialogStyled = styled("div", {
   display: "inline-block",
@@ -82,11 +64,11 @@ export const DialogCoreStyled = styled("div", {
   variants: {
     animation: {
       false: {
-        animation: `${slideOut} 0.2s ease-in-out`,
+        animation: `${slideOutDown} 0.2s ease-in-out`,
         animationFillMode: "forwards",
       },
       true: {
-        animation: `${slideIn} 0.2s ease-in-out`,
+        animation: `${slideInUp} 0.2s ease-in-out`,
         animationFillMode: "forwards",
       },
     },
@@ -113,7 +95,7 @@ export const DialogHeaderStyled = styled("div", {
 
 export const DialogContentStyled = styled("div", {
   margin: "0 auto",
-  maxWidth: "60rem",
+  maxWidth: "600px",
   padding: "$large $medium",
   paddingBottom: "calc($medium + env(safe-area-inset-bottom))",
   width: "100%",

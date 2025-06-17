@@ -1,26 +1,4 @@
-import { fadeIn, fadeOut, keyframes, styled } from "../../stitches.config";
-
-const slideIn = keyframes({
-  from: {
-    opacity: 0,
-    transform: "translate(-50%, -50%) scale(0.95)",
-  },
-  to: {
-    opacity: 1,
-    transform: "translate(-50%, -50%) scale(1)",
-  },
-});
-
-const slideOut = keyframes({
-  from: {
-    opacity: 1,
-    transform: "translate(-50%, -50%) scale(1)",
-  },
-  to: {
-    opacity: 0,
-    transform: "translate(-50%, -50%) scale(0.95)",
-  },
-});
+import { fadeIn, fadeOut, slideInScale, slideOutScale, styled } from "../../stitches.config";
 
 export const ModalStyled = styled("div", {
   display: "inline-flex",
@@ -71,7 +49,7 @@ export const ModalGroupStyled = styled("div", {
   boxShadow: "$large",
   left: "50%",
   maxHeight: "80vh",
-  maxWidth: "60rem",
+  maxWidth: "600px",
   minHeight: "auto",
   overflowX: "hidden",
   overflowY: "auto",
@@ -87,17 +65,17 @@ export const ModalGroupStyled = styled("div", {
   variants: {
     animation: {
       false: {
-        animation: `${slideOut} 200ms ease-out`,
+        animation: `${slideOutScale} 200ms ease-out`,
         animationFillMode: "forwards",
       },
       true: {
-        animation: `${slideIn} 200ms ease-out`,
+        animation: `${slideInScale} 200ms ease-out`,
         animationFillMode: "forwards",
       },
     },
     small: {
       true: {
-        maxWidth: "28rem",
+        maxWidth: "280px",
       },
     },
   },

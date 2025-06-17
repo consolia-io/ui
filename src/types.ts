@@ -13,9 +13,8 @@ import {
 import { Toaster } from "react-hot-toast";
 
 import { TextSizes } from "./components/Text/styles";
-import { theme } from "./stitches.config";
-
-type IThemeSpacing = keyof typeof theme.space;
+import { systemIcons } from "./icons";
+import { spacings, theme } from "./stitches.config";
 
 type InferToastComponentProps<T extends ElementType> =
   T extends ComponentType<infer U>
@@ -73,7 +72,7 @@ export interface IBadge {
   /** Position of the icon relative to the content */
   iconPosition?: "left" | "right";
   /** Inline spacing around the badge */
-  inline?: IThemeSpacing | "auto";
+  inline?: keyof typeof spacings | "auto";
   /** Whether the badge should appear as a clickable link */
   link?: boolean;
   /** Whether to show a loading state */
@@ -84,6 +83,8 @@ export interface IBadge {
   small?: boolean;
   /** Visual theme/color scheme for the badge */
   theme?: "default" | "solid" | "orange" | "purple" | "yellow" | "blue";
+  /** Badge display variant - border adds left border, theme fills with color */
+  variant?: "border" | "theme";
 }
 
 /**
@@ -154,6 +155,8 @@ export interface IBox {
     | "minimal"
     | "solid"
     | "gradient";
+  /** Add colored left border */
+  border?: "default" | "orange" | "purple" | "yellow" | "blue" | "solid";
 }
 
 /**
@@ -178,7 +181,7 @@ export interface IButton extends ComponentPropsWithoutRef<"button"> {
   /** Position of the icon relative to the text */
   iconPosition?: "left" | "right";
   /** Inline spacing around the button */
-  inline?: IThemeSpacing | "auto";
+  inline?: keyof typeof spacings | "auto";
   /** Whether to show a loading state with spinner */
   loading?: boolean;
   /** Whether to render a smaller version of the button */
@@ -341,11 +344,11 @@ export interface IModal {
  */
 export interface IDivider {
   /** Bottom margin/spacing */
-  bottom?: IThemeSpacing;
+  bottom?: keyof typeof spacings;
   /** Custom CSS styles */
   css?: CSS;
   /** Top margin/spacing */
-  top?: IThemeSpacing;
+  top?: keyof typeof spacings;
 }
 
 /**
@@ -807,57 +810,65 @@ export interface IStack {
   /** HTML element type to render as */
   as?: keyof JSX.IntrinsicElements;
   /** Bottom margin/spacing */
-  bottom?: IThemeSpacing;
+  bottom?: keyof typeof spacings;
   /** Content to display in the stack */
-  children: ReactNode;
+  children?: ReactNode;
   /** CSS class name */
   className?: string;
-  /** Whether to collapse on duo screens */
-  collapseduo?: boolean;
   /** Custom CSS styles */
   css?: CSS;
   /** Direction of the flex layout */
   direction?: "row" | "column";
-  /** Flex alignment for items */
-  flex?: CSSProperties["alignItems"];
-  /** Whether to use flex layout on duo screens */
-  flexduo?: boolean;
-  /** HTML id attribute */
-  id?: string;
-  /** Whether to invert colors */
-  inverted?: boolean;
+  /** Whether to remove text margins and align items */
+  inline?: boolean;
   /** Whether to use minimal styling */
   minimal?: boolean;
-  /** Whether to hide when printing */
-  noPrint?: boolean;
   /** Default offset percentage */
   offset?: number;
-  /** Desktop offset percentage */
-  offsetDesktop?: number;
-  /** Laptop offset percentage */
-  offsetLaptop?: number;
+  /** Responsive offset percentages */
+  offsetResponsive?: {
+    desktop?: number;
+    laptop?: number;
+    phone?: number;
+    tablet?: number;
+    wide?: number;
+  };
   /** Click handler for the stack */
-  onClick?: MouseEventHandler<HTMLDivElement>;
-  /** Phone offset percentage */
-  offsetPhone?: number;
-  /** Tablet offset percentage */
-  offsetTablet?: number;
-  /** Wide screen offset percentage */
-  offsetWide?: number;
+  onClick?: () => void;
   /** Top margin/spacing */
-  top?: IThemeSpacing;
+  top?: keyof typeof spacings;
   /** Default width percentage */
   width?: number;
-  /** Desktop width percentage */
-  widthDesktop?: number;
-  /** Laptop width percentage */
-  widthLaptop?: number;
-  /** Phone width percentage */
-  widthPhone?: number;
-  /** Tablet width percentage */
-  widthTablet?: number;
-  /** Wide screen width percentage */
-  widthWide?: number;
+  /** Responsive width percentages */
+  widthResponsive?: {
+    desktop?: number;
+    laptop?: number;
+    phone?: number;
+    tablet?: number;
+    wide?: number;
+  };
+  /** Main axis alignment */
+  justify?: CSSProperties["justifyContent"];
+  /** Gap between items */
+  gap?: keyof typeof spacings;
+  /** Whether to wrap items */
+  wrap?: boolean;
+  /** HTML id attribute */
+  id?: string;
+  /** Whether to use dark theme */
+  inverted?: boolean;
+  /** Cross-axis alignment */
+  alignItems?: CSSProperties["alignItems"];
+  /** Content alignment */
+  alignContent?: CSSProperties["alignContent"];
+  /** Flex basis */
+  basis?: CSSProperties["flexBasis"];
+  /** Flex grow */
+  grow?: CSSProperties["flexGrow"];
+  /** Flex shrink */
+  shrink?: CSSProperties["flexShrink"];
+  /** Flex order */
+  order?: CSSProperties["order"];
 }
 
 /**
@@ -926,7 +937,7 @@ export interface IText extends ComponentPropsWithRef<"p"> {
   /** Whether to use balanced text wrapping */
   balanced?: boolean;
   /** Bottom margin/spacing */
-  bottom?: IThemeSpacing;
+  bottom?: keyof typeof spacings;
   /** Text content */
   children: ReactNode;
   /** Custom CSS styles */
@@ -936,9 +947,11 @@ export interface IText extends ComponentPropsWithRef<"p"> {
   /** URL for link functionality */
   href?: string;
   /** Inline spacing around the text */
-  inline?: IThemeSpacing | "auto";
+  inline?: keyof typeof spacings | "auto";
   /** Link styling variant */
   link?: "minimal" | "default";
+  /** Whether to use muted styling with default opacity */
+  muted?: boolean;
   /** Override the default size from 'as' prop */
   override?: keyof typeof TextSizes;
   /** Relationship attribute for links */
@@ -946,7 +959,9 @@ export interface IText extends ComponentPropsWithRef<"p"> {
   /** Link target */
   target?: "_blank" | "_self";
   /** Top margin/spacing */
-  top?: IThemeSpacing;
+  top?: keyof typeof spacings;
+  /** Number of lines to truncate text to (1-4) */
+  truncate?: 1 | 2 | 3 | 4;
 }
 
 /**
@@ -1015,7 +1030,7 @@ export interface IView {
   /** HTML element type to render as */
   as?: keyof JSX.IntrinsicElements;
   /** Bottom margin/spacing */
-  bottom?: IThemeSpacing;
+  bottom?: keyof typeof spacings;
   /** Content to display in the view */
   children: ReactNode;
   /** Whether to use container width constraints */
@@ -1031,7 +1046,7 @@ export interface IView {
   /** Whether to hide when printing */
   noPrint?: boolean;
   /** Top margin/spacing */
-  top?: IThemeSpacing;
+  top?: keyof typeof spacings;
 }
 
 /**
@@ -1052,26 +1067,30 @@ export interface IPortal {
 }
 
 /**
- * Icon component props - wrapper for icon elements with consistent sizing and theming
+ * Icon component props - wrapper for Phosphor icons with consistent styling
  *
  * @example
  * ```tsx
- * <Icon forceColor="blue" forceSize={24} inline="small">
- *   <PhosphorIcon />
- * </Icon>
+ * // Using system icons (recommended for internal use)
+ * <Icon system="ArrowRightIcon" forceColor="blue" forceSize={24} inline="small" />
+ *
+ * // Using any Phosphor icon (for client use)
+ * <Icon phosphor="AnyPhosphorIcon" forceColor="blue" forceSize={24} inline="small" />
  * ```
  */
 export interface IIcon {
-  /** Icon element to render */
-  children: ReactNode;
   /** Custom CSS styles */
   css?: CSS;
   /** Force a specific color from theme */
-  forceColor?: keyof typeof theme.colors;
+  forceColor?: string;
   /** Force a specific size in pixels */
   forceSize?: number;
   /** Inline spacing around the icon */
-  inline?: IThemeSpacing | "auto";
+  inline?: keyof typeof spacings;
+  /** System icon name (for internal use) */
+  system?: (typeof systemIcons)[number];
+  /** Any Phosphor icon name (for client use) */
+  phosphor?: keyof typeof import("@phosphor-icons/react");
 }
 
 /**

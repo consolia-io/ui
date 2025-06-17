@@ -1,4 +1,4 @@
-import { breakpoints, darkTheme, globalCss, styled, theme } from "../../stitches.config";
+import { darkTheme, globalCss, styled, theme } from "../../stitches.config";
 
 export const ProviderStyled = styled("main", {
   minHeight: "100vh",
@@ -11,7 +11,7 @@ export const ToastStyled = styled("div", {
   },
   cursor: "pointer",
   marginBottom: "$small",
-  maxWidth: "60rem",
+  maxWidth: "600px",
   padding: "$smaller $small",
   phone: {
     "&:last-child": {
@@ -25,7 +25,6 @@ export const ToastStyled = styled("div", {
   },
 
   pointerEvents: "all",
-
   width: "fit-content",
 });
 
@@ -75,11 +74,12 @@ export const providerReset = globalCss({
     backgroundColor: theme.colors.background,
     color: theme.colors.text,
     fontFamily: theme.fonts.default,
+    fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
+    fontOpticalSizing: "auto",
     fontSize: theme.fontSizes.default,
     fontWeight: "normal",
     lineHeight: theme.lineHeights.default,
     margin: 0,
-
     minHeight: "100vh",
     MozOsxFontSmoothing: "grayscale",
     overflowX: "hidden",
@@ -95,33 +95,19 @@ export const providerReset = globalCss({
     },
     cursor: "pointer",
     fontFamily: "inherit",
-
     fontSize: "inherit",
   },
 
   "h1, h2, h3, h4, h5, h6": {
+    fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
     fontWeight: "bold",
     lineHeight: theme.lineHeights.small,
     margin: 0,
+    textRendering: "optimizeLegibility",
   },
 
   html: {
-    [breakpoints.phoneX]: {
-      fontSize: "60.5%",
-    },
-    [breakpoints.special.micro]: {
-      fontSize: "57.5%",
-    },
-    [breakpoints.special.print]: {
-      fontSize: "62.5%",
-    },
-    [breakpoints.tabletX]: {
-      fontSize: "61.5%",
-    },
-    [breakpoints.wide]: {
-      fontSize: "68.5%",
-    },
-    fontSize: "62.5%",
+    fontSize: "100%",
     scrollBehavior: "smooth",
   },
 
@@ -136,7 +122,6 @@ export const providerReset = globalCss({
       opacity: theme.opacities.light,
     },
     fontFamily: "inherit",
-
     fontSize: "inherit",
   },
 
@@ -147,7 +132,6 @@ export const providerReset = globalCss({
 
   svg: {
     alignSelf: "center",
-    fill: "currentColor",
     verticalAlign: "middle",
   },
 

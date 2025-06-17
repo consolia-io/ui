@@ -1,18 +1,33 @@
-import type { JSX } from "react";
+import type { IconProps } from "@phosphor-icons/react";
+
+import * as PhosphorIcons from "@phosphor-icons/react";
+import { type ComponentType, type JSX } from "react";
 
 import { IIcon } from "../../types";
 import { IconStyled } from "./styles";
 
 export const BASE_SIZE = 21;
 
-export default function Icon({ children, css, forceColor, forceSize, inline }: IIcon): JSX.Element {
+export default function Icon({
+  css,
+  forceColor,
+  forceSize,
+  inline,
+  phosphor,
+  system,
+}: IIcon): JSX.Element {
+  const iconName = system || phosphor;
+
+  if (!iconName) return <> </>;
+
+  const Icon = PhosphorIcons[iconName as keyof typeof PhosphorIcons] as ComponentType<IconProps>;
+
   return (
     <IconStyled
       css={{
         ...(inline && {
           display: "inline-flex",
           marginRight: inline === "auto" ? "auto" : `$${inline}`,
-          verticalAlign: "middle",
         }),
         ...(forceColor && {
           svg: {
@@ -26,9 +41,8 @@ export default function Icon({ children, css, forceColor, forceSize, inline }: I
           },
         }),
         ...css,
-      }}
-      suppressHydrationWarning>
-      {children}
+      }}>
+      <Icon weight="duotone" />
     </IconStyled>
   );
 }

@@ -1,9 +1,9 @@
 import { ChangeEvent, useState, type JSX } from "react";
 import toast from "react-hot-toast";
 
-import { Icons } from "../../icons";
 import { Badge, Button, Loading, useBreakpoints } from "../../index";
 import { IField } from "../../types";
+import Icon from "../Icon";
 import {
   FieldStyled,
   FieldAreaStyled,
@@ -109,29 +109,29 @@ export default function Field({
             {copy && (
               <Button
                 disabled={isCopied || disabled}
-                icon={!isPhone ? <Icons.ClipboardText /> : undefined}
+                icon={!isPhone ? <Icon system="ClipboardTextIcon" /> : undefined}
                 small
                 onClick={() => handleCopy()}>
-                {!isPhone ? "Copy" : <Icons.ClipboardText />}
+                {!isPhone ? "Copy" : <Icon system="ClipboardTextIcon" />}
               </Button>
             )}
 
             {reset && inputValue && (
               <Button disabled={disabled} small onClick={() => handleReset()}>
-                <Icons.X />
+                <Icon system="XCircleIcon" />
               </Button>
             )}
 
             {submit && (
               <Button
                 disabled={isSubmitDisabled}
-                icon={!isPhone ? <Icons.ArrowRight /> : undefined}
+                icon={!isPhone ? <Icon system="ArrowRightIcon" /> : undefined}
                 iconPosition="right"
                 small
                 theme={isSubmitValid ? "solid" : "default"}
                 type="submit"
                 onClick={() => handleSubmit()}>
-                {!isPhone ? submit : <Icons.ArrowRight />}
+                {!isPhone ? submit : <Icon system="ArrowRightIcon" />}
               </Button>
             )}
           </FieldFunctionStyled>
@@ -141,17 +141,23 @@ export default function Field({
       {hasCallback && (
         <FieldCallbackStyled>
           {error && (
-            <Badge icon={!errorMessage ? <Icons.Warning /> : undefined} theme="orange">
+            <Badge
+              icon={!errorMessage ? <Icon system="WarningCircleIcon" /> : undefined}
+              theme="orange">
               {errorMessage || "Error"}
             </Badge>
           )}
           {success && (
-            <Badge icon={!successMessage ? <Icons.CheckCircle /> : undefined} theme="blue">
+            <Badge
+              icon={!successMessage ? <Icon system="CheckCircleIcon" /> : undefined}
+              theme="blue">
               {successMessage || "Success"}
             </Badge>
           )}
           {warning && (
-            <Badge icon={!warningMessage ? <Icons.Warning /> : undefined} theme="yellow">
+            <Badge
+              icon={!warningMessage ? <Icon system="WarningCircleIcon" /> : undefined}
+              theme="yellow">
               {warningMessage || "Warning"}
             </Badge>
           )}

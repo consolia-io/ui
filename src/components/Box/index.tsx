@@ -1,9 +1,9 @@
 import { useState, type JSX } from "react";
 
-import { Icons } from "../../icons";
 import { Button, Image, Loading } from "../../index";
 import { IBox } from "../../types";
 import Gradient from "../Gradient";
+import Icon from "../Icon";
 import {
   BoxExitStyled,
   BoxExpanderTrigger,
@@ -16,6 +16,7 @@ import {
 } from "./styles";
 
 export default function Box({
+  border,
   children,
   closable,
   css,
@@ -58,6 +59,7 @@ export default function Box({
     <BoxStyled
       animation={!isOpen}
       as={cta ? "a" : "div"}
+      border={border}
       collapsed={expandable && !isExpanded}
       css={{
         ...(expandable && expandableHeight && !isExpanded && { maxHeight: expandableHeight }),
@@ -142,9 +144,9 @@ export default function Box({
           <Button
             icon={
               isExpanded ? (
-                <Icons.ArrowsInSimple weight="regular" />
+                <Icon system="ArrowsInSimpleIcon" />
               ) : (
-                <Icons.ArrowsOutSimple weight="regular" />
+                <Icon system="ArrowsOutSimpleIcon" />
               )
             }
             small
@@ -158,7 +160,7 @@ export default function Box({
       {closable && !cta && (
         <BoxExitStyled onClick={() => handleClose()}>
           <Button small theme="minimal">
-            <Icons.X />
+            <Icon system="XCircleIcon" />
           </Button>
         </BoxExitStyled>
       )}

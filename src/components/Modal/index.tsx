@@ -1,8 +1,8 @@
 import { useRef, useState, type JSX, type MouseEvent } from "react";
 
-import { Icons } from "../../icons";
 import { Button, useEventListener, useOutsideClick, useScrollLock } from "../../index";
 import { IModal } from "../../types";
+import Icon from "../Icon";
 import Portal from "../Provider/ProviderPortal";
 import {
   ModalOverlayStyled,
@@ -95,7 +95,11 @@ export default function Modal({
               small={small}>
               <ModalHeaderStyled>
                 <span>{title}</span>
-                <Button icon={<Icons.X />} small theme="minimal" onClick={() => handleClose()}>
+                <Button
+                  icon={<Icon system="XCircleIcon" />}
+                  small
+                  theme="minimal"
+                  onClick={() => handleClose()}>
                   Close
                 </Button>
               </ModalHeaderStyled>

@@ -1,8 +1,8 @@
 import { useRef, useState, type JSX } from "react";
 
-import { Icons } from "../../icons";
 import { Button, Logo, useEventListener, useOutsideClick, useScrollLock } from "../../index";
 import { IMenu } from "../../types";
+import Icon from "../Icon";
 import {
   MenuGroupStyled,
   MenuItemStyled,
@@ -97,7 +97,7 @@ export default function Menu({
             <MenuHeaderStyled>
               <Logo />
 
-              <Button icon={<Icons.X />} small onClick={() => handleClose()}>
+              <Button icon={<Icon system="XCircleIcon" />} small onClick={() => handleClose()}>
                 Close
               </Button>
             </MenuHeaderStyled>
@@ -113,7 +113,7 @@ export default function Menu({
                   </MenuItemContentStyled>
                   {option.sub && (
                     <MenuIconStyled open={subMenu === option.value}>
-                      <Icons.CaretDown />
+                      <Icon system="CaretDownIcon" />
                     </MenuIconStyled>
                   )}
                 </MenuItemStyled>

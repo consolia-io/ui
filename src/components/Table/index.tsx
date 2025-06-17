@@ -1,9 +1,9 @@
 import { sort } from "fast-sort";
 import { useState, useCallback, useMemo, Fragment, useRef, useEffect, type JSX } from "react";
 
-import { Icons } from "../../icons";
 import { Loading, Stack, Text, Button, Badge, Box } from "../../index";
 import { type ITable } from "../../types";
+import Icon from "../Icon";
 import {
   TableStitches,
   TableCoreStitches,
@@ -19,6 +19,7 @@ import {
   TableMobileRow,
   TableMobileLabel,
   TableMobileValue,
+  TableEmptyStateCell,
 } from "./styles";
 
 export default function Table({
@@ -114,11 +115,14 @@ export default function Table({
     });
   }, []);
 
-  function getSortButtonOpacity(colKey: string): string {
-    return sortColumn === colKey ? "$default" : "$light";
-  }
+  const getSortButtonOpacity = useCallback(
+    (colKey: string): string => {
+      return sortColumn === colKey ? "$default" : "$light";
+    },
+    [sortColumn],
+  );
 
-  function getLoadingContent(): JSX.Element {
+  const renderLoadingState = useCallback((): JSX.Element => {
     return (
       <Stack css={{ alignItems: "center", gap: "$medium" }}>
         <Loading />
@@ -127,18 +131,27 @@ export default function Table({
         </Text>
       </Stack>
     );
-  }
+  }, []);
 
-  function getErrorContent(): JSX.Element {
+  const renderErrorState = useCallback((): JSX.Element => {
     return (
       <Stack css={{ alignItems: "center", gap: "$small" }}>
-        <Badge icon={<Icons.Warning />} theme="orange">
+        <Badge icon={<Icon system="WarningCircleIcon" />} theme="orange">
           {error}
         </Badge>
       </Stack>
     );
-  }
+  }, [error]);
 
+  const renderEmptyState = useCallback((): JSX.Element => {
+    return (
+      <Text as="small" css={{ opacity: "$light" }}>
+        No data available
+      </Text>
+    );
+  }, []);
+
+  // Keyboard navigation effect
   useEffect(() => {
     if (!kbd || !pagination) return;
 
@@ -173,33 +186,35 @@ export default function Table({
                 {row.cells[Object.keys(row.cells)[0]]}
               </CellComponent>
             ) : (
-              <>
-                {memoizedColumns.map((col) => (
-                  <CellComponent
-                    key={`${row.id}-${col.key}`}
-                    align={col.align}
-                    css={{ width: col.width || `calc(100% / ${memoizedColumns.length})` }}
-                    isAction={col.key === "actions"}>
-                    <TableCellBlock
-                      css={{
-                        justifyContent: col.key === "actions" ? "flex-end" : "flex-start",
-                      }}>
-                      {col.key === "actions" && hasSubRows && !isSubRow && (
-                        <Button
-                          small
-                          theme="minimal"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            toggleRow(row.id);
-                          }}>
-                          {isExpanded ? <Icons.CaretDown /> : <Icons.CaretRight />}
-                        </Button>
-                      )}
-                      {row.cells[col.key]}
-                    </TableCellBlock>
-                  </CellComponent>
-                ))}
-              </>
+              memoizedColumns.map((col) => (
+                <CellComponent
+                  key={`${row.id}-${col.key}`}
+                  align={col.align}
+                  css={{ width: col.width || `calc(100% / ${memoizedColumns.length})` }}
+                  isAction={col.key === "actions"}>
+                  <TableCellBlock
+                    css={{
+                      justifyContent: col.key === "actions" ? "flex-end" : "flex-start",
+                    }}>
+                    {col.key === "actions" && hasSubRows && !isSubRow && (
+                      <Button
+                        small
+                        theme="minimal"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleRow(row.id);
+                        }}>
+                        {isExpanded ? (
+                          <Icon system="CaretDownIcon" />
+                        ) : (
+                          <Icon system="CaretRightIcon" />
+                        )}
+                      </Button>
+                    )}
+                    {row.cells[col.key]}
+                  </TableCellBlock>
+                </CellComponent>
+              ))
             )}
           </RowComponent>
           {isExpanded && hasSubRows && row.subRows?.map((subRow) => renderDesktopRow(subRow, true))}
@@ -231,7 +246,6 @@ export default function Table({
                     </TableMobileRow>
                   ))}
 
-                {/* Actions row - separate from other content */}
                 {(row.cells.actions || (hasSubRows && !isSubRow)) && (
                   <TableMobileRow isActions>
                     <TableMobileValue isActions>
@@ -243,7 +257,11 @@ export default function Table({
                             e.stopPropagation();
                             toggleRow(row.id);
                           }}>
-                          {isExpanded ? <Icons.CaretDown /> : <Icons.CaretRight />}
+                          {isExpanded ? (
+                            <Icon system="CaretDownIcon" />
+                          ) : (
+                            <Icon system="CaretRightIcon" />
+                          )}
                         </Button>
                       )}
                       {row.cells.actions}
@@ -290,12 +308,12 @@ export default function Table({
                       onClick={() => handleSort(col.key)}>
                       {sortColumn === col.key ? (
                         sortDirection === "asc" ? (
-                          <Icons.SortAscending />
+                          <Icon system="SortAscendingIcon" />
                         ) : (
-                          <Icons.SortDescending />
+                          <Icon system="SortDescendingIcon" />
                         )
                       ) : (
-                        <Icons.SortAscending />
+                        <Icon system="SortAscendingIcon" />
                       )}
                     </Button>
                   )}
@@ -307,25 +325,23 @@ export default function Table({
         <tbody>
           {error ? (
             <tr>
-              <td colSpan={columns.length} style={{ padding: "4rem 0", textAlign: "center" }}>
-                {getErrorContent()}
-              </td>
+              <TableEmptyStateCell colSpan={columns.length}>
+                {renderErrorState()}
+              </TableEmptyStateCell>
             </tr>
           ) : loading ? (
             <tr>
-              <td colSpan={columns.length} style={{ padding: "4rem 0", textAlign: "center" }}>
-                {getLoadingContent()}
-              </td>
+              <TableEmptyStateCell colSpan={columns.length}>
+                {renderLoadingState()}
+              </TableEmptyStateCell>
             </tr>
           ) : hasData ? (
             paginatedRows.map((row) => renderDesktopRow(row))
           ) : (
             <tr>
-              <td colSpan={columns.length} style={{ padding: "4rem 0", textAlign: "center" }}>
-                <Text as="small" css={{ opacity: "$light" }}>
-                  No data available
-                </Text>
-              </td>
+              <TableEmptyStateCell colSpan={columns.length}>
+                {renderEmptyState()}
+              </TableEmptyStateCell>
             </tr>
           )}
         </tbody>
@@ -336,13 +352,13 @@ export default function Table({
         {error ? (
           <Box>
             <Stack css={{ alignItems: "center", gap: "$small", textAlign: "center" }}>
-              {getErrorContent()}
+              {renderErrorState()}
             </Stack>
           </Box>
         ) : loading ? (
           <Box>
             <Stack css={{ alignItems: "center", gap: "$medium", textAlign: "center" }}>
-              {getLoadingContent()}
+              {renderLoadingState()}
             </Stack>
           </Box>
         ) : hasData ? (
@@ -350,9 +366,7 @@ export default function Table({
         ) : (
           <Box>
             <Stack css={{ alignItems: "center", gap: "$medium", textAlign: "center" }}>
-              <Text as="small" css={{ opacity: "$light" }}>
-                No data available
-              </Text>
+              {renderEmptyState()}
             </Stack>
           </Box>
         )}
@@ -366,7 +380,7 @@ export default function Table({
           <Stack>
             <Button
               disabled={isFirstPage}
-              icon={<Icons.ArrowLeft />}
+              icon={<Icon system="ArrowLeftIcon" />}
               inline="small"
               small
               onClick={handlePrevPage}>
@@ -374,7 +388,7 @@ export default function Table({
             </Button>
             <Button
               disabled={isLastPage}
-              icon={<Icons.ArrowRight />}
+              icon={<Icon system="ArrowRightIcon" />}
               iconPosition="right"
               small
               onClick={handleNextPage}>

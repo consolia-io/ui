@@ -35,6 +35,43 @@ export const BoxStyled = styled("article", {
         animationFillMode: "forwards",
       },
     },
+    border: {
+      blue: {
+        backgroundColor: "$background",
+        borderColor: "$border",
+        borderTopColor: "$blue",
+        borderTopWidth: "8px",
+      },
+      default: {
+        backgroundColor: "$background",
+        borderColor: "$border",
+        borderTopWidth: "8px",
+      },
+      orange: {
+        backgroundColor: "$background",
+        borderColor: "$border",
+        borderTopColor: "$orange",
+        borderTopWidth: "8px",
+      },
+      purple: {
+        backgroundColor: "$background",
+        borderColor: "$border",
+        borderTopColor: "$purple",
+        borderTopWidth: "8px",
+      },
+      solid: {
+        backgroundColor: "$background",
+        borderColor: "$border",
+        borderTopColor: "$text",
+        borderTopWidth: "8px",
+      },
+      yellow: {
+        backgroundColor: "$background",
+        borderColor: "$border",
+        borderTopColor: "$yellow",
+        borderTopWidth: "8px",
+      },
+    },
     collapsed: {
       true: {
         "&::after": {
@@ -48,6 +85,7 @@ export const BoxStyled = styled("article", {
         },
       },
     },
+
     footer: {
       true: {
         display: "flex",
@@ -55,7 +93,6 @@ export const BoxStyled = styled("article", {
         justifyContent: "space-between",
       },
     },
-
     hover: {
       true: {
         "&:hover": {

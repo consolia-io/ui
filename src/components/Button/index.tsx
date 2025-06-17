@@ -1,8 +1,8 @@
 import type { JSX } from "react";
 
-import { Icons } from "../../icons";
 import { Loading } from "../../index";
 import { IButton } from "../../types";
+import Icon from "../Icon";
 import { ButtonIconStyled, ButtonLoadingStyled, ButtonStyled } from "./styles";
 
 export default function Button({
@@ -55,7 +55,7 @@ export default function Button({
 
       {external && (
         <ButtonIconStyled align="right">
-          <Icons.ArrowUpRight weight="regular" />
+          <Icon system="ArrowUpRightIcon" />
         </ButtonIconStyled>
       )}
     </ButtonStyled>

@@ -54,6 +54,7 @@ export default function useFloatingUI(): {
     }).then(({ x, y }: ComputePositionReturn) => {
       if (!contentRef.current || !triggerRef.current) return;
 
+      // Set position
       contentRef.current.style.position = strategy;
       contentRef.current.style.left = `${Math.round(x)}px`;
       contentRef.current.style.top = `${Math.round(y)}px`;
@@ -62,7 +63,15 @@ export default function useFloatingUI(): {
 
   const prepareFloatingElement = (element: HTMLDivElement): void => {
     if (!element) return;
+    // Ensure element is properly positioned for floating UI
     element.style.position = "fixed";
+    element.style.top = "0";
+    element.style.left = "0";
+    // Reset any conflicting transforms
+    element.style.transform = "";
+    // Ensure element has proper display to prevent size calculation issues
+    element.style.visibility = "hidden";
+    element.style.display = "block";
   };
 
   useEffect(() => {
@@ -77,8 +86,15 @@ export default function useFloatingUI(): {
 
     prepareFloatingElement(contentRef.current);
 
-    updatePosition();
+    // Initial position calculation with a small delay to ensure DOM is ready
+    setTimeout(() => {
+      if (contentRef.current) {
+        contentRef.current.style.visibility = "visible";
+        updatePosition();
+      }
+    }, 0);
 
+    // Set up auto-update for dynamic positioning
     cleanupRef.current = autoUpdate(triggerRef.current, contentRef.current, updatePosition, {
       ancestorResize: true,
       ancestorScroll: true,
@@ -105,12 +121,12 @@ export default function useFloatingUI(): {
   function handleOpen(): void {
     setIsMounted(true);
     setIsOpen(true);
-    setTimeout(updatePosition, 10);
   }
 
   function handleClose(): void {
     setIsOpen(false);
-    setTimeout(() => setIsMounted(false), 150);
+    // Match animation duration for smooth close
+    setTimeout(() => setIsMounted(false), 200);
   }
 
   function handleClick(): void {

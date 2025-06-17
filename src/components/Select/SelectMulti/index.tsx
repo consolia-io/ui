@@ -1,7 +1,6 @@
 import { useEffect, useState, type JSX } from "react";
 import toast from "react-hot-toast";
 
-import { Icons } from "../../../icons";
 import {
   Input,
   Loading,
@@ -13,6 +12,7 @@ import {
   useWindowDimensions,
 } from "../../../index";
 import { ISelectMulti } from "../../../types";
+import Icon from "../../Icon";
 import {
   SelectStyled,
   SelectTriggerStyled,
@@ -192,8 +192,8 @@ export default function SelectMulti({
           css={{
             height: height || "auto",
             maxHeight: windowHeight < 700 ? "50vh" : "70vh",
-            maxWidth: width || "50rem",
-            minWidth: width || filter ? "20rem" : "12.5rem",
+            maxWidth: width || "500px",
+            minWidth: width || filter ? "200px" : "125px",
             phone: {
               maxWidth: "100%",
             },
@@ -248,7 +248,7 @@ export default function SelectMulti({
               onMouseOver={() => handleResetMouseOver()}>
               Reset
               <SelectIconStyled align="right">
-                <Icons.X />
+                <Icon system="XCircleIcon" />
               </SelectIconStyled>
             </SelectItemStyled>
           )}

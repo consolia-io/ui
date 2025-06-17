@@ -2,10 +2,10 @@
 import { ChangeEvent, useRef, useState, type JSX } from "react";
 import toast from "react-hot-toast";
 
-import { Icons } from "../../icons";
 import { IUpload } from "../../types";
 import Badge from "../Badge";
 import Button from "../Button";
+import Icon from "../Icon";
 import Loading from "../Loading";
 import Text from "../Text";
 import {
@@ -119,11 +119,11 @@ export default function Upload<T extends boolean>({
           disabled={isDisabled}
           icon={
             isUploadSuccessful ? (
-              <Icons.CheckCircle />
+              <Icon system="CheckCircleIcon" />
             ) : multiple ? (
-              <Icons.Upload />
+              <Icon system="UploadIcon" />
             ) : (
-              <Icons.UploadSimple />
+              <Icon system="UploadSimpleIcon" />
             )
           }
           onClick={() => handleButtonClick()}>
@@ -154,12 +154,16 @@ export default function Upload<T extends boolean>({
       {hasCallback && (
         <UploadCallbackStyled>
           {hasError && (
-            <Badge icon={!errorMessage ? <Icons.Warning /> : undefined} theme="orange">
+            <Badge
+              icon={!errorMessage ? <Icon system="WarningCircleIcon" /> : undefined}
+              theme="orange">
               {errorMessage || "Upload error"}
             </Badge>
           )}
           {success && (
-            <Badge icon={!successMessage ? <Icons.CheckCircle /> : undefined} theme="blue">
+            <Badge
+              icon={!successMessage ? <Icon system="CheckCircleIcon" /> : undefined}
+              theme="blue">
               {successMessage || "Upload successful"}
             </Badge>
           )}

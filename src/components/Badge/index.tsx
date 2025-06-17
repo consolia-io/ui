@@ -1,9 +1,9 @@
 import { useState, type JSX } from "react";
 import { toast } from "react-hot-toast";
 
-import { Icons } from "../../icons";
 import { Loading } from "../../index";
 import { IBadge } from "../../types";
+import Icon from "../Icon";
 import { BadgeIconStyled, BadgeStyled, BadgeLoadingStyled } from "./styles";
 
 export default function Badge({
@@ -20,6 +20,7 @@ export default function Badge({
   onClick,
   small,
   theme = "default",
+  variant = "border",
 }: IBadge): JSX.Element | null {
   const [isOpen, setIsOpen] = useState(true);
   const [isMounted, setIsMounted] = useState(true);
@@ -58,6 +59,7 @@ export default function Badge({
       loading={loading}
       small={small}
       theme={theme}
+      variant={variant}
       onClick={copy ? handleCopy : onClick}>
       {loading && (
         <BadgeLoadingStyled>
@@ -71,7 +73,7 @@ export default function Badge({
 
       {copy && (
         <BadgeIconStyled align={small ? "smallLeft" : "left"} hover>
-          <Icons.ClipboardText />
+          <Icon system="ClipboardTextIcon" />
         </BadgeIconStyled>
       )}
 
@@ -89,7 +91,7 @@ export default function Badge({
             e.stopPropagation();
             handleClose();
           }}>
-          <Icons.X />
+          <Icon system="XCircleIcon" />
         </BadgeIconStyled>
       )}
     </BadgeStyled>

@@ -2,7 +2,6 @@ import { CSS } from "@stitches/react";
 import { Fragment, type JSX } from "react";
 import { Balancer } from "react-wrap-balancer";
 
-import { Icons } from "../../icons";
 import { IText } from "../../types";
 import Icon from "../Icon";
 import { TextStyled } from "./styles";
@@ -18,10 +17,12 @@ export default function Text({
   href,
   inline,
   link,
+  muted,
   override,
   rel,
   target,
   top,
+  truncate,
   ...rest
 }: IText): JSX.Element {
   const TextBalancer = balanced ? Balancer : Fragment;
@@ -56,9 +57,11 @@ export default function Text({
       href={isAnchor ? href : undefined}
       inline={shouldShowInline ? true : false}
       link={link || (isAnchor ? "default" : undefined)}
+      muted={muted}
       rel={isAnchor ? rel : undefined}
       size={as || "p"}
       target={isAnchor ? target : undefined}
+      truncate={truncate}
       {...rest}>
       <TextBalancer>{children}</TextBalancer>
       {isExternalLink && (
@@ -67,9 +70,9 @@ export default function Text({
             marginLeft: "$smallest",
             marginTop: "-$smallest",
           }}
-          forceSize={18}>
-          <Icons.ArrowUpRight weight="regular" />
-        </Icon>
+          forceSize={18}
+          system="ArrowUpRightIcon"
+        />
       )}
     </TextStyled>
   );

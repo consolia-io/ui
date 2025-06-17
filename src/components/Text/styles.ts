@@ -23,40 +23,37 @@ export const TextSizes = {
   },
   h1: {
     fontSize: "$h1",
+    fontWeight: "bold",
     lineHeight: "$small",
     marginBottom: "$medium",
-    phone: {
-      fontSize: "calc($h1 * 0.8)",
-    },
   },
   h2: {
     fontSize: "$h2",
+    fontWeight: "bold",
     lineHeight: "$small",
     marginBottom: "$medium",
-    phone: {
-      fontSize: "calc($h2 * 0.85)",
-    },
   },
   h3: {
     fontSize: "$h3",
+    fontWeight: "bold",
     lineHeight: "$small",
     marginBottom: "$medium",
-    phone: {
-      fontSize: "calc($h3 * 0.9)",
-    },
   },
   h4: {
     fontSize: "$h4",
+    fontWeight: "bold",
     lineHeight: "$small",
     marginBottom: "$medium",
   },
   h5: {
     fontSize: "$h5",
+    fontWeight: "bold",
     lineHeight: "$default",
     marginBottom: "$small",
   },
   h6: {
     fontSize: "$h6",
+    fontWeight: "bold",
     lineHeight: "$default",
     marginBottom: "$small",
   },
@@ -73,6 +70,14 @@ export const TextSizes = {
     fontSize: "$default",
     lineHeight: "$default",
     marginBottom: "$smaller",
+  },
+  micro: {
+    color: "$text",
+    display: "block",
+    fontSize: "$micro",
+    lineHeight: "$default",
+    marginBottom: "$smaller",
+    opacity: "$default",
   },
   ol: {
     listStylePosition: "inside",
@@ -165,7 +170,40 @@ export const TextStyled = styled("div", {
         borderColor: "transparent",
       },
     },
+    muted: {
+      true: {
+        opacity: "$default",
+      },
+    },
     size: TextSizes,
+    truncate: {
+      "1": {
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
+      },
+      "2": {
+        display: "-webkit-box",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        WebkitBoxOrient: "vertical",
+        WebkitLineClamp: 2,
+      },
+      "3": {
+        display: "-webkit-box",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        WebkitBoxOrient: "vertical",
+        WebkitLineClamp: 3,
+      },
+      "4": {
+        display: "-webkit-box",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        WebkitBoxOrient: "vertical",
+        WebkitLineClamp: 4,
+      },
+    },
   },
 
   verticalAlign: "baseline",

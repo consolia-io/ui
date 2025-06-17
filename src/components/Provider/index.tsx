@@ -13,12 +13,6 @@ const tag = `Consolia UI v${packageJson.version}`;
 
 export default function Provider({ children, css, dark }: IProvider): JSX.Element {
   const isDarkMode = Boolean(dark);
-  const themeClassName = isDarkMode ? darkTheme : "";
-
-  const iconContextValue = {
-    size: BASE_SIZE,
-    weight: "duotone" as const,
-  };
 
   providerReset();
 
@@ -28,8 +22,14 @@ export default function Provider({ children, css, dark }: IProvider): JSX.Elemen
   }, []);
 
   return (
-    <ProviderStyled className={themeClassName} css={css}>
-      <IconContext.Provider value={iconContextValue}>
+    <ProviderStyled className={isDarkMode ? darkTheme : ""} css={css}>
+      <IconContext.Provider
+        value={{
+          alignmentBaseline: "middle",
+          height: BASE_SIZE,
+          weight: "duotone",
+          width: BASE_SIZE,
+        }}>
         <ToastController />
         {children}
         <Portal />

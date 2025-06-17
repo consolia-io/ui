@@ -2,7 +2,7 @@ import { fadeIn, fadeOut, styled } from "../../stitches.config";
 import Button from "../Button";
 
 export const CalendarStyled = styled("div", {
-  minWidth: "32rem",
+  minWidth: "320px",
   padding: "$small",
   phone: {
     minWidth: "100%",

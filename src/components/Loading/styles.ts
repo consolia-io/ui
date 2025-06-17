@@ -97,7 +97,7 @@ export const LoadingOverlayStyled = styled("div", {
   color: "$background",
   display: "flex",
   justifyContent: "center",
-  maxWidth: "60rem",
+  maxWidth: "600px",
   padding: "$smallest $small",
   phone: {
     left: "50%",

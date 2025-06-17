@@ -4,123 +4,93 @@ import { CSS } from "@stitches/react";
 
 import { darkTheme } from "../../stitches.config";
 import { IStack } from "../../types";
-import { StackStyled, StackColumnStyled, StackRowStyled } from "./styles";
+import { StackStyled } from "./styles";
 
 export default function Stack({
   align,
+  alignContent,
+  alignItems,
   as,
+  basis,
   bottom,
   children,
   className,
-  collapseduo,
   css,
   direction,
-  flex,
-  flexduo,
+  gap,
+  grow,
   id,
+  inline,
   inverted,
+  justify,
   minimal,
-  noPrint,
-  offset = 0,
-  offsetDesktop,
-  offsetLaptop,
-  offsetPhone,
-  offsetTablet,
-  offsetWide,
+  offset,
+  offsetResponsive,
   onClick,
+  order,
+  shrink,
   top,
-  width = 100,
-  widthDesktop,
-  widthLaptop,
-  widthPhone,
-  widthTablet,
-  widthWide,
+  width,
+  widthResponsive,
+  wrap,
   ...rest
 }: IStack): JSX.Element {
-  function getDynamicStyles(): CSS {
-    return {
-      ...(align && { textAlign: align }),
-      ...(top && { marginTop: 0, paddingTop: `$${top}` }),
-      ...(bottom && { marginBottom: 0, paddingBottom: `$${bottom}` }),
-      ...(noPrint && { print: { display: "none" } }),
-      ...css,
-    };
-  }
+  const dynamicStyles: CSS = {
+    ...(align && { textAlign: align }),
+    ...(alignItems && { alignItems }),
+    ...(alignContent && { alignContent }),
+    ...(justify && { justifyContent: justify }),
+    ...(gap && { gap: `$${gap}` }),
+    ...(wrap && { flexWrap: "wrap" }),
+    ...(basis && { flexBasis: basis }),
+    ...(grow && { flexGrow: grow }),
+    ...(shrink && { flexShrink: shrink }),
+    ...(order && { order }),
+    ...(top && { marginTop: 0, paddingTop: `$${top}` }),
+    ...(bottom && { marginBottom: 0, paddingBottom: `$${bottom}` }),
+    ...css,
+  };
 
-  function getResponsiveColumnStyles(): CSS {
-    return {
-      desktopX: {
-        flex: `0 0 ${widthDesktop || width}%`,
-        marginLeft: `${offsetDesktop || offset}%`,
-        width: `${widthDesktop || width}%`,
-      },
-      laptopX: {
-        flex: `0 0 ${widthLaptop || width}%`,
-        marginLeft: `${offsetLaptop || offset}%`,
-        width: `${widthLaptop || width}%`,
-      },
-      phone: {
-        flex: `0 0 ${widthPhone || 100}%`,
-        marginLeft: `${offsetPhone || 0}%`,
-        width: `${widthPhone || 100}%`,
-      },
-      tabletX: {
-        flex: `0 0 ${widthTablet || width}%`,
-        marginLeft: `${offsetTablet || offset}%`,
-        width: `${widthTablet || width}%`,
-      },
-      wide: {
-        flex: `0 0 ${widthWide || width}%`,
-        marginLeft: `${offsetWide || offset}%`,
-        width: `${widthWide || width}%`,
-      },
-    };
-  }
-
-  const dynamicStyles = getDynamicStyles();
-  const appliedClassName = inverted ? darkTheme.className : className;
-
-  if (direction === "row") {
-    return (
-      <StackRowStyled
-        className={appliedClassName}
-        css={{
-          alignItems: flex || "normal",
-          justifyContent: flex || "normal",
-          ...dynamicStyles,
-        }}
-        id={id}
-        inverted={inverted}
-        onClick={onClick}>
-        {children}
-      </StackRowStyled>
-    );
-  }
-
-  if (direction === "column") {
-    return (
-      <StackColumnStyled
-        className={appliedClassName}
-        css={{
-          ...getResponsiveColumnStyles(),
-          ...dynamicStyles,
-        }}
-        inverted={inverted}
-        minimal={minimal}
-        onClick={onClick}>
-        {children}
-      </StackColumnStyled>
-    );
-  }
+  // Only apply responsive styles if width/offset props are used
+  const hasGridProps =
+    width !== undefined || offset !== undefined || widthResponsive || offsetResponsive;
+  const responsiveStyles: CSS = hasGridProps
+    ? {
+        desktopX: {
+          flex: `0 0 ${widthResponsive?.desktop ?? width ?? 100}%`,
+          marginLeft: `${offsetResponsive?.desktop ?? offset ?? 0}%`,
+        },
+        laptopX: {
+          flex: `0 0 ${widthResponsive?.laptop ?? width ?? 100}%`,
+          marginLeft: `${offsetResponsive?.laptop ?? offset ?? 0}%`,
+        },
+        phone: {
+          flex: `0 0 ${widthResponsive?.phone ?? width ?? 100}%`,
+          marginLeft: `${offsetResponsive?.phone ?? offset ?? 0}%`,
+        },
+        tabletX: {
+          flex: `0 0 ${widthResponsive?.tablet ?? width ?? 100}%`,
+          marginLeft: `${offsetResponsive?.tablet ?? offset ?? 0}%`,
+        },
+        wide: {
+          flex: `0 0 ${widthResponsive?.wide ?? width ?? 100}%`,
+          marginLeft: `${offsetResponsive?.wide ?? offset ?? 0}%`,
+        },
+      }
+    : {};
 
   return (
     <StackStyled
       as={as}
-      className={appliedClassName}
-      collapseduo={collapseduo}
-      css={dynamicStyles}
-      flexduo={flexduo}
-      inverted={inverted}
+      className={inverted ? darkTheme.className : className}
+      css={{
+        ...responsiveStyles,
+        ...dynamicStyles,
+      }}
+      direction={direction}
+      id={id}
+      inline={inline}
+      minimal={minimal}
       onClick={onClick}
       {...rest}>
       {children}

@@ -18,79 +18,72 @@ export const breakpoints = {
   wide: "@media only screen and (min-width: 2201px)",
 };
 
+export const spacings = {
+  auto: "auto",
+  large: "40px",
+  larger: "60px",
+  largest: "100px",
+  medium: "20px",
+  none: "0px",
+  small: "10px",
+  smaller: "5px",
+  smallest: "2.5px",
+};
+
 const defaultTheme = {
   colors: {
     background: "#FFFFFF",
-    blue: "#8fbdd8",
-    blueLight: "#e6eff5",
+    blue: "rgb(143, 189, 216)",
+    blueLight: "rgba(143, 189, 216, 0.3)",
     border: "rgba(50, 30, 90, 0.18)",
     borderLight: "rgba(50, 30, 90, 0.1)",
-    orange: "#E49580",
-    orangeLight: "#fff1ec",
+    orange: "rgb(236, 180, 137)",
+    orangeLight: "rgba(236, 180, 137, 0.3)",
     overlay: "rgba(15, 8, 18, 0.2)",
-    purple: "#a79bd0",
-    purpleLight: "#f5eefa",
+    purple: "rgb(167, 155, 208)",
+    purpleLight: "rgba(167, 155, 208, 0.3)",
     surface: "rgba(50, 30, 90, 0.07)",
     surfaceHover: "rgba(50, 30, 90, 0.12)",
     surfaceLight: "rgba(50, 30, 90, 0.035)",
     text: "rgb(23, 14, 31)",
-    yellow: "#ffbe7a",
-    yellowLight: "#fff7e6",
+    yellow: "rgb(255, 190, 122)",
+    yellowLight: "rgba(255, 190, 122, 0.3)",
   },
   fonts: {
     default: "Untitled Sans, apple-system, sans-serif",
   },
   fontSizes: {
-    default: "1.7rem",
-    h1: "4.7rem",
-    h2: "3.4rem",
-    h3: "2.9rem",
-    h4: "2.4rem",
-    h5: "2.1rem",
-    h6: "1.9",
-    small: "1.45rem",
+    default: "clamp(0.9375rem, 0.875rem + 0.5vw, 1.125rem)",
+    h1: "clamp(2rem, 1.75rem + 1.25vw, 3rem)",
+    h2: "clamp(1.75rem, 1.5rem + 1vw, 2.5rem)",
+    h3: "clamp(1.5rem, 1.25rem + 1vw, 2rem)",
+    h4: "clamp(1.375rem, 1.25rem + 0.5vw, 1.5rem)",
+    h5: "clamp(1.25rem, 1.125rem + 0.5vw, 1.375rem)",
+    h6: "clamp(1.125rem, 1.0625rem + 0.25vw, 1.25rem)",
+    micro: "clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem)",
+    small: "clamp(0.875rem, 0.8125rem + 0.3125vw, 1rem)",
   },
   lineHeights: {
-    default: "1.45",
-    small: "1.1",
+    default: "1.5",
+    small: "1.2",
   },
   opacities: {
     default: 0.75,
     light: 0.55,
   },
   radii: {
-    large: "1.5rem",
-    medium: "0.5rem",
-    small: "0.15rem",
+    large: "24px",
+    medium: "8px",
+    small: "2.5px",
   },
   shadows: {
     large: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
     small: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
   },
-  sizes: {
-    excess: "16rem",
-    large: "4rem",
-    larger: "6rem",
-    largest: "8rem",
-    medium: "2rem",
-    none: "0",
-    small: "1rem",
-    smaller: "0.5rem",
-    smallest: "0.25rem",
-  },
-  space: {
-    excess: "16rem",
-    large: "4rem",
-    larger: "6rem",
-    largest: "8rem",
-    medium: "2rem",
-    none: "0",
-    small: "1rem",
-    smaller: "0.5rem",
-    smallest: "0.25rem",
-  },
+  sizes: spacings,
+  space: spacings,
   transitions: {
-    default: "all 0.5s ease",
+    default: "all 0.35s ease",
   },
   zIndices: {
     menu: 999,
@@ -107,20 +100,20 @@ export const darkTheme = createTheme({
   colors: {
     background: "#170e1f",
     blue: "#6b7db0",
-    blueLight: "#232755",
+    blueLight: "#6b7db0",
     border: "rgba(255, 255, 255, 0.20)",
     borderLight: "rgba(255, 255, 255, 0.12)",
     orange: "rgb(196, 116, 107)",
-    orangeLight: "#3C242E",
+    orangeLight: "#c4746b",
     overlay: "rgba(255, 255, 255, 0.15)",
     purple: "#8b7ba8",
-    purpleLight: "#2E1E43",
+    purpleLight: "#8b7ba8",
     surface: "rgba(245, 243, 255, 0.12)",
     surfaceHover: "rgba(245, 243, 255, 0.18)",
     surfaceLight: "rgba(245, 243, 255, 0.08)",
     text: "#FFFFFF",
     yellow: "rgb(255, 210, 140)",
-    yellowLight: "#38302E",
+    yellowLight: "#ffd28c",
   },
   shadows: {
     large: "0 4px 6px -1px rgba(0, 0, 0, 0.25), 0 2px 4px -1px rgba(0, 0, 0, 0.15)",
@@ -263,5 +256,47 @@ export const fadeOut = keyframes({
   },
   "100%": {
     opacity: 0,
+  },
+});
+
+// Modal/Menu slide animations
+export const slideInScale = keyframes({
+  from: {
+    opacity: 0,
+    transform: "translate(-50%, -50%) scale(0.95)",
+  },
+  to: {
+    opacity: 1,
+    transform: "translate(-50%, -50%) scale(1)",
+  },
+});
+
+export const slideOutScale = keyframes({
+  from: {
+    opacity: 1,
+    transform: "translate(-50%, -50%) scale(1)",
+  },
+  to: {
+    opacity: 0,
+    transform: "translate(-50%, -50%) scale(0.95)",
+  },
+});
+
+// Drawer slide animations
+export const slideInUp = keyframes({
+  from: {
+    transform: "translateY(100%)",
+  },
+  to: {
+    transform: "translateY(0)",
+  },
+});
+
+export const slideOutDown = keyframes({
+  from: {
+    transform: "translateY(0)",
+  },
+  to: {
+    transform: "translateY(100%)",
   },
 });

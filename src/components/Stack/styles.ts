@@ -1,77 +1,39 @@
 import { styled } from "../../stitches.config";
 import { TextStyled } from "../Text/styles";
 
-export const StackStyled = styled("div", {
+const baseStyles = {
   marginBlockEnd: 0,
   marginBlockStart: 0,
+  width: "auto",
+};
 
+export const StackStyled = styled("div", {
+  ...baseStyles,
   variants: {
-    collapseduo: {
-      true: {
-        [`& ${TextStyled}`]: {
-          marginBottom: "0 !important",
-          verticalAlign: "middle",
-        },
-        alignItems: "center",
+    direction: {
+      column: {
         display: "flex",
-        flexWrap: "wrap",
-        gap: "$medium",
-        justifyContent: "space-between",
+        flexDirection: "column",
+        paddingLeft: "$small",
+        paddingRight: "$small",
         phone: {
-          gap: "$small",
+          paddingLeft: "$smaller",
+          paddingRight: "$smaller",
         },
-        verticalAlign: "middle",
+      },
+      row: {
+        display: "flex",
+        flexDirection: "row",
       },
     },
-    flexduo: {
+    inline: {
       true: {
         [`& ${TextStyled}`]: {
           marginBottom: "0 !important",
           verticalAlign: "middle",
         },
-        alignItems: "center",
-        display: "flex",
-        gap: "$small",
-        justifyContent: "space-between",
-        verticalAlign: "middle",
       },
     },
-    inverted: {
-      true: {
-        backgroundColor: "$background",
-        color: "$text",
-      },
-    },
-  },
-});
-
-export const StackRowStyled = styled("div", {
-  display: "flex",
-  flexDirection: "row",
-  flexFlow: "row wrap",
-  variants: {
-    inverted: {
-      true: {
-        backgroundColor: "$background",
-        color: "$text",
-      },
-    },
-  },
-
-  width: "100%",
-});
-
-export const StackColumnStyled = styled("div", {
-  flex: "1 1 auto",
-  maxWidth: "100%",
-  paddingLeft: "$small",
-  paddingRight: "$small",
-  phone: {
-    paddingLeft: "$smaller !important",
-    paddingRight: "$smaller !important",
-  },
-
-  variants: {
     inverted: {
       true: {
         backgroundColor: "$background",
@@ -85,8 +47,6 @@ export const StackColumnStyled = styled("div", {
       },
     },
   },
-
-  width: "100%",
 });
 
 export default StackStyled;

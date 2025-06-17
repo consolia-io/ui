@@ -17,7 +17,7 @@ function HeroBackground(): JSX.Element {
       <Gradient />
       <Logo
         css={{
-          left: "-10rem",
+          left: "-100px",
           opacity: 0.05,
           pointerEvents: "none",
           position: "absolute",

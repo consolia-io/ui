@@ -54,7 +54,7 @@ export default function Nodes({ height, nodes, parent }: INodes): JSX.Element {
 
       {renderConnectingLines()}
 
-      <NodeRow css={{ marginBottom: "$large", marginTop: "auto" }}>
+      <NodeRow>
         <div ref={parentRef}>{parent}</div>
       </NodeRow>
     </NodesContainer>

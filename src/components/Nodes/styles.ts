@@ -15,7 +15,7 @@ export const NodesContainer = styled("div", {
   flexDirection: "column",
   height: "500px",
   overflow: "hidden",
-  padding: "$large 0",
+  padding: "0",
   position: "relative",
   variants: {
     height: {
@@ -31,7 +31,7 @@ export const NodeRow = styled("div", {
   display: "flex",
   gap: "$medium",
   justifyContent: "center",
-  padding: "0 $large",
+  padding: "0",
   position: "relative",
   width: "100%",
   zIndex: 1,
@@ -48,7 +48,7 @@ export const ConnectingLine = styled("path", {
   variants: {
     animate: {
       true: {
-        animation: `${flowDown} 8s steps(1000, end) infinite`,
+        animation: `${flowDown} 5s steps(1000, end) infinite`,
         opacity: "$default",
         strokeDasharray: "100, 950",
       },
