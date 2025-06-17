@@ -2,7 +2,7 @@ import { keyframes, styled } from "../../stitches.config";
 
 const flowDown = keyframes({
   "0%": {
-    strokeDashoffset: 1050,
+    strokeDashoffset: 550,
   },
   "100%": {
     strokeDashoffset: 0,
@@ -14,16 +14,9 @@ export const NodesContainer = styled("div", {
   display: "flex",
   flexDirection: "column",
   height: "500px",
+  justifyContent: "space-between",
   overflow: "hidden",
-  padding: "0",
   position: "relative",
-  variants: {
-    height: {
-      custom: {
-        height: "100%",
-      },
-    },
-  },
   width: "100%",
 });
 
@@ -31,7 +24,6 @@ export const NodeRow = styled("div", {
   display: "flex",
   gap: "$medium",
   justifyContent: "center",
-  padding: "0",
   position: "relative",
   width: "100%",
   zIndex: 1,
@@ -48,9 +40,9 @@ export const ConnectingLine = styled("path", {
   variants: {
     animate: {
       true: {
-        animation: `${flowDown} 5s steps(1000, end) infinite`,
+        animation: `${flowDown} 5s linear infinite`,
         opacity: "$default",
-        strokeDasharray: "100, 950",
+        strokeDasharray: "50, 500",
       },
     },
   },

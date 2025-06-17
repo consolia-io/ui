@@ -46,10 +46,7 @@ export default function Nodes({ height, nodes, parent }: INodes): JSX.Element {
   );
 
   return (
-    <NodesContainer
-      ref={containerRef}
-      css={{ height: containerHeight }}
-      height={hasCustomHeight ? "custom" : undefined}>
+    <NodesContainer ref={containerRef} css={{ height: containerHeight }}>
       <NodeRow>{nodes.map(renderNode)}</NodeRow>
 
       {renderConnectingLines()}
