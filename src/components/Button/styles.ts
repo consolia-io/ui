@@ -100,7 +100,6 @@ export const ButtonStyled = styled("button", {
   verticalAlign: "middle",
   whiteSpace: "nowrap",
   width: "auto",
-  zIndex: 1,
 });
 
 export const ButtonIconStyled = styled("span", {

@@ -11,7 +11,7 @@ export const BASE_SIZE = 21;
 export default function Icon({
   css,
   forceColor,
-  forceSize,
+  forceSize = BASE_SIZE,
   inline,
   phosphor,
   system,

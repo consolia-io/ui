@@ -225,7 +225,6 @@ export const BoxFlexStyled = styled("div", {
   height: "100%",
   position: "relative",
   width: "100%",
-  zIndex: 1,
 });
 
 export const BoxExitStyled = styled("div", {
@@ -246,7 +245,6 @@ export const BoxLoadingStyled = styled("div", {
   position: "absolute",
   right: 0,
   top: 0,
-  zIndex: 1,
 });
 
 export const BoxExpanderTrigger = styled("div", {
@@ -266,6 +264,5 @@ export const BoxExpanderTrigger = styled("div", {
       },
     },
   },
-  zIndex: 1,
 });
 export default BoxStyled;

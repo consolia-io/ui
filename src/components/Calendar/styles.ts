@@ -126,7 +126,6 @@ export const CalendarFooterStyled = styled("div", {
   justifyContent: "space-between",
   padding: "$medium",
   position: "sticky",
-  zIndex: 1,
 });
 
 export const CalendarDescriptionStyled = styled("div", {
