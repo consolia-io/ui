@@ -1,59 +1,98 @@
-import React from "react";
-import * as C from "../../src/index";
-import { Icons } from "../../src/icons";
+import { JSX } from "react";
 
-export default function IconDemo() {
+import * as C from "../../src/index";
+
+export default function IconDemo(): JSX.Element {
   return (
     <C.Stack css={{ 
       display: "grid",
-      gridTemplateColumns: "repeat(2, 1fr)",
-      gap: "$large" 
+      gap: "$large",
+      gridTemplateColumns: "repeat(3, 1fr)" 
     }}>
-      {/* Basic Icons */}
-      <C.Stack>
-        <C.Text as="h4">Basic</C.Text>
-        <C.Stack direction="row" css={{ gap: "$medium", alignItems: "center" }}>
-          <C.Icon><Icons.Circle /></C.Icon>
-          <C.Icon><Icons.CircleDashed /></C.Icon>
-          <C.Icon><Icons.Dot /></C.Icon>
-          <C.Icon><Icons.Hash /></C.Icon>
+      {/* Basic Usage */}
+      <C.Box header={
+        <C.Text as="h4">Basic Usage</C.Text>
+      }>
+        <C.Stack direction="row">
+          <C.Icon system="CircleIcon" />
+          <C.Icon system="CheckCircleIcon" />
+          <C.Icon system="WarningCircleIcon" />
+          <C.Icon system="XCircleIcon" />
         </C.Stack>
-      </C.Stack>
+      </C.Box>
 
       {/* Sizes */}
-      <C.Stack>
+      <C.Box header={
         <C.Text as="h4">Sizes</C.Text>
-        <C.Stack direction="row" css={{ gap: "$medium", alignItems: "center" }}>
-          <C.Icon forceSize={16}><Icons.Circle /></C.Icon>
-          <C.Icon forceSize={24}><Icons.Circle /></C.Icon>
-          <C.Icon forceSize={32}><Icons.Circle /></C.Icon>
-          <C.Icon forceSize={48}><Icons.Circle /></C.Icon>
+      }>
+        <C.Stack direction="row">
+          <C.Icon system="CheckCircleIcon" forceSize={16} />
+          <C.Icon system="CheckCircleIcon" forceSize={24} />
+          <C.Icon system="CheckCircleIcon" forceSize={32} />
+          <C.Icon system="CheckCircleIcon" forceSize={48} />
         </C.Stack>
-      </C.Stack>
+      </C.Box>
 
       {/* Colors */}
-      <C.Stack>
+      <C.Box header={
         <C.Text as="h4">Colors</C.Text>
-        <C.Stack direction="row" css={{ gap: "$medium", alignItems: "center" }}>
-          <C.Icon forceColor="text"><Icons.Circle /></C.Icon>
-          <C.Icon forceColor="blue"><Icons.Circle /></C.Icon>
-          <C.Icon forceColor="purple"><Icons.Circle /></C.Icon>
-          <C.Icon forceColor="orange"><Icons.Circle /></C.Icon>
+      }>
+        <C.Stack direction="row">
+          <C.Icon system="CheckCircleIcon" forceColor="text" />
+          <C.Icon system="CheckCircleIcon" forceColor="blue" />
+          <C.Icon system="CheckCircleIcon" forceColor="purple" />
+          <C.Icon system="CheckCircleIcon" forceColor="orange" />
         </C.Stack>
-      </C.Stack>
+      </C.Box>
 
       {/* Inline Usage */}
-      <C.Stack>
-        <C.Text as="h4">Inline</C.Text>
-        <C.Text>
-          Text with an <C.Icon inline="smaller"><Icons.Circle /></C.Icon> icon in it.
-          And another <C.Icon inline="smaller" forceColor="blue"><Icons.CheckCircle /></C.Icon> here.
-        </C.Text>
-        <C.Text>
-          <C.Icon inline="auto"><Icons.ArrowRight /></C.Icon>
-          Icon with auto margin
-        </C.Text>
-      </C.Stack>
+      <C.Box header={
+        <C.Text as="h4">Inline Usage</C.Text>
+      }>
+        <C.Stack>
+          <C.Text>
+            Text with <C.Icon system="CheckCircleIcon" inline="smaller" /> icon
+          </C.Text>
+          <C.Text>
+            <C.Icon system="ArrowRightIcon" inline="small" /> Icon with margin
+          </C.Text>
+        </C.Stack>
+      </C.Box>
+
+      {/* System Icons */}
+      <C.Box header={
+        <C.Text as="h4">System Icons</C.Text>
+      }>
+        <C.Stack direction="row">
+          <C.Icon system="ArrowRightIcon" />
+          <C.Icon system="InfoIcon" />
+          <C.Icon system="MagnifyingGlassIcon" />
+          <C.Icon system="ArrowClockwiseIcon" />
+        </C.Stack>
+      </C.Box>
+
+      {/* Combinations */}
+      <C.Box header={
+        <C.Text as="h4">Combinations</C.Text>
+      }>
+        <C.Stack direction="row">
+          <C.Icon 
+            system="CheckCircleIcon" 
+            forceSize={32} 
+            forceColor="blue" 
+          />
+          <C.Icon 
+            system="WarningCircleIcon" 
+            forceSize={32} 
+            forceColor="orange" 
+          />
+          <C.Icon 
+            system="XCircleIcon" 
+            forceSize={32} 
+            forceColor="red" 
+          />
+        </C.Stack>
+      </C.Box>
     </C.Stack>
   );
 } 

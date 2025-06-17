@@ -1,129 +1,125 @@
-import React, { useState } from "react";
+import { JSX, useState } from "react";
 import * as C from "../../src/index";
 
-export default function UploadDemo() {
-  // State for different upload scenarios
-  const [singleLoading, setSingleLoading] = useState(false);
-  const [singleSuccess, setSingleSuccess] = useState(false);
-  const [singleError, setSingleError] = useState(false);
-  const [multipleFiles, setMultipleFiles] = useState<File[]>([]);
+export default function UploadDemo(): JSX.Element {
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+  const [files, setFiles] = useState<File[]>([]);
 
-  // Simulate file upload with delay
-  const simulateUpload = (file: File, setLoading: (v: boolean) => void, setSuccess: (v: boolean) => void) => {
+  const simulateUpload = (): void => {
     setLoading(true);
+    setError(false);
     setTimeout(() => {
       setLoading(false);
       setSuccess(true);
-      // Reset success state after 2 seconds
       setTimeout(() => setSuccess(false), 2000);
-    }, 2000);
+    }, 1500);
+  };
+
+  const simulateError = (): void => {
+    setError(true);
+    setTimeout(() => setError(false), 3000);
   };
 
   return (
-    <C.Stack css={{ gap: "$xlarge" }}>
-      {/* Basic Upload */}
-      <C.Stack>
-        <C.Text as="h4" bottom="medium">Basic Upload</C.Text>
-        <C.Stack css={{ maxWidth: "400px" }}>
-          <C.Upload
-            accept=".pdf"
-            onUpload={(file: File) => {
-              console.log("Uploaded file:", file);
-              simulateUpload(file, setSingleLoading, setSingleSuccess);
-            }}
-            loading={singleLoading}
-            success={singleSuccess}
-          />
-        </C.Stack>
-      </C.Stack>
+    <C.Stack css={{ 
+      display: "grid",
+      gap: "$large",
+      gridTemplateColumns: "repeat(3, 1fr)" 
+    }}>
+      {/* Basic Usage */}
+      <C.Box header={
+        <C.Text as="h4">Basic Usage</C.Text>
+      }>
+        <C.Upload
+          accept=".pdf"
+          onUpload={(file: File) => {
+            
+            simulateUpload();
+          }}
+          loading={loading}
+          success={success}
+        />
+      </C.Box>
 
-      {/* Multiple File Upload */}
-      <C.Stack>
-        <C.Text as="h4" bottom="medium">Multiple File Upload</C.Text>
-        <C.Stack css={{ maxWidth: "400px", gap: "$medium" }}>
+      {/* Multiple Files */}
+      <C.Box header={
+        <C.Text as="h4">Multiple Files</C.Text>
+      }>
+        <C.Stack css={{ gap: "$small" }}>
           <C.Upload
             multiple
             accept="image/*"
             maxFiles={3}
-            maxSize={2000000}
-            onUpload={(files: FileList) => {
-              const fileArray = Array.from(files);
-              setMultipleFiles(fileArray);
-              console.log("Uploaded files:", fileArray);
+            onUpload={(fileList: FileList) => {
+              setFiles(Array.from(fileList));
+              console.log("Multiple files:", fileList);
             }}
           />
-          {multipleFiles.length > 0 && (
-            <C.Box css={{ 
-              backgroundColor: "$surface",
-              padding: "$medium",
-              borderRadius: "$medium"
-            }}>
-              <C.Text as="h5" bottom="small">Selected Files:</C.Text>
-              {multipleFiles.map((file, index) => (
-                <C.Text key={index} as="p" bottom="smaller">
-                  {file.name} ({(file.size / 1000000).toFixed(2)}MB)
-                </C.Text>
-              ))}
-            </C.Box>
+          {files.length > 0 && (
+            <C.Text accent>
+              {files.length} file{files.length > 1 ? 's' : ''} selected
+            </C.Text>
           )}
         </C.Stack>
-      </C.Stack>
+      </C.Box>
+
+      {/* Custom File Types */}
+      <C.Box header={
+        <C.Text as="h4">Custom File Types</C.Text>
+      }>
+        <C.Upload
+          accept=".doc,.docx,.txt"
+          maxSize={2000000}
+          onUpload={(file: File) => {
+            console.log("Document uploaded:", file.name);
+          }}
+        />
+      </C.Box>
 
       {/* Error State */}
-      <C.Stack>
-        <C.Text as="h4" bottom="medium">Error State</C.Text>
-        <C.Stack css={{ maxWidth: "400px" }}>
-          <C.Upload
-            error={singleError}
-            accept=".doc,.docx"
-            onUpload={(file: File) => {
-              console.log("Uploaded file:", file);
-              setSingleError(true);
-              // Reset error state after 2 seconds
-              setTimeout(() => setSingleError(false), 2000);
-            }}
-          />
-        </C.Stack>
-      </C.Stack>
+      <C.Box header={
+        <C.Text as="h4">Error State</C.Text>
+      }>
+        <C.Upload
+          accept="*"
+          error={error}
+          errorMessage="Upload failed"
+          onUpload={(file: File) => {
+            console.log("File:", file.name);
+            simulateError();
+          }}
+        />
+      </C.Box>
 
-      {/* Custom Size Limits */}
-      <C.Stack>
-        <C.Text as="h4" bottom="medium">Custom Size Limits</C.Text>
-        <C.Stack css={{ maxWidth: "400px" }}>
-          <C.Upload
-            accept="video/*"
-            maxSize={10000000} // 10MB
-            onUpload={(file: File) => {
-              console.log("Uploaded file:", file);
-            }}
-          />
-        </C.Stack>
-      </C.Stack>
+      {/* Success State */}
+      <C.Box header={
+        <C.Text as="h4">Success State</C.Text>
+      }>
+        <C.Upload
+          accept="image/*"
+          success={success}
+          successMessage="Upload complete!"
+          onUpload={(file: File) => {
+            console.log("Image uploaded:", file.name);
+            simulateUpload();
+          }}
+        />
+      </C.Box>
 
-      {/* Different File Types */}
-      <C.Stack>
-        <C.Text as="h4" bottom="medium">Different File Types</C.Text>
-        <C.Stack css={{ maxWidth: "400px", gap: "$medium" }}>
-          <C.Upload
-            accept=".jpg,.jpeg,.png"
-            onUpload={(file: File) => {
-              console.log("Uploaded file:", file);
-            }}
-          />
-          <C.Upload
-            accept=".csv,.xlsx"
-            onUpload={(file: File) => {
-              console.log("Uploaded file:", file);
-            }}
-          />
-          <C.Upload
-            accept=".zip,.rar"
-            onUpload={(file: File) => {
-              console.log("Uploaded file:", file);
-            }}
-          />
-        </C.Stack>
-      </C.Stack>
+      {/* Custom Width */}
+      <C.Box header={
+        <C.Text as="h4">Custom Width</C.Text>
+      }>
+        <C.Upload
+          accept=".zip,.rar"
+          width="80%"
+          onUpload={(file: File) => {
+            console.log("Archive uploaded:", file.name);
+          }}
+        />
+      </C.Box>
     </C.Stack>
   );
 } 

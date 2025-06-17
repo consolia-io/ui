@@ -1,221 +1,159 @@
 import { JSX } from "react";
 
-import { Icons } from "../../src/icons";
 import * as C from "../../src/index";
 
 export default function BoxDemo(): JSX.Element {
   return (
-    <C.Stack css={{ gap: "$large" }}>
-      <C.Box css={{
-        width: "fit-content",
-      }} theme="gradient"
-      >
-        <C.Logo theme="light" />
+    <C.Stack css={{ 
+      display: "grid",
+      gap: "$large",
+      gridTemplateColumns: "repeat(3, 1fr)" 
+    }}>
+      {/* Basic Usage */}
+      <C.Box header={
+        <C.Text as="h4">Basic Usage</C.Text>
+      }>
+        <C.Stack>
+          <C.Box>Default Box</C.Box>
+          <C.Box small>Small Box</C.Box>
+          <C.Box minimal>Minimal Box</C.Box>
+        </C.Stack>
       </C.Box>
-      {/* Basic Variants */}
-      <C.Stack>
-        <C.Text as="h4" bottom="medium">Basic Variants</C.Text>
-        <C.Stack css={{ 
-          display: "grid",
-          gap: "$medium",
-          gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))" 
-        }}>
-          <C.Box>Default Box with content</C.Box>
-          <C.Box small>Small padding variant</C.Box>
-          <C.Box minimal>Minimal variant without padding</C.Box>
-        </C.Stack>
-      </C.Stack>
 
-      {/* All Themes */}
-      <C.Stack>
-        <C.Text as="h4" bottom="medium">All Themes</C.Text>
-        <C.Stack css={{ 
-          display: "grid",
-          gap: "$medium",
-          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))" 
-        }}>
-          <C.Box theme="default">Default theme</C.Box>
-          <C.Box theme="fill">
-            Fill theme</C.Box>
-          <C.Box header={<C.Badge theme="blue">New</C.Badge>} theme="blue">
-            <br/>
-            Blue theme
-          </C.Box>
-          <C.Box theme="purple">
-            <C.Badge theme="purple">New</C.Badge><br/>
-            Purple theme
-          </C.Box>
-          <C.Box theme="orange">
-            <C.Badge theme="orange">New</C.Badge><br/>
-            Orange theme
-          </C.Box>
-          <C.Box theme="yellow">
-            <C.Badge theme="yellow">New</C.Badge><br/>
-            Yellow theme
-          </C.Box>
-          <C.Box theme="minimal">Minimal theme</C.Box>
-          <C.Box theme="solid">Solid theme</C.Box>
+      {/* Themes (Filled Backgrounds) */}
+      <C.Box header={
+        <C.Text as="h4">Themes (Filled)</C.Text>
+      }>
+        <C.Stack>
+          <C.Box theme="blue">Blue Theme</C.Box>
+          <C.Box theme="purple">Purple Theme</C.Box>
+          <C.Box theme="orange">Orange Theme</C.Box>
+          <C.Box theme="gradient">Gradient Theme</C.Box>
         </C.Stack>
-      </C.Stack>
+      </C.Box>
 
-      {/* Header & Footer Combinations */}
-      <C.Stack>
-        <C.Text as="h4" bottom="medium">Header & Footer</C.Text>
-        <C.Stack css={{ 
-          display: "grid",
-          gap: "$medium",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))" 
-        }}>
-          <C.Box header="Header Only" small>
-            Content with header only
+      {/* Borders (Left Border Style) */}
+      <C.Box header={
+        <C.Text as="h4">Borders (Left Border)</C.Text>
+      }>
+        <C.Stack>
+          <C.Box border="blue">Blue Border</C.Box>
+          <C.Box border="purple">Purple Border</C.Box>
+          <C.Box border="orange">Orange Border</C.Box>
+          <C.Box border="solid">Solid Border</C.Box>
+        </C.Stack>
+      </C.Box>
+
+      {/* With Headers */}
+      <C.Box header={
+        <C.Text as="h4">With Headers</C.Text>
+      }>
+        <C.Stack>
+          <C.Box header="Simple Header">
+            Content with header
           </C.Box>
-          
+          <C.Box header={<C.Badge theme="blue">Status</C.Badge>}>
+            Complex header
+          </C.Box>
+        </C.Stack>
+      </C.Box>
+
+      {/* With Footers */}
+      <C.Box header={
+        <C.Text as="h4">With Footers</C.Text>
+      }>
+        <C.Stack>
           <C.Box footer={
-            <C.Stack css={{ gap: "$small", justifyContent: "flex-end" }} direction="row">
-              <C.Button small theme="minimal">Cancel</C.Button>
-              <C.Button small>Submit</C.Button>
-            </C.Stack>
+            <C.Button small>Action</C.Button>
           }>
-            Content with footer only
+            Content with footer
           </C.Box>
-          
           <C.Box 
-            footer={
-              <C.Stack css={{ alignItems: "center", justifyContent: "space-between" }} direction="row">
-                <C.Text as="small">Footer info</C.Text>
-                <C.Button small>Action</C.Button>
-              </C.Stack>
-            }
-            header="Header Title"
-          >
-            Content with both header and footer
-          </C.Box>
-        </C.Stack>
-      </C.Stack>
-
-      {/* Interactive Features */}
-      <C.Stack>
-        <C.Text as="h4" bottom="medium">Interactive Features</C.Text>
-        <C.Stack css={{ 
-          display: "grid",
-          gap: "$medium",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))" 
-        }}>
-          <C.Box closable>
-            Closable box with an X button
-          </C.Box>
-          
-          <C.Box 
-            expandable 
-            expandableHeight={80}
-          >
-            Expandable box with truncated content. This content will be cut off at the specified height and can be expanded to show the full content. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-          </C.Box>
-          
-          <C.Box cta="https://example.com">
-            Clickable box (CTA) - entire box is a link
-          </C.Box>
-        </C.Stack>
-      </C.Stack>
-
-      {/* States */}
-      <C.Stack>
-        <C.Text as="h4" bottom="medium">States</C.Text>
-        <C.Stack css={{ 
-          display: "grid",
-          gap: "$medium",
-          gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))" 
-        }}>
-          <C.Box loading>
-            Loading state box with overlay
-          </C.Box>
-          
-          <C.Box>
-            Normal state box
-          </C.Box>
-        </C.Stack>
-      </C.Stack>
-
-      {/* Gradient Background */}
-      <C.Stack>
-        <C.Text as="h4" bottom="medium">Gradient Background</C.Text>
-        <C.Stack css={{ 
-          display: "grid",
-          gap: "$medium",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))" 
-        }}>
-          <C.Box theme="gradient">
-            Basic gradient background box
-          </C.Box>
-          
-          <C.Box 
-            theme="gradient"
-          >
-            <C.Logo theme="light" />
-          </C.Box>
-          
-          <C.Box 
-            footer={
-              <C.Stack css={{ gap: "$small", justifyContent: "flex-end" }} direction="row">
-                <C.Button small theme="minimal">Cancel</C.Button>
-                <C.Button small>Confirm</C.Button>
-              </C.Stack>
-            }
             header="Complete Example"
-            theme="gradient"
-          >
-            <C.Text bottom="small">Gradient box with header and footer</C.Text>
-            <C.Text as="small">The gradient creates a beautiful sunset effect behind the content.</C.Text>
-          </C.Box>
-          
-          <C.Box 
-            closable
-            small
-            theme="gradient"
-          >
-            Small gradient box with close button
-          </C.Box>
-        </C.Stack>
-      </C.Stack>
-     
-      {/* Combined Features */}
-      <C.Stack>
-        <C.Text as="h4" bottom="medium">Complex Examples</C.Text>
-        <C.Stack css={{ 
-          display: "grid",
-          gap: "$medium",
-          gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))" 
-        }}>
-          <C.Box 
-            closable
             footer={
-              <C.Stack css={{ gap: "$small", justifyContent: "flex-end" }} direction="row">
-                <C.Button small theme="minimal">Reset</C.Button>
+              <C.Stack direction="row">
+                <C.Button small theme="minimal">Cancel</C.Button>
                 <C.Button small>Save</C.Button>
               </C.Stack>
             }
-            header={
-              <C.Stack css={{ alignItems: "center", justifyContent: "space-between" }} direction="row">
-                <C.Text as="strong">Settings</C.Text>
-                                 <Icons.ArrowClockwise />
-              </C.Stack>
-            }
-            theme="blue"
           >
-            <C.Text bottom="small">Configure your preferences</C.Text>
-                         <C.Text as="small">This is a complex box with theme, header, footer, and close functionality.</C.Text>
-          </C.Box>
-          
-          <C.Box 
-            footer={<C.Badge theme="orange">New</C.Badge>}
-            header="Compact Card"
-            small
-            theme="solid"
-          >
-            Small box with solid theme and badge
+            Header and footer
           </C.Box>
         </C.Stack>
-      </C.Stack>
+      </C.Box>
+
+      {/* Interactive */}
+      <C.Box header={
+        <C.Text as="h4">Interactive</C.Text>
+      }>
+        <C.Stack>
+          <C.Box closable>
+            Closable Box
+          </C.Box>
+          <C.Box expandable expandableHeight={60}>
+            Expandable box with long content that gets truncated at the specified height and can be expanded to show more.
+          </C.Box>
+          <C.Box loading>
+            Loading State
+          </C.Box>
+        </C.Stack>
+      </C.Box>
+
+      {/* Theme vs Border Comparison */}
+      <C.Box header={
+        <C.Text as="h4">Theme vs Border Comparison</C.Text>
+      }>
+        <C.Stack>
+          <C.Stack direction="row" css={{ gap: "$small" }}>
+            <C.Box theme="blue" css={{ flex: 1 }}>
+              <C.Text as="strong">Theme Blue</C.Text>
+              <C.Text as="small">Filled background</C.Text>
+            </C.Box>
+            <C.Box border="blue" css={{ flex: 1 }}>
+              <C.Text as="strong">Border Blue</C.Text>
+              <C.Text as="small">Left border only</C.Text>
+            </C.Box>
+          </C.Stack>
+          <C.Stack direction="row" css={{ gap: "$small" }}>
+            <C.Box 
+              theme="purple" 
+              header="Purple Theme"
+              css={{ flex: 1 }}
+            >
+              With header
+            </C.Box>
+            <C.Box 
+              border="purple" 
+              header="Purple Border"
+              css={{ flex: 1 }}
+            >
+              With header
+            </C.Box>
+          </C.Stack>
+        </C.Stack>
+      </C.Box>
+
+      {/* Advanced */}
+      <C.Box header={
+        <C.Text as="h4">Advanced</C.Text>
+      }>
+        <C.Stack>
+          <C.Box 
+            theme="gradient"
+            closable
+            small
+          >
+            <C.Logo theme="light" />
+          </C.Box>
+          <C.Box 
+            header="Settings"
+            footer={<C.Button small>Update</C.Button>}
+            border="orange"
+          >
+            Border with complex content
+          </C.Box>
+        </C.Stack>
+      </C.Box>
     </C.Stack>
   );
 } 

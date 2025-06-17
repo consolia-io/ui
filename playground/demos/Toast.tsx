@@ -1,6 +1,5 @@
 import React from "react";
 import * as C from "../../src/index";
-import { Icons } from "../../src/icons";
 import { toast } from "react-hot-toast";
 
 export default function ToastDemo() {
@@ -17,7 +16,7 @@ export default function ToastDemo() {
         <C.Button
           onClick={() => toast("This is a default toast message")}
         >
-          <Icons.Info weight="regular" />
+          <C.Icon system="InfoIcon" />
           Show Toast
         </C.Button>
       </C.Stack>
@@ -28,7 +27,7 @@ export default function ToastDemo() {
         <C.Button
           onClick={() => toast.success("Operation completed successfully!")}
         >
-          <Icons.ArrowUp weight="regular" />
+          <C.Icon system="ArrowUpIcon" />
           Success Toast
         </C.Button>
       </C.Stack>
@@ -39,7 +38,7 @@ export default function ToastDemo() {
         <C.Button
           onClick={() => toast.error("Something went wrong!")}
         >
-          <Icons.X weight="regular" />
+          <C.Icon system="XIcon" />
           Error Toast
         </C.Button>
       </C.Stack>
@@ -54,7 +53,7 @@ export default function ToastDemo() {
             })
           }
         >
-          <Icons.ArrowsOutSimple weight="regular" />
+          <C.Icon system="ArrowsOutSimpleIcon" />
           Long Toast
         </C.Button>
       </C.Stack>
@@ -69,7 +68,7 @@ export default function ToastDemo() {
             setTimeout(() => toast.error("Third toast"), 1000);
           }}
         >
-          <Icons.ArrowRight weight="regular" />
+          <C.Icon system="ArrowRightIcon" />
           Multiple Toasts
         </C.Button>
       </C.Stack>
@@ -80,7 +79,7 @@ export default function ToastDemo() {
         <C.Button
           onClick={() => toast.dismiss()}
         >
-          <Icons.ArrowDown weight="regular" />
+          <C.Icon system="ArrowDownIcon" />
           Clear All
         </C.Button>
       </C.Stack>

@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { JSX, useState } from "react";
 
-import { Icons } from "../../src/icons";
 import * as C from "../../src/index";
 
 // Content components for tab panels
@@ -17,110 +16,130 @@ function TabContent({ color, title }: { color: string; title: string }) {
   );
 }
 
-export default function TabsDemo() {
+export default function TabsDemo(): JSX.Element {
   const [basicTab, setBasicTab] = useState("tab1");
   const [iconTab, setIconTab] = useState("home");
-  const [dynamicTab, setDynamicTab] = useState("all");
+  const [callbackTab, setCallbackTab] = useState("overview");
 
-  // Basic tabs options
   const basicOptions = [
-    { label: "Tab 1", value: "tab1" },
-    { label: "Tab 2", value: "tab2" },
-    { label: "Tab 3", value: "tab3" }
+    { label: "First", value: "tab1" },
+    { label: "Second", value: "tab2" },
+    { label: "Third", value: "tab3" }
   ];
 
-  // Tabs with icons
   const iconOptions = [
     { 
-      icon: <Icons.ArrowRight weight="regular" />,
+      icon: <C.Icon system="ArrowRightIcon" />,
       label: "Home",
       value: "home"
     },
     {
-      icon: <Icons.MagnifyingGlass weight="regular" />,
-      label: "Search",
-      value: "search"
+      icon: <C.Icon system="InfoIcon" />,
+      label: "Info",
+      value: "info"
     },
     {
-      icon: <Icons.Info weight="regular" />,
+      icon: <C.Icon system="ArrowUpIcon" />,
       label: "Settings",
       value: "settings"
     }
   ];
 
-  // Dynamic content tabs
-  const dynamicOptions = [
-    { label: "All Items", value: "all" },
-    { label: "Active", value: "active" },
-    { label: "Archived", value: "archived" }
+  const callbackOptions = [
+    { label: "Overview", value: "overview" },
+    { label: "Details", value: "details" },
+    { label: "History", value: "history" }
   ];
 
   return (
-    <C.Stack css={{ gap: "$xlarge" }}>
-      {/* Basic Tabs */}
-      <C.Stack>
-        <C.Text as="h4" bottom="medium">Basic Tabs</C.Text>
-        <C.Tabs
-        options={basicOptions}
-          small
-          onSelection={setBasicTab}
-        />
-        <TabContent 
-          color="$purple500"
-          title={basicOptions.find(o => o.value === basicTab)?.label || ""}
-        />
-      </C.Stack>
-
-      {/* Tabs with Icons */}
-      <C.Stack>
-        <C.Text as="h4" bottom="medium">Tabs with Icons</C.Text>
-        <C.Tabs
-          options={iconOptions}
-          onSelection={setIconTab}
-        />
-        <TabContent 
-          color="$blue500"
-          title={iconOptions.find(o => o.value === iconTab)?.label || ""}
-        />
-      </C.Stack>
-
-      {/* Dynamic Content Tabs */}
-      <C.Stack>
-        <C.Text as="h4" bottom="medium">Dynamic Content Tabs</C.Text>
+    <C.Stack css={{ 
+      display: "grid",
+      gap: "$large",
+      gridTemplateColumns: "repeat(3, 1fr)" 
+    }}>
+      {/* Basic Usage */}
+      <C.Box header={
+        <C.Text as="h4">Basic Usage</C.Text>
+      }>
         <C.Stack css={{ gap: "$medium" }}>
           <C.Tabs
-            options={dynamicOptions}
-            onSelection={setDynamicTab}
+            options={basicOptions}
+            onSelection={setBasicTab}
           />
-          {dynamicTab === "all" && (
-            <C.Stack css={{ gap: "$small" }}>
-              <TabContent color="$green500" title="Active Item 1" />
-              <TabContent color="$gray500" title="Archived Item 1" />
-              <TabContent color="$green500" title="Active Item 2" />
-            </C.Stack>
-          )}
-          {dynamicTab === "active" && (
-            <C.Stack css={{ gap: "$small" }}>
-              <TabContent color="$green500" title="Active Item 1" />
-              <TabContent color="$green500" title="Active Item 2" />
-            </C.Stack>
-          )}
-          {dynamicTab === "archived" && (
-            <C.Stack css={{ gap: "$small" }}>
-              <TabContent color="$gray500" title="Archived Item 1" />
-            </C.Stack>
-          )}
+          <C.Text accent>Selected: {basicTab}</C.Text>
         </C.Stack>
-      </C.Stack>
+      </C.Box>
 
-      {/* Initial Selected Tab */}
-      <C.Stack>
-        <C.Text as="h4" bottom="medium">Initial Selected Tab</C.Text>
-        <C.Tabs
-          initial="tab2"
-          options={basicOptions}
-        />
-      </C.Stack>
+      {/* Small Size */}
+      <C.Box header={
+        <C.Text as="h4">Small Size</C.Text>
+      }>
+        <C.Stack css={{ gap: "$medium" }}>
+          <C.Tabs
+            options={basicOptions}
+            small
+            onSelection={setBasicTab}
+          />
+          <C.Text accent>Compact styling</C.Text>
+        </C.Stack>
+      </C.Box>
+
+      {/* With Icons */}
+      <C.Box header={
+        <C.Text as="h4">With Icons</C.Text>
+      }>
+        <C.Stack css={{ gap: "$medium" }}>
+          <C.Tabs
+            options={iconOptions}
+            onSelection={setIconTab}
+          />
+          <C.Text accent>Selected: {iconTab}</C.Text>
+        </C.Stack>
+      </C.Box>
+
+      {/* Initial Selection */}
+      <C.Box header={
+        <C.Text as="h4">Initial Selection</C.Text>
+      }>
+        <C.Stack css={{ gap: "$medium" }}>
+          <C.Tabs
+            initial="tab2"
+            options={basicOptions}
+          />
+          <C.Text accent>Pre-selected second tab</C.Text>
+        </C.Stack>
+      </C.Box>
+
+      {/* With Callback */}
+      <C.Box header={
+        <C.Text as="h4">With Callback</C.Text>
+      }>
+        <C.Stack css={{ gap: "$medium" }}>
+          <C.Tabs
+            options={callbackOptions}
+            onSelection={(value) => {
+              setCallbackTab(value);
+              console.log('Tab changed:', value);
+            }}
+          />
+          <C.Text accent>Check console logs</C.Text>
+        </C.Stack>
+      </C.Box>
+
+      {/* Dynamic Content */}
+      <C.Box header={
+        <C.Text as="h4">Dynamic Content</C.Text>
+      }>
+        <C.Stack css={{ gap: "$medium" }}>
+          <C.Tabs
+            options={callbackOptions}
+            onSelection={setCallbackTab}
+          />
+          <C.Box small css={{ backgroundColor: "$surface" }}>
+            <C.Text>Content for: {callbackTab}</C.Text>
+          </C.Box>
+        </C.Stack>
+      </C.Box>
     </C.Stack>
   );
 } 

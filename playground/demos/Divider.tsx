@@ -1,46 +1,81 @@
-import React from "react";
+import { JSX } from "react";
+
 import * as C from "../../src/index";
 
-export default function DividerDemo() {
+export default function DividerDemo(): JSX.Element {
   return (
     <C.Stack css={{ 
       display: "grid",
-      gridTemplateColumns: "repeat(2, 1fr)",
-      gap: "$large" 
+      gap: "$large",
+      gridTemplateColumns: "repeat(3, 1fr)" 
     }}>
-      {/* Basic Divider */}
-      <C.Stack>
-        <C.Text as="h4">Basic</C.Text>
-        <C.Text>Content above</C.Text>
-        <C.Divider />
-        <C.Text>Content below</C.Text>
-      </C.Stack>
+      {/* Basic Usage */}
+      <C.Box header={
+        <C.Text as="h4">Basic Usage</C.Text>
+      }>
+        <C.Stack>
+          <C.Text>Content above</C.Text>
+          <C.Divider />
+          <C.Text>Content below</C.Text>
+        </C.Stack>
+      </C.Box>
 
-      {/* With Spacing */}
-      <C.Stack>
-        <C.Text as="h4">With Spacing</C.Text>
-        <C.Text>Content above</C.Text>
-        <C.Divider top="medium" bottom="medium" />
-        <C.Text>Content below</C.Text>
-      </C.Stack>
+      {/* Top Spacing */}
+      <C.Box header={
+        <C.Text as="h4">Top Spacing</C.Text>
+      }>
+        <C.Stack>
+          <C.Text>Content above</C.Text>
+          <C.Divider top="large" />
+          <C.Text>Content below</C.Text>
+        </C.Stack>
+      </C.Box>
 
-      {/* In Content */}
-      <C.Stack>
-        <C.Text as="h4">In Content</C.Text>
-        <C.Text>First paragraph of content describing something important.</C.Text>
-        <C.Divider top="small" bottom="small" />
-        <C.Text>Second paragraph with different content.</C.Text>
-        <C.Divider top="small" bottom="small" />
-        <C.Text>Third and final paragraph of the content.</C.Text>
-      </C.Stack>
+      {/* Bottom Spacing */}
+      <C.Box header={
+        <C.Text as="h4">Bottom Spacing</C.Text>
+      }>
+        <C.Stack>
+          <C.Text>Content above</C.Text>
+          <C.Divider bottom="large" />
+          <C.Text>Content below</C.Text>
+        </C.Stack>
+      </C.Box>
 
-      {/* Between Components */}
-      <C.Stack>
-        <C.Text as="h4">Between Components</C.Text>
-        <C.Button block>First Action</C.Button>
-        <C.Divider top="medium" bottom="medium" />
-        <C.Button block theme="minimal">Second Action</C.Button>
-      </C.Stack>
+      {/* Both Spacing */}
+      <C.Box header={
+        <C.Text as="h4">Both Spacing</C.Text>
+      }>
+        <C.Stack>
+          <C.Text>Content above</C.Text>
+          <C.Divider top="medium" bottom="medium" />
+          <C.Text>Content below</C.Text>
+        </C.Stack>
+      </C.Box>
+
+      {/* In Components */}
+      <C.Box header={
+        <C.Text as="h4">In Components</C.Text>
+      }>
+        <C.Stack>
+          <C.Button block>First Action</C.Button>
+          <C.Divider top="small" bottom="small" />
+          <C.Button block theme="minimal">Second Action</C.Button>
+        </C.Stack>
+      </C.Box>
+
+      {/* Multiple Dividers */}
+      <C.Box header={
+        <C.Text as="h4">Multiple Dividers</C.Text>
+      }>
+        <C.Stack>
+          <C.Text>Section 1</C.Text>
+          <C.Divider />
+          <C.Text>Section 2</C.Text>
+          <C.Divider />
+          <C.Text>Section 3</C.Text>
+        </C.Stack>
+      </C.Box>
     </C.Stack>
   );
 } 

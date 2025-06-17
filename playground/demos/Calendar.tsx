@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { JSX, useState } from "react";
 import * as C from "../../src/index";
 import dayjs from "dayjs";
 
-export default function CalendarDemo() {
+export default function CalendarDemo(): JSX.Element {
   const [singleDate, setSingleDate] = useState<string>();
-  const [dateRange, setDateRange] = useState<{ startDate?: string; endDate?: string }>({});
-  const [selectedMonth, setSelectedMonth] = useState<string>();
+  const [rangeDate, setRangeDate] = useState<{ startDate?: string; endDate?: string }>({});
+  const [monthDate, setMonthDate] = useState<string>();
 
   // Example blocked dates (next 3 Sundays)
   const blockedDates = Array.from({ length: 3 }).map((_, i) => 
@@ -23,64 +23,109 @@ export default function CalendarDemo() {
   return (
     <C.Stack css={{ 
       display: "grid",
-      gridTemplateColumns: "repeat(3, 1fr)",
-      gap: "$large" 
+      gap: "$large",
+      gridTemplateColumns: "repeat(3, 1fr)" 
     }}>
-      {/* Single Selection Calendar */}
-      <C.Stack>
+      {/* Single Selection */}
+      <C.Box header={
         <C.Text as="h4">Single Selection</C.Text>
-        <C.Calendar
-          mode="single"
-          minDate={minDate}
-          maxDate={maxDate}
-          startDate={singleDate}
-          onSelection={({ startDate }) => setSingleDate(startDate)}
-          description="Select a single date within the next 3 months"
-        />
-        <C.Text accent>
-          Selected: {singleDate || "None"}
-        </C.Text>
-      </C.Stack>
+      }>
+        <C.Stack>
+          <C.Calendar
+            mode="single"
+            startDate={singleDate}
+            onSelection={({ startDate }) => setSingleDate(startDate)}
+          />
+          <C.Text as="small">
+            Selected: {singleDate || "None"}
+          </C.Text>
+        </C.Stack>
+      </C.Box>
 
-      {/* Range Selection Calendar */}
-      <C.Stack>
+      {/* Range Selection */}
+      <C.Box header={
         <C.Text as="h4">Range Selection</C.Text>
-        <C.Calendar
-          mode="range"
-          minDate={minDate}
-          maxDate={maxDate}
-          startDate={dateRange.startDate}
-          endDate={dateRange.endDate}
-          blockedDates={blockedDates}
-          minLength={2}
-          maxLength={14}
-          onSelection={({ startDate, endDate }) => 
-            setDateRange({ startDate, endDate })
-          }
-          description="Select a date range (2-14 days) excluding Sundays"
-        />
-        <C.Text accent>
-          Range: {dateRange.startDate && dateRange.endDate ? 
-            `${dateRange.startDate} to ${dateRange.endDate}` : 
-            "None"}
-        </C.Text>
-      </C.Stack>
+      }>
+        <C.Stack>
+          <C.Calendar
+            mode="range"
+            startDate={rangeDate.startDate}
+            endDate={rangeDate.endDate}
+            minLength={2}
+            maxLength={7}
+            onSelection={({ startDate, endDate }) => 
+              setRangeDate({ startDate, endDate })
+            }
+          />
+          <C.Text as="small">
+            Range: {rangeDate.startDate && rangeDate.endDate ? 
+              `${rangeDate.startDate} to ${rangeDate.endDate}` : 
+              "None"}
+          </C.Text>
+        </C.Stack>
+      </C.Box>
 
-      {/* Month Selection Calendar */}
-      <C.Stack>
+      {/* Month Selection */}
+      <C.Box header={
         <C.Text as="h4">Month Selection</C.Text>
-        <C.CalendarMonths
-          minDate={monthMinDate}
-          maxDate={monthMaxDate}
-          selectedDate={selectedMonth}
-          onSelection={(date) => setSelectedMonth(date)}
-        />
-        <C.Text accent>
-          Selected: {selectedMonth ? 
-            dayjs(selectedMonth).format("MMMM YYYY") : 
-            "None"}
-        </C.Text>
-      </C.Stack>
+      }>
+        <C.Stack>
+          <C.CalendarMonths
+            selectedDate={monthDate}
+            onSelection={(date) => setMonthDate(date)}
+          />
+          <C.Text as="small">
+            Selected: {monthDate || "None"}
+          </C.Text>
+        </C.Stack>
+      </C.Box>
+
+      {/* With Restrictions */}
+      <C.Box header={
+        <C.Text as="h4">With Restrictions</C.Text>
+      }>
+        <C.Stack>
+          <C.Calendar
+            mode="single"
+            minDate="2024-01-01"
+            maxDate="2024-12-31"
+            blockedDates={["2024-12-25", "2024-01-01"]}
+            onSelection={() => {}}
+          />
+          <C.Text as="small">
+            Min/max dates and blocked holidays
+          </C.Text>
+        </C.Stack>
+      </C.Box>
+
+      {/* With Description */}
+      <C.Box header={
+        <C.Text as="h4">With Description</C.Text>
+      }>
+        <C.Stack>
+          <C.Calendar
+            mode="range"
+            description="Select your travel dates"
+            onSelection={() => {}}
+          />
+        </C.Stack>
+      </C.Box>
+
+      {/* Month Picker Restricted */}
+      <C.Box header={
+        <C.Text as="h4">Month Restrictions</C.Text>
+      }>
+        <C.Stack>
+          <C.CalendarMonths
+            minDate="2024-01-01"
+            maxDate="2024-12-31"
+            onSelection={() => {}}
+          />
+          <C.Text as="small">
+            Restricted to 2024 only
+          </C.Text>
+        </C.Stack>
+      </C.Box>
     </C.Stack>
   );
 } 

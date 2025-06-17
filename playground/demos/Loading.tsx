@@ -9,80 +9,90 @@ export default function LoadingDemo(): JSX.Element {
     <C.Stack css={{ 
       display: "grid",
       gap: "$large",
-      gridTemplateColumns: "repeat(2, 1fr)" 
+      gridTemplateColumns: "repeat(3, 1fr)" 
     }}>
-      {/* Basic Loading */}
-      <C.Stack>
-        <C.Text as="h4">Basic</C.Text>
-        <C.Stack css={{ alignItems: "center", gap: "$medium" }} direction="row">
+      {/* Basic Usage */}
+      <C.Box header={
+        <C.Text as="h4">Basic Usage</C.Text>
+      }>
+        <C.Stack>
           <C.Loading />
+          <C.Text as="small">Default loading spinner</C.Text>
         </C.Stack>
-      </C.Stack>
+      </C.Box>
 
       {/* Themes */}
-      <C.Stack>
+      <C.Box header={
         <C.Text as="h4">Themes</C.Text>
-        <C.Stack css={{ alignItems: "center", gap: "$medium" }} direction="row">
+      }>
+        <C.Stack>
           <C.Loading theme="default" />
+          <C.Text as="small">Default theme</C.Text>
           <C.Loading theme="colored" />
+          <C.Text as="small">Colored theme</C.Text>
         </C.Stack>
-        <C.Text css={{ color: "$text", opacity: "$light" }}>Default vs Colored cycling</C.Text>
-      </C.Stack>
+      </C.Box>
 
       {/* Sizes */}
-      <C.Stack>
+      <C.Box header={
         <C.Text as="h4">Sizes</C.Text>
-        <C.Stack css={{ alignItems: "center", gap: "$medium" }} direction="row">
+      }>
+        <C.Stack direction="row">
           <C.Loading css={{ height: "16px", width: "16px" }} />
           <C.Loading css={{ height: "24px", width: "24px" }} />
           <C.Loading css={{ height: "32px", width: "32px" }} />
           <C.Loading css={{ height: "48px", width: "48px" }} />
         </C.Stack>
-      </C.Stack>
+      </C.Box>
 
-      {/* Colors + Colored Theme */}
-      <C.Stack>
-        <C.Text as="h4">Colored Theme Examples</C.Text>
-        <C.Stack css={{ alignItems: "center", gap: "$medium" }} direction="row">
-          <C.Loading theme="colored" />
-          <C.Loading theme="colored" css={{ height: "32px", width: "32px" }} />
-          <C.Loading theme="colored" css={{ height: "48px", width: "48px" }} />
-        </C.Stack>
-      </C.Stack>
-
-      {/* Static Colors */}
-      <C.Stack>
-        <C.Text as="h4">Static Colors</C.Text>
-        <C.Stack css={{ alignItems: "center", gap: "$medium" }} direction="row">
-          <C.Loading css={{ color: "$text" }} />
+      {/* Custom Colors */}
+      <C.Box header={
+        <C.Text as="h4">Custom Colors</C.Text>
+      }>
+        <C.Stack direction="row">
           <C.Loading css={{ color: "$blue" }} />
           <C.Loading css={{ color: "$purple" }} />
           <C.Loading css={{ color: "$orange" }} />
+          <C.Loading css={{ color: "$yellow" }} />
         </C.Stack>
-      </C.Stack>
+      </C.Box>
 
       {/* Loading Overlay */}
-      <C.Stack>
+      <C.Box header={
         <C.Text as="h4">Loading Overlay</C.Text>
-        <C.Box css={{ height: "200px", position: "relative" }}>
-          <C.Stack css={{ gap: "$medium" }}>
-            <C.Button 
-              theme={showOverlay ? "solid" : "default"}
-              onClick={() => setShowOverlay(!showOverlay)}
-            >
-              {showOverlay ? "Hide" : "Show"} Overlay
-            </C.Button>
-            <C.Text>Content in the box</C.Text>
-            <C.Text>More content here</C.Text>
-            <C.Text>Even more content</C.Text>
-          </C.Stack>
+      }>
+        <C.Stack css={{ position: "relative", height: "120px" }}>
+          <C.Button 
+            theme={showOverlay ? "solid" : "default"}
+            onClick={() => setShowOverlay(!showOverlay)}
+          >
+            {showOverlay ? "Hide" : "Show"} Overlay
+          </C.Button>
+          <C.Text>Content behind overlay</C.Text>
           {showOverlay && (
-            <C.LoadingOverlay 
-              title="Loading something..." 
-            />
+            <C.LoadingOverlay title="Loading..." />
           )}
-        </C.Box>
-      </C.Stack>
+        </C.Stack>
+      </C.Box>
+
+      {/* Combinations */}
+      <C.Box header={
+        <C.Text as="h4">Combinations</C.Text>
+      }>
+        <C.Stack direction="row">
+          <C.Loading 
+            theme="colored"
+            css={{ height: "32px", width: "32px" }}
+          />
+          <C.Loading 
+            css={{ 
+              height: "24px", 
+              width: "24px",
+              color: "$purple" 
+            }}
+          />
+        </C.Stack>
+      </C.Box>
     </C.Stack>
   );
 } 

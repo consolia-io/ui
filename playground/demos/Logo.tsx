@@ -1,61 +1,85 @@
-import React from "react";
+import { JSX } from "react";
+
 import * as C from "../../src/index";
 
-export default function LogoDemo() {
+export default function LogoDemo(): JSX.Element {
   return (
-    <C.Stack css={{ gap: "$large" }}>
-      {/* Types */}
-      <C.Box theme="border">
-        <C.Text as="h4">Types</C.Text>
-        <C.Stack css={{ marginTop: "$medium", gap: "$large" }}>
-          <C.Logo type="full" width={48} />
-          <C.Logo type="full" width={200} />
-          <C.Logo type="full" width={180} />
+    <C.Stack css={{ 
+      display: "grid",
+      gap: "$large",
+      gridTemplateColumns: "repeat(3, 1fr)" 
+    }}>
+      {/* Basic Usage */}
+      <C.Box header={
+        <C.Text as="h4">Basic Usage</C.Text>
+      }>
+        <C.Stack>
+          <C.Logo type="full" width={120} />
+          <C.Logo type="icon" width={48} />
+          <C.Logo type="text" width={100} />
         </C.Stack>
       </C.Box>
 
-      {/* Colors */}
-      <C.Box theme="border">
-        <C.Text as="h4">Colors</C.Text>
-        <C.Stack css={{ marginTop: "$medium", gap: "$large" }}>
-          <C.Logo type="full" width={48} color="purple" />
-          <C.Logo type="full" width={48} color="orange" />
-          <C.Logo type="full" width={48} color="yellow" />
-          <C.Logo type="full" width={48} color="blue" />
+      {/* Themes */}
+      <C.Box header={
+        <C.Text as="h4">Themes</C.Text>
+      }>
+        <C.Stack>
+          <C.Logo type="full" width={100} theme="default" />
+          <C.Logo type="full" width={100} theme="blue" />
+          <C.Logo type="full" width={100} theme="purple" />
+          <C.Logo type="full" width={100} theme="orange" />
         </C.Stack>
       </C.Box>
 
       {/* Sizes */}
-      <C.Box theme="border">
+      <C.Box header={
         <C.Text as="h4">Sizes</C.Text>
-        <C.Stack css={{ marginTop: "$medium", gap: "$large" }}>
+      }>
+        <C.Stack>
+          <C.Logo type="full" width={80} />
           <C.Logo type="full" width={120} />
-          <C.Logo type="full" width={180} />
-          <C.Logo type="full" width={240} />
+          <C.Logo type="full" width={160} />
         </C.Stack>
       </C.Box>
 
-      {/* Hover */}
-      <C.Box theme="border">
-        <C.Text as="h4">Hover</C.Text>
-        <C.Stack css={{ marginTop: "$medium", gap: "$large" }}>
+      {/* With Hover */}
+      <C.Box header={
+        <C.Text as="h4">With Hover</C.Text>
+      }>
+        <C.Stack>
           <C.Logo type="full" width={120} hover />
-        </C.Stack>
-      </C.Box>
-
-      {/* Icon */}
-      <C.Box theme="border">
-        <C.Text as="h4">Icon</C.Text>
-        <C.Stack css={{ marginTop: "$medium", gap: "$large" }}>
-          <C.Logo type="icon" width={120} />
+          <C.Text as="small">Hover for effect</C.Text>
         </C.Stack>
       </C.Box>
 
       {/* Outline */}
-      <C.Box theme="border">
+      <C.Box header={
         <C.Text as="h4">Outline</C.Text>
-        <C.Stack css={{ marginTop: "$medium", gap: "$large" }}>
+      }>
+        <C.Stack>
           <C.Logo type="full" width={120} outline />
+          <C.Logo type="icon" width={48} outline />
+        </C.Stack>
+      </C.Box>
+
+      {/* Combinations */}
+      <C.Box header={
+        <C.Text as="h4">Combinations</C.Text>
+      }>
+        <C.Stack>
+          <C.Logo 
+            type="full" 
+            width={120} 
+            theme="blue" 
+            hover 
+          />
+          <C.Logo 
+            type="icon" 
+            width={48} 
+            theme="purple" 
+            outline 
+          />
         </C.Stack>
       </C.Box>
     </C.Stack>

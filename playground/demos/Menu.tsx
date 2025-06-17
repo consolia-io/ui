@@ -1,48 +1,50 @@
 import { JSX, useState } from "react";
 
-import { Icons } from "../../src/icons";
 import * as C from "../../src/index";
 
 export default function MenuDemo(): JSX.Element {
   const [selectedOption, setSelectedOption] = useState<string>();
 
-  const menuOptions = [
+  const basicOptions = [
     {
-      icon: <Icons.ArrowUpRight weight="regular" />,
+      icon: <C.Icon system="ArrowRightIcon" />,
       label: "Dashboard",
       value: "dashboard"
     },
     {
-      icon: <Icons.ArrowDown weight="regular" />,
+      icon: <C.Icon system="InfoIcon" />,
       label: "Settings",
+      value: "settings"
+    },
+    {
+      icon: <C.Icon system="XCircleIcon" />,
+      label: "Logout",
+      value: "logout"
+    }
+  ];
+
+  const menuWithSubs = [
+    {
+      icon: <C.Icon system="ArrowRightIcon" />,
+      label: "Account",
       sub: [
         {
-          icon: <Icons.ArrowRight weight="regular" />,
+          icon: <C.Icon system="CheckCircleIcon" />,
           label: "Profile",
           value: "profile"
         },
         {
-          icon: <Icons.ArrowLeft weight="regular" />,
-          label: "Preferences",
-          value: "preferences"
-        },
-        {
-          icon: <Icons.ArrowDown weight="regular" />,
-          label: "Security",
-          value: "security"
+          icon: <C.Icon system="InfoIcon" />,
+          label: "Settings",
+          value: "settings"
         }
       ],
-      value: "settings"
+      value: "account"
     },
     {
-      icon: <Icons.Info weight="regular" />,
+      icon: <C.Icon system="MagnifyingGlassIcon" />,
       label: "Help",
       value: "help"
-    },
-    {
-      icon: <Icons.X weight="regular" />,
-      label: "Logout",
-      value: "logout"
     }
   ];
 
@@ -50,46 +52,100 @@ export default function MenuDemo(): JSX.Element {
     <C.Stack css={{ 
       display: "grid",
       gap: "$large",
-      gridTemplateColumns: "repeat(2, 1fr)" 
+      gridTemplateColumns: "repeat(3, 1fr)" 
     }}>
-      {/* Basic Menu */}
-      <C.Stack>
-        <C.Text as="h4">Basic Menu</C.Text>
-        <C.Menu
-          options={menuOptions}
-          trigger={
-            <C.Button>
-              <Icons.ArrowDown weight="regular" />
-              Open Menu
-            </C.Button>
-          }
-          onSelection={(value) => setSelectedOption(value)}
-        />
-        <C.Text accent>
-          Selected: {selectedOption || "None"}
-        </C.Text>
-      </C.Stack>
+      {/* Basic Usage */}
+      <C.Box header={
+        <C.Text as="h4">Basic Usage</C.Text>
+      }>
+        <C.Stack>
+          <C.Menu
+            options={basicOptions}
+            trigger={<C.Button>Open Menu</C.Button>}
+          />
+        </C.Stack>
+      </C.Box>
 
-      {/* Custom Menu with Logo */}
-      <C.Stack>
-        <C.Text as="h4">Custom Menu with Logo</C.Text>
-        <C.Menu
-          logo={
-            <C.Stack css={{ alignItems: "center", gap: "$small" }} direction="row">
-              <Icons.ArrowUpRight weight="regular" />
-              <C.Text as="h4" inline="auto">Actions Menu</C.Text>
-            </C.Stack>
-          }
-          options={menuOptions}
-          trigger={
-            <C.Button>
-              <Icons.ArrowsOutSimple weight="regular" />
-              Actions
-            </C.Button>
-          }
-          onSelection={(value) => setSelectedOption(value)}
-        />
-      </C.Stack>
+      {/* With Icons */}
+      <C.Box header={
+        <C.Text as="h4">With Icons</C.Text>
+      }>
+        <C.Stack>
+          <C.Menu
+            options={basicOptions}
+            trigger={
+              <C.Button icon={<C.Icon system="ArrowDownIcon" />}>
+                Actions
+              </C.Button>
+            }
+          />
+        </C.Stack>
+      </C.Box>
+
+      {/* With Sub-menus */}
+      <C.Box header={
+        <C.Text as="h4">With Sub-menus</C.Text>
+      }>
+        <C.Stack>
+          <C.Menu
+            options={menuWithSubs}
+            trigger={<C.Button theme="solid">Navigation</C.Button>}
+          />
+        </C.Stack>
+      </C.Box>
+
+      {/* Custom Triggers */}
+      <C.Box header={
+        <C.Text as="h4">Custom Triggers</C.Text>
+      }>
+        <C.Stack>
+          <C.Menu
+            options={basicOptions}
+            trigger={
+              <C.Button 
+                icon={<C.Icon system="ArrowsOutSimpleIcon" />}
+                theme="minimal"
+                small
+              />
+            }
+          />
+          <C.Menu
+            options={basicOptions}
+            trigger={<C.Text>Click this text</C.Text>}
+          />
+        </C.Stack>
+      </C.Box>
+
+      {/* With Callback */}
+      <C.Box header={
+        <C.Text as="h4">With Callback</C.Text>
+      }>
+        <C.Stack>
+          <C.Menu
+            options={basicOptions}
+            trigger={<C.Button>Select Option</C.Button>}
+            onSelection={(value, label) => {
+              setSelectedOption(`${label} (${value})`);
+            }}
+          />
+          <C.Text as="small">
+            Selected: {selectedOption || "None"}
+          </C.Text>
+        </C.Stack>
+      </C.Box>
+
+      {/* With Initial */}
+      <C.Box header={
+        <C.Text as="h4">With Initial</C.Text>
+      }>
+        <C.Stack>
+          <C.Menu
+            options={basicOptions}
+            initial="dashboard"
+            trigger={<C.Button theme="minimal">Pre-selected</C.Button>}
+          />
+        </C.Stack>
+      </C.Box>
     </C.Stack>
   );
 } 

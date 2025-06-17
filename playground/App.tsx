@@ -1,6 +1,5 @@
 import { JSX, useState } from "react";
 
-import { Icons } from "../src/icons";
 import * as C from "../src/index";
 import AccordionDemo from "./demos/Accordion";
 import AvatarDemo from "./demos/Avatar";
@@ -49,7 +48,6 @@ const DEMOS = {
   Modal: ModalDemo,
   Nodes: NodesDemo,
   Popover: PopoverDemo,
-
   Select: SelectDemo,
   Stack: StackDemo,
   Table: TableDemo,
@@ -91,14 +89,19 @@ export function App(): JSX.Element {
         }}
         inverted
         top="medium">
-        <C.Stack flexduo>
-          <C.Logo hover width={150} />
+        <C.Stack direction="row" justify="space-between">
+          <C.Stack
+            onClick={() => {
+              setSelectedDemo("avatar");
+            }}>
+            <C.Logo hover width={150} />
+          </C.Stack>
           <C.Select
             initial={selectedDemo}
             options={DEMO_OPTIONS}
             trigger={
               <C.Button theme="solid">
-                <Icons.ArrowDown weight="regular" />
+                <C.Icon system="ArrowDownIcon" />
                 {DEMO_OPTIONS.find((opt) => opt.value === selectedDemo)?.label ||
                   "Select Component"}
               </C.Button>

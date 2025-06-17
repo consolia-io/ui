@@ -1,103 +1,99 @@
-import React from "react";
-import * as C from "../../src/index";
-import { Icons } from "../../src/icons";
+import { JSX } from "react";
 
-export default function ButtonDemo() {
+import * as C from "../../src/index";
+
+export default function ButtonDemo(): JSX.Element {
   return (
     <C.Stack css={{ 
       display: "grid",
-      gridTemplateColumns: "repeat(2, 1fr)",
-      gap: "$large" 
+      gap: "$large",
+      gridTemplateColumns: "repeat(3, 1fr)" 
     }}>
-      {/* Basic Buttons */}
-      <C.Stack>
-        <C.Text as="h4">Basic</C.Text>
-        <C.Stack direction="row" css={{ gap: "$medium", flexWrap: "wrap" }}>
+      {/* Basic Usage */}
+      <C.Box header={
+        <C.Text as="h4">Basic Usage</C.Text>
+      }>
+        <C.Stack>
           <C.Button>Default Button</C.Button>
           <C.Button small>Small Button</C.Button>
           <C.Button disabled>Disabled Button</C.Button>
         </C.Stack>
-      </C.Stack>
+      </C.Box>
 
       {/* Themes */}
-      <C.Stack>
+      <C.Box header={
         <C.Text as="h4">Themes</C.Text>
-        <C.Stack direction="row" css={{ gap: "$medium", flexWrap: "wrap" }}>
-          <C.Button theme="default">Default Theme</C.Button>
-          <C.Button theme="minimal">Minimal Theme</C.Button>
-          <C.Button theme="solid">Solid Theme</C.Button>
+      }>
+        <C.Stack>
+          <C.Button theme="default">Default</C.Button>
+          <C.Button theme="solid">Solid</C.Button>
+          <C.Button theme="minimal">Minimal</C.Button>
         </C.Stack>
-      </C.Stack>
+      </C.Box>
 
       {/* With Icons */}
-      <C.Stack>
+      <C.Box header={
         <C.Text as="h4">With Icons</C.Text>
-        <C.Stack direction="row" css={{ gap: "$medium", flexWrap: "wrap" }}>
-          <C.Button icon={<C.Icon><Icons.Circle /></C.Icon>}>
-            Left Icon
+      }>
+        <C.Stack>
+          <C.Button icon={<C.Icon system="CheckCircleIcon" />}>
+            Success
           </C.Button>
           <C.Button 
-            icon={<C.Icon><Icons.ArrowRight /></C.Icon>}
+            icon={<C.Icon system="ArrowRightIcon" />}
             iconPosition="right"
           >
-            Right Icon
-          </C.Button>
-          <C.Button external>
-            External Link
+            Next
           </C.Button>
         </C.Stack>
-      </C.Stack>
+      </C.Box>
 
       {/* States */}
-      <C.Stack>
+      <C.Box header={
         <C.Text as="h4">States</C.Text>
-        <C.Stack direction="row" css={{ gap: "$medium", flexWrap: "wrap" }}>
+      }>
+        <C.Stack>
           <C.Button loading>Loading</C.Button>
-          <C.Button disabled>Disabled</C.Button>
+          <C.Button external>External Link</C.Button>
           <C.Button block>Full Width</C.Button>
         </C.Stack>
-      </C.Stack>
+      </C.Box>
+
+      {/* Inline Usage */}
+      <C.Box header={
+        <C.Text as="h4">Inline Usage</C.Text>
+      }>
+        <C.Stack>
+          <C.Text>
+            Text with <C.Button inline="small" small>inline</C.Button> button
+          </C.Text>
+          <C.Button inline="auto" small theme="minimal">
+            Auto margin
+          </C.Button>
+        </C.Stack>
+      </C.Box>
 
       {/* Combinations */}
-      <C.Stack>
+      <C.Box header={
         <C.Text as="h4">Combinations</C.Text>
-        <C.Stack direction="row" css={{ gap: "$medium", flexWrap: "wrap" }}>
+      }>
+        <C.Stack>
           <C.Button 
             small 
             theme="solid"
-            icon={<C.Icon><Icons.Circle /></C.Icon>}
+            icon={<C.Icon system="CheckCircleIcon" />}
           >
             Small Solid
           </C.Button>
           <C.Button 
-            theme="minimal"
-            icon={<C.Icon><Icons.X /></C.Icon>}
-            iconPosition="right"
-          >
-            Delete
-          </C.Button>
-          <C.Button 
             loading 
-            theme="solid"
+            theme="minimal"
+            icon={<C.Icon system="ArrowClockwiseIcon" />}
           >
             Processing
           </C.Button>
         </C.Stack>
-      </C.Stack>
-
-      {/* Inline */}
-      <C.Stack>
-        <C.Text as="h4">Inline</C.Text>
-        <C.Stack css={{ gap: "$medium" }}>
-          <C.Text>
-            Text with an <C.Button inline="small" small>inline button</C.Button> in it.
-          </C.Text>
-          <C.Text>
-            <C.Button inline="auto" small theme="minimal">Left</C.Button>
-            Auto margin pushing this button right
-          </C.Text>
-        </C.Stack>
-      </C.Stack>
+      </C.Box>
     </C.Stack>
   );
 } 

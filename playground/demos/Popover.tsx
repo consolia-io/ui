@@ -1,86 +1,88 @@
 import { JSX } from "react";
 
-import { Icons } from "../../src/icons";
 import * as C from "../../src/index";
 
 export default function PopoverDemo(): JSX.Element {
   return (
     <C.Stack css={{ 
-      alignItems: "center",
       display: "grid",
       gap: "$large",
       gridTemplateColumns: "repeat(3, 1fr)" 
     }}>
-      {/* Basic Popover */}
-      <C.Stack css={{ alignItems: "center" }}>
-        <C.Text as="h4" bottom="medium">Basic</C.Text>
+      {/* Basic Usage */}
+      <C.Box header={
+        <C.Text as="h4">Basic Usage</C.Text>
+      }>
         <C.Popover
           trigger={
             <C.Button>
-              <Icons.Info weight="regular" />
-              Click me
+              <C.Icon system="InfoIcon" />
+              Basic
             </C.Button>
           }
         >
-          <C.Text>This is a basic popover with default styling.</C.Text>
+          <C.Text>Default popover with automatic positioning.</C.Text>
         </C.Popover>
-      </C.Stack>
+      </C.Box>
 
       {/* Small Popover */}
-      <C.Stack css={{ alignItems: "center" }}>
-        <C.Text as="h4" bottom="medium">Small</C.Text>
+      <C.Box header={
+        <C.Text as="h4">Small Size</C.Text>
+      }>
         <C.Popover
           small
           trigger={
             <C.Button>
-              <Icons.ArrowDown weight="regular" />
-              Small popover
+              <C.Icon system="ArrowDownIcon" />
+              Small
             </C.Button>
           }
         >
-          <C.Text>A more compact popover with reduced max-width.</C.Text>
+          <C.Text>Compact popover with reduced max-width.</C.Text>
         </C.Popover>
-      </C.Stack>
+      </C.Box>
 
       {/* Minimal Popover */}
-      <C.Stack css={{ alignItems: "center" }}>
-        <C.Text as="h4" bottom="medium">Minimal</C.Text>
+      <C.Box header={
+        <C.Text as="h4">Minimal Style</C.Text>
+      }>
         <C.Popover
           minimal
           trigger={
             <C.Button>
-              <Icons.ArrowsOutSimple weight="regular" />
+              <C.Icon system="ArrowsOutSimpleIcon" />
+              Minimal
             </C.Button>
           }
         >
-          <C.Box css={{ padding: "$medium" }}>
-            <C.Stack css={{ gap: "$medium" }}>
-              <C.Text>No default padding for custom content.</C.Text>
-              <C.Button>Action Button</C.Button>
-            </C.Stack>
-          </C.Box>
+          <C.Stack css={{ gap: "$small", padding: "$medium" }}>
+            <C.Text>No default padding.</C.Text>
+            <C.Button small>Custom content</C.Button>
+          </C.Stack>
         </C.Popover>
-      </C.Stack>
+      </C.Box>
 
-      {/* Disabled Popover */}
-      <C.Stack css={{ alignItems: "center" }}>
-        <C.Text as="h4" bottom="medium">Disabled</C.Text>
+      {/* Disabled State */}
+      <C.Box header={
+        <C.Text as="h4">Disabled State</C.Text>
+      }>
         <C.Popover
           disabled
           trigger={
             <C.Button disabled>
-              <Icons.X weight="regular" />
+              <C.Icon system="XIcon" />
               Disabled
             </C.Button>
           }
         >
-          <C.Text>This content won't be shown.</C.Text>
+          <C.Text>This won't show.</C.Text>
         </C.Popover>
-      </C.Stack>
+      </C.Box>
 
-      {/* Custom Styled Popover */}
-      <C.Stack css={{ alignItems: "center" }}>
-        <C.Text as="h4" bottom="medium">Custom Styled</C.Text>
+      {/* Custom Styling */}
+      <C.Box header={
+        <C.Text as="h4">Custom CSS</C.Text>
+      }>
         <C.Popover
           css={{
             backgroundColor: "$purple",
@@ -88,40 +90,36 @@ export default function PopoverDemo(): JSX.Element {
           }}
           trigger={
             <C.Button>
-              <Icons.ArrowUp weight="regular" />
-              Custom style
+              <C.Icon system="ArrowUpIcon" />
+              Styled
             </C.Button>
           }
         >
           <C.Text css={{ color: "inherit" }}>
-            A popover with custom background color.
+            Custom background and text color.
           </C.Text>
         </C.Popover>
-      </C.Stack>
+      </C.Box>
 
-      {/* Rich Content Popover */}
-      <C.Stack css={{ alignItems: "center" }}>
-        <C.Text as="h4" bottom="medium">Rich Content</C.Text>
+      {/* Rich Content */}
+      <C.Box header={
+        <C.Text as="h4">Rich Content</C.Text>
+      }>
         <C.Popover
           trigger={
             <C.Button>
-              <Icons.ArrowRight weight="regular" />
-              More info
+              <C.Icon system="ArrowRightIcon" />
+              Rich
             </C.Button>
           }
         >
-          <C.Stack css={{ gap: "$medium" }}>
-            <C.Text as="h4">Detailed Information</C.Text>
-            <C.Text>This popover contains multiple elements including:</C.Text>
-            <C.Stack css={{ gap: "$small" }}>
-              <C.Badge theme="purple">Feature 1</C.Badge>
-              <C.Badge theme="blue">Feature 2</C.Badge>
-              <C.Badge theme="orange">Feature 3</C.Badge>
-            </C.Stack>
-            <C.Button>Learn More</C.Button>
+          <C.Stack css={{ gap: "$small" }}>
+            <C.Text as="strong">User Profile</C.Text>
+            <C.Badge theme="blue">Active</C.Badge>
+            <C.Button small>View Details</C.Button>
           </C.Stack>
         </C.Popover>
-      </C.Stack>
+      </C.Box>
     </C.Stack>
   );
 } 
