@@ -1,11 +1,13 @@
 import type { JSX } from "react";
 
+import useMountSSR from "../../../hooks/useMountSSR";
 import { Select, Button, useTheme } from "../../../index";
 import { ISelect } from "../../../types";
 import Icon from "../../Icon";
 
 export default function ProviderToggle(): JSX.Element {
   const { setTheme, theme } = useTheme();
+  const isMounted = useMountSSR();
 
   const options = [
     { icon: <Icon system="MoonIcon" />, iconPosition: "right", label: "Dark", value: "dark" },
@@ -18,9 +20,11 @@ export default function ProviderToggle(): JSX.Element {
     },
   ] as ISelect["options"];
 
-  const currentThemeOption = options.find((option) => option.value === theme);
+  // Use a fallback theme during SSR to prevent hydration mismatch
+  const currentTheme = isMounted ? theme : "system";
+  const currentThemeOption = options.find((option) => option.value === currentTheme);
   const currentThemeIcon = currentThemeOption?.icon;
-  const isCurrentTheme = (value: string): boolean => value === theme;
+  const isCurrentTheme = (value: string): boolean => value === currentTheme;
 
   const handleSelection = (value: string): void => {
     if (isCurrentTheme(value)) {
@@ -36,13 +40,13 @@ export default function ProviderToggle(): JSX.Element {
       }}
       icon={currentThemeIcon}
       small>
-      {theme}
+      {currentTheme}
     </Button>
   );
 
   return (
     <Select
-      initial={theme}
+      initial={currentTheme}
       options={options}
       trigger={renderTrigger()}
       onSelection={handleSelection}
