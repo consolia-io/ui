@@ -52,14 +52,63 @@ export default function StackDemo(): JSX.Element {
         <C.Text as="h4">With Width</C.Text>
       }>
         <C.Stack css={{ gap: "$small" }}>
-          <C.Stack width={100}>
-            <DemoBox color="$orange">100%</DemoBox>
+          <C.Stack width={100} direction="column">
+            <DemoBox color="$orange">100% with padding</DemoBox>
           </C.Stack>
-          <C.Stack width={75}>
-            <DemoBox color="$orange">75%</DemoBox>
+          <C.Stack width={75} direction="column">
+            <DemoBox color="$orange">75% with padding</DemoBox>
           </C.Stack>
-          <C.Stack width={50}>
-            <DemoBox color="$orange">50%</DemoBox>
+          <C.Stack width={50} direction="column">
+            <DemoBox color="$orange">50% with padding</DemoBox>
+          </C.Stack>
+        </C.Stack>
+      </C.Box>
+
+      {/* Responsive Width Test */}
+      <C.Box header={
+        <C.Text as="h4">Responsive (Debug)</C.Text>
+      }>
+        <C.Stack direction="row" wrap={true} css={{ border: "1px solid red" }}>
+          <C.Stack 
+            direction="column"
+            width={40}
+            widthResponsive={{ phone: 100 }}
+            css={{ border: "2px solid blue" }}
+          >
+            <DemoBox color="$blue">40% default, 100% on phone</DemoBox>
+          </C.Stack>
+          <C.Stack 
+            direction="column"
+            width={60}
+            widthResponsive={{ 
+              phone: 100,
+              tablet: 80 
+            }}
+            css={{ border: "2px solid purple" }}
+          >
+            <DemoBox color="$purple">60% default, 80% tablet, 100% phone</DemoBox>
+          </C.Stack>
+        </C.Stack>
+      </C.Box>
+
+      {/* Auto-wrapping Two Columns */}
+      <C.Box header={
+        <C.Text as="h4">Perfect 50/50 Columns</C.Text>
+      }>
+        <C.Stack direction="row">
+          <C.Stack 
+            width={50}
+            direction="column"
+            widthResponsive={{ phone: 100 }}
+          >
+            <DemoBox color="$orange">50% desktop, 100% phone (auto-wraps)</DemoBox>
+          </C.Stack>
+          <C.Stack 
+            width={50}
+            direction="column"
+            widthResponsive={{ phone: 100 }}
+          >
+            <DemoBox color="$yellow">50% desktop, 100% phone (auto-wraps)</DemoBox>
           </C.Stack>
         </C.Stack>
       </C.Box>

@@ -14,16 +14,16 @@ export const StackStyled = styled("div", {
       column: {
         display: "flex",
         flexDirection: "column",
+      },
+      row: {
+        display: "flex",
+        flexDirection: "row",
         paddingLeft: "$small",
         paddingRight: "$small",
         phone: {
           paddingLeft: "$smaller",
           paddingRight: "$smaller",
         },
-      },
-      row: {
-        display: "flex",
-        flexDirection: "row",
       },
     },
     inline: {

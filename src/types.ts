@@ -823,16 +823,6 @@ export interface IStack {
   inline?: boolean;
   /** Whether to use minimal styling */
   minimal?: boolean;
-  /** Default offset percentage */
-  offset?: number;
-  /** Responsive offset percentages */
-  offsetResponsive?: {
-    desktop?: number;
-    laptop?: number;
-    phone?: number;
-    tablet?: number;
-    wide?: number;
-  };
   /** Click handler for the stack */
   onClick?: () => void;
   /** Top margin/spacing */
