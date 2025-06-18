@@ -104,8 +104,8 @@ export default function MenuDemo(): JSX.Element {
             trigger={
               <C.Button 
                 icon={<C.Icon system="ArrowsOutSimpleIcon" />}
-                theme="minimal"
                 small
+                theme="minimal"
               />
             }
           />
@@ -140,8 +140,8 @@ export default function MenuDemo(): JSX.Element {
       }>
         <C.Stack>
           <C.Menu
-            options={basicOptions}
             initial="dashboard"
+            options={basicOptions}
             trigger={<C.Button theme="minimal">Pre-selected</C.Button>}
           />
         </C.Stack>

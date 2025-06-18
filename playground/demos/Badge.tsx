@@ -25,12 +25,12 @@ export default function BadgeDemo(): JSX.Element {
         <C.Text as="h4">Border Variant</C.Text>
       }>
         <C.Stack>
-          <C.Badge variant="border" theme="default">Default</C.Badge>
-          <C.Badge variant="border" theme="solid">Solid</C.Badge>
-          <C.Badge variant="border" theme="blue">Blue</C.Badge>
-          <C.Badge variant="border" theme="purple">Purple</C.Badge>
-          <C.Badge variant="border" theme="orange">Orange</C.Badge>
-          <C.Badge variant="border" theme="yellow">Yellow</C.Badge>
+          <C.Badge theme="default" variant="border">Default</C.Badge>
+          <C.Badge theme="solid" variant="border">Solid</C.Badge>
+          <C.Badge theme="blue" variant="border">Blue</C.Badge>
+          <C.Badge theme="purple" variant="border">Purple</C.Badge>
+          <C.Badge theme="orange" variant="border">Orange</C.Badge>
+          <C.Badge theme="yellow" variant="border">Yellow</C.Badge>
         </C.Stack>
       </C.Box>
 
@@ -39,12 +39,12 @@ export default function BadgeDemo(): JSX.Element {
         <C.Text as="h4">Theme Variant</C.Text>
       }>
         <C.Stack>
-          <C.Badge variant="theme" theme="default">Default</C.Badge>
-          <C.Badge variant="theme" theme="solid">Solid</C.Badge>
-          <C.Badge variant="theme" theme="blue">Blue</C.Badge>
-          <C.Badge variant="theme" theme="purple">Purple</C.Badge>
-          <C.Badge variant="theme" theme="orange">Orange</C.Badge>
-          <C.Badge variant="theme" theme="yellow">Yellow</C.Badge>
+          <C.Badge theme="default" variant="theme">Default</C.Badge>
+          <C.Badge theme="solid" variant="theme">Solid</C.Badge>
+          <C.Badge theme="blue" variant="theme">Blue</C.Badge>
+          <C.Badge theme="purple" variant="theme">Purple</C.Badge>
+          <C.Badge theme="orange" variant="theme">Orange</C.Badge>
+          <C.Badge theme="yellow" variant="theme">Yellow</C.Badge>
         </C.Stack>
       </C.Box>
 
@@ -94,19 +94,19 @@ export default function BadgeDemo(): JSX.Element {
         <C.Text as="h4">Variant Comparison</C.Text>
       }>
         <C.Stack>
-          <C.Stack direction="row" css={{ gap: "$small", alignItems: "center" }}>
-            <C.Badge variant="border" theme="blue">Border Blue</C.Badge>
-            <C.Badge variant="theme" theme="blue">Theme Blue</C.Badge>
+          <C.Stack css={{ alignItems: "center", gap: "$small" }} direction="row">
+            <C.Badge theme="blue" variant="border">Border Blue</C.Badge>
+            <C.Badge theme="blue" variant="theme">Theme Blue</C.Badge>
           </C.Stack>
-          <C.Stack direction="row" css={{ gap: "$small", alignItems: "center" }}>
-            <C.Badge variant="border" theme="purple">Border Purple</C.Badge>
-            <C.Badge variant="theme" theme="purple">Theme Purple</C.Badge>
+          <C.Stack css={{ alignItems: "center", gap: "$small" }} direction="row">
+            <C.Badge theme="purple" variant="border">Border Purple</C.Badge>
+            <C.Badge theme="purple" variant="theme">Theme Purple</C.Badge>
           </C.Stack>
-          <C.Stack direction="row" css={{ gap: "$small", alignItems: "center" }}>
-            <C.Badge variant="border" theme="orange" icon={<C.Icon system="CheckCircleIcon" />}>
+          <C.Stack css={{ alignItems: "center", gap: "$small" }} direction="row">
+            <C.Badge icon={<C.Icon system="CheckCircleIcon" />} theme="orange" variant="border">
               Border with Icon
             </C.Badge>
-            <C.Badge variant="theme" theme="orange" icon={<C.Icon system="CheckCircleIcon" />}>
+            <C.Badge icon={<C.Icon system="CheckCircleIcon" />} theme="orange" variant="theme">
               Theme with Icon
             </C.Badge>
           </C.Stack>
@@ -121,16 +121,16 @@ export default function BadgeDemo(): JSX.Element {
           <C.Badge 
             icon={<C.Icon system="CircleIcon" />} 
             small 
-            variant="theme"
             theme="purple"
+            variant="theme"
           >
             Status
           </C.Badge>
           <C.Badge 
             closable 
             icon={<C.Icon system="CheckCircleIcon" />}
-            variant="border"
             theme="solid"
+            variant="border"
           >
             Complete
           </C.Badge>

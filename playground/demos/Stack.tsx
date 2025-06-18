@@ -25,7 +25,6 @@ export default function StackDemo(): JSX.Element {
       gap: "$large",
       gridTemplateColumns: "repeat(3, 1fr)" 
     }}>
-      {/* Basic Usage */}
       <C.Box header={
         <C.Text as="h4">Basic Usage</C.Text>
       }>
@@ -36,7 +35,6 @@ export default function StackDemo(): JSX.Element {
         </C.Stack>
       </C.Box>
 
-      {/* Row Direction */}
       <C.Box header={
         <C.Text as="h4">Row Direction</C.Text>
       }>
@@ -47,7 +45,6 @@ export default function StackDemo(): JSX.Element {
         </C.Stack>
       </C.Box>
 
-      {/* With Width */}
       <C.Box header={
         <C.Text as="h4">With Width</C.Text>
       }>
@@ -64,7 +61,6 @@ export default function StackDemo(): JSX.Element {
         </C.Stack>
       </C.Box>
 
-      {/* Responsive Width Test */}
       <C.Box header={
         <C.Text as="h4">Responsive (Debug)</C.Text>
       }>
@@ -91,7 +87,6 @@ export default function StackDemo(): JSX.Element {
         </C.Stack>
       </C.Box>
 
-      {/* Auto-wrapping Two Columns */}
       <C.Box header={
         <C.Text as="h4">Perfect 50/50 Columns</C.Text>
       }>
@@ -113,7 +108,6 @@ export default function StackDemo(): JSX.Element {
         </C.Stack>
       </C.Box>
 
-      {/* CSS + Responsive Width Test */}
       <C.Box header={
         <C.Text as="h4">CSS + Responsive Test</C.Text>
       }>
@@ -152,7 +146,6 @@ export default function StackDemo(): JSX.Element {
         </C.Stack>
       </C.Box>
 
-      {/* Center Alignment */}
       <C.Box header={
         <C.Text as="h4">Center Alignment</C.Text>
       }>
@@ -167,7 +160,6 @@ export default function StackDemo(): JSX.Element {
         </C.Stack>
       </C.Box>
 
-      {/* With Spacing */}
       <C.Box header={
         <C.Text as="h4">With Spacing</C.Text>
       }>
@@ -180,7 +172,6 @@ export default function StackDemo(): JSX.Element {
         </C.Stack>
       </C.Box>
 
-      {/* Inverted Stack */}
       <C.Box header={
         <C.Text as="h4">Inverted</C.Text>
       }>

@@ -102,7 +102,7 @@ export default function TableDemo(): JSX.Element {
         <C.Text as="h4">Loading State</C.Text>
       }>
         <C.Stack css={{ gap: "$small" }}>
-          <C.Button onClick={simulateLoading} small>
+          <C.Button small onClick={simulateLoading}>
             <C.Icon system="ArrowClockwiseIcon" />
             Load
           </C.Button>
@@ -119,7 +119,7 @@ export default function TableDemo(): JSX.Element {
         <C.Text as="h4">Error State</C.Text>
       }>
         <C.Stack css={{ gap: "$small" }}>
-          <C.Button onClick={simulateError} small>
+          <C.Button small onClick={simulateError}>
             <C.Icon system="WarningCircleIcon" />
             Error
           </C.Button>

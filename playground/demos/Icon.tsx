@@ -26,10 +26,10 @@ export default function IconDemo(): JSX.Element {
         <C.Text as="h4">Sizes</C.Text>
       }>
         <C.Stack direction="row">
-          <C.Icon system="CheckCircleIcon" forceSize={16} />
-          <C.Icon system="CheckCircleIcon" forceSize={24} />
-          <C.Icon system="CheckCircleIcon" forceSize={32} />
-          <C.Icon system="CheckCircleIcon" forceSize={48} />
+          <C.Icon forceSize={16} system="CheckCircleIcon" />
+          <C.Icon forceSize={24} system="CheckCircleIcon" />
+          <C.Icon forceSize={32} system="CheckCircleIcon" />
+          <C.Icon forceSize={48} system="CheckCircleIcon" />
         </C.Stack>
       </C.Box>
 
@@ -38,10 +38,10 @@ export default function IconDemo(): JSX.Element {
         <C.Text as="h4">Colors</C.Text>
       }>
         <C.Stack direction="row">
-          <C.Icon system="CheckCircleIcon" forceColor="text" />
-          <C.Icon system="CheckCircleIcon" forceColor="blue" />
-          <C.Icon system="CheckCircleIcon" forceColor="purple" />
-          <C.Icon system="CheckCircleIcon" forceColor="orange" />
+          <C.Icon forceColor="text" system="CheckCircleIcon" />
+          <C.Icon forceColor="blue" system="CheckCircleIcon" />
+          <C.Icon forceColor="purple" system="CheckCircleIcon" />
+          <C.Icon forceColor="orange" system="CheckCircleIcon" />
         </C.Stack>
       </C.Box>
 
@@ -51,10 +51,10 @@ export default function IconDemo(): JSX.Element {
       }>
         <C.Stack>
           <C.Text>
-            Text with <C.Icon system="CheckCircleIcon" inline="smaller" /> icon
+            Text with <C.Icon inline="smaller" system="CheckCircleIcon" /> icon
           </C.Text>
           <C.Text>
-            <C.Icon system="ArrowRightIcon" inline="small" /> Icon with margin
+            <C.Icon inline="small" system="ArrowRightIcon" /> Icon with margin
           </C.Text>
         </C.Stack>
       </C.Box>
@@ -77,19 +77,19 @@ export default function IconDemo(): JSX.Element {
       }>
         <C.Stack direction="row">
           <C.Icon 
-            system="CheckCircleIcon" 
-            forceSize={32} 
             forceColor="blue" 
+            forceSize={32} 
+            system="CheckCircleIcon" 
           />
           <C.Icon 
-            system="WarningCircleIcon" 
-            forceSize={32} 
             forceColor="orange" 
+            forceSize={32} 
+            system="WarningCircleIcon" 
           />
           <C.Icon 
-            system="XCircleIcon" 
-            forceSize={32} 
             forceColor="red" 
+            forceSize={32} 
+            system="XCircleIcon" 
           />
         </C.Stack>
       </C.Box>

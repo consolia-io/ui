@@ -1,26 +1,16 @@
+/* eslint-disable no-console */
 import { JSX, useState } from "react";
 
 import * as C from "../../src/index";
 
 // Content components for tab panels
-function TabContent({ color, title }: { color: string; title: string }) {
-  return (
-    <C.Box css={{ 
-      backgroundColor: color,
-      borderRadius: "$medium",
-      marginTop: "$medium",
-      padding: "$large"
-    }}>
-      <C.Text css={{ color: "white" }}>Content for {title}</C.Text>
-    </C.Box>
-  );
-}
 
 export default function TabsDemo(): JSX.Element {
   const [basicTab, setBasicTab] = useState("tab1");
   const [iconTab, setIconTab] = useState("home");
   const [callbackTab, setCallbackTab] = useState("overview");
   const [controlledTab, setControlledTab] = useState("tab1");
+  const [overflowTab, setOverflowTab] = useState("monday");
 
   const basicOptions = [
     { label: "First", value: "tab1" },
@@ -52,25 +42,62 @@ export default function TabsDemo(): JSX.Element {
     { label: "History", value: "history" }
   ];
 
+  // Many tabs to demonstrate overflow scrolling
+  const overflowOptions = [
+    { label: "Monday", value: "monday" },
+    { label: "Tuesday", value: "tuesday" },
+    { label: "Wednesday", value: "wednesday" },
+    { label: "Thursday", value: "thursday" },
+    { label: "Friday", value: "friday" },
+    { label: "Saturday", value: "saturday" },
+    { label: "Sunday", value: "sunday" },
+    { label: "Next Monday", value: "next-monday" },
+    { label: "Next Tuesday", value: "next-tuesday" },
+    { label: "Next Wednesday", value: "next-wednesday" },
+    { label: "Next Thursday", value: "next-thursday" },
+    { label: "Next Friday", value: "next-friday" }
+  ];
+
   return (
     <C.Stack css={{ 
       display: "grid",
       gap: "$large",
       gridTemplateColumns: "repeat(3, 1fr)" 
     }}>
-      {/* Controlled Demo */}
-      <C.Box header={
-        <C.Text as="h4">Controlled Value</C.Text>
-      } css={{ gridColumn: "1 / -1" }}>
+      {/* Overflow Scrolling Demo */}
+      <C.Box css={{ gridColumn: "1 / -1" }} header={
+        <C.Text as="h4">Overflow Scrolling</C.Text>
+      }>
         <C.Stack css={{ gap: "$medium" }}>
-          <C.Stack direction="row" css={{ gap: "$small" }}>
-            <C.Button onClick={() => setControlledTab("tab1")} small>
+          <C.Text accent>Try scrolling horizontally through the tabs below (no visible scrollbars)</C.Text>
+          <C.Box css={{ 
+            border: "1px dashed $borderLight",
+            borderRadius: "$medium",
+            maxWidth: "400px", // Constrain container to force overflow
+            padding: "$small"
+          }}>
+            <C.Tabs
+              options={overflowOptions}
+              onSelection={setOverflowTab}
+            />
+          </C.Box>
+          <C.Text accent>Selected: {overflowTab}</C.Text>
+        </C.Stack>
+      </C.Box>
+
+      {/* Controlled Demo */}
+      <C.Box css={{ gridColumn: "1 / -1" }} header={
+        <C.Text as="h4">Controlled Value</C.Text>
+      }>
+        <C.Stack css={{ gap: "$medium" }}>
+          <C.Stack css={{ gap: "$small" }} direction="row">
+            <C.Button small onClick={() => setControlledTab("tab1")}>
               Set First
             </C.Button>
-            <C.Button onClick={() => setControlledTab("tab2")} small>
+            <C.Button small onClick={() => setControlledTab("tab2")}>
               Set Second  
             </C.Button>
-            <C.Button onClick={() => setControlledTab("tab3")} small>
+            <C.Button small onClick={() => setControlledTab("tab3")}>
               Set Third
             </C.Button>
           </C.Stack>
@@ -161,7 +188,7 @@ export default function TabsDemo(): JSX.Element {
             options={callbackOptions}
             onSelection={setCallbackTab}
           />
-          <C.Box small css={{ backgroundColor: "$surface" }}>
+          <C.Box css={{ backgroundColor: "$surface" }} small>
             <C.Text>Content for: {callbackTab}</C.Text>
           </C.Box>
         </C.Stack>

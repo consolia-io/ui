@@ -122,8 +122,8 @@ export default function AccordionDemo(): JSX.Element {
             {
               children: <C.Text>This accordion item uses the large variant.</C.Text>,
               label: "Large Item",
-              value: "large",
-              large: true
+              large: true,
+              value: "large"
             }
           ]}
         />

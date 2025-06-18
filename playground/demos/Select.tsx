@@ -47,18 +47,18 @@ export default function SelectDemo(): JSX.Element {
       gridTemplateColumns: "repeat(3, 1fr)" 
     }}>
       {/* Controlled Demo */}
-      <C.Box header={
+      <C.Box css={{ gridColumn: "1 / -1" }} header={
         <C.Text as="h4">Controlled Value</C.Text>
-      } css={{ gridColumn: "1 / -1" }}>
+      }>
         <C.Stack css={{ gap: "$medium" }}>
-          <C.Stack direction="row" css={{ gap: "$small" }}>
-            <C.Button onClick={() => setControlledValue("option1")} small>
+          <C.Stack css={{ gap: "$small" }} direction="row">
+            <C.Button small onClick={() => setControlledValue("option1")}>
               Set Option 1
             </C.Button>
-            <C.Button onClick={() => setControlledValue("option2")} small>
+            <C.Button small onClick={() => setControlledValue("option2")}>
               Set Option 2
             </C.Button>
-            <C.Button onClick={() => setControlledValue("option3")} small>
+            <C.Button small onClick={() => setControlledValue("option3")}>
               Set Option 3
             </C.Button>
           </C.Stack>
@@ -158,8 +158,8 @@ export default function SelectDemo(): JSX.Element {
         <C.Text as="h4">Limited Multi</C.Text>
       }>
         <C.SelectMulti
-          limit={2}
           label="Max 2 selections"
+          limit={2}
           options={options}
           trigger={
             <C.Button>

@@ -1,4 +1,6 @@
+/* eslint-disable no-console */
 import { JSX, useState } from "react";
+
 import * as C from "../../src/index";
 
 export default function UploadDemo(): JSX.Element {
@@ -34,12 +36,9 @@ export default function UploadDemo(): JSX.Element {
       }>
         <C.Upload
           accept=".pdf"
-          onUpload={(file: File) => {
-            
-            simulateUpload();
-          }}
           loading={loading}
           success={success}
+          onUpload={simulateUpload}
         />
       </C.Box>
 
@@ -49,9 +48,9 @@ export default function UploadDemo(): JSX.Element {
       }>
         <C.Stack css={{ gap: "$small" }}>
           <C.Upload
-            multiple
             accept="image/*"
             maxFiles={3}
+            multiple
             onUpload={(fileList: FileList) => {
               setFiles(Array.from(fileList));
               console.log("Multiple files:", fileList);

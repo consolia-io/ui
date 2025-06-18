@@ -135,7 +135,7 @@ export default function PopoverDemo(): JSX.Element {
         >
           <C.Stack css={{ gap: "$small" }}>
             <C.Text as="strong">Action Panel</C.Text>
-            <C.Stack direction="row" css={{ gap: "$small", flexWrap: "nowrap" }}>
+            <C.Stack css={{ flexWrap: "nowrap", gap: "$small" }} direction="row">
               <C.Button small>Save</C.Button>
               <C.Button small>Edit</C.Button>
               <C.Button small>Delete</C.Button>
@@ -167,11 +167,11 @@ export default function PopoverDemo(): JSX.Element {
             {Array.from({ length: 25 }, (_, i) => (
               <C.Button
                 key={i}
-                small
                 css={{ 
                   justifyContent: "flex-start",
                   textAlign: "left" 
                 }}
+                small
               >
                 <C.Icon system="ArrowRightIcon" />
                 Menu Item {i + 1} - This is a longer description

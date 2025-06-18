@@ -1,14 +1,15 @@
-import React from "react";
-import * as C from "../../src/index";
+import { JSX } from "react";
 import { toast } from "react-hot-toast";
 
-export default function ToastDemo() {
+import * as C from "../../src/index";
+
+export default function ToastDemo(): JSX.Element {
   return (
     <C.Stack css={{ 
+      alignItems: "center",
       display: "grid",
-      gridTemplateColumns: "repeat(3, 1fr)",
       gap: "$large",
-      alignItems: "center" 
+      gridTemplateColumns: "repeat(3, 1fr)" 
     }}>
       {/* Default Toast */}
       <C.Stack css={{ alignItems: "center" }}>

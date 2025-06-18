@@ -25,10 +25,10 @@ export default function LogoDemo(): JSX.Element {
         <C.Text as="h4">Themes</C.Text>
       }>
         <C.Stack>
-          <C.Logo type="full" width={100} theme="default" />
-          <C.Logo type="full" width={100} theme="blue" />
-          <C.Logo type="full" width={100} theme="purple" />
-          <C.Logo type="full" width={100} theme="orange" />
+          <C.Logo theme="default" type="full" width={100} />
+          <C.Logo theme="blue" type="full" width={100} />
+          <C.Logo theme="purple" type="full" width={100} />
+          <C.Logo theme="orange" type="full" width={100} />
         </C.Stack>
       </C.Box>
 
@@ -48,7 +48,7 @@ export default function LogoDemo(): JSX.Element {
         <C.Text as="h4">With Hover</C.Text>
       }>
         <C.Stack>
-          <C.Logo type="full" width={120} hover />
+          <C.Logo hover type="full" width={120} />
           <C.Text as="small">Hover for effect</C.Text>
         </C.Stack>
       </C.Box>
@@ -58,8 +58,8 @@ export default function LogoDemo(): JSX.Element {
         <C.Text as="h4">Outline</C.Text>
       }>
         <C.Stack>
-          <C.Logo type="full" width={120} outline />
-          <C.Logo type="icon" width={48} outline />
+          <C.Logo outline type="full" width={120} />
+          <C.Logo outline type="icon" width={48} />
         </C.Stack>
       </C.Box>
 
@@ -69,16 +69,16 @@ export default function LogoDemo(): JSX.Element {
       }>
         <C.Stack>
           <C.Logo 
+            hover 
+            theme="blue" 
             type="full" 
             width={120} 
-            theme="blue" 
-            hover 
           />
           <C.Logo 
+            outline 
+            theme="purple" 
             type="icon" 
             width={48} 
-            theme="purple" 
-            outline 
           />
         </C.Stack>
       </C.Box>

@@ -48,7 +48,7 @@ export default function DividerDemo(): JSX.Element {
       }>
         <C.Stack>
           <C.Text>Content above</C.Text>
-          <C.Divider top="medium" bottom="medium" />
+          <C.Divider bottom="medium" top="medium" />
           <C.Text>Content below</C.Text>
         </C.Stack>
       </C.Box>
@@ -59,7 +59,7 @@ export default function DividerDemo(): JSX.Element {
       }>
         <C.Stack>
           <C.Button block>First Action</C.Button>
-          <C.Divider top="small" bottom="small" />
+          <C.Divider bottom="small" top="small" />
           <C.Button block theme="minimal">Second Action</C.Button>
         </C.Stack>
       </C.Box>

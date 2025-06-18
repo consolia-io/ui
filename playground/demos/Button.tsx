@@ -79,16 +79,16 @@ export default function ButtonDemo(): JSX.Element {
       }>
         <C.Stack>
           <C.Button 
-            small 
+            icon={<C.Icon system="CheckCircleIcon" />} 
+            small
             theme="solid"
-            icon={<C.Icon system="CheckCircleIcon" />}
           >
             Small Solid
           </C.Button>
           <C.Button 
-            loading 
+            icon={<C.Icon system="ArrowClockwiseIcon" />} 
+            loading
             theme="minimal"
-            icon={<C.Icon system="ArrowClockwiseIcon" />}
           >
             Processing
           </C.Button>

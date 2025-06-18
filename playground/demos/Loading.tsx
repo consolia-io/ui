@@ -61,7 +61,7 @@ export default function LoadingDemo(): JSX.Element {
       <C.Box header={
         <C.Text as="h4">Loading Overlay</C.Text>
       }>
-        <C.Stack css={{ position: "relative", height: "120px" }}>
+        <C.Stack css={{ height: "120px", position: "relative" }}>
           <C.Button 
             theme={showOverlay ? "solid" : "default"}
             onClick={() => setShowOverlay(!showOverlay)}
@@ -81,14 +81,14 @@ export default function LoadingDemo(): JSX.Element {
       }>
         <C.Stack direction="row">
           <C.Loading 
-            theme="colored"
             css={{ height: "32px", width: "32px" }}
+            theme="colored"
           />
           <C.Loading 
             css={{ 
-              height: "24px", 
-              width: "24px",
-              color: "$purple" 
+              color: "$purple", 
+              height: "24px",
+              width: "24px" 
             }}
           />
         </C.Stack>

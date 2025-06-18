@@ -1,24 +1,11 @@
 import { JSX, useState } from "react";
+
 import * as C from "../../src/index";
-import dayjs from "dayjs";
 
 export default function CalendarDemo(): JSX.Element {
   const [singleDate, setSingleDate] = useState<string>();
   const [rangeDate, setRangeDate] = useState<{ startDate?: string; endDate?: string }>({});
   const [monthDate, setMonthDate] = useState<string>();
-
-  // Example blocked dates (next 3 Sundays)
-  const blockedDates = Array.from({ length: 3 }).map((_, i) => 
-    dayjs().day(7 + (i * 7)).format("YYYY-MM-DD")
-  );
-
-  // Min date is today, max date is 3 months from now
-  const minDate = dayjs().format("YYYY-MM-DD");
-  const maxDate = dayjs().add(3, "month").format("YYYY-MM-DD");
-
-  // Month picker min/max dates (current year and next year)
-  const monthMinDate = dayjs().startOf("year").format("YYYY-MM-DD");
-  const monthMaxDate = dayjs().add(1, "year").endOf("year").format("YYYY-MM-DD");
 
   return (
     <C.Stack css={{ 
@@ -48,13 +35,13 @@ export default function CalendarDemo(): JSX.Element {
       }>
         <C.Stack>
           <C.Calendar
+            endDate={rangeDate.endDate}
+            maxLength={7}
+            minLength={2}
             mode="range"
             startDate={rangeDate.startDate}
-            endDate={rangeDate.endDate}
-            minLength={2}
-            maxLength={7}
-            onSelection={({ startDate, endDate }) => 
-              setRangeDate({ startDate, endDate })
+            onSelection={({ endDate, startDate }) => 
+              setRangeDate({ endDate, startDate })
             }
           />
           <C.Text as="small">
@@ -86,10 +73,10 @@ export default function CalendarDemo(): JSX.Element {
       }>
         <C.Stack>
           <C.Calendar
-            mode="single"
-            minDate="2024-01-01"
-            maxDate="2024-12-31"
             blockedDates={["2024-12-25", "2024-01-01"]}
+            maxDate="2024-12-31"
+            minDate="2024-01-01"
+            mode="single"
             onSelection={() => {}}
           />
           <C.Text as="small">
@@ -104,8 +91,8 @@ export default function CalendarDemo(): JSX.Element {
       }>
         <C.Stack>
           <C.Calendar
-            mode="range"
             description="Select your travel dates"
+            mode="range"
             onSelection={() => {}}
           />
         </C.Stack>
@@ -117,8 +104,8 @@ export default function CalendarDemo(): JSX.Element {
       }>
         <C.Stack>
           <C.CalendarMonths
-            minDate="2024-01-01"
             maxDate="2024-12-31"
+            minDate="2024-01-01"
             onSelection={() => {}}
           />
           <C.Text as="small">

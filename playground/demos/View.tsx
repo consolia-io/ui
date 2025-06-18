@@ -64,7 +64,7 @@ export default function ViewDemo(): JSX.Element {
       <C.Box header={
         <C.Text as="h4">Inverted Theme</C.Text>
       }>
-        <C.View inverted css={{ height: "150px" }}>
+        <C.View css={{ height: "150px" }} inverted>
           <C.Box css={{ height: "100%", padding: "$medium" }}>
             <C.Text>Dark theme view</C.Text>
           </C.Box>
@@ -75,7 +75,7 @@ export default function ViewDemo(): JSX.Element {
       <C.Box header={
         <C.Text as="h4">With Spacing</C.Text>
       }>
-        <C.View bottom="large" top="large" css={{ height: "150px" }}>
+        <C.View bottom="large" css={{ height: "150px" }} top="large">
           <C.Box css={{ height: "100%", padding: "$medium" }}>
             <C.Text>View with top/bottom spacing</C.Text>
           </C.Box>

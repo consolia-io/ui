@@ -20,8 +20,8 @@ export default function InputDemo(): JSX.Element {
           />
           <C.Input
             name="email"
-            type="email"
             placeholder="Email input"
+            type="email"
           />
         </C.Stack>
       </C.Box>
@@ -32,10 +32,10 @@ export default function InputDemo(): JSX.Element {
       }>
         <C.Stack>
           <C.Input
-            name="error"
-            placeholder="Error state"
             error
             errorMessage="This field has an error"
+            name="error"
+            placeholder="Error state"
           />
           <C.Input
             name="success"
@@ -58,14 +58,14 @@ export default function InputDemo(): JSX.Element {
       }>
         <C.Stack>
           <C.Input
+            loading
             name="loading"
             placeholder="Loading state"
-            loading
           />
           <C.Input
+            copy
             name="actions"
             placeholder="Type something"
-            copy
             reset
           />
         </C.Stack>
@@ -78,9 +78,9 @@ export default function InputDemo(): JSX.Element {
         <C.Stack>
           <C.Input
             name="password"
-            type="password"
             placeholder="Password input"
             reveal
+            type="password"
           />
           <C.Input
             name="width"
@@ -99,16 +99,16 @@ export default function InputDemo(): JSX.Element {
             name="submit"
             placeholder="Type and submit"
             submit="Send"
-            submitValid={(value) => value.length > 0}
             submitFunction={(value) => {
               // eslint-disable-next-line no-console
               console.log('Submitted:', value);
             }}
+            submitValid={(value) => value.length > 0}
           />
           <C.Input
+            listen
             name="listen"
             placeholder="Press Enter to submit"
-            listen
             submit="Submit"
             submitFunction={(value) => {
               // eslint-disable-next-line no-console
@@ -124,17 +124,17 @@ export default function InputDemo(): JSX.Element {
       }>
         <C.Stack>
           <C.Input
+            copy
             name="advanced"
             placeholder="All features"
-            copy
             reset
             reveal
             submit="Submit"
-            submitValid={(value) => value.length > 2}
             submitFunction={(value) => {
               // eslint-disable-next-line no-console
               console.log('Advanced submit:', value);
             }}
+            submitValid={(value) => value.length > 2}
           />
         </C.Stack>
       </C.Box>

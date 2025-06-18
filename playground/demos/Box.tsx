@@ -69,13 +69,13 @@ export default function BoxDemo(): JSX.Element {
             Content with footer
           </C.Box>
           <C.Box 
-            header="Complete Example"
             footer={
               <C.Stack direction="row">
                 <C.Button small theme="minimal">Cancel</C.Button>
                 <C.Button small>Save</C.Button>
               </C.Stack>
             }
+            header="Complete Example"
           >
             Header and footer
           </C.Box>
@@ -104,8 +104,8 @@ export default function BoxDemo(): JSX.Element {
         <C.Text as="h4">Theme vs Border Comparison</C.Text>
       }>
         <C.Stack>
-          <C.Stack direction="row" css={{ gap: "$small" }}>
-            <C.Box theme="blue" css={{ flex: 1 }}>
+          <C.Stack css={{ gap: "$small" }} direction="row">
+            <C.Box css={{ flex: 1 }} theme="blue">
               <C.Text as="strong">Theme Blue</C.Text>
               <C.Text as="small">Filled background</C.Text>
             </C.Box>
@@ -114,18 +114,18 @@ export default function BoxDemo(): JSX.Element {
               <C.Text as="small">Left border only</C.Text>
             </C.Box>
           </C.Stack>
-          <C.Stack direction="row" css={{ gap: "$small" }}>
+          <C.Stack css={{ gap: "$small" }} direction="row">
             <C.Box 
-              theme="purple" 
+              css={{ flex: 1 }} 
               header="Purple Theme"
-              css={{ flex: 1 }}
+              theme="purple"
             >
               With header
             </C.Box>
             <C.Box 
               border="purple" 
-              header="Purple Border"
               css={{ flex: 1 }}
+              header="Purple Border"
             >
               With header
             </C.Box>
@@ -139,16 +139,16 @@ export default function BoxDemo(): JSX.Element {
       }>
         <C.Stack>
           <C.Box 
-            theme="gradient"
             closable
             small
+            theme="gradient"
           >
             <C.Logo theme="light" />
           </C.Box>
           <C.Box 
-            header="Settings"
-            footer={<C.Button small>Update</C.Button>}
             border="orange"
+            footer={<C.Button small>Update</C.Button>}
+            header="Settings"
           >
             Border with complex content
           </C.Box>

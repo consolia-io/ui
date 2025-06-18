@@ -32,10 +32,10 @@ export default function FieldDemo(): JSX.Element {
       }>
         <C.Stack>
           <C.Field 
-            name="error"
-            placeholder="Error state"
             error
             errorMessage="This field has an error"
+            name="error"
+            placeholder="Error state"
           />
           <C.Field 
             name="success"
@@ -58,14 +58,14 @@ export default function FieldDemo(): JSX.Element {
       }>
         <C.Stack>
           <C.Field 
+            loading
             name="loading"
             placeholder="Loading state"
-            loading
           />
           <C.Field 
+            copy
             name="actions"
             placeholder="Type something"
-            copy
             reset
           />
         </C.Stack>
@@ -80,11 +80,11 @@ export default function FieldDemo(): JSX.Element {
             name="submit"
             placeholder="Type and submit"
             submit="Send"
-            submitValid={(value) => value.length > 0}
             submitFunction={(value) => {
               // eslint-disable-next-line no-console
               console.log('Submitted:', value);
             }}
+            submitValid={(value) => value.length > 0}
           />
         </C.Stack>
       </C.Box>
@@ -108,16 +108,16 @@ export default function FieldDemo(): JSX.Element {
       }>
         <C.Stack>
           <C.Field 
+            copy
             name="advanced"
             placeholder="Reset and submit"
-            copy
             reset
             submit="Submit"
-            submitValid={(value) => value.length > 2}
             submitFunction={(value) => {
               // eslint-disable-next-line no-console
               console.log('Advanced submit:', value);
             }}
+            submitValid={(value) => value.length > 2}
           />
         </C.Stack>
       </C.Box>
