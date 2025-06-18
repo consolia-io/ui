@@ -8,7 +8,6 @@ export default function Tabs({ css, initial, onSelection, options, small }: ITab
 
   const hasOptions = options && options.length > 0;
 
-  // Sync internal state with external initial prop changes
   useEffect(() => {
     if (initial !== undefined) {
       setSelected(initial);

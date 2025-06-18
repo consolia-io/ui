@@ -9,7 +9,6 @@ export const BadgeStyled = styled("span", {
   boxShadow: "$small",
   color: "$text",
   compoundVariants: [
-    // Border variant (current theme styles with left border)
     {
       css: {
         backgroundColor: "$background",
@@ -63,7 +62,6 @@ export const BadgeStyled = styled("span", {
       theme: "yellow",
       variant: "border",
     },
-    // Theme variant (filled with color, text always $text)
     {
       css: {
         backgroundColor: "$blue",

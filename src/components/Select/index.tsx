@@ -70,7 +70,6 @@ export default function Select({
     }
   }, [isOpen, filter]);
 
-  // Sync internal state with external initial prop changes
   useEffect(() => {
     if (initial !== undefined) {
       setSelected(initial);

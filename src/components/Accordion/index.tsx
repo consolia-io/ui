@@ -69,7 +69,6 @@ export default function Accordion({
   }
 
   if (mode === "grid") {
-    // Grid mode: show items in a grid, use AccordionCardStyled as trigger, allow open/close
     return (
       <AccordionStyled mode="grid">
         {options.map((option) => {

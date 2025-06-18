@@ -20,7 +20,6 @@ export default function ProviderToggle(): JSX.Element {
     },
   ] as ISelect["options"];
 
-  // Use a fallback theme during SSR to prevent hydration mismatch
   const currentTheme = isMounted ? theme : "system";
   const currentThemeOption = options.find((option) => option.value === currentTheme);
   const currentThemeIcon = currentThemeOption?.icon;

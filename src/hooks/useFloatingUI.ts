@@ -54,7 +54,6 @@ export default function useFloatingUI(): {
     }).then(({ x, y }: ComputePositionReturn) => {
       if (!contentRef.current || !triggerRef.current) return;
 
-      // Set position
       contentRef.current.style.position = strategy;
       contentRef.current.style.left = `${Math.round(x)}px`;
       contentRef.current.style.top = `${Math.round(y)}px`;
@@ -63,15 +62,12 @@ export default function useFloatingUI(): {
 
   const prepareFloatingElement = (element: HTMLDivElement): void => {
     if (!element) return;
-    // Ensure element is properly positioned for floating UI
     element.style.position = "fixed";
     element.style.top = "0";
     element.style.left = "0";
-    // Reset any conflicting transforms
     element.style.transform = "";
   };
 
-  // Effect for mounting - calculate position immediately when mounted
   useEffect(() => {
     if (!isMounted || !triggerRef.current || !contentRef.current) {
       if (cleanupRef.current) {
@@ -84,10 +80,8 @@ export default function useFloatingUI(): {
 
     prepareFloatingElement(contentRef.current);
 
-    // Calculate position immediately while invisible
     updatePosition();
 
-    // Set up auto-update for dynamic positioning
     cleanupRef.current = autoUpdate(triggerRef.current, contentRef.current, updatePosition, {
       ancestorResize: true,
       ancestorScroll: true,
@@ -118,7 +112,6 @@ export default function useFloatingUI(): {
 
   function handleClose(): void {
     setIsOpen(false);
-    // Match animation duration for smooth close
     setTimeout(() => setIsMounted(false), 200);
   }
 

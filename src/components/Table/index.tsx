@@ -151,7 +151,6 @@ export default function Table({
     );
   }, []);
 
-  // Keyboard navigation effect
   useEffect(() => {
     if (!kbd || !pagination) return;
 
@@ -280,7 +279,6 @@ export default function Table({
 
   return (
     <TableStitches css={css}>
-      {/* Desktop Table View */}
       <TableCoreStitches ref={tableRef}>
         <thead>
           <TableRowStitches ref={tableHeaderRef}>
@@ -347,7 +345,6 @@ export default function Table({
         </tbody>
       </TableCoreStitches>
 
-      {/* Mobile Card View */}
       <TableMobileView>
         {error ? (
           <Box>
