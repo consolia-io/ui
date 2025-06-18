@@ -1,7 +1,7 @@
 {
   "name": "@consolia/ui",
   "description": "Consolia's internal component library, built with React, Next.js, and Stitches.",
-  "version": "0.2.16",
+  "version": "0.2.17",
   "author": "Jackson Dolman <mail@dolmios.com>",
   "browserslist": {
     "production": [
@@ -36,7 +36,7 @@
     "@types/react-dom": "^19.1.6",
     "eslint": "^9.29.0",
     "eslint-config-dolmios": "^2.0.8",
-    "next": "^15.3.3",
+    "next": "^15.3.4",
     "parcel": "^2.15.2",
     "path-browserify": "^1.0.1",
     "prettier": "^3.5.3",
@@ -75,7 +75,6 @@
     "next": "^15.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
-
   },
   "prettier": "eslint-config-dolmios/configs/prettier",
   "repository": {
