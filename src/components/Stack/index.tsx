@@ -46,36 +46,38 @@ export default function Stack({
     ...(order && { order }),
     ...(top && { marginTop: 0, paddingTop: `$${top}` }),
     ...(bottom && { marginBottom: 0, paddingBottom: `$${bottom}` }),
-    ...(width !== undefined && { flex: `${width} 1 0%` }),
+    ...(width !== undefined && {
+      flex: width === 100 ? `0 0 100%` : `${width} 1 0%`,
+    }),
     ...css,
     ...(widthResponsive?.phone && {
       phone: {
         ...(css?.phone && typeof css.phone === "object" ? css.phone : {}),
-        flex: `${widthResponsive.phone} 1 0%`,
+        flex: widthResponsive.phone === 100 ? `0 0 100%` : `${widthResponsive.phone} 1 0%`,
       },
     }),
     ...(widthResponsive?.tabletX && {
       tabletX: {
         ...(css?.tabletX && typeof css.tabletX === "object" ? css.tabletX : {}),
-        flex: `${widthResponsive.tabletX} 1 0%`,
+        flex: widthResponsive.tabletX === 100 ? `0 0 100%` : `${widthResponsive.tabletX} 1 0%`,
       },
     }),
     ...(widthResponsive?.laptopX && {
       laptopX: {
         ...(css?.laptopX && typeof css.laptopX === "object" ? css.laptopX : {}),
-        flex: `${widthResponsive.laptopX} 1 0%`,
+        flex: widthResponsive.laptopX === 100 ? `0 0 100%` : `${widthResponsive.laptopX} 1 0%`,
       },
     }),
     ...(widthResponsive?.desktopX && {
       desktopX: {
         ...(css?.desktopX && typeof css.desktopX === "object" ? css.desktopX : {}),
-        flex: `${widthResponsive.desktopX} 1 0%`,
+        flex: widthResponsive.desktopX === 100 ? `0 0 100%` : `${widthResponsive.desktopX} 1 0%`,
       },
     }),
     ...(widthResponsive?.wide && {
       wide: {
         ...(css?.wide && typeof css.wide === "object" ? css.wide : {}),
-        flex: `${widthResponsive.wide} 1 0%`,
+        flex: widthResponsive.wide === 100 ? `0 0 100%` : `${widthResponsive.wide} 1 0%`,
       },
     }),
   };

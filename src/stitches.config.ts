@@ -1,3 +1,4 @@
+/* eslint-disable perfectionist/sort-objects */
 import { createStitches, createTheme, defaultThemeMap } from "@stitches/react";
 
 export const breakpoints = {
@@ -124,11 +125,42 @@ export const { css, getCssText, globalCss, keyframes, styled, theme } = createSt
     darkOnly: (value: unknown) => ({
       [`.${darkTheme} &`]: value,
     }),
+    lightOnly: (value: unknown) => ({
+      "@media (prefers-color-scheme: light)": value,
+    }),
+    wide: (value: unknown) => ({
+      [breakpoints.wide]: value,
+    }),
     desktop: (value: unknown) => ({
       [breakpoints.desktop]: value,
     }),
     desktopX: (value: unknown) => ({
       [breakpoints.desktopX]: value,
+    }),
+    laptop: (value: unknown) => ({
+      [breakpoints.laptop]: value,
+    }),
+    laptopX: (value: unknown) => ({
+      [breakpoints.laptopX]: value,
+    }),
+    tablet: (value: unknown) => ({
+      [breakpoints.tablet]: value,
+    }),
+    tabletX: (value: unknown) => ({
+      [breakpoints.tabletX]: value,
+    }),
+    phone: (value: unknown) => ({
+      [breakpoints.phone]: value,
+    }),
+    // Special breakpoints
+    micro: (value: unknown) => ({
+      [breakpoints.special.micro]: value,
+    }),
+    retina: (value: unknown) => ({
+      [breakpoints.special.retina]: value,
+    }),
+    print: (value: unknown) => ({
+      [breakpoints.special.print]: value,
     }),
     // Visibility utilities
     hidden: (
@@ -167,34 +199,6 @@ export const { css, getCssText, globalCss, keyframes, styled, theme } = createSt
         display: "none !important",
       },
     }),
-    laptop: (value: unknown) => ({
-      [breakpoints.laptop]: value,
-    }),
-    laptopX: (value: unknown) => ({
-      [breakpoints.laptopX]: value,
-    }),
-    lightOnly: (value: unknown) => ({
-      "@media (prefers-color-scheme: light)": value,
-    }),
-    // Special breakpoints
-    micro: (value: unknown) => ({
-      [breakpoints.special.micro]: value,
-    }),
-    phone: (value: unknown) => ({
-      [breakpoints.phone]: value,
-    }),
-    print: (value: unknown) => ({
-      [breakpoints.special.print]: value,
-    }),
-    retina: (value: unknown) => ({
-      [breakpoints.special.retina]: value,
-    }),
-    tablet: (value: unknown) => ({
-      [breakpoints.tablet]: value,
-    }),
-    tabletX: (value: unknown) => ({
-      [breakpoints.tabletX]: value,
-    }),
     visible: (
       value:
         | "phone"
@@ -232,10 +236,6 @@ export const { css, getCssText, globalCss, keyframes, styled, theme } = createSt
         display: "block !important",
       },
       display: "none",
-    }),
-    // Breakpoint utilities ordered by precedence (largest to smallest)
-    wide: (value: unknown) => ({
-      [breakpoints.wide]: value,
     }),
   },
 });
