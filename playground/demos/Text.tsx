@@ -17,6 +17,9 @@ export default function TextDemo(): JSX.Element {
           <C.Text as="h1">Heading 1</C.Text>
           <C.Text as="h2">Heading 2</C.Text>
           <C.Text as="h3">Heading 3</C.Text>
+          <C.Text as="h4">Heading 4</C.Text>
+          <C.Text as="h5">Heading 5</C.Text>
+          <C.Text as="h6">Heading 6</C.Text>
           <C.Text as="p">Paragraph text</C.Text>
           <C.Text as="small">Small text</C.Text>
           <C.Text as="strong">Strong text</C.Text>

@@ -20,6 +20,7 @@ export default function TabsDemo(): JSX.Element {
   const [basicTab, setBasicTab] = useState("tab1");
   const [iconTab, setIconTab] = useState("home");
   const [callbackTab, setCallbackTab] = useState("overview");
+  const [controlledTab, setControlledTab] = useState("tab1");
 
   const basicOptions = [
     { label: "First", value: "tab1" },
@@ -57,6 +58,31 @@ export default function TabsDemo(): JSX.Element {
       gap: "$large",
       gridTemplateColumns: "repeat(3, 1fr)" 
     }}>
+      {/* Controlled Demo */}
+      <C.Box header={
+        <C.Text as="h4">Controlled Value</C.Text>
+      } css={{ gridColumn: "1 / -1" }}>
+        <C.Stack css={{ gap: "$medium" }}>
+          <C.Stack direction="row" css={{ gap: "$small" }}>
+            <C.Button onClick={() => setControlledTab("tab1")} small>
+              Set First
+            </C.Button>
+            <C.Button onClick={() => setControlledTab("tab2")} small>
+              Set Second  
+            </C.Button>
+            <C.Button onClick={() => setControlledTab("tab3")} small>
+              Set Third
+            </C.Button>
+          </C.Stack>
+          <C.Tabs
+            initial={controlledTab}
+            options={basicOptions}
+            onSelection={setControlledTab}
+          />
+          <C.Text accent>External control: {controlledTab}</C.Text>
+        </C.Stack>
+      </C.Box>
+
       {/* Basic Usage */}
       <C.Box header={
         <C.Text as="h4">Basic Usage</C.Text>

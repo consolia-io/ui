@@ -1,4 +1,4 @@
-import { useState, type JSX } from "react";
+import { useState, useEffect, type JSX } from "react";
 
 import { ITabs } from "../../types";
 import { TabStyled, TabsStyled } from "./styles";
@@ -7,6 +7,13 @@ export default function Tabs({ css, initial, onSelection, options, small }: ITab
   const [selected, setSelected] = useState<string>(initial || options[0].value);
 
   const hasOptions = options && options.length > 0;
+
+  // Sync internal state with external initial prop changes
+  useEffect(() => {
+    if (initial !== undefined) {
+      setSelected(initial);
+    }
+  }, [initial]);
 
   function handleSelection(value: string): void {
     setSelected(value);

@@ -6,6 +6,7 @@ export default function SelectDemo(): JSX.Element {
   const [singleValue, setSingleValue] = useState<string>();
   const [multiValue, setMultiValue] = useState<Array<{ label: string; value: string }>>([]);
   const [filteredValue, setFilteredValue] = useState<string>();
+  const [controlledValue, setControlledValue] = useState<string>("option1");
 
   const options = [
     {
@@ -45,6 +46,38 @@ export default function SelectDemo(): JSX.Element {
       gap: "$large",
       gridTemplateColumns: "repeat(3, 1fr)" 
     }}>
+      {/* Controlled Demo */}
+      <C.Box header={
+        <C.Text as="h4">Controlled Value</C.Text>
+      } css={{ gridColumn: "1 / -1" }}>
+        <C.Stack css={{ gap: "$medium" }}>
+          <C.Stack direction="row" css={{ gap: "$small" }}>
+            <C.Button onClick={() => setControlledValue("option1")} small>
+              Set Option 1
+            </C.Button>
+            <C.Button onClick={() => setControlledValue("option2")} small>
+              Set Option 2
+            </C.Button>
+            <C.Button onClick={() => setControlledValue("option3")} small>
+              Set Option 3
+            </C.Button>
+          </C.Stack>
+          <C.Select
+            initial={controlledValue}
+            label="Choose an option"
+            options={options.slice(0, 3)}
+            trigger={
+              <C.Button>
+                <C.Icon system="ArrowDownIcon" />
+                {controlledValue ? options.find(o => o.value === controlledValue)?.label : "Select"}
+              </C.Button>
+            }
+            onSelection={(value) => setControlledValue(value)}
+          />
+          <C.Text accent>External control: {controlledValue}</C.Text>
+        </C.Stack>
+      </C.Box>
+
       {/* Basic Select */}
       <C.Box header={
         <C.Text as="h4">Basic Select</C.Text>
