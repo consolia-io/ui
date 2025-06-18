@@ -120,6 +120,70 @@ export default function PopoverDemo(): JSX.Element {
           </C.Stack>
         </C.Popover>
       </C.Box>
+
+      {/* Wide Content */}
+      <C.Box header={
+        <C.Text as="h4">Wide Content</C.Text>
+      }>
+        <C.Popover
+          trigger={
+            <C.Button>
+              <C.Icon system="ArrowsOutSimpleIcon" />
+              Wide
+            </C.Button>
+          }
+        >
+          <C.Stack css={{ gap: "$small" }}>
+            <C.Text as="strong">Action Panel</C.Text>
+            <C.Stack direction="row" css={{ gap: "$small", flexWrap: "nowrap" }}>
+              <C.Button small>Save</C.Button>
+              <C.Button small>Edit</C.Button>
+              <C.Button small>Delete</C.Button>
+              <C.Button small>Archive</C.Button>
+              <C.Button small>Share</C.Button>
+              <C.Button small>Export</C.Button>
+            </C.Stack>
+            <C.Text css={{ whiteSpace: "nowrap" }}>
+              This is a very long line of text that should not wrap and will make the popover quite wide to test horizontal constraints
+            </C.Text>
+          </C.Stack>
+        </C.Popover>
+      </C.Box>
+
+      {/* Really Long Content */}
+      <C.Box header={
+        <C.Text as="h4">Long Content</C.Text>
+      }>
+        <C.Popover
+          trigger={
+            <C.Button>
+              <C.Icon system="ArrowDownIcon" />
+              Long List
+            </C.Button>
+          }
+        >
+          <C.Stack css={{ gap: "$small" }}>
+            <C.Text as="strong">Navigation Menu</C.Text>
+            {Array.from({ length: 25 }, (_, i) => (
+              <C.Button
+                key={i}
+                small
+                css={{ 
+                  justifyContent: "flex-start",
+                  textAlign: "left" 
+                }}
+              >
+                <C.Icon system="ArrowRightIcon" />
+                Menu Item {i + 1} - This is a longer description
+              </C.Button>
+            ))}
+            <C.Text>
+              This popover contains many items that should trigger vertical scrolling when the max height is reached. 
+              It tests the overflow behavior and ensures proper scrolling functionality within the constrained height.
+            </C.Text>
+          </C.Stack>
+        </C.Popover>
+      </C.Box>
     </C.Stack>
   );
 } 

@@ -1,6 +1,6 @@
 import type { JSX, MouseEvent } from "react";
 
-import { useEventListener, useOutsideClick, useFloatingUI } from "../../index";
+import { useEventListener, useOutsideClick, useFloatingUI, useWindowDimensions } from "../../index";
 import { IPopover } from "../../types";
 import { PopoverStyled, PopoverContentStyled, PopoverTriggerStyled } from "./styles";
 
@@ -15,6 +15,7 @@ export default function Popover({
   wrapperCSS,
 }: IPopover): JSX.Element {
   const { contentRef, handleClick, handleClose, isMounted, isOpen, triggerRef } = useFloatingUI();
+  const { height: windowHeight } = useWindowDimensions();
 
   function handleKeyDown(event: KeyboardEvent): void {
     if (event.key === "Escape") {
@@ -46,7 +47,16 @@ export default function Popover({
         <PopoverContentStyled
           ref={contentRef}
           animation={isOpen}
-          css={css}
+          css={{
+            maxHeight: windowHeight < 700 ? "50vh" : "70vh",
+            maxWidth: small ? "280px" : "420px",
+            minWidth: small ? "200px" : "250px",
+            phone: {
+              maxWidth: "100%",
+            },
+            width: "auto",
+            ...css,
+          }}
           minimal={minimal}
           small={small}>
           {children}

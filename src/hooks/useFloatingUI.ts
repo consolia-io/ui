@@ -69,13 +69,11 @@ export default function useFloatingUI(): {
     element.style.left = "0";
     // Reset any conflicting transforms
     element.style.transform = "";
-    // Ensure element has proper display to prevent size calculation issues
-    element.style.visibility = "hidden";
-    element.style.display = "block";
   };
 
+  // Effect for mounting - calculate position immediately when mounted
   useEffect(() => {
-    if (!isOpen || !triggerRef.current || !contentRef.current) {
+    if (!isMounted || !triggerRef.current || !contentRef.current) {
       if (cleanupRef.current) {
         cleanupRef.current();
         cleanupRef.current = null;
@@ -86,13 +84,8 @@ export default function useFloatingUI(): {
 
     prepareFloatingElement(contentRef.current);
 
-    // Initial position calculation with a small delay to ensure DOM is ready
-    setTimeout(() => {
-      if (contentRef.current) {
-        contentRef.current.style.visibility = "visible";
-        updatePosition();
-      }
-    }, 0);
+    // Calculate position immediately while invisible
+    updatePosition();
 
     // Set up auto-update for dynamic positioning
     cleanupRef.current = autoUpdate(triggerRef.current, contentRef.current, updatePosition, {
@@ -107,7 +100,7 @@ export default function useFloatingUI(): {
         cleanupRef.current = null;
       }
     };
-  }, [isOpen]);
+  }, [isMounted]);
 
   useEffect(() => {
     return (): void => {
@@ -131,8 +124,7 @@ export default function useFloatingUI(): {
 
   function handleClick(): void {
     if (isOpen || isMounted) {
-      setIsOpen(false);
-      setIsMounted(false);
+      handleClose();
     } else {
       handleOpen();
     }

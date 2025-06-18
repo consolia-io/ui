@@ -21,14 +21,10 @@ export const PopoverContentStyled = styled("div", {
   border: "1px solid $border",
   borderRadius: "$medium",
   boxShadow: "$large",
-  color: "$text",
-  fontSize: "$default",
-  maxHeight: "85vh",
   overflowY: "auto",
+  padding: "$smallest $smaller",
   pointerEvents: "auto",
   textAlign: "left !important",
-  transition: "$default",
-
   variants: {
     animation: {
       false: {
@@ -63,8 +59,7 @@ export const PopoverContentStyled = styled("div", {
       },
     },
   },
-
-  width: "auto",
+  width: "100%",
   zIndex: "$popover",
 });
 
