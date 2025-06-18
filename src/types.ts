@@ -831,10 +831,10 @@ export interface IStack {
   width?: number;
   /** Responsive width percentages */
   widthResponsive?: {
-    desktop?: number;
-    laptop?: number;
+    desktopX?: number;
+    laptopX?: number;
     phone?: number;
-    tablet?: number;
+    tabletX?: number;
     wide?: number;
   };
   /** Main axis alignment */

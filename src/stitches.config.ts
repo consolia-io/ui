@@ -99,21 +99,17 @@ const defaultTheme = {
 export const darkTheme = createTheme({
   colors: {
     background: "#170e1f",
-    blue: "#6b7db0",
-    blueLight: "#133f62",
+    blueLight: "#072035",
     border: "rgba(255, 255, 255, 0.20)",
     borderLight: "rgba(255, 255, 255, 0.12)",
-    orange: "#c48d6b",
-    orangeLight: "#9d6f3c",
+    orangeLight: "#441405",
     overlay: "rgba(255, 255, 255, 0.15)",
-    purple: "#8b7ba8",
-    purpleLight: "#40345a",
+    purpleLight: "#1e162e",
     surface: "rgba(245, 243, 255, 0.12)",
     surfaceHover: "rgba(245, 243, 255, 0.18)",
     surfaceLight: "rgba(245, 243, 255, 0.08)",
     text: "#FFFFFF",
-    yellow: "rgb(255, 210, 140)",
-    yellowLight: "#857d36",
+    yellowLight: "#383305",
   },
   shadows: {
     large: "0 4px 6px -1px rgba(0, 0, 0, 0.25), 0 2px 4px -1px rgba(0, 0, 0, 0.15)",
@@ -134,6 +130,7 @@ export const { css, getCssText, globalCss, keyframes, styled, theme } = createSt
     desktopX: (value: unknown) => ({
       [breakpoints.desktopX]: value,
     }),
+    // Visibility utilities
     hidden: (
       value:
         | "phone"
@@ -179,6 +176,7 @@ export const { css, getCssText, globalCss, keyframes, styled, theme } = createSt
     lightOnly: (value: unknown) => ({
       "@media (prefers-color-scheme: light)": value,
     }),
+    // Special breakpoints
     micro: (value: unknown) => ({
       [breakpoints.special.micro]: value,
     }),
@@ -235,6 +233,7 @@ export const { css, getCssText, globalCss, keyframes, styled, theme } = createSt
       },
       display: "none",
     }),
+    // Breakpoint utilities ordered by precedence (largest to smallest)
     wide: (value: unknown) => ({
       [breakpoints.wide]: value,
     }),

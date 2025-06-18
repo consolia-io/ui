@@ -1,4 +1,3 @@
-import { CSS } from "@stitches/react";
 import { Fragment, type JSX } from "react";
 import { Balancer } from "react-wrap-balancer";
 
@@ -31,28 +30,24 @@ export default function Text({
   const isExternalLink = isAnchor && target === "_blank";
   const shouldShowInline = inline && !["span", "strong"].includes(as);
 
-  function getDynamicStyles(): CSS {
-    return {
-      ...(top && {
-        marginTop: 0,
-        paddingTop: `$${top}`,
-      }),
-      ...(bottom && {
-        marginBottom: 0,
-        paddingBottom: `$${bottom}`,
-      }),
-      ...(inline && {
-        marginRight: inline === "auto" ? "auto" : `$${inline}`,
-      }),
-      ...css,
-    };
-  }
-
   return (
     <TextStyled
       accent={accent}
       as={elementType}
-      css={getDynamicStyles()}
+      css={{
+        ...(top && {
+          marginTop: 0,
+          paddingTop: `$${top}`,
+        }),
+        ...(bottom && {
+          marginBottom: 0,
+          paddingBottom: `$${bottom}`,
+        }),
+        ...(inline && {
+          marginRight: inline === "auto" ? "auto" : `$${inline}`,
+        }),
+        ...css,
+      }}
       highlight={highlight}
       href={isAnchor ? href : undefined}
       inline={shouldShowInline ? true : false}

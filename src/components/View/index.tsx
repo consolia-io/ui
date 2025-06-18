@@ -1,7 +1,5 @@
 import type { JSX } from "react";
 
-import { CSS } from "@stitches/react";
-
 import useBreakpoints from "../../hooks/useBreakpoints";
 import { darkTheme } from "../../stitches.config";
 import { IView } from "../../types";
@@ -46,25 +44,21 @@ export default function View({
   noPrint,
   top,
 }: IView): JSX.Element {
-  function getCustomStyles(): CSS {
-    return {
-      ...(top && {
-        marginTop: 0,
-        paddingTop: `$${top}`,
-      }),
-      ...(bottom && {
-        marginBottom: 0,
-        paddingBottom: `$${bottom}`,
-      }),
-      ...css,
-    };
-  }
-
   return (
     <ViewStyled
       as={as}
       className={inverted ? darkTheme.className : ""}
-      css={getCustomStyles()}
+      css={{
+        ...(top && {
+          marginTop: 0,
+          paddingTop: `$${top}`,
+        }),
+        ...(bottom && {
+          marginBottom: 0,
+          paddingBottom: `$${bottom}`,
+        }),
+        ...css,
+      }}
       hero={hero}
       id={`view-${id}`}
       inverted={inverted}

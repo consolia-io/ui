@@ -32,20 +32,20 @@ export const AvatarStyled = styled("div", {
   variants: {
     theme: {
       blue: {
-        background: "$blueLight",
+        background: "$blue",
       },
       default: {
         backgroundColor: "$surface",
-        borderColor: "$borderLight",
+        borderColor: "$border",
       },
       orange: {
-        background: "$orangeLight",
+        background: "$orange",
       },
       purple: {
-        background: "$purpleLight",
+        background: "$purple",
       },
       yellow: {
-        background: "$yellowLight",
+        background: "$yellow",
       },
     },
   },
