@@ -33,14 +33,12 @@ export default function Stack({
   wrap,
   ...rest
 }: IStack): JSX.Element {
-  const dynamicStyles: CSS = {
+  const finalCSS: CSS = {
     ...(align && { textAlign: align }),
     ...(alignItems && { alignItems }),
     ...(alignContent && { alignContent }),
     ...(justify && { justifyContent: justify }),
-    ...((gap || direction === "row") && {
-      gap: `$${gap ?? "small"}`,
-    }),
+    ...((gap || direction === "row") && { gap: `$${gap ?? "small"}` }),
     ...((wrap || direction === "row") && { flexWrap: "wrap" }),
     ...(basis && { flexBasis: basis }),
     ...(grow && { flexGrow: grow }),
@@ -48,38 +46,45 @@ export default function Stack({
     ...(order && { order }),
     ...(top && { marginTop: 0, paddingTop: `$${top}` }),
     ...(bottom && { marginBottom: 0, paddingBottom: `$${bottom}` }),
+    ...(width !== undefined && { flex: `${width} 1 0%` }),
     ...css,
+    ...(widthResponsive?.phone && {
+      phone: {
+        ...(css?.phone && typeof css.phone === "object" ? css.phone : {}),
+        flex: `${widthResponsive.phone} 1 0%`,
+      },
+    }),
+    ...(widthResponsive?.tabletX && {
+      tabletX: {
+        ...(css?.tabletX && typeof css.tabletX === "object" ? css.tabletX : {}),
+        flex: `${widthResponsive.tabletX} 1 0%`,
+      },
+    }),
+    ...(widthResponsive?.laptopX && {
+      laptopX: {
+        ...(css?.laptopX && typeof css.laptopX === "object" ? css.laptopX : {}),
+        flex: `${widthResponsive.laptopX} 1 0%`,
+      },
+    }),
+    ...(widthResponsive?.desktopX && {
+      desktopX: {
+        ...(css?.desktopX && typeof css.desktopX === "object" ? css.desktopX : {}),
+        flex: `${widthResponsive.desktopX} 1 0%`,
+      },
+    }),
+    ...(widthResponsive?.wide && {
+      wide: {
+        ...(css?.wide && typeof css.wide === "object" ? css.wide : {}),
+        flex: `${widthResponsive.wide} 1 0%`,
+      },
+    }),
   };
-
-  const responsiveStyles: CSS =
-    width !== undefined || widthResponsive
-      ? {
-          desktopX: {
-            flex: `${widthResponsive?.desktop ?? width ?? 100} 1 0%`,
-          },
-          laptopX: {
-            flex: `${widthResponsive?.laptop ?? width ?? 100} 1 0%`,
-          },
-          phone: {
-            flex: `${widthResponsive?.phone ?? width ?? 100} 1 0%`,
-          },
-          tabletX: {
-            flex: `${widthResponsive?.tablet ?? width ?? 100} 1 0%`,
-          },
-          wide: {
-            flex: `${widthResponsive?.wide ?? width ?? 100} 1 0%`,
-          },
-        }
-      : {};
 
   return (
     <StackStyled
       as={as}
       className={inverted ? darkTheme.className : className}
-      css={{
-        ...responsiveStyles,
-        ...dynamicStyles,
-      }}
+      css={finalCSS}
       direction={direction}
       id={id}
       inline={inline}

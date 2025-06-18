@@ -9,7 +9,7 @@ function DemoBox({ children, color }: { children: ReactNode; color: string }): J
       backgroundColor: color,
       borderRadius: "$medium",
       color: "white",
-      minWidth: "60px",
+
       padding: "$small",
       textAlign: "center"
     }}>
@@ -52,13 +52,13 @@ export default function StackDemo(): JSX.Element {
         <C.Text as="h4">With Width</C.Text>
       }>
         <C.Stack css={{ gap: "$small" }}>
-          <C.Stack width={100} direction="column">
+          <C.Stack direction="column" width={100}>
             <DemoBox color="$orange">100% with padding</DemoBox>
           </C.Stack>
-          <C.Stack width={75} direction="column">
+          <C.Stack direction="column" width={75}>
             <DemoBox color="$orange">75% with padding</DemoBox>
           </C.Stack>
-          <C.Stack width={50} direction="column">
+          <C.Stack direction="column" width={50}>
             <DemoBox color="$orange">50% with padding</DemoBox>
           </C.Stack>
         </C.Stack>
@@ -68,25 +68,25 @@ export default function StackDemo(): JSX.Element {
       <C.Box header={
         <C.Text as="h4">Responsive (Debug)</C.Text>
       }>
-        <C.Stack direction="row" wrap={true} css={{ border: "1px solid red" }}>
+        <C.Stack css={{ border: "1px solid red" }} direction="row" wrap>
           <C.Stack 
+            css={{ border: "2px solid blue" }}
             direction="column"
             width={40}
             widthResponsive={{ phone: 100 }}
-            css={{ border: "2px solid blue" }}
           >
             <DemoBox color="$blue">40% default, 100% on phone</DemoBox>
           </C.Stack>
           <C.Stack 
+            css={{ border: "2px solid purple" }}
             direction="column"
             width={60}
             widthResponsive={{ 
               phone: 100,
-              tablet: 80 
+              tabletX: 80 
             }}
-            css={{ border: "2px solid purple" }}
           >
-            <DemoBox color="$purple">60% default, 80% tablet, 100% phone</DemoBox>
+            <DemoBox color="$purple">60% default, 80% tabletX, 100% phone</DemoBox>
           </C.Stack>
         </C.Stack>
       </C.Box>
@@ -97,18 +97,57 @@ export default function StackDemo(): JSX.Element {
       }>
         <C.Stack direction="row">
           <C.Stack 
-            width={50}
             direction="column"
+            width={50}
             widthResponsive={{ phone: 100 }}
           >
             <DemoBox color="$orange">50% desktop, 100% phone (auto-wraps)</DemoBox>
           </C.Stack>
           <C.Stack 
-            width={50}
             direction="column"
+            width={50}
             widthResponsive={{ phone: 100 }}
           >
             <DemoBox color="$yellow">50% desktop, 100% phone (auto-wraps)</DemoBox>
+          </C.Stack>
+        </C.Stack>
+      </C.Box>
+
+      {/* CSS + Responsive Width Test */}
+      <C.Box header={
+        <C.Text as="h4">CSS + Responsive Test</C.Text>
+      }>
+        <C.Stack direction="row">
+          <C.Stack 
+            direction="column"
+            width={30}
+            widthResponsive={{ 
+              phone: 100,
+              tabletX: 50 
+            }}
+           
+          >
+            <DemoBox color="white">Width + Custom CSS</DemoBox>
+          </C.Stack>
+          <C.Stack 
+            css={{
+              backgroundColor: "$purple",
+              padding: "$small",
+              phone: {
+                backgroundColor: "$blue"
+              },
+              tabletX: {
+                backgroundColor: "$orange"
+              }
+            }}
+            direction="column"
+            width={70}
+            widthResponsive={{ 
+              phone: 100,
+              tabletX: 50 
+            }}
+          >
+            <DemoBox color="black">Should work together!</DemoBox>
           </C.Stack>
         </C.Stack>
       </C.Box>
