@@ -2,15 +2,28 @@ import { styled } from "../../stitches.config";
 import Button from "../Button";
 
 export const TabsStyled = styled("div", {
+  "&::-webkit-scrollbar": {
+    display: "none",
+  },
   background: "$surface",
   border: "1px solid $borderLight",
   borderRadius: "$medium",
   boxShadow: "$small",
   display: "flex",
+  flexWrap: "nowrap",
   gap: "$smallest",
+  maxWidth: "100%",
+  msOverflowStyle: "none",
+  overflowX: "auto",
+  overflowY: "hidden",
+
   padding: "$smallest",
   position: "relative",
-  width: "fit-content",
+  scrollbarWidth: "none",
+
+  scrollBehavior: "smooth",
+
+  width: "100%",
 });
 
 export const TabStyled = styled(Button, {
@@ -19,9 +32,10 @@ export const TabStyled = styled(Button, {
   },
   border: "none",
   borderRadius: "$medium",
+  flexShrink: 0,
   padding: "$smaller $small",
-  transition: "$default",
 
+  transition: "$default",
   variants: {
     selected: {
       false: {
@@ -38,4 +52,6 @@ export const TabStyled = styled(Button, {
       },
     },
   },
+
+  whiteSpace: "nowrap",
 });
