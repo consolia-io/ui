@@ -1,7 +1,6 @@
 import type { JSX } from "react";
 
-import { Image, Text } from "../../index";
-import { IAvatar } from "../../types";
+import { Image, Text, type IAvatar } from "../../index";
 import { AvatarStyled } from "./styles";
 
 const getTheme = (text: string): "purple" | "orange" | "yellow" | "blue" => {
