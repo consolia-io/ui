@@ -128,6 +128,26 @@ export default function AccordionDemo(): JSX.Element {
           ]}
         />
       </C.Box>
+
+      {/* Long Text Wrapping */}
+      <C.Box header={
+        <C.Text as="h4">Text Wrapping</C.Text>
+      }>
+        <C.Accordion
+          options={[
+            {
+              children: <C.Text>This demonstrates how the accordion handles extremely long text labels that need to wrap to multiple lines for proper display and usability.</C.Text>,
+              label: "This is an immensely long accordion option label that should wrap to multiple lines to demonstrate the text wrapping functionality in list mode, ensuring that no content is truncated and the entire label remains readable to users",
+              value: "long-text"
+            },
+            {
+              children: <C.Text>A normal length option for comparison.</C.Text>,
+              label: "Normal Length Option",
+              value: "normal"
+            }
+          ]}
+        />
+      </C.Box>
     </C.Stack>
   );
 } 

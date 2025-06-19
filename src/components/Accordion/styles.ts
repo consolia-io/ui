@@ -34,6 +34,11 @@ export const AccordionItemStyled = styled("div", {
 });
 
 export const AccordionButtonStyled = styled(Button, {
+  "& svg": {
+    alignSelf: "flex-start",
+    flexShrink: 0,
+  },
+  alignItems: "center ",
   borderRadius: "$medium",
   justifyContent: "space-between",
   padding: "$smaller $small",
@@ -54,7 +59,9 @@ export const AccordionButtonStyled = styled(Button, {
       },
     },
   },
+  whiteSpace: "normal",
   width: "100%",
+  wordBreak: "break-word",
 });
 
 export const AccordionCardStyled = styled(Box, {
