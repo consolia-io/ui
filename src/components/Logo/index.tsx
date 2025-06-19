@@ -1,6 +1,6 @@
 import type { JSX } from "react";
 
-import { ILogo } from "../../types";
+import { type ILogo } from "../../index";
 import { LogoStyled } from "./styles";
 
 const aspectRatios = {

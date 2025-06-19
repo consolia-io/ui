@@ -1,13 +1,35 @@
 import { fadeIn, fadeOut, styled } from "../../stitches.config";
 import Button from "../Button";
 
+// Base styles shared between calendar day and month buttons
+const calendarButtonBase = {
+  "&:active": {
+    transform: "scale(0.98)",
+  },
+  "&:hover": {
+    backgroundColor: "$surfaceHover",
+  },
+  alignItems: "center",
+  backgroundColor: "transparent",
+  borderBottom: "1px solid $borderLight",
+  borderRadius: 0,
+  borderRight: "1px solid $borderLight",
+  boxShadow: "none",
+  color: "$text",
+  cursor: "pointer",
+  display: "flex",
+  justifyContent: "center",
+  position: "relative",
+  transition: "all 200ms ease-out",
+  width: "100%",
+};
+
 export const CalendarStyled = styled("div", {
   minWidth: "320px",
   padding: "$small",
   phone: {
     minWidth: "100%",
   },
-
   width: "100%",
 });
 
@@ -55,36 +77,16 @@ export const CalendarDayHeaderStyled = styled("div", {
   borderRadius: 0,
   borderRight: "1px solid $borderLight",
   padding: "$smaller 0",
-
   textAlign: "center",
 });
 
 export const CalendarDayStyled = styled(Button, {
-  "&:active": {
-    transform: "scale(0.98)",
-  },
-  "&:hover": {
-    backgroundColor: "$surfaceHover",
-  },
+  ...calendarButtonBase,
   "&:nth-child(7n)": {
     borderRight: "none",
   },
-  alignItems: "center",
-  backgroundColor: "transparent",
-  borderBottom: "1px solid $borderLight",
-  borderRadius: 0,
-  borderRight: "1px solid $borderLight",
-  boxShadow: "none",
-  color: "$text",
-  cursor: "pointer",
-  display: "flex",
   height: "$large",
-  justifyContent: "center",
   padding: 0,
-
-  position: "relative",
-
-  transition: "all 200ms ease-out",
 
   variants: {
     disabled: {
@@ -113,8 +115,6 @@ export const CalendarDayStyled = styled(Button, {
       },
     },
   },
-
-  width: "100%",
 });
 
 export const CalendarFooterStyled = styled("div", {
@@ -133,32 +133,13 @@ export const CalendarDescriptionStyled = styled("div", {
 });
 
 export const CalendarMonthStyled = styled(Button, {
-  "&:active": {
-    transform: "scale(0.98)",
-  },
-  "&:hover": {
-    backgroundColor: "$surfaceHover",
-  },
+  ...calendarButtonBase,
   "&:nth-child(3n)": {
     borderRight: "none",
   },
-  alignItems: "center",
-  backgroundColor: "transparent",
-  borderBottom: "1px solid $borderLight",
-  borderRadius: 0,
-  borderRight: "1px solid $borderLight",
-  boxShadow: "none",
-  color: "$text",
-  cursor: "pointer",
-  display: "flex",
   fontSize: "$default",
   height: "$larger",
-  justifyContent: "center",
   padding: "$medium $small",
-
-  position: "relative",
-
-  transition: "all 200ms ease-out",
 
   variants: {
     disabled: {
@@ -179,8 +160,6 @@ export const CalendarMonthStyled = styled(Button, {
       },
     },
   },
-
-  width: "100%",
 });
 
 export const CalendarAnimationWrapper = styled("div", {

@@ -1,20 +1,6 @@
 import { fadeOut, styled } from "../../stitches.config";
 import { TextStyled } from "../Text/styles";
 
-export const paddingVariants = {
-  padding: {
-    default: {
-      padding: "$medium",
-    },
-    none: {
-      padding: 0,
-    },
-    small: {
-      padding: "$small",
-    },
-  },
-};
-
 export const BoxStyled = styled("article", {
   backgroundColor: "$background",
   border: "1px solid $border",
@@ -23,9 +9,7 @@ export const BoxStyled = styled("article", {
   color: "$text",
   display: "block",
   height: "100%",
-  margin: 0,
   overflow: "hidden",
-  paddingBlock: 0,
   position: "relative",
   transition: "$default",
   variants: {
@@ -37,37 +21,24 @@ export const BoxStyled = styled("article", {
     },
     border: {
       blue: {
-        backgroundColor: "$background",
-        borderColor: "$border",
         borderTopColor: "$blue",
         borderTopWidth: "8px",
       },
       default: {
-        backgroundColor: "$background",
-        borderColor: "$border",
         borderTopWidth: "8px",
       },
       orange: {
-        backgroundColor: "$background",
-        borderColor: "$border",
         borderTopColor: "$orange",
         borderTopWidth: "8px",
       },
       purple: {
-        backgroundColor: "$background",
-        borderColor: "$border",
         borderTopColor: "$purple",
         borderTopWidth: "8px",
       },
       solid: {
-        backgroundColor: "$background",
-        borderColor: "$border",
-        borderTopColor: "$text",
         borderTopWidth: "8px",
       },
       yellow: {
-        backgroundColor: "$background",
-        borderColor: "$border",
         borderTopColor: "$yellow",
         borderTopWidth: "8px",
       },
@@ -85,7 +56,6 @@ export const BoxStyled = styled("article", {
         },
       },
     },
-
     footer: {
       true: {
         display: "flex",
@@ -113,11 +83,21 @@ export const BoxStyled = styled("article", {
         opacity: 0.6,
       },
     },
+    padding: {
+      default: {
+        padding: "$medium",
+      },
+      none: {
+        padding: 0,
+      },
+      small: {
+        padding: "$small",
+      },
+    },
     theme: {
       blue: {
         background: "$blueLight",
       },
-
       default: {
         backgroundColor: "$background",
       },
@@ -129,7 +109,6 @@ export const BoxStyled = styled("article", {
           color: "$background",
         },
         backgroundColor: "transparent",
-        borderColor: "$surfaceLight",
         color: "$background",
         darkOnly: {
           [`${TextStyled}`]: {
@@ -160,7 +139,6 @@ export const BoxStyled = styled("article", {
         background: "$yellowLight",
       },
     },
-    ...paddingVariants,
   },
 
   width: "100%",
@@ -172,7 +150,7 @@ export const BoxHeaderStyled = styled("div", {
   boxShadow: "$small",
   color: "$text",
   fontWeight: "bold",
-  padding: "$small $medium",
+
   variants: {
     padding: {
       default: {
@@ -192,7 +170,7 @@ export const BoxHeaderStyled = styled("div", {
 export const BoxFooterStyled = styled("div", {
   borderTop: "1px solid $borderLight",
   color: "$text",
-  padding: "$small $medium",
+
   variants: {
     fill: {
       true: {
@@ -217,7 +195,17 @@ export const BoxFooterStyled = styled("div", {
 
 export const BoxInnerStyled = styled("div", {
   variants: {
-    ...paddingVariants,
+    padding: {
+      default: {
+        padding: "$medium",
+      },
+      none: {
+        padding: 0,
+      },
+      small: {
+        padding: "$small",
+      },
+    },
   },
 });
 
@@ -237,14 +225,11 @@ export const BoxLoadingStyled = styled("div", {
   alignItems: "center",
   backgroundColor: "$background",
   borderRadius: "$medium",
-  bottom: 0,
   display: "flex",
+  inset: 0,
   justifyContent: "center",
-  left: 0,
   opacity: 0.95,
   position: "absolute",
-  right: 0,
-  top: 0,
 });
 
 export const BoxExpanderTrigger = styled("div", {
@@ -254,6 +239,7 @@ export const BoxExpanderTrigger = styled("div", {
   left: 0,
   position: "absolute",
   right: 0,
+
   variants: {
     expanded: {
       true: {
@@ -265,4 +251,5 @@ export const BoxExpanderTrigger = styled("div", {
     },
   },
 });
+
 export default BoxStyled;

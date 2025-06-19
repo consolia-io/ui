@@ -1,7 +1,6 @@
 import { useState, type JSX } from "react";
 
-import { Button, useEventListener } from "../../index";
-import { IForm } from "../../types";
+import { Button, useEventListener, type IForm } from "../../index";
 import { FormStyled } from "./styles";
 
 export default function Form({

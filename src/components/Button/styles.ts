@@ -10,11 +10,6 @@ export const ButtonStyled = styled("button", {
     opacity: "$light",
   },
 
-  "&:not(:disabled):hover": {
-    backgroundColor: "$surfaceHover",
-    borderColor: "$border",
-    boxShadow: "$large",
-  },
   alignContent: "center",
   alignItems: "center",
   appearance: "none",
@@ -41,6 +36,7 @@ export const ButtonStyled = styled("button", {
   },
   position: "relative",
   textOverflow: "ellipsis",
+
   transition: "$default",
 
   variants: {
@@ -72,6 +68,7 @@ export const ButtonStyled = styled("button", {
         "&:not(:disabled):hover": {
           backgroundColor: "$surfaceHover",
           borderColor: "$border",
+          boxShadow: "$large",
         },
       },
       minimal: {
@@ -115,18 +112,16 @@ export const ButtonIconStyled = styled("span", {
       },
     },
   },
+
   verticalAlign: "middle",
 });
 
 export const ButtonLoadingStyled = styled("div", {
   alignItems: "center",
   backgroundColor: "$surface",
-  bottom: 0,
   display: "flex",
+  inset: 0,
   justifyContent: "center",
-  left: 0,
   position: "absolute",
-  right: 0,
-  top: 0,
   zIndex: 1,
 });

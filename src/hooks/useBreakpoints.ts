@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
-import { breakpoints } from "../stitches.config";
+import type { TBreakpoint, IUseBreakpoints } from "../types/hooks";
 
-type Breakpoint = "phone" | "tabletX" | "laptopX" | "desktopX" | "wide" | undefined;
+import { breakpoints } from "../stitches.config";
 
 const extractMediaQuery = (cssRule: string): string => {
   return cssRule.replace("@media only screen and ", "");
 };
 
-const getBreakpoint = (): Breakpoint => {
+const getBreakpoint = (): TBreakpoint => {
   if (window.matchMedia(extractMediaQuery(breakpoints.phone)).matches) {
     return "phone";
   } else if (window.matchMedia(extractMediaQuery(breakpoints.tabletX)).matches) {
@@ -24,15 +24,8 @@ const getBreakpoint = (): Breakpoint => {
   return undefined;
 };
 
-export default function useBreakpoints(): {
-  breakpoint: Breakpoint;
-  isDesktop: boolean;
-  isLaptop: boolean;
-  isPhone: boolean;
-  isTablet: boolean;
-  isWide: boolean;
-} {
-  const [breakpoint, setBreakpoint] = useState<Breakpoint>("phone");
+export default function useBreakpoints(): IUseBreakpoints {
+  const [breakpoint, setBreakpoint] = useState<TBreakpoint>("phone");
 
   const isPhone = breakpoint === "phone";
   const isTablet = breakpoint === "tabletX";

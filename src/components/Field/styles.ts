@@ -1,5 +1,10 @@
 import { styled } from "../../stitches.config";
 
+const interactiveStyles = {
+  borderColor: "$text",
+  boxShadow: "$small",
+};
+
 export const FieldStyled = styled("div", {
   position: "relative",
   variants: {
@@ -10,18 +15,13 @@ export const FieldStyled = styled("div", {
       },
     },
   },
+
   width: "100%",
 });
 
 export const FieldCoreStyled = styled("div", {
-  "&:focus-within": {
-    borderColor: "$text",
-    boxShadow: "$small",
-  },
-  "&:hover": {
-    borderColor: "$text",
-    boxShadow: "$small",
-  },
+  "&:focus-within": interactiveStyles,
+  "&:hover": interactiveStyles,
   border: "1px solid $border",
   borderRadius: "$medium",
   display: "flex",
@@ -49,13 +49,13 @@ export const FieldAreaStyled = styled("textarea", {
   display: "block",
   fontFamily: "$default",
   fontSize: "$default",
-  margin: "0 auto",
   minHeight: "$largest",
   padding: "$small",
   phone: {
     fontSize: "16px !important",
   },
   resize: "vertical",
+
   width: "100%",
 });
 
@@ -67,6 +67,7 @@ export const FieldFunctionStyled = styled("div", {
   gap: "$smaller",
   justifyContent: "flex-end",
   padding: "$smaller $small",
+
   phone: {
     justifyContent: "flex-start",
   },

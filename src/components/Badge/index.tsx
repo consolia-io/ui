@@ -1,9 +1,7 @@
 import { useState, type JSX } from "react";
 import { toast } from "react-hot-toast";
 
-import { Loading } from "../../index";
-import { IBadge } from "../../types";
-import Icon from "../Icon";
+import { Loading, Icon, type IBadge } from "../../index";
 import { BadgeIconStyled, BadgeStyled, BadgeLoadingStyled } from "./styles";
 
 export default function Badge({

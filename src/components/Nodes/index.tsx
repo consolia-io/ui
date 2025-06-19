@@ -1,8 +1,8 @@
 import { JSX, ReactNode } from "react";
 
-import { INodes } from "../../types";
+import { type INodes } from "../../index";
 import { useNodesLogic } from "./hooks";
-import { ConnectingLine, NodeRow, NodesContainer } from "./styles";
+import { ConnectingLine, NodeRow, NodesContainer, NodesSVG } from "./styles";
 
 export default function Nodes({ height, nodes, parent }: INodes): JSX.Element {
   const { containerRef, nodesRef, parentRef, paths } = useNodesLogic(nodes, parent);
@@ -22,15 +22,7 @@ export default function Nodes({ height, nodes, parent }: INodes): JSX.Element {
   };
 
   const renderConnectingLines = (): JSX.Element => (
-    <svg
-      style={{
-        height: "100%",
-        left: 0,
-        pointerEvents: "none",
-        position: "absolute",
-        top: 0,
-        width: "100%",
-      }}>
+    <NodesSVG>
       {/* Base lines */}
       {paths.map((path, i) => (
         <ConnectingLine key={`base-${i}`} css={{ stroke: "$border" }} d={path} />
@@ -42,7 +34,7 @@ export default function Nodes({ height, nodes, parent }: INodes): JSX.Element {
 
         return <ConnectingLine key={`flow-${i}`} animate css={{ stroke: strokeColor }} d={path} />;
       })}
-    </svg>
+    </NodesSVG>
   );
 
   return (

@@ -1,5 +1,61 @@
 import { fadeIn, fadeOut, slideInScale, slideOutScale, styled } from "../../stitches.config";
 
+// Shared base for overlay components (Menu/Modal/Drawer)
+const overlayBase = {
+  backdropFilter: "blur(2px)",
+  backgroundColor: "$overlay",
+  inset: 0,
+  position: "fixed",
+  transition: "$default",
+  variants: {
+    animation: {
+      false: {
+        animation: `${fadeOut} 200ms ease-in-out`,
+        animationFillMode: "forwards",
+      },
+      true: {
+        animation: `${fadeIn} 200ms ease-in-out`,
+        animationFillMode: "forwards",
+      },
+    },
+  },
+} as const;
+
+// Shared base for dialog-style containers
+const dialogContainerBase = {
+  "&::-webkit-scrollbar": {
+    display: "none",
+  },
+  backgroundColor: "$background",
+  borderRadius: "$large",
+  boxShadow: "$large",
+  left: "50%",
+  maxHeight: "80vh",
+  minHeight: "auto",
+  overflowX: "hidden",
+  overflowY: "auto",
+  phone: {
+    maxHeight: "90vh",
+    width: "95%",
+  },
+  position: "fixed",
+  top: "50%",
+  transform: "translate(-50%, -50%)",
+  variants: {
+    animation: {
+      false: {
+        animation: `${slideOutScale} 200ms ease-out`,
+        animationFillMode: "forwards",
+      },
+      true: {
+        animation: `${slideInScale} 200ms ease-out`,
+        animationFillMode: "forwards",
+      },
+    },
+  },
+  width: "90%",
+} as const;
+
 export const MenuStyled = styled("div", {
   display: "inline-flex",
   height: "100%",
@@ -14,68 +70,14 @@ export const MenuTriggerStyled = styled("div", {
 });
 
 export const MenuOverlayStyled = styled("div", {
-  backdropFilter: "blur(2px)",
-  backgroundColor: "$overlay",
-  bottom: 0,
-  height: "100%",
-  left: 0,
-  position: "fixed",
-  right: 0,
-  top: 0,
-  transition: "$default",
-  variants: {
-    animation: {
-      false: {
-        animation: `${fadeOut} 200ms ease-in-out`,
-        animationFillMode: "forwards",
-      },
-      true: {
-        animation: `${fadeIn} 200ms ease-in-out`,
-        animationFillMode: "forwards",
-      },
-    },
-  },
-  width: "100%",
+  ...overlayBase,
   zIndex: "$menu",
 });
 
 export const MenuGroupStyled = styled("div", {
-  "&::-webkit-scrollbar": {
-    display: "none",
-  },
-  backgroundColor: "$background",
-  borderRadius: "$large",
-  boxShadow: "$large",
-  left: "50%",
-  maxHeight: "80vh",
+  ...dialogContainerBase,
   maxWidth: "420px",
-  minHeight: "auto",
-  overflowX: "hidden",
-  overflowY: "auto",
   padding: "$small",
-  phone: {
-    maxHeight: "90vh",
-    width: "95%",
-  },
-  position: "fixed",
-  top: "50%",
-
-  transform: "translate(-50%, -50%)",
-
-  variants: {
-    animation: {
-      false: {
-        animation: `${slideOutScale} 200ms ease-out`,
-        animationFillMode: "forwards",
-      },
-      true: {
-        animation: `${slideInScale} 200ms ease-out`,
-        animationFillMode: "forwards",
-      },
-    },
-  },
-
-  width: "90%",
 });
 
 export const MenuItemStyled = styled("div", {

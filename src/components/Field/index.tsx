@@ -1,9 +1,7 @@
 import { ChangeEvent, useState, type JSX } from "react";
 import toast from "react-hot-toast";
 
-import { Badge, Button, Loading, useBreakpoints } from "../../index";
-import { IField } from "../../types";
-import Icon from "../Icon";
+import { Badge, Button, Loading, useBreakpoints, Icon, type IField } from "../../index";
 import {
   FieldStyled,
   FieldAreaStyled,

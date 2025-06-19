@@ -10,9 +10,9 @@ import {
   useOutsideClick,
   useFloatingUI,
   useWindowDimensions,
+  Icon,
+  type ISelectMulti,
 } from "../../../index";
-import { ISelectMulti } from "../../../types";
-import Icon from "../../Icon";
 import {
   SelectStyled,
   SelectTriggerStyled,

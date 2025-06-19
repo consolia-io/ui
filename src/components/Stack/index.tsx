@@ -2,9 +2,54 @@ import type { JSX } from "react";
 
 import { CSS } from "@stitches/react";
 
+import { type IStack } from "../../index";
 import { darkTheme } from "../../stitches.config";
-import { IStack } from "../../types";
 import { StackStyled } from "./styles";
+
+// Helper function to calculate flex value for width
+const getFlexValue = (width: number): string => (width === 100 ? `0 0 100%` : `${width} 1 0%`);
+
+// Helper function to create responsive width styles
+const createResponsiveWidth = (widthResponsive: IStack["widthResponsive"], css: CSS = {}): CSS => {
+  const responsiveStyles: CSS = {};
+
+  if (widthResponsive?.phone) {
+    responsiveStyles.phone = {
+      ...(css?.phone && typeof css.phone === "object" ? css.phone : {}),
+      flex: getFlexValue(widthResponsive.phone),
+    };
+  }
+
+  if (widthResponsive?.tabletX) {
+    responsiveStyles.tabletX = {
+      ...(css?.tabletX && typeof css.tabletX === "object" ? css.tabletX : {}),
+      flex: getFlexValue(widthResponsive.tabletX),
+    };
+  }
+
+  if (widthResponsive?.laptopX) {
+    responsiveStyles.laptopX = {
+      ...(css?.laptopX && typeof css.laptopX === "object" ? css.laptopX : {}),
+      flex: getFlexValue(widthResponsive.laptopX),
+    };
+  }
+
+  if (widthResponsive?.desktopX) {
+    responsiveStyles.desktopX = {
+      ...(css?.desktopX && typeof css.desktopX === "object" ? css.desktopX : {}),
+      flex: getFlexValue(widthResponsive.desktopX),
+    };
+  }
+
+  if (widthResponsive?.wide) {
+    responsiveStyles.wide = {
+      ...(css?.wide && typeof css.wide === "object" ? css.wide : {}),
+      flex: getFlexValue(widthResponsive.wide),
+    };
+  }
+
+  return responsiveStyles;
+};
 
 export default function Stack({
   align,
@@ -46,40 +91,9 @@ export default function Stack({
     ...(order && { order }),
     ...(top && { marginTop: 0, paddingTop: `$${top}` }),
     ...(bottom && { marginBottom: 0, paddingBottom: `$${bottom}` }),
-    ...(width !== undefined && {
-      flex: width === 100 ? `0 0 100%` : `${width} 1 0%`,
-    }),
+    ...(width !== undefined && { flex: getFlexValue(width) }),
     ...css,
-    ...(widthResponsive?.phone && {
-      phone: {
-        ...(css?.phone && typeof css.phone === "object" ? css.phone : {}),
-        flex: widthResponsive.phone === 100 ? `0 0 100%` : `${widthResponsive.phone} 1 0%`,
-      },
-    }),
-    ...(widthResponsive?.tabletX && {
-      tabletX: {
-        ...(css?.tabletX && typeof css.tabletX === "object" ? css.tabletX : {}),
-        flex: widthResponsive.tabletX === 100 ? `0 0 100%` : `${widthResponsive.tabletX} 1 0%`,
-      },
-    }),
-    ...(widthResponsive?.laptopX && {
-      laptopX: {
-        ...(css?.laptopX && typeof css.laptopX === "object" ? css.laptopX : {}),
-        flex: widthResponsive.laptopX === 100 ? `0 0 100%` : `${widthResponsive.laptopX} 1 0%`,
-      },
-    }),
-    ...(widthResponsive?.desktopX && {
-      desktopX: {
-        ...(css?.desktopX && typeof css.desktopX === "object" ? css.desktopX : {}),
-        flex: widthResponsive.desktopX === 100 ? `0 0 100%` : `${widthResponsive.desktopX} 1 0%`,
-      },
-    }),
-    ...(widthResponsive?.wide && {
-      wide: {
-        ...(css?.wide && typeof css.wide === "object" ? css.wide : {}),
-        flex: widthResponsive.wide === 100 ? `0 0 100%` : `${widthResponsive.wide} 1 0%`,
-      },
-    }),
+    ...(widthResponsive && createResponsiveWidth(widthResponsive, css)),
   };
 
   return (

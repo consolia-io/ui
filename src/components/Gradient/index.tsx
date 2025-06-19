@@ -28,13 +28,7 @@ export default function Gradient(): JSX.Element {
             <stop offset="85%" stopColor="rgba(80, 100, 140, 0.2)" />
             <stop offset="95%" stopColor="rgba(60, 80, 120, 0.08)" />
             <stop offset="100%" stopColor="transparent" />
-            <animateTransform
-              attributeName="gradientTransform"
-              dur="10s"
-              repeatCount="indefinite"
-              type="scale"
-              values="1; 1.15; 1"
-            />
+            <animate attributeName="r" dur="15s" repeatCount="indefinite" values="80%; 140%; 80%" />
           </radialGradient>
         </defs>
         <rect fill="url(#sunsetGradient)" height="100%" width="100%" />

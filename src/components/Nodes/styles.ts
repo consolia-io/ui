@@ -29,6 +29,14 @@ export const NodeRow = styled("div", {
   zIndex: 1,
 });
 
+export const NodesSVG = styled("svg", {
+  height: "100%",
+  inset: 0,
+  pointerEvents: "none",
+  position: "absolute",
+  width: "100%",
+});
+
 export const ConnectingLine = styled("path", {
   fill: "none",
   opacity: "$light",

@@ -2,7 +2,7 @@ import type { JSX } from "react";
 
 import { default as NextImage } from "next/image";
 
-import { IImage } from "../../types";
+import { type IImage } from "../../index";
 import { ImageStyled } from "./styles";
 
 export default function Image({
@@ -25,7 +25,6 @@ export default function Image({
           },
         }),
         height: fillHeight,
-        overflow: "hidden",
         ...css,
       }}>
       <NextImage

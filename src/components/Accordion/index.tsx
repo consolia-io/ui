@@ -1,9 +1,6 @@
 import { useState, useRef, type JSX } from "react";
 
-import { IAccordion } from "../../types";
-import Icon from "../Icon";
-import Stack from "../Stack";
-import Text from "../Text";
+import { Icon, Stack, Text, type IAccordion } from "../../index";
 import {
   AccordionStyled,
   AccordionItemStyled,
@@ -48,11 +45,11 @@ export default function Accordion({
         if (contentElement) {
           contentElement.scrollIntoView({
             behavior: "smooth",
-            block: "start",
+            block: "end",
           });
-          window.scrollBy(0, -40);
+          window.scrollBy(0, 20);
         }
-      }, 100);
+      }, 150);
     }
 
     if (onToggle) {
@@ -94,7 +91,11 @@ export default function Accordion({
                 }
                 minimal
                 onClick={handleItemClick(option.value)}>
-                <AccordionGridContentStyled expanded={isOpen}>
+                <AccordionGridContentStyled
+                  ref={(el: HTMLDivElement | null) => {
+                    contentRefs.current[option.value] = el;
+                  }}
+                  expanded={isOpen}>
                   {isOpen ? option.children : null}
                 </AccordionGridContentStyled>
               </AccordionCardStyled>

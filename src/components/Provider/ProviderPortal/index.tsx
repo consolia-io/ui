@@ -1,7 +1,7 @@
 import { useEffect, useRef, type JSX } from "react";
 import { createPortal } from "react-dom";
 
-import { IPortal } from "../../../types";
+import { type IPortal } from "../../../index";
 
 export default function Portal({ children, disabled }: IPortal): JSX.Element {
   const portalRef = useRef<HTMLDivElement | null>(null);

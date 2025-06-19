@@ -124,7 +124,6 @@ export const BadgeStyled = styled("span", {
   lineHeight: "$default",
   marginBottom: "0 !important",
   padding: "$smallest $small",
-
   position: "relative",
   variants: {
     animation: {
@@ -197,6 +196,7 @@ export const BadgeStyled = styled("span", {
       theme: {},
     },
   },
+
   verticalAlign: "middle",
 });
 
@@ -228,17 +228,15 @@ export const BadgeIconStyled = styled("span", {
       },
     },
   },
+
   verticalAlign: "middle",
 });
 
 export const BadgeLoadingStyled = styled("div", {
   alignItems: "center",
   backgroundColor: "$surface",
-  bottom: 0,
   display: "flex",
+  inset: 0,
   justifyContent: "center",
-  left: 0,
   position: "absolute",
-  right: 0,
-  top: 0,
 });

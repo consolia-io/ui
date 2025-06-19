@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 import { useState, useEffect } from "react";
 
+import type { TUseLocalStorage } from "../types/hooks";
+
 const isBrowser = typeof window !== "undefined";
 
 function getStorageValue<T>(key: string, defaultValue: T): T {
@@ -12,7 +14,7 @@ function getStorageValue<T>(key: string, defaultValue: T): T {
   return initial;
 }
 
-export default function useLocalStorage<T>(key: string, defaultValue: T): [T, (value: T) => void] {
+export default function useLocalStorage<T>(key: string, defaultValue: T): TUseLocalStorage<T> {
   const [value, setValue] = useState<T>(() => getStorageValue<T>(key, defaultValue));
 
   useEffect(() => {

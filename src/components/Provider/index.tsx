@@ -1,8 +1,8 @@
 import { useEffect, type JSX } from "react";
 
 import packageJson from "../../../package.json";
+import { type IProvider } from "../../index";
 import { darkTheme } from "../../stitches.config";
-import { IProvider } from "../../types";
 import Portal from "./ProviderPortal";
 import { ProviderStyled, providerReset } from "./styles";
 import { ToastController } from "./ToastController";

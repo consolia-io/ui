@@ -2,12 +2,7 @@
 import { ChangeEvent, useRef, useState, type JSX } from "react";
 import toast from "react-hot-toast";
 
-import { IUpload } from "../../types";
-import Badge from "../Badge";
-import Button from "../Button";
-import Icon from "../Icon";
-import Loading from "../Loading";
-import Text from "../Text";
+import { Badge, Button, Icon, Loading, Text, type IUpload } from "../../index";
 import {
   UploadCoreStyled,
   UploadFooterStyled,

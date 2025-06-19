@@ -1,14 +1,8 @@
 import { styled } from "../../stitches.config";
 import { TextStyled } from "../Text/styles";
 
-const baseStyles = {
-  marginBlockEnd: 0,
-  marginBlockStart: 0,
-  width: "auto",
-};
-
 export const StackStyled = styled("div", {
-  ...baseStyles,
+  margin: 0,
   variants: {
     direction: {
       column: {

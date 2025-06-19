@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
-export default function useWindowDimensions(): { height: number; width: number } {
+import type { IUseWindowDimensions } from "../types/hooks";
+
+export default function useWindowDimensions(): IUseWindowDimensions {
   const [windowDimensions, setWindowDimensions] = useState({
     height: typeof window !== "undefined" ? window.innerHeight : 0,
     width: typeof window !== "undefined" ? window.innerWidth : 0,

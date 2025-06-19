@@ -1,8 +1,6 @@
 import type { JSX } from "react";
 
-import { Loading } from "../../index";
-import { IButton } from "../../types";
-import Icon from "../Icon";
+import { Loading, Icon, type IButton } from "../../index";
 import { ButtonIconStyled, ButtonLoadingStyled, ButtonStyled } from "./styles";
 
 export default function Button({

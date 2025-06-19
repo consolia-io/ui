@@ -7,9 +7,9 @@ import {
   useEventListener,
   useOutsideClick,
   useScrollLock,
+  Icon,
+  type IMenu,
 } from "../../index";
-import { IMenu } from "../../types";
-import Icon from "../Icon";
 import {
   MenuGroupStyled,
   MenuItemStyled,

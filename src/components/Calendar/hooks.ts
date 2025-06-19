@@ -2,7 +2,7 @@ import dayjs, { Dayjs } from "dayjs";
 import { useState, Dispatch, SetStateAction } from "react";
 import toast from "react-hot-toast";
 
-import { ICalendar } from "../../types";
+import { type ICalendar } from "../../index";
 
 export const isDateOutOfRange = (date: string, minDate: string, maxDate: string): boolean => {
   return dayjs(date).isBefore(minDate, "day") || dayjs(date).isAfter(maxDate, "day");

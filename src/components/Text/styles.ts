@@ -17,6 +17,10 @@ const link = {
   transition: "$default",
 };
 
+const mutedStyles = {
+  opacity: "$default",
+};
+
 export const TextSizes = {
   a: {
     marginBottom: 0,
@@ -121,12 +125,9 @@ export const TextStyled = styled("div", {
     marginBottom: "0 !important",
   },
   color: "$text",
-
   variants: {
     accent: {
-      true: {
-        opacity: "$default",
-      },
+      true: mutedStyles,
     },
     highlight: {
       blue: {
@@ -171,9 +172,7 @@ export const TextStyled = styled("div", {
       },
     },
     muted: {
-      true: {
-        opacity: "$default",
-      },
+      true: mutedStyles,
     },
     size: TextSizes,
     truncate: {

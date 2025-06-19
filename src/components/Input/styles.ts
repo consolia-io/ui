@@ -1,5 +1,10 @@
 import { styled } from "../../stitches.config";
 
+const interactiveStyles = {
+  borderColor: "$text",
+  boxShadow: "$small",
+};
+
 export const InputStyled = styled("div", {
   position: "relative",
   variants: {
@@ -10,18 +15,13 @@ export const InputStyled = styled("div", {
       },
     },
   },
+
   width: "100%",
 });
 
 export const InputCoreStyled = styled("div", {
-  "&:focus-within": {
-    borderColor: "$text",
-    boxShadow: "$small",
-  },
-  "&:hover": {
-    borderColor: "$text",
-    boxShadow: "$small",
-  },
+  "&:focus-within": interactiveStyles,
+  "&:hover": interactiveStyles,
   alignContent: "center",
   alignSelf: "center",
   border: "1px solid $border",
@@ -49,11 +49,11 @@ export const InputAreaStyled = styled("input", {
   fontFamily: "$default",
   fontSize: "$default",
   height: "$large",
-  margin: "0 auto",
   padding: "0 $small",
   phone: {
     fontSize: "16px !important",
   },
+
   width: "100%",
 });
 

@@ -1,5 +1,32 @@
 import { fadeIn, styled } from "../../stitches.config";
 
+// Shared patterns
+const cellPaddingBase = {
+  "&:first-child": {
+    paddingLeft: "$medium",
+  },
+  "&:last-child": {
+    paddingRight: "$medium",
+  },
+};
+
+const alignVariants = {
+  center: { textAlign: "center" },
+  left: { textAlign: "left" },
+  right: { textAlign: "right" },
+} as const;
+
+const rowHoverBase = {
+  "&:hover": {
+    backgroundColor: "$surfaceHover",
+  },
+  "&:last-child": {
+    borderBottom: "none",
+  },
+  borderBottom: "1px solid $borderLight",
+  transition: "$default",
+};
+
 export const TableStitches = styled("div", {
   backgroundColor: "$background",
   border: "1px solid $border",
@@ -12,7 +39,6 @@ export const TableStitches = styled("div", {
     overflow: "visible",
   },
   position: "relative",
-
   width: "100%",
 });
 
@@ -24,13 +50,11 @@ export const TableCoreStitches = styled("table", {
     display: "none",
   },
   tableLayout: "fixed",
-
   width: "100%",
 });
 
 export const TableMobileView = styled("div", {
   display: "none",
-
   phone: {
     display: "flex",
     flexDirection: "column",
@@ -39,17 +63,12 @@ export const TableMobileView = styled("div", {
 });
 
 export const TableRowStitches = styled("tr", {
-  "&:last-child": {
-    borderBottom: "none",
-  },
-  borderBottom: "1px solid $borderLight",
+  ...rowHoverBase,
   "tbody &": {
     "&:hover": {
       backgroundColor: "$surfaceHover",
     },
   },
-
-  transition: "$default",
 });
 
 export const TableMobileRow = styled("div", {
@@ -63,7 +82,6 @@ export const TableMobileRow = styled("div", {
   gap: "$small",
   justifyContent: "space-between",
   padding: "$smaller 0",
-
   variants: {
     isActions: {
       true: {
@@ -96,7 +114,6 @@ export const TableMobileValue = styled("div", {
   gap: "$smaller",
   justifyContent: "flex-end",
   textAlign: "right",
-
   variants: {
     isActions: {
       true: {
@@ -108,23 +125,14 @@ export const TableMobileValue = styled("div", {
 });
 
 export const TableCellStitches = styled("td", {
-  "&:first-child": {
-    paddingLeft: "$medium",
-  },
-  "&:last-child": {
-    paddingRight: "$medium",
-  },
+  ...cellPaddingBase,
   color: "$text",
   fontSize: "$default",
   fontWeight: 400,
   lineHeight: 1.4,
   padding: "$small $medium",
   variants: {
-    align: {
-      center: { textAlign: "center" },
-      left: { textAlign: "left" },
-      right: { textAlign: "right" },
-    },
+    align: alignVariants,
     isAction: {
       true: {
         textAlign: "right",
@@ -137,18 +145,18 @@ export const TableCellStitches = styled("td", {
       },
     },
   },
-
   verticalAlign: "middle",
 });
 
 export const TableHeaderCellStitches = styled("th", {
+  ...cellPaddingBase,
   "&:first-child": {
+    ...cellPaddingBase["&:first-child"],
     borderTopLeftRadius: "$medium",
-    paddingLeft: "$medium",
   },
   "&:last-child": {
+    ...cellPaddingBase["&:last-child"],
     borderTopRightRadius: "$medium",
-    paddingRight: "$medium",
   },
   "& > div": {
     alignItems: "center",
@@ -163,13 +171,8 @@ export const TableHeaderCellStitches = styled("th", {
   padding: "$small $medium",
   textAlign: "left",
   variants: {
-    align: {
-      center: { textAlign: "center" },
-      left: { textAlign: "left" },
-      right: { textAlign: "right" },
-    },
+    align: alignVariants,
   },
-
   verticalAlign: "middle",
 });
 
@@ -197,7 +200,6 @@ export const TablePaginationBlock = styled("div", {
     marginTop: "$medium",
     padding: "$medium 0",
   },
-
   width: "100%",
 });
 
@@ -215,35 +217,19 @@ export const TableEmptyStateCell = styled("td", {
 });
 
 export const TableSubRowStitches = styled("tr", {
-  "&:hover": {
-    backgroundColor: "$surfaceHover",
-  },
-  "&:last-child": {
-    borderBottom: "none",
-  },
+  ...rowHoverBase,
   backgroundColor: "$surfaceLight",
-  borderBottom: "1px solid $borderLight",
-  transition: "$default",
 });
 
 export const TableSubCellStitches = styled("td", {
-  "&:first-child": {
-    paddingLeft: "$medium",
-  },
-  "&:last-child": {
-    paddingRight: "$medium",
-  },
+  ...cellPaddingBase,
   backgroundColor: "transparent",
   color: "$text",
   fontSize: "$small",
   fontWeight: 400,
   padding: "$smaller $medium",
   variants: {
-    align: {
-      center: { textAlign: "center" },
-      left: { textAlign: "left" },
-      right: { textAlign: "right" },
-    },
+    align: alignVariants,
     isAction: {
       true: {
         textAlign: "right",
@@ -256,7 +242,6 @@ export const TableSubCellStitches = styled("td", {
       },
     },
   },
-
   verticalAlign: "middle",
 });
 

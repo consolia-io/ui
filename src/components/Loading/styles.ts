@@ -67,7 +67,6 @@ export const LoadingStyled = styled("span", {
       transition: "color 1.5s ease-in-out",
     },
     height: "100%",
-
     width: "100%",
   },
   display: "inline-flex",

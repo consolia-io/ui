@@ -71,7 +71,6 @@ export const LogoStyled = styled("div", {
         "& svg": {
           "& path:last-of-type": {
             fillOpacity: 0,
-            ...strokeStyles,
           },
         },
       },

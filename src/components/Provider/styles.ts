@@ -23,12 +23,17 @@ export const ToastStyled = styled("div", {
     maxWidth: "90%",
     textAlign: "center",
   },
-
   pointerEvents: "all",
   width: "fit-content",
 });
 
 const baseFontURL = "https://cosmogroup.io/fonts";
+
+// Shared disabled state
+const disabledStyles = {
+  cursor: "not-allowed",
+  opacity: theme.opacities.light,
+} as const;
 
 export const providerReset = globalCss({
   "*": {
@@ -67,14 +72,14 @@ export const providerReset = globalCss({
 
   body: {
     [`.${darkTheme}`]: {
-      backgroundColor: darkTheme.colors.background,
-      color: darkTheme.colors.text,
+      backgroundColor: "$background",
+      color: "$text",
       colorScheme: "dark",
     },
     backgroundColor: theme.colors.background,
     color: theme.colors.text,
     fontFamily: theme.fonts.default,
-    fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
+    fontFeatureSettings: '"zero" 1, "tnum" 1, "calt" 1, "liga" 1, "case" 1',
     fontOpticalSizing: "auto",
     fontSize: theme.fontSizes.default,
     fontWeight: "normal",
@@ -88,18 +93,15 @@ export const providerReset = globalCss({
     WebkitFontSmoothing: "antialiased",
   },
 
-  button: {
-    "&:disabled": {
-      cursor: "not-allowed",
-      opacity: theme.opacities.light,
-    },
+  "button, input, textarea, select": {
+    "&:disabled": disabledStyles,
     cursor: "pointer",
     fontFamily: "inherit",
     fontSize: "inherit",
   },
 
   "h1, h2, h3, h4, h5, h6": {
-    fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
+    fontFeatureSettings: '"zero" 1, "tnum" 1, "calt" 1, "liga" 1, "case" 1',
     fontWeight: "bold",
     lineHeight: theme.lineHeights.small,
     margin: 0,
@@ -117,12 +119,7 @@ export const providerReset = globalCss({
   },
 
   "input, textarea, select": {
-    "&:disabled": {
-      cursor: "not-allowed",
-      opacity: theme.opacities.light,
-    },
-    fontFamily: "inherit",
-    fontSize: "inherit",
+    cursor: "text",
   },
 
   p: {

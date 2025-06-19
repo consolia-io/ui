@@ -1,5 +1,10 @@
 export * from "./stitches.config";
 
+// Export all types
+export * from "./types/components";
+export * from "./types/hooks";
+export * from "./types/stitches";
+
 export { default as Accordion } from "./components/Accordion";
 export { default as Avatar } from "./components/Avatar";
 export { default as Badge } from "./components/Badge";

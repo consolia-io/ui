@@ -1,6 +1,6 @@
 import { useState, useEffect, type JSX } from "react";
 
-import { ITabs } from "../../types";
+import { type ITabs } from "../../index";
 import { TabStyled, TabsStyled } from "./styles";
 
 export default function Tabs({ css, initial, onSelection, options, small }: ITabs): JSX.Element {

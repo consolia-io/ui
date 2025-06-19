@@ -25,6 +25,7 @@ import TabsDemo from "./demos/Tabs";
 import TextDemo from "./demos/Text";
 import ToastDemo from "./demos/Toast";
 import UploadDemo from "./demos/Upload";
+import UtilsDemo from "./demos/Utils";
 import ViewDemo from "./demos/View";
 
 // Proto demo has been stashed to proto-demo-stash.txt
@@ -55,6 +56,7 @@ const DEMOS = {
   Text: TextDemo,
   Toast: ToastDemo,
   Upload: UploadDemo,
+  Utils: UtilsDemo,
   View: ViewDemo,
 };
 
@@ -84,7 +86,6 @@ export function App(): JSX.Element {
           backgroundColor: "$background",
           borderBottom: "1px solid $border",
           position: "sticky",
-          top: 0,
           zIndex: 10,
         }}
         inverted

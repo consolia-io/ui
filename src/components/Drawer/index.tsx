@@ -1,9 +1,15 @@
 import { useRef, useState, type JSX } from "react";
 
-import { Button, Text, useEventListener, useOutsideClick, useScrollLock } from "../../index";
-import { IDrawer } from "../../types";
-import Icon from "../Icon";
-import Portal from "../Provider/ProviderPortal";
+import {
+  Button,
+  Text,
+  useEventListener,
+  useOutsideClick,
+  useScrollLock,
+  Icon,
+  Portal,
+  type IDrawer,
+} from "../../index";
 import {
   DialogContentStyled,
   DialogCoreStyled,

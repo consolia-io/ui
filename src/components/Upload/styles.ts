@@ -1,18 +1,16 @@
 import { styled } from "../../stitches.config";
 
+const interactiveStyles = {
+  borderColor: "$text",
+  boxShadow: "$small",
+};
+
 export const UploadStyled = styled("div", {
-  "&:focus-within": {
-    borderColor: "$text",
-    boxShadow: "$small",
-  },
-  "&:hover": {
-    borderColor: "$text",
-    boxShadow: "$small",
-  },
+  "&:focus-within": interactiveStyles,
+  "&:hover": interactiveStyles,
   border: "1px solid $border",
   borderRadius: "$medium",
   position: "relative",
-
   transition: "$default",
   variants: {
     disabled: {

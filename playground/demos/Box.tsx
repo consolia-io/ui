@@ -28,7 +28,10 @@ export default function BoxDemo(): JSX.Element {
           <C.Box theme="blue">Blue Theme</C.Box>
           <C.Box theme="purple">Purple Theme</C.Box>
           <C.Box theme="orange">Orange Theme</C.Box>
-          <C.Box theme="gradient">Gradient Theme</C.Box>
+          <C.Box theme="yellow">Yellow Theme</C.Box>
+          <C.Box theme="solid">Solid Theme</C.Box>
+          <C.Box theme="fill">Fill Theme</C.Box>
+          <C.Box theme="gradient"><C.Logo /></C.Box>
         </C.Stack>
       </C.Box>
 

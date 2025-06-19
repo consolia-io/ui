@@ -1,8 +1,7 @@
 import { useEffect, type JSX } from "react";
 import toast, { Toast, useToaster, Toaster } from "react-hot-toast";
 
-import { Badge, useEventListener } from "../../../index";
-import { IToast } from "../../../types";
+import { Badge, useEventListener, type IToast } from "../../../index";
 import { ToastStyled } from "../styles";
 
 const TOAST_LIMIT = 4;

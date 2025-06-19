@@ -1,7 +1,12 @@
 import type { JSX, MouseEvent } from "react";
 
-import { useEventListener, useOutsideClick, useFloatingUI, useWindowDimensions } from "../../index";
-import { IPopover } from "../../types";
+import {
+  useEventListener,
+  useOutsideClick,
+  useFloatingUI,
+  useWindowDimensions,
+  type IPopover,
+} from "../../index";
 import { PopoverStyled, PopoverContentStyled, PopoverTriggerStyled } from "./styles";
 
 export default function Popover({
@@ -49,11 +54,6 @@ export default function Popover({
           animation={isOpen}
           css={{
             maxHeight: windowHeight < 700 ? "50vh" : "70vh",
-            maxWidth: small ? "280px" : "420px",
-            minWidth: small ? "200px" : "250px",
-            phone: {
-              maxWidth: "100%",
-            },
             width: "auto",
             ...css,
           }}

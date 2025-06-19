@@ -1,9 +1,6 @@
 import type { JSX } from "react";
 
-import useMountSSR from "../../../hooks/useMountSSR";
-import { Select, Button, useTheme } from "../../../index";
-import { ISelect } from "../../../types";
-import Icon from "../../Icon";
+import { useMountSSR, Select, Button, useTheme, Icon, type ISelect } from "../../../index";
 
 export default function ProviderToggle(): JSX.Element {
   const { setTheme, theme } = useTheme();

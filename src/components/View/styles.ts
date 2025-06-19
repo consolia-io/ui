@@ -38,6 +38,7 @@ export const ViewStyled = styled("section", {
 
 export const ViewContainerStyled = styled("div", {
   position: "relative",
+
   variants: {
     app: {
       false: {
@@ -70,7 +71,6 @@ export const ViewContainerStyled = styled("div", {
       },
     },
   },
-  zIndex: 2,
 });
 
 export default ViewStyled;

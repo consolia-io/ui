@@ -3,7 +3,8 @@ import type { IconProps } from "@phosphor-icons/react";
 import * as PhosphorIcons from "@phosphor-icons/react";
 import { type ComponentType, type JSX } from "react";
 
-import { IIcon } from "../../types";
+import type { IIcon } from "../../index";
+
 import { IconStyled } from "./styles";
 
 export const BASE_SIZE = 21;
@@ -15,6 +16,7 @@ export default function Icon({
   inline,
   phosphor,
   system,
+  weight = "duotone",
 }: IIcon): JSX.Element {
   const iconName = system || phosphor;
 
@@ -26,7 +28,6 @@ export default function Icon({
     <IconStyled
       css={{
         ...(inline && {
-          display: "inline-flex",
           marginRight: inline === "auto" ? "auto" : `$${inline}`,
         }),
         ...(forceColor && {
@@ -42,7 +43,7 @@ export default function Icon({
         }),
         ...css,
       }}>
-      <Icon weight="duotone" />
+      <Icon weight={weight} />
     </IconStyled>
   );
 }

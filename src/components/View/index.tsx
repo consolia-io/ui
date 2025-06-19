@@ -1,10 +1,7 @@
 import type { JSX } from "react";
 
-import useBreakpoints from "../../hooks/useBreakpoints";
+import { useBreakpoints, Gradient, Logo, type IView } from "../../index";
 import { darkTheme } from "../../stitches.config";
-import { IView } from "../../types";
-import Gradient from "../Gradient";
-import Logo from "../Logo";
 import { ViewStyled, ViewContainerStyled } from "./styles";
 
 function HeroBackground(): JSX.Element {

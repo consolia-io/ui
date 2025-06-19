@@ -1,10 +1,17 @@
 import { styled } from "../../stitches.config";
 import Button from "../Button";
 
-export const TabsStyled = styled("div", {
+// Shared scrollbar hiding styles
+const hideScrollbar = {
   "&::-webkit-scrollbar": {
     display: "none",
   },
+  msOverflowStyle: "none",
+  scrollbarWidth: "none",
+};
+
+export const TabsStyled = styled("div", {
+  ...hideScrollbar,
   background: "$surface",
   border: "1px solid $borderLight",
   borderRadius: "$medium",
@@ -13,16 +20,11 @@ export const TabsStyled = styled("div", {
   flexWrap: "nowrap",
   gap: "$smallest",
   maxWidth: "100%",
-  msOverflowStyle: "none",
   overflowX: "auto",
   overflowY: "hidden",
-
   padding: "$smallest",
   position: "relative",
-  scrollbarWidth: "none",
-
   scrollBehavior: "smooth",
-
   width: "100%",
 });
 
@@ -34,7 +36,6 @@ export const TabStyled = styled(Button, {
   borderRadius: "$medium",
   flexShrink: 0,
   padding: "$smaller $small",
-
   transition: "$default",
   variants: {
     selected: {
@@ -52,6 +53,5 @@ export const TabStyled = styled(Button, {
       },
     },
   },
-
   whiteSpace: "nowrap",
 });

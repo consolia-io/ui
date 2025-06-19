@@ -1,5 +1,5 @@
 {
-  "entryPoints": ["src/types.ts"],
+  "entryPoints": ["src/types/components.ts", "src/types/hooks.ts", "src/types/stitches.ts"],
   "out": "docs",
   "plugin": ["typedoc-plugin-markdown"],
   "readme": "none",
@@ -16,7 +16,11 @@
   "defaultCategory": "Components",
   "categoryOrder": [
     "Components",
+    "Configuration",
+    "Themes", 
+    "Design Tokens",
     "Utilities",
+    "Animations",
     "*"
   ],
   "groupOrder": [
@@ -29,5 +33,5 @@
     "node_modules/**/*"
   ],
   "skipErrorChecking": true,
-  "customFooterHtml": "Generated from TypeScript definitions in <code>src/types.ts</code>"
+  "customFooterHtml": "Generated from TypeScript definitions in <code>src/types/</code> directory"
 } 

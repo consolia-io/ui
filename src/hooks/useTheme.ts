@@ -1,24 +1,20 @@
 import { useEffect, useState } from "react";
 
+import type { TThemeMode, IUseTheme } from "../types/hooks";
+
 import { useLocalStorage, useMountSSR } from "../index";
 
-type Theme = "system" | "dark" | "light";
-
-export default function useTheme(): {
-  isDarkTheme: boolean | undefined;
-  setTheme: (theme: Theme) => void;
-  theme: Theme;
-} {
+export default function useTheme(): IUseTheme {
   const isBrowser = useMountSSR();
   const [systemTheme, setSystemTheme] = useState<boolean>(false);
-  const [theme, setLocalStorageTheme] = useLocalStorage<Theme>("cosmo-ui-theme", "system");
+  const [theme, setLocalStorageTheme] = useLocalStorage<TThemeMode>("cosmo-ui-theme", "system");
   const [isDarkTheme, setIsDarkTheme] = useState<boolean | undefined>();
 
   const checkDarkMode = (): boolean => {
     return document.documentElement.classList.contains("dark");
   };
 
-  const mutateTheme = (currentTheme: Theme): void => {
+  const mutateTheme = (currentTheme: TThemeMode): void => {
     const rootElement = document.documentElement;
 
     rootElement.classList.remove("dark", "light");
@@ -30,7 +26,7 @@ export default function useTheme(): {
     }
   };
 
-  const setTheme = (newTheme: Theme): void => {
+  const setTheme = (newTheme: TThemeMode): void => {
     setLocalStorageTheme(newTheme);
     mutateTheme(newTheme);
   };

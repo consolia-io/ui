@@ -12,13 +12,11 @@ export const AvatarStyled = styled("div", {
     width: "100%",
   },
   alignSelf: "center",
-  backgroundColor: "$surface",
   border: "1px solid $border",
   borderRadius: "$medium",
   display: "inline-flex",
   height: "100%",
   justifyContent: "center",
-
   span: {
     alignItems: "center",
     color: "$text",
@@ -29,23 +27,23 @@ export const AvatarStyled = styled("div", {
     overflow: "hidden",
     textTransform: "uppercase",
   },
+
   variants: {
     theme: {
       blue: {
-        background: "$blue",
+        backgroundColor: "$blue",
       },
       default: {
         backgroundColor: "$surface",
-        borderColor: "$border",
       },
       orange: {
-        background: "$orange",
+        backgroundColor: "$orange",
       },
       purple: {
-        background: "$purple",
+        backgroundColor: "$purple",
       },
       yellow: {
-        background: "$yellow",
+        backgroundColor: "$yellow",
       },
     },
   },

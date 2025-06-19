@@ -1,9 +1,15 @@
 import { ChangeEvent, useState, type JSX } from "react";
 import toast from "react-hot-toast";
 
-import { Badge, Button, Loading, useEventListener, useBreakpoints } from "../../index";
-import { IInput } from "../../types";
-import Icon from "../Icon";
+import {
+  Badge,
+  Button,
+  Loading,
+  useEventListener,
+  useBreakpoints,
+  Icon,
+  type IInput,
+} from "../../index";
 import {
   InputAreaStyled,
   InputCallbackStyled,

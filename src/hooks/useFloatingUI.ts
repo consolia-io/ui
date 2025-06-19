@@ -10,14 +10,9 @@ import {
 } from "@floating-ui/dom";
 import { useState, useRef, useEffect } from "react";
 
-export default function useFloatingUI(): {
-  contentRef: { current: null | HTMLDivElement };
-  handleClick: () => void;
-  handleClose: () => void;
-  isMounted: boolean;
-  isOpen: boolean;
-  triggerRef: { current: null | HTMLDivElement };
-} {
+import type { IUseFloatingUI } from "../types/hooks";
+
+export default function useFloatingUI(): IUseFloatingUI {
   const [isOpen, setIsOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 

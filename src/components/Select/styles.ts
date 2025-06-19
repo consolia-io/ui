@@ -1,5 +1,13 @@
 import { fadeIn, fadeOut, styled } from "../../stitches.config";
 
+// Shared base for sticky elements in select
+const stickyBase = {
+  backgroundColor: "$background",
+  position: "sticky",
+  top: 0,
+  zIndex: "$select",
+} as const;
+
 export const SelectStyled = styled("div", {
   display: "inline-block",
   position: "relative",
@@ -39,16 +47,12 @@ export const SelectGroupStyled = styled("div", {
     },
   },
   width: "100%",
-
   zIndex: "$select",
 });
 
 export const SelectFilterStyled = styled("div", {
-  backgroundColor: "$background",
+  ...stickyBase,
   padding: "$small",
-  position: "sticky",
-  top: 0,
-  zIndex: "$select",
 });
 
 export const SelectItemStyled = styled("div", {
@@ -63,7 +67,6 @@ export const SelectItemStyled = styled("div", {
   justifyContent: "space-between",
   margin: "$smallest $smaller",
   padding: "$smaller $small",
-
   transition: "$default",
 
   variants: {
@@ -101,13 +104,10 @@ export const SelectEmptyStyled = styled("div", {
 });
 
 export const SelectLabelStyled = styled("div", {
-  backgroundColor: "$background",
+  ...stickyBase,
   borderBottom: "1px solid $borderLight",
   fontWeight: "bold",
   padding: "$smaller $small $smallest $small",
-  position: "sticky",
-  top: 0,
-  zIndex: "$select",
 });
 
 export const SelectIconStyled = styled("div", {

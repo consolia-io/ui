@@ -1,9 +1,7 @@
 import { useState, type JSX } from "react";
 
-import { Button, Image, Loading } from "../../index";
-import { IBox } from "../../types";
+import { Button, Image, Loading, Icon, type IBox } from "../../index";
 import Gradient from "../Gradient";
-import Icon from "../Icon";
 import {
   BoxExitStyled,
   BoxExpanderTrigger,

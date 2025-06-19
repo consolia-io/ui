@@ -1,9 +1,7 @@
 import dayjs from "dayjs";
 import { useEffect, useState, useMemo, type JSX } from "react";
 
-import { Stack, Text, Button } from "../../../index";
-import { ICalendarMonths } from "../../../types";
-import Icon from "../../Icon";
+import { Stack, Text, Button, Icon, type ICalendarMonths } from "../../../index";
 import {
   CalendarContentStyled,
   CalendarHeaderNavigationStyled,

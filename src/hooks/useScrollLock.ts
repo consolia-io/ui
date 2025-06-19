@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 
-export default function useScrollLock(
-  initialLocked = false,
-  rootId = "root",
-): [boolean, (locked: boolean) => void] {
+import type { TUseScrollLock } from "../types/hooks";
+
+export default function useScrollLock(initialLocked = false, rootId = "root"): TUseScrollLock {
   const [locked, setLocked] = useState(initialLocked);
 
   useEffect(() => {

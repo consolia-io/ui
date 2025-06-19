@@ -1,9 +1,7 @@
 import { sort } from "fast-sort";
 import { useState, useCallback, useMemo, Fragment, useRef, useEffect, type JSX } from "react";
 
-import { Loading, Stack, Text, Button, Badge, Box } from "../../index";
-import { type ITable } from "../../types";
-import Icon from "../Icon";
+import { Loading, Stack, Text, Button, Badge, Box, Icon, type ITable } from "../../index";
 import {
   TableStitches,
   TableCoreStitches,

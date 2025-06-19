@@ -1,6 +1,6 @@
 import type { JSX } from "react";
 
-import { ILoading } from "../../types";
+import { type ILoading } from "../../index";
 import { LoadingStyled } from "./styles";
 
 export default function Loading({ css, theme = "default" }: ILoading): JSX.Element {

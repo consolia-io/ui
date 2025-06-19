@@ -4,19 +4,12 @@ import Button from "../Button";
 
 export const AccordionStyled = styled("div", {
   alignItems: "flex-start",
-  defaultVariants: {
-    mode: "list",
-  },
-  display: "flex",
-  flexDirection: "column",
   gap: "$small",
-  overflow: "hidden",
   transition: "$default",
   variants: {
     mode: {
       grid: {
         display: "grid",
-        flexDirection: undefined,
         gap: "$medium",
         gridTemplateColumns: "1fr 1fr",
       },
@@ -26,6 +19,7 @@ export const AccordionStyled = styled("div", {
       },
     },
   },
+
   width: "100%",
 });
 
@@ -38,7 +32,7 @@ export const AccordionButtonStyled = styled(Button, {
     alignSelf: "flex-start",
     flexShrink: 0,
   },
-  alignItems: "center ",
+  alignItems: "center",
   borderRadius: "$medium",
   justifyContent: "space-between",
   padding: "$smaller $small",
@@ -61,19 +55,19 @@ export const AccordionButtonStyled = styled(Button, {
   },
   whiteSpace: "normal",
   width: "100%",
+
   wordBreak: "break-word",
 });
 
 export const AccordionCardStyled = styled(Box, {
-  backgroundColor: "$background",
   cursor: "pointer",
-  width: "100%",
 });
 
 export const AccordionListContentStyled = styled("div", {
   border: "1px solid transparent",
   overflow: "hidden",
   transition: "$default",
+
   variants: {
     expanded: {
       false: {
@@ -94,6 +88,7 @@ export const AccordionListContentStyled = styled("div", {
 export const AccordionGridContentStyled = styled("div", {
   overflow: "hidden",
   transition: "$default",
+
   variants: {
     expanded: {
       false: {

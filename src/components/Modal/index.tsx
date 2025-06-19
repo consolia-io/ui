@@ -1,9 +1,14 @@
 import { useRef, useState, type JSX, type MouseEvent } from "react";
 
-import { Button, useEventListener, useOutsideClick, useScrollLock } from "../../index";
-import { IModal } from "../../types";
-import Icon from "../Icon";
-import Portal from "../Provider/ProviderPortal";
+import {
+  Button,
+  useEventListener,
+  useOutsideClick,
+  useScrollLock,
+  Icon,
+  Portal,
+  type IModal,
+} from "../../index";
 import {
   ModalOverlayStyled,
   ModalGroupStyled,

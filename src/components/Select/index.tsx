@@ -9,8 +9,8 @@ import {
   useOutsideClick,
   useFloatingUI,
   useWindowDimensions,
+  type ISelect,
 } from "../../index";
-import { ISelect } from "../../types";
 import {
   SelectStyled,
   SelectTriggerStyled,
