@@ -5,6 +5,10 @@ export const ViewStyled = styled("section", {
   color: "$text",
   paddingLeft: "$medium",
   paddingRight: "$medium",
+  phone: {
+    paddingLeft: "$small",
+    paddingRight: "$small",
+  },
   position: "relative",
   variants: {
     hero: {
