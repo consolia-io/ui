@@ -138,8 +138,8 @@ export const { css, getCssText, globalCss, keyframes, styled, theme } = createSt
   utils: {
     // Theme utilities
     darkOnly: (value: unknown): Record<string, unknown> => ({
-      // Will be populated after darkTheme is created
-      "& .dark-theme": value,
+      // eslint-disable-next-line no-use-before-define
+      [`.${darkTheme} &`]: value,
     }),
     lightOnly: (value: unknown): Record<string, unknown> => ({
       "@media (prefers-color-scheme: light)": value,
