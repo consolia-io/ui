@@ -71,6 +71,8 @@ export const ViewContainerStyled = styled("div", {
       },
     },
   },
+
+  zIndex: 2,
 });
 
 export default ViewStyled;
