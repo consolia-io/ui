@@ -1,7 +1,7 @@
 {
   "name": "@consolia/ui",
   "description": "Consolia's internal component library, built with React, Next.js, and Stitches.",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "author": "Jackson Dolman <mail@dolmios.com>",
   "browserslist": {
     "production": [
@@ -19,9 +19,6 @@
   },
   "dependencies": {
     "@floating-ui/dom": "^1.7.1",
-    "@phosphor-icons/react": "^2.1.10",
-    "@stitches/react": "^1.2.8",
-    "@swc/helpers": "^0.5.17",
     "dayjs": "^1.11.13",
     "fast-sort": "^3.4.1",
     "react-hot-toast": "^2.5.2",
@@ -31,6 +28,8 @@
     "@parcel/optimizer-htmlnano": "^2.15.2",
     "@parcel/packager-ts": "^2.15.2",
     "@parcel/transformer-typescript-types": "^2.15.2",
+    "@phosphor-icons/react": "^2.1.10",
+    "@stitches/react": "^1.2.8",
     "@types/node": "^22.15.32",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
@@ -45,7 +44,7 @@
     "react-dom": "^19.1.0",
     "tslib": "^2.8.1",
     "typedoc": "^0.28.5",
-    "typedoc-plugin-markdown": "^4.6.4",
+    "typedoc-plugin-markdown": "^4.7.0",
     "typescript": "^5.8.3",
     "util": "^0.12.5"
   },
@@ -72,6 +71,8 @@
   "license": "MIT",
   "module": "dist/index.js",
   "peerDependencies": {
+    "@phosphor-icons/react": "^2.1.10",
+    "@stitches/react": "^1.2.8",
     "next": "^15.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -96,11 +97,5 @@
   },
   "sideEffects": false,
   "source": "src/index.ts",
-  "types": "dist/types.d.ts",
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@swc/core",
-      "sharp"
-    ]
-  }
+  "types": "dist/types.d.ts"
 }

@@ -31,9 +31,12 @@ export default function Gradient(): JSX.Element {
             <animate
               attributeName="r"
               begin="2s"
-              dur="15s"
+              calcMode="spline"
+              dur="20s"
+              keySplines="0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1"
+              keyTimes="0; 0.2; 0.5; 0.7; 0.9; 1"
               repeatCount="indefinite"
-              values="80%; 140%; 80%"
+              values="80%; 100%; 140%; 120%; 100%; 80%"
             />
           </radialGradient>
         </defs>

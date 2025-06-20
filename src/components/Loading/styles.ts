@@ -2,30 +2,55 @@ import { keyframes, styled } from "../../stitches.config";
 
 const dashArrayValue = "2500";
 const strokeWidthValue = "30";
-const animationDuration = "4s";
+const animationDuration = "10s";
 
 const buildPath = keyframes({
   "0%": {
     fillOpacity: 0,
     strokeDasharray: dashArrayValue,
-    strokeDashoffset: dashArrayValue,
+    strokeDashoffset: "2450",
+  },
+  "17.5%": {
+    fillOpacity: 0,
+    strokeDasharray: dashArrayValue,
+    strokeDashoffset: "0",
+  },
+  "20%": {
+    fillOpacity: 1,
+    strokeDasharray: dashArrayValue,
+    strokeDashoffset: "0",
+  },
+  "32.5%": {
+    fillOpacity: 1,
+    strokeDasharray: dashArrayValue,
+    strokeDashoffset: "0",
   },
   "35%": {
     fillOpacity: 0,
     strokeDasharray: dashArrayValue,
     strokeDashoffset: "0",
   },
-  "40%": {
-    fillOpacity: 1,
+  "50%": {
+    fillOpacity: 0,
     strokeDasharray: dashArrayValue,
-    strokeDashoffset: "0",
+    strokeDashoffset: "-1950",
   },
   "65%": {
+    fillOpacity: 0,
+    strokeDasharray: dashArrayValue,
+    strokeDashoffset: "0",
+  },
+  "67.5%": {
     fillOpacity: 1,
     strokeDasharray: dashArrayValue,
     strokeDashoffset: "0",
   },
-  "70%": {
+  "80%": {
+    fillOpacity: 1,
+    strokeDasharray: dashArrayValue,
+    strokeDashoffset: "0",
+  },
+  "82.5%": {
     fillOpacity: 0,
     strokeDasharray: dashArrayValue,
     strokeDashoffset: "0",
@@ -33,7 +58,7 @@ const buildPath = keyframes({
   "100%": {
     fillOpacity: 0,
     strokeDasharray: dashArrayValue,
-    strokeDashoffset: `-${dashArrayValue}`,
+    strokeDashoffset: "2450",
   },
 });
 
