@@ -13,7 +13,7 @@ export default function Maps({
   zoom = 12,
 }: IMaps): JSX.Element {
   const mapRef = useRef<HTMLDivElement>(null);
-  const mapInstanceRef = useRef<google.maps.Map | null>(null);
+  const mapInstanceRef = useRef<unknown>(null);
 
   useEffect(() => {
     if (!apiKey || !mapRef.current) return;

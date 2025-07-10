@@ -24,6 +24,13 @@ interface PlacePrediction {
   types: string[];
 }
 
+interface AutocompleteService {
+  getPlacePredictions: (
+    request: Record<string, unknown>,
+    callback: (results: PlacePrediction[] | null, status: string) => void,
+  ) => void;
+}
+
 export default function Places({
   apiKey,
   countries,
@@ -59,7 +66,7 @@ export default function Places({
   const [isReady, setIsReady] = useState(false);
 
   const debouncedValue = useDebounce(inputValue, 300);
-  const serviceRef = useRef<google.maps.places.AutocompleteService | null>(null);
+  const serviceRef = useRef<unknown>(null);
 
   // Initialize Google Maps
   useEffect(() => {
@@ -92,22 +99,17 @@ export default function Places({
     }
 
     setLoading(true);
-    const request: google.maps.places.AutocompletionRequest = {
+    const request = {
       input: debouncedValue,
       ...(countries && { componentRestrictions: { country: countries } }),
       ...(types && { types }),
     };
 
-    serviceRef.current.getPlacePredictions(
+    (serviceRef.current as AutocompleteService).getPlacePredictions(
       request,
-      (
-        results: google.maps.places.AutocompletePrediction[] | null,
-        status: google.maps.places.PlacesServiceStatus,
-      ) => {
+      (results: PlacePrediction[] | null, status: string) => {
         setLoading(false);
-        setPredictions(
-          status === google.maps.places.PlacesServiceStatus.OK && results ? results : [],
-        );
+        setPredictions(status === "OK" && results ? results : []);
       },
     );
   }, [debouncedValue, isOpen, countries, types]);
