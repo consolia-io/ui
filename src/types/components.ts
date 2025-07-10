@@ -520,6 +520,73 @@ export interface IInput extends ComponentPropsWithRef<"input"> {
 }
 
 /**
+ * Places component props - Google Places autocomplete input with dropdown
+ *
+ * @example
+ * ```tsx
+ * <Places
+ *   name="location"
+ *   placeholder="Search for places..."
+ *   onPlaceSelect={(place) => console.log('Selected place:', place)}
+ *   apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+ * />
+ * ```
+ */
+export interface IPlaces
+  extends Omit<IInput, "submitFunction" | "submit" | "reveal" | "copy" | "reset"> {
+  /** Google Maps API key for Places API */
+  apiKey: string;
+  /** Callback when a place is selected from the dropdown */
+  onPlaceSelect?: (place: {
+    description: string;
+    place_id: string;
+    structured_formatting?: {
+      main_text: string;
+      secondary_text: string;
+    };
+    types: string[];
+  }) => void;
+  /** Country restrictions (ISO 3166-1 Alpha-2 country codes) */
+  countries?: string[];
+  /** Types of places to search for */
+  types?: string[];
+  /** Custom CSS styles for the dropdown */
+  dropdownCSS?: CSS;
+  /** Width of the dropdown */
+  dropdownWidth?: number | string;
+  /** Height of the dropdown */
+  dropdownHeight?: number | string;
+}
+
+/**
+ * Maps component props - simple Google Maps display
+ *
+ * @example
+ * ```tsx
+ * <Maps
+ *   apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+ *   height="400px"
+ *   center={{ lat: 40.7128, lng: -74.0060 }}
+ *   zoom={12}
+ * />
+ * ```
+ */
+export interface IMaps {
+  /** Google Maps API key for Maps API */
+  apiKey: string;
+  /** Height of the map */
+  height?: string | number;
+  /** Custom CSS styles */
+  css?: CSS;
+  /** Map center coordinates */
+  center?: { lat: number; lng: number };
+  /** Map zoom level */
+  zoom?: number;
+  /** Map type */
+  mapType?: "roadmap" | "satellite" | "hybrid" | "terrain";
+}
+
+/**
  * Loading component props - animated loading spinner
  *
  * @example

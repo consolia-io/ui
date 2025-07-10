@@ -14,9 +14,11 @@ import IconDemo from "./demos/Icon";
 import InputDemo from "./demos/Input";
 import LoadingDemo from "./demos/Loading";
 import LogoDemo from "./demos/Logo";
+import MapsDemo from "./demos/Maps";
 import MenuDemo from "./demos/Menu";
 import ModalDemo from "./demos/Modal";
 import NodesDemo from "./demos/Nodes";
+import PlacesDemo from "./demos/Places";
 import PopoverDemo from "./demos/Popover";
 import SelectDemo from "./demos/Select";
 import StackDemo from "./demos/Stack";
@@ -45,9 +47,11 @@ const DEMOS = {
   Input: InputDemo,
   Loading: LoadingDemo,
   Logo: LogoDemo,
+  Maps: MapsDemo,
   Menu: MenuDemo,
   Modal: ModalDemo,
   Nodes: NodesDemo,
+  Places: PlacesDemo,
   Popover: PopoverDemo,
   Select: SelectDemo,
   Stack: StackDemo,
