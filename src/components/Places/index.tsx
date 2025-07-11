@@ -6,7 +6,6 @@ import {
   Loading,
   Text,
   useDebounce,
-  useEventListener,
   useOutsideClick,
   useFloatingUI,
   useWindowDimensions,
@@ -62,8 +61,9 @@ export default function Places({
   const [inputValue, setInputValue] = useState((value as string) || "");
   const [predictions, setPredictions] = useState<PlacePrediction[]>([]);
   const [loading, setLoading] = useState(false);
-  const [focused, setFocused] = useState("");
   const [isReady, setIsReady] = useState(false);
+  const [selectedPlace, setSelectedPlace] = useState<string>("");
+  const [selectionKey, setSelectionKey] = useState(0);
 
   const debouncedValue = useDebounce(inputValue, 300);
   const serviceRef = useRef<unknown>(null);
@@ -114,97 +114,76 @@ export default function Places({
     );
   }, [debouncedValue, isOpen, countries, types]);
 
-  // Reset focus when dropdown closes
+  // Sync with external value prop
   useEffect(() => {
-    if (!isOpen) setFocused("");
-  }, [isOpen]);
+    if (value !== undefined && !selectedPlace) {
+      setInputValue(value as string);
+    }
+  }, [value, selectedPlace]);
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
     setInputValue(event.target.value);
+    setSelectedPlace(""); // Clear selected place when user types
+
+    // Open dropdown when user starts typing
+    if (!isOpen && event.target.value.trim() && isReady) {
+      handleClick();
+    }
+
     if (onChange) onChange(event);
   }
 
   function handleSelection(prediction: PlacePrediction): void {
-    setInputValue(prediction.description);
+    const selectedValue = prediction.description;
+
+    setSelectedPlace(selectedValue);
+    setInputValue(selectedValue);
+    setSelectionKey((prev) => prev + 1); // Increment key to force remount
     handleClose();
+
+    // If there's an onChange handler, call it with synthetic event
+    if (onChange) {
+      const syntheticEvent = {
+        currentTarget: { name: name, value: selectedValue },
+        preventDefault: () => {},
+        stopPropagation: () => {},
+        target: { name: name, value: selectedValue },
+      } as React.ChangeEvent<HTMLInputElement>;
+
+      onChange(syntheticEvent);
+    }
+
+    // Always call onPlaceSelect if provided
     if (onPlaceSelect) onPlaceSelect(prediction);
   }
 
-  function handleKeyDown(event: KeyboardEvent): void {
-    // Only handle keyboard events when THIS dropdown is open
-    if (!isOpen || !predictions.length) return;
-
-    if (event.key === "Escape") {
-      event.preventDefault();
-      handleClose();
-    }
-
-    if (event.key === "ArrowDown") {
-      event.preventDefault();
-      const index = predictions.findIndex((p) => p.place_id === focused);
-
-      if (index < predictions.length - 1) {
-        setFocused(predictions[index + 1].place_id);
-      }
-    }
-
-    if (event.key === "ArrowUp") {
-      event.preventDefault();
-      const index = predictions.findIndex((p) => p.place_id === focused);
-
-      if (index > 0) {
-        setFocused(predictions[index - 1].place_id);
-      }
-    }
-
-    if (event.key === "Enter") {
-      event.preventDefault();
-      const prediction = predictions.find((p) => p.place_id === focused);
-
-      if (prediction) handleSelection(prediction);
-    }
-  }
-
-  const handleTriggerClick = (e: React.MouseEvent): void => {
-    e.stopPropagation(); // CRITICAL: Prevent event bubbling to other components
+  function handleInputFocus(): void {
     if (!disabled && isReady) {
       handleClick();
     }
-  };
+  }
 
-  const handleTriggerKeyDown = (e: React.KeyboardEvent): void => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      e.stopPropagation();
-      if (!disabled && isReady) {
-        handleClick();
-      }
+  function handleInputKeyDown(event: React.KeyboardEvent<HTMLInputElement>): void {
+    if (event.key === "Escape" && isOpen) {
+      event.preventDefault();
+      handleClose();
     }
-  };
+  }
 
   const handleItemClick =
     (prediction: PlacePrediction) =>
     (e: React.MouseEvent): void => {
-      e.stopPropagation(); // Prevent bubbling on item selection too
+      e.stopPropagation();
       handleSelection(prediction);
     };
 
-  const handleItemMouseOver = (placeId: string) => (): void => {
-    setFocused(placeId);
-  };
-
   useOutsideClick(contentRef, handleClose);
-  useEventListener("keydown", handleKeyDown);
 
   return (
     <PlacesStyled css={css}>
-      <div
-        ref={triggerRef}
-        role="button"
-        tabIndex={0}
-        onClick={(e) => handleTriggerClick(e)}
-        onKeyDown={(e) => handleTriggerKeyDown(e)}>
+      <div ref={triggerRef}>
         <Input
+          key={selectionKey}
           {...inputProps}
           css={{ width: width || "100%", ...css }}
           disabled={disabled || !isReady}
@@ -216,10 +195,19 @@ export default function Places({
           placeholder={isReady ? placeholder : "Loading..."}
           success={success}
           successMessage={successMessage}
-          value={inputValue}
+          value={selectedPlace || inputValue}
           warning={warning}
           warningMessage={warningMessage}
-          onChange={(e) => handleInputChange(e)}
+          onChange={(e) => {
+            handleInputChange(e);
+            onChange?.(e);
+          }}
+          onFocus={() => {
+            handleInputFocus();
+          }}
+          onKeyDown={(e) => {
+            handleInputKeyDown(e);
+          }}
         />
       </div>
 
@@ -238,11 +226,7 @@ export default function Places({
             <Loading />
           ) : predictions.length > 0 ? (
             predictions.map((prediction) => (
-              <PlacesItemStyled
-                key={prediction.place_id}
-                focused={prediction.place_id === focused}
-                onClick={handleItemClick(prediction)}
-                onMouseOver={handleItemMouseOver(prediction.place_id)}>
+              <PlacesItemStyled key={prediction.place_id} onClick={handleItemClick(prediction)}>
                 {prediction.structured_formatting ? (
                   <div>
                     <Text as="strong">{prediction.structured_formatting.main_text}</Text>

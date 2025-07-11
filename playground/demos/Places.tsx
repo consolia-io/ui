@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable no-console */
 import { useState } from "react";
 
 import { Places, Stack, Text, View } from "../../src";
@@ -6,7 +9,11 @@ export default function PlacesDemo() {
   const [selectedPlace, setSelectedPlace] = useState<string>("");
   const [selectedPlaceDetails, setSelectedPlaceDetails] = useState<any>(null);
 
-  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
+  // TEMPORARY: Hardcoded API key for testing - replace with env var once working
+  const apiKey = "AIzaSyBi7_1oi9VWPY1PwaYIEa6uS34JKR_6G-U";
+  
+  // Debug: Check if API key is loaded
+  console.log("Places Demo - API Key loaded:", apiKey ? "✅ YES" : "❌ NO", apiKey?.slice(0, 10) + "...");
 
   if (!apiKey) {
     return (
@@ -15,6 +22,7 @@ export default function PlacesDemo() {
         <Text>
           To use this demo, please set the NEXT_PUBLIC_GOOGLE_MAPS_API_KEY environment variable.
         </Text>
+        <Text accent>For demo purposes, the API key would be loaded from environment variables.</Text>
       </View>
     );
   }
@@ -25,11 +33,13 @@ export default function PlacesDemo() {
       
       <Stack css={{ maxWidth: "600px" }} gap="large">
         <div>
-          <Text as="h3">Basic Places Search</Text>
+          <Text as="h3">Basic Places Search (Controlled)</Text>
           <Places
             apiKey={apiKey}
             name="basic-places"
             placeholder="Search for any place..."
+            value={selectedPlace}
+            onChange={(e) => setSelectedPlace(e.target.value)}
             onPlaceSelect={(place) => {
               setSelectedPlace(place.description);
               setSelectedPlaceDetails(place);
@@ -40,6 +50,21 @@ export default function PlacesDemo() {
               Selected: {selectedPlace}
             </Text>
           )}
+        </div>
+
+        <div>
+          <Text as="h3">Uncontrolled Search</Text>
+          <Places
+            apiKey={apiKey}
+            name="uncontrolled-places"
+            placeholder="This input manages its own state..."
+            onPlaceSelect={(place) => {
+              console.log("Uncontrolled place selected:", place.description);
+            }}
+          />
+          <Text as="small" top="small">
+            This example doesn't use a value prop - the input manages its own state
+          </Text>
         </div>
 
         <div>

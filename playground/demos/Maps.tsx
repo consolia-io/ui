@@ -2,7 +2,11 @@
 import { Maps, Stack, Text, View } from "../../src";
 
 export default function MapsDemo() {
-  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
+  // TEMPORARY: Hardcoded API key for testing - replace with env var once working
+  const apiKey = "AIzaSyBi7_1oi9VWPY1PwaYIEa6uS34JKR_6G-U";
+  
+  // Debug: Check if API key is loaded
+  console.log("Maps Demo - API Key loaded:", apiKey ? "✅ YES" : "❌ NO", apiKey?.slice(0, 10) + "...");
 
   if (!apiKey) {
     return (
@@ -11,6 +15,7 @@ export default function MapsDemo() {
         <Text>
           To use this demo, please set the NEXT_PUBLIC_GOOGLE_MAPS_API_KEY environment variable.
         </Text>
+        <Text accent>For demo purposes, the API key would be loaded from environment variables.</Text>
       </View>
     );
   }
@@ -21,27 +26,40 @@ export default function MapsDemo() {
 
       <Stack gap="large">
         <div>
-          <Text as="h3">Default Map (NYC)</Text>
-          <Maps apiKey={apiKey} />
-        </div>
-
-        <div>
-          <Text as="h3">Custom Height</Text>
+          <Text as="h3">Loading State (No Center Provided)</Text>
           <Maps apiKey={apiKey} height="300px" />
         </div>
 
         <div>
-          <Text as="h3">London, UK</Text>
+          <Text as="h3">Default Map (NYC Coordinates)</Text>
+          <Maps 
+            apiKey={apiKey} 
+            center={{ lat: 40.7128, lng: -74.0060 }}
+          />
+        </div>
+
+        <div>
+          <Text as="h3">Address: "London, UK"</Text>
           <Maps
             apiKey={apiKey}
-            center={{ lat: 51.5074, lng: -0.1278 }}
-            height="500px"
+            center="London, UK"
+            height="400px"
             zoom={13}
           />
         </div>
 
         <div>
-          <Text as="h3">Satellite View - San Francisco</Text>
+          <Text as="h3">Address: "Times Square, New York"</Text>
+          <Maps
+            apiKey={apiKey}
+            center="Times Square, New York"
+            height="350px"
+            zoom={16}
+          />
+        </div>
+
+        <div>
+          <Text as="h3">Coordinates: San Francisco</Text>
           <Maps
             apiKey={apiKey}
             center={{ lat: 37.7749, lng: -122.4194 }}
@@ -52,13 +70,13 @@ export default function MapsDemo() {
         </div>
 
         <div>
-          <Text as="h3">Small Map - Tokyo</Text>
+          <Text as="h3">Address: "Eiffel Tower, Paris"</Text>
           <Maps
             apiKey={apiKey}
-            center={{ lat: 35.6762, lng: 139.6503 }}
+            center="Eiffel Tower, Paris"
             css={{ maxWidth: "500px" }}
-            height="250px"
-            zoom={10}
+            height="300px"
+            zoom={15}
           />
         </div>
       </Stack>

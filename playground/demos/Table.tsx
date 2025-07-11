@@ -1,7 +1,7 @@
 import { JSX, useState } from "react";
 
 import * as C from "../../src/index";
-import { ITable } from "../../src/types";
+import type { ITable } from "../../src/index";
 
 // Sample data generator
 const generateData = (count: number): ITable["rows"] => {

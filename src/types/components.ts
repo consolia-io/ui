@@ -565,10 +565,18 @@ export interface IPlaces
  * ```tsx
  * <Maps
  *   apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
- *   height="400px"
  *   center={{ lat: 40.7128, lng: -74.0060 }}
+ *   height="400px"
  *   zoom={12}
  * />
+ * // Or with address
+ * <Maps
+ *   apiKey={apiKey}
+ *   center="New York, NY"
+ *   height="400px"
+ * />
+ * // Shows loading when no center provided
+ * <Maps apiKey={apiKey} height="400px" />
  * ```
  */
 export interface IMaps {
@@ -578,8 +586,8 @@ export interface IMaps {
   height?: string | number;
   /** Custom CSS styles */
   css?: CSS;
-  /** Map center coordinates */
-  center?: { lat: number; lng: number };
+  /** Map center - coordinates object or address string. Shows loading if not provided. */
+  center?: { lat: number; lng: number } | string;
   /** Map zoom level */
   zoom?: number;
   /** Map type */

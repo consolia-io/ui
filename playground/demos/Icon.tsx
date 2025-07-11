@@ -11,7 +11,7 @@ export default function IconDemo(): JSX.Element {
     }}>
       {/* Basic Usage */}
       <C.Box header={
-        <C.Text as="h4">Basic Usage</C.Text>
+        <C.Text as="h6">Basic Usage</C.Text>
       }>
         <C.Stack direction="row">
           <C.Icon system="CircleIcon" />

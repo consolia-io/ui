@@ -45,14 +45,6 @@ export const PlacesItemStyled = styled("div", {
   margin: "$smallest $smaller",
   padding: "$smaller $small",
   transition: "$default",
-
-  variants: {
-    focused: {
-      true: {
-        backgroundColor: "$surfaceHover",
-      },
-    },
-  },
 });
 
 export const PlacesEmptyStyled = styled("div", {

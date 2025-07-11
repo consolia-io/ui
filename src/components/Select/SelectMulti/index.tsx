@@ -111,7 +111,7 @@ export default function SelectMulti({
     }
 
     if (!isOpen) {
-      if (event.key === "Enter" || event.key === " ") {
+      if (event.key === "Enter") {
         event.preventDefault();
         handleClick();
       }
