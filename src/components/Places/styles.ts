@@ -4,10 +4,9 @@ export const PlacesStyled = styled("div", {
   display: "inline-block",
   position: "relative",
   verticalAlign: "middle",
-  width: "100%",
 });
 
-export const PlacesDropdownStyled = styled("div", {
+export const PlacesGroupStyled = styled("div", {
   "&::-webkit-scrollbar": {
     display: "none",
   },

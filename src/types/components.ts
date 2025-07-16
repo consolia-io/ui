@@ -550,12 +550,6 @@ export interface IPlaces
   countries?: string[];
   /** Types of places to search for */
   types?: string[];
-  /** Custom CSS styles for the dropdown */
-  dropdownCSS?: CSS;
-  /** Width of the dropdown */
-  dropdownWidth?: number | string;
-  /** Height of the dropdown */
-  dropdownHeight?: number | string;
 }
 
 /**

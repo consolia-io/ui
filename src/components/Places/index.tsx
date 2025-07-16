@@ -11,7 +11,7 @@ import {
   useWindowDimensions,
   type IPlaces,
 } from "../../index";
-import { PlacesStyled, PlacesDropdownStyled, PlacesItemStyled, PlacesEmptyStyled } from "./styles";
+import { PlacesStyled, PlacesGroupStyled, PlacesItemStyled, PlacesEmptyStyled } from "./styles";
 
 interface PlacePrediction {
   description: string;
@@ -35,9 +35,6 @@ export default function Places({
   countries,
   css,
   disabled,
-  dropdownCSS,
-  dropdownHeight,
-  dropdownWidth,
   error,
   errorMessage,
   id,
@@ -52,7 +49,6 @@ export default function Places({
   value,
   warning,
   warningMessage,
-  width,
   ...inputProps
 }: IPlaces): JSX.Element {
   const { contentRef, handleClick, handleClose, isMounted, isOpen, triggerRef } = useFloatingUI();
@@ -185,7 +181,7 @@ export default function Places({
         <Input
           key={selectionKey}
           {...inputProps}
-          css={{ width: width || "100%", ...css }}
+          css={css}
           disabled={disabled || !isReady}
           error={error}
           errorMessage={errorMessage}
@@ -212,15 +208,12 @@ export default function Places({
       </div>
 
       {isMounted && isOpen && (
-        <PlacesDropdownStyled
+        <PlacesGroupStyled
           ref={contentRef}
           animation={isOpen}
           css={{
             maxHeight: windowHeight < 700 ? "50vh" : "70vh",
-            maxWidth: dropdownWidth || "500px",
-            minWidth: dropdownWidth || "200px",
-            width: dropdownWidth || "100%",
-            ...dropdownCSS,
+            width: "auto",
           }}>
           {loading ? (
             <Loading />
@@ -244,7 +237,7 @@ export default function Places({
           ) : (
             <PlacesEmptyStyled>Start typing to search</PlacesEmptyStyled>
           )}
-        </PlacesDropdownStyled>
+        </PlacesGroupStyled>
       )}
     </PlacesStyled>
   );

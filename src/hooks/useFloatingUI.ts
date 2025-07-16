@@ -3,6 +3,7 @@ import {
   offset,
   flip,
   shift,
+  size,
   autoUpdate,
   limitShift,
   type Strategy,
@@ -42,6 +43,15 @@ export default function useFloatingUI(): IUseFloatingUI {
         shift({
           limiter: limitShift(),
           padding: 8,
+        }),
+        size({
+          apply({ elements }: { elements: { floating: HTMLElement } }) {
+            // Enforce min 200px, max 500px constraints
+            Object.assign(elements.floating.style, {
+              maxWidth: "500px",
+              minWidth: "200px",
+            });
+          },
         }),
       ],
       placement: "bottom",
