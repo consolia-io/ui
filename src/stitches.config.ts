@@ -45,8 +45,8 @@ const defaultTheme: TThemeConfig = {
     background: "#FFFFFF",
     blue: "#8fbdd8",
     blueLight: "#ddebf3",
-    border: "rgba(150, 120, 180, 0.25)",
-    borderLight: "rgba(150, 120, 180, 0.18)",
+    border: "rgba(25, 10, 55, 0.12)",
+    borderLight: "rgba(25, 10, 55, 0.08)",
     orange: "#ecb489",
     orangeLight: "#fae1ce",
     overlay: "rgba(15, 8, 18, 0.2)",
@@ -82,8 +82,8 @@ const defaultTheme: TThemeConfig = {
     light: 0.55,
   },
   radii: {
-    large: "24px",
-    medium: "8px",
+    large: "20px",
+    medium: "5px",
     small: "2.5px",
   },
   shadows: {
