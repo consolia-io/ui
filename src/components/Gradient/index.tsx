@@ -9,7 +9,7 @@ export default function Gradient(): JSX.Element {
         height="100%"
         style={{
           left: 0,
-          opacity: 0.7,
+          opacity: 0.8,
           pointerEvents: "none",
           position: "absolute",
           top: 0,
