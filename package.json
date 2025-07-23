@@ -1,7 +1,7 @@
 {
   "name": "@consolia/ui",
   "description": "Consolia's internal component library, built with React, Next.js, and Stitches.",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "author": "Jackson Dolman <mail@dolmios.com>",
   "browserslist": {
     "production": [
