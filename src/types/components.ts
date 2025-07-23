@@ -901,7 +901,7 @@ export interface IStack {
   /** Gap between items */
   gap?: keyof typeof spacings;
   /** Whether to wrap items */
-  wrap?: boolean;
+  wrap?: "wrap" | "nowrap" | "wrap-reverse";
   /** HTML id attribute */
   id?: string;
   /** Whether to use dark theme */

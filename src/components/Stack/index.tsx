@@ -84,7 +84,7 @@ export default function Stack({
     ...(alignContent && { alignContent }),
     ...(justify && { justifyContent: justify }),
     ...((gap || direction === "row") && { gap: `$${gap ?? "small"}` }),
-    ...((wrap || direction === "row") && { flexWrap: `$${wrap ?? "wrap"}` }),
+    ...((wrap || direction === "row") && { flexWrap: wrap ?? "wrap" }),
     ...(basis && { flexBasis: basis }),
     ...(grow && { flexGrow: grow }),
     ...(shrink && { flexShrink: shrink }),
